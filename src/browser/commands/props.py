@@ -1,0 +1,95 @@
+##
+# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+##
+
+from browser.command import Command
+from browser.command import WrongOptions
+from protocol.url import URL
+from browser import utils
+import os
+import getopt
+
+class Cmd(Command):
+    
+    def __init__(self):
+        super(Command, self).__init__()
+        self.cmds = ("props",)
+        
+    def execute(self, name, options):
+        
+        names = False
+        all = False
+        path = None
+
+        opts, args = getopt.getopt(options.split(), 'an')
+
+        for name, _ignore_value in opts:
+            
+            if name == "-a":
+                all = True
+            elif name == "-n":
+                names = True
+            else:
+                print "Unknown option: %s" % (name,)
+                print self.usage(name)
+                raise WrongOptions
+        
+        if len(args) > 1:
+            print "Wrong number of arguments: %d" % (len(args),)
+            print self.usage(name)
+            raise WrongOptions
+        elif args:
+            path = args[0]
+            if not path.startswith("/"):
+                path = os.path.join(self.shell.wd, path)
+        else:
+            path = self.shell.wd
+        if not path.endswith("/"):
+            path += "/"
+        resource = URL(url=path)
+
+        if names:
+            results = self.shell.account.session.getPropertyNames(resource)
+            print "    Properties: %s" % (utils.printList(results),)
+        else:
+            if all:
+                props = None
+            else:
+                props = self.shell.account.session.getPropertyNames(resource)
+            results, bad = self.shell.account.session.getProperties(resource, props)
+            print "OK Properties:"
+            utils.printProperties(results)
+            if bad:
+                print "Failed Properties:"
+                utils.printProperties(bad)
+            
+        return True
+
+    def complete(self, text):
+        return self.shell.wdcomplete(text)
+
+    def usage(self, name):
+        return """Usage: %s [OPTIONS] [PATH]
+PATH is a relative or absolute path.
+
+Options:
+-n    list property names only
+-a    list all properties via allprop
+    if neither of the above are set then property names are first listed, and then values of those looked up.
+    only one of -n and -a can be set.
+""" % (name,)
+
+    def helpDescription(self):
+        return "List the properties of a directory or file."
