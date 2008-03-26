@@ -53,9 +53,23 @@ Options:
 """ % (self.cmdname,)
 
     def allRecordsAllowed(self):
+        """
+        Indicates whether a command is able to operate on all record types in addition to
+        individual record types. Sub-classes should override this if they can handle all
+        record in one go.
+        """
         return False
 
     def execute(self, argv):
+        """
+        Execute the command specified by the command line arguments.
+        
+        @param argv: command line arguments.
+        @type argv: C{list}
+        
+        @return: 1 for success, 0 for failure.
+        @rtype: C{int}
+        """
         
         # Check first argument for type
         argv = self.getTypeArgument(argv)
@@ -89,6 +103,16 @@ Options:
         return self.doCommand()
 
     def getTypeArgument(self, argv):
+        """
+        Extract the user specified record type argument from the command line arguments.
+
+        @param argv: command line arguments.
+        @type argv: C{list}
+        
+        @return: the modified arguments (if a record type is found the corresponding argument is
+            removed from the argv passed in).
+        @rtype: C{list}
+        """
         # Check first argument for type
         if len(argv) == 0:
             print "Must specify a record type."
@@ -107,6 +131,15 @@ Options:
             return argv
 
     def mapType(self, type):
+        """
+        Map the specified user record type input to the actual record type identifier.
+
+        @param type: user input from the command line.
+        @type type: C{str}
+        
+        @return: identifier matching the user input, or C{None} if no match.
+        @rtype: L{admin.xmlaccounts.recordtypes}
+        """
         return {
             "users"    : recordtypes.recordType_users,
             "u"        : recordtypes.recordType_users,
@@ -121,6 +154,10 @@ Options:
         }.get(type, None)
         
     def loadAccounts(self):
+        """
+        Load the entire directory from the XML file.
+        """
+        
         
         f = open(self.path, "r")
         if not f:
@@ -133,6 +170,9 @@ Options:
         return 1
 
     def writeAccounts(self):
+        """
+        Write the entire directory to the XML file.
+        """
         
         node = self.directory.writeXML()
         os = StringIO()
@@ -147,7 +187,10 @@ Options:
         return 1
 
     def doCommand(self):
-        pass
+        """
+        Run the command. Sub-classes must implement this.
+        """
+        raise NotImplementedError
 
     def promptPassword(self):
         """

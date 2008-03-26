@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>src.browser.command</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="src-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="src-module.html">Package&nbsp;src</a> ::
+        <a href="src.browser-module.html">Package&nbsp;browser</a> ::
+        Module&nbsp;command
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="src.browser.command-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="src.browser.command-module.html">Module src.browser.command</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># Copyright (c) 2007-2008 Apple Inc. All rights reserved.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># You may obtain a copy of the License at</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># See the License for the specific language governing permissions and</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">##</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="Command"></a><div id="Command-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="Command-toggle" onclick="return toggle('Command');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="src.browser.command.Command-class.html">Command</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Command-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">     </tt>
+<a name="Command.__init__"></a><div id="Command.__init__-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="Command.__init__-toggle" onclick="return toggle('Command.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.__init__-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">         </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt id="link-0" class="py-name" targets="Variable src.protocol.webdav.definitions.davxml.self=src.protocol.webdav.definitions.davxml-module.html#self"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-0', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module src.browser.shell=src.browser.shell-module.html"><a title="src.browser.shell" class="py-name" href="#" onclick="return doclink('link-1', 'shell', 'link-1');">shell</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt id="link-2" class="py-name"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-2', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">cmds</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">         </tt>
+<a name="Command.execute"></a><div id="Command.execute-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="Command.execute-toggle" onclick="return toggle('Command.execute');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#execute">execute</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">options</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.execute-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.execute-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="Command.usage"></a><div id="Command.usage-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="Command.usage-toggle" onclick="return toggle('Command.usage');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#usage">usage</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.usage-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.usage-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="Command.hasHelp"></a><div id="Command.hasHelp-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="Command.hasHelp-toggle" onclick="return toggle('Command.hasHelp');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#hasHelp">hasHelp</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.hasHelp-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.hasHelp-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">name</tt> <tt class="py-keyword">in</tt> <tt id="link-3" class="py-name"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-3', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">cmds</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="Command.help"></a><div id="Command.help-def"><a name="L33"></a><tt class="py-lineno">33</tt> <a class="py-toggle" href="#" id="Command.help-toggle" onclick="return toggle('Command.help');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#help">help</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.help-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.help-expanded"><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-string">"Command: %s\n"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">+=</tt> <tt class="py-string">"Description: %s\n"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-4', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method src.browser.command.Command.helpDescription()=src.browser.command.Command-class.html#helpDescription,Method src.browser.commands.acl.Add.helpDescription()=src.browser.commands.acl.Add-class.html#helpDescription,Method src.browser.commands.acl.Change.helpDescription()=src.browser.commands.acl.Change-class.html#helpDescription,Method src.browser.commands.acl.Cmd.helpDescription()=src.browser.commands.acl.Cmd-class.html#helpDescription,Method src.browser.commands.acl.List.helpDescription()=src.browser.commands.acl.List-class.html#helpDescription,Method src.browser.commands.acl.Remove.helpDescription()=src.browser.commands.acl.Remove-class.html#helpDescription,Method src.browser.commands.cat.Cmd.helpDescription()=src.browser.commands.cat.Cmd-class.html#helpDescription,Method src.browser.commands.cd.Cmd.helpDescription()=src.browser.commands.cd.Cmd-class.html#helpDescription,Method src.browser.commands.help.Cmd.helpDescription()=src.browser.commands.help.Cmd-class.html#helpDescription,Method src.browser.commands.history.Cmd.helpDescription()=src.browser.commands.history.Cmd-class.html#helpDescription,Method src.browser.commands.logging.Cmd.helpDescription()=src.browser.commands.logging.Cmd-class.html#helpDescription,Method src.browser.commands.ls.Cmd.helpDescription()=src.browser.commands.ls.Cmd-class.html#helpDescription,Method src.browser.commands.principal.Cmd.helpDescription()=src.browser.commands.principal.Cmd-class.html#helpDescription,Method src.browser.commands.props.Cmd.helpDescription()=src.browser.commands.props.Cmd-class.html#helpDescription,Method src.browser.commands.proxies.Add.helpDescription()=src.browser.commands.proxies.Add-class.html#helpDescription,Method src.browser.commands.proxies.Cmd.helpDescription()=src.browser.commands.proxies.Cmd-class.html#helpDescription,Method src.browser.commands.proxies.List.helpDescription()=src.browser.commands.proxies.List-class.html#helpDescription,Method src.browser.commands.proxies.Remove.helpDescription()=src.browser.commands.proxies.Remove-class.html#helpDescription,Method src.browser.commands.quit.Cmd.helpDescription()=src.browser.commands.quit.Cmd-class.html#helpDescription,Method src.browser.commands.server.Cmd.helpDescription()=src.browser.commands.server.Cmd-class.html#helpDescription,Method src.browser.commands.whoami.Cmd.helpDescription()=src.browser.commands.whoami.Cmd-class.html#helpDescription"><a title="src.browser.command.Command.helpDescription
+src.browser.commands.acl.Add.helpDescription
+src.browser.commands.acl.Change.helpDescription
+src.browser.commands.acl.Cmd.helpDescription
+src.browser.commands.acl.List.helpDescription
+src.browser.commands.acl.Remove.helpDescription
+src.browser.commands.cat.Cmd.helpDescription
+src.browser.commands.cd.Cmd.helpDescription
+src.browser.commands.help.Cmd.helpDescription
+src.browser.commands.history.Cmd.helpDescription
+src.browser.commands.logging.Cmd.helpDescription
+src.browser.commands.ls.Cmd.helpDescription
+src.browser.commands.principal.Cmd.helpDescription
+src.browser.commands.props.Cmd.helpDescription
+src.browser.commands.proxies.Add.helpDescription
+src.browser.commands.proxies.Cmd.helpDescription
+src.browser.commands.proxies.List.helpDescription
+src.browser.commands.proxies.Remove.helpDescription
+src.browser.commands.quit.Cmd.helpDescription
+src.browser.commands.server.Cmd.helpDescription
+src.browser.commands.whoami.Cmd.helpDescription" class="py-name" href="#" onclick="return doclink('link-5', 'helpDescription', 'link-5');">helpDescription</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">+=</tt> <tt id="link-6" class="py-name"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-6', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method src.admin.xmlaccounts.commands.changepassword.ChangePassword.usage()=src.admin.xmlaccounts.commands.changepassword.ChangePassword-class.html#usage,Method src.admin.xmlaccounts.commands.command.Command.usage()=src.admin.xmlaccounts.commands.command.Command-class.html#usage,Method src.admin.xmlaccounts.commands.removerecord.RemoveRecord.usage()=src.admin.xmlaccounts.commands.removerecord.RemoveRecord-class.html#usage,Function src.admin.xmlaccounts.manage.usage()=src.admin.xmlaccounts.manage-module.html#usage,Method src.browser.command.Command.usage()=src.browser.command.Command-class.html#usage,Method src.browser.commands.acl.Add.usage()=src.browser.commands.acl.Add-class.html#usage,Method src.browser.commands.acl.Change.usage()=src.browser.commands.acl.Change-class.html#usage,Method src.browser.commands.acl.Cmd.usage()=src.browser.commands.acl.Cmd-class.html#usage,Method src.browser.commands.acl.List.usage()=src.browser.commands.acl.List-class.html#usage,Method src.browser.commands.acl.Remove.usage()=src.browser.commands.acl.Remove-class.html#usage,Method src.browser.commands.cat.Cmd.usage()=src.browser.commands.cat.Cmd-class.html#usage,Method src.browser.commands.cd.Cmd.usage()=src.browser.commands.cd.Cmd-class.html#usage,Method src.browser.commands.help.Cmd.usage()=src.browser.commands.help.Cmd-class.html#usage,Method src.browser.commands.history.Cmd.usage()=src.browser.commands.history.Cmd-class.html#usage,Method src.browser.commands.logging.Cmd.usage()=src.browser.commands.logging.Cmd-class.html#usage,Method src.browser.commands.ls.Cmd.usage()=src.browser.commands.ls.Cmd-class.html#usage,Method src.browser.commands.principal.Cmd.usage()=src.browser.commands.principal.Cmd-class.html#usage,Method src.browser.commands.props.Cmd.usage()=src.browser.commands.props.Cmd-class.html#usage,Method src.browser.commands.proxies.Add.usage()=src.browser.commands.proxies.Add-class.html#usage,Method src.browser.commands.proxies.Cmd.usage()=src.browser.commands.proxies.Cmd-class.html#usage,Method src.browser.commands.proxies.List.usage()=src.browser.commands.proxies.List-class.html#usage,Method src.browser.commands.proxies.Remove.usage()=src.browser.commands.proxies.Remove-class.html#usage,Method src.browser.commands.quit.Cmd.usage()=src.browser.commands.quit.Cmd-class.html#usage,Method src.browser.commands.server.Cmd.usage()=src.browser.commands.server.Cmd-class.html#usage,Method src.browser.commands.whoami.Cmd.usage()=src.browser.commands.whoami.Cmd-class.html#usage,Function src.browser.shell.usage()=src.browser.shell-module.html#usage"><a title="src.admin.xmlaccounts.commands.changepassword.ChangePassword.usage
+src.admin.xmlaccounts.commands.command.Command.usage
+src.admin.xmlaccounts.commands.removerecord.RemoveRecord.usage
+src.admin.xmlaccounts.manage.usage
+src.browser.command.Command.usage
+src.browser.commands.acl.Add.usage
+src.browser.commands.acl.Change.usage
+src.browser.commands.acl.Cmd.usage
+src.browser.commands.acl.List.usage
+src.browser.commands.acl.Remove.usage
+src.browser.commands.cat.Cmd.usage
+src.browser.commands.cd.Cmd.usage
+src.browser.commands.help.Cmd.usage
+src.browser.commands.history.Cmd.usage
+src.browser.commands.logging.Cmd.usage
+src.browser.commands.ls.Cmd.usage
+src.browser.commands.principal.Cmd.usage
+src.browser.commands.props.Cmd.usage
+src.browser.commands.proxies.Add.usage
+src.browser.commands.proxies.Cmd.usage
+src.browser.commands.proxies.List.usage
+src.browser.commands.proxies.Remove.usage
+src.browser.commands.quit.Cmd.usage
+src.browser.commands.server.Cmd.usage
+src.browser.commands.whoami.Cmd.usage
+src.browser.shell.usage" class="py-name" href="#" onclick="return doclink('link-7', 'usage', 'link-7');">usage</a></tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">         </tt>
+<a name="Command.helpListing"></a><div id="Command.helpListing-def"><a name="L39"></a><tt class="py-lineno">39</tt> <a class="py-toggle" href="#" id="Command.helpListing-toggle" onclick="return toggle('Command.helpListing');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#helpListing">helpListing</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.helpListing-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.helpListing-expanded"><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-8', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="src.browser.command.Command.helpDescription
+src.browser.commands.acl.Add.helpDescription
+src.browser.commands.acl.Change.helpDescription
+src.browser.commands.acl.Cmd.helpDescription
+src.browser.commands.acl.List.helpDescription
+src.browser.commands.acl.Remove.helpDescription
+src.browser.commands.cat.Cmd.helpDescription
+src.browser.commands.cd.Cmd.helpDescription
+src.browser.commands.help.Cmd.helpDescription
+src.browser.commands.history.Cmd.helpDescription
+src.browser.commands.logging.Cmd.helpDescription
+src.browser.commands.ls.Cmd.helpDescription
+src.browser.commands.principal.Cmd.helpDescription
+src.browser.commands.props.Cmd.helpDescription
+src.browser.commands.proxies.Add.helpDescription
+src.browser.commands.proxies.Cmd.helpDescription
+src.browser.commands.proxies.List.helpDescription
+src.browser.commands.proxies.Remove.helpDescription
+src.browser.commands.quit.Cmd.helpDescription
+src.browser.commands.server.Cmd.helpDescription
+src.browser.commands.whoami.Cmd.helpDescription" class="py-name" href="#" onclick="return doclink('link-9', 'helpDescription', 'link-5');">helpDescription</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">         </tt>
+<a name="Command.helpDescription"></a><div id="Command.helpDescription-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="Command.helpDescription-toggle" onclick="return toggle('Command.helpDescription');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#helpDescription">helpDescription</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.helpDescription-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.helpDescription-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">""</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">     </tt>
+<a name="Command.setShell"></a><div id="Command.setShell-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="Command.setShell-toggle" onclick="return toggle('Command.setShell');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#setShell">setShell</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">shell</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.setShell-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.setShell-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt id="link-10" class="py-name"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-10', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="src.browser.shell" class="py-name" href="#" onclick="return doclink('link-11', 'shell', 'link-1');">shell</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="src.browser.shell" class="py-name" href="#" onclick="return doclink('link-12', 'shell', 'link-1');">shell</a></tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">         </tt>
+<a name="Command.getCmds"></a><div id="Command.getCmds-def"><a name="L48"></a><tt class="py-lineno">48</tt> <a class="py-toggle" href="#" id="Command.getCmds-toggle" onclick="return toggle('Command.getCmds');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#getCmds">getCmds</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.getCmds-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.getCmds-expanded"><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-13" class="py-name"><a title="src.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-13', 'self', 'link-0');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">cmds</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="Command.complete"></a><div id="Command.complete-def"><a name="L51"></a><tt class="py-lineno">51</tt> <a class="py-toggle" href="#" id="Command.complete-toggle" onclick="return toggle('Command.complete');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="src.browser.command.Command-class.html#complete">complete</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Command.complete-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Command.complete-expanded"><a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="WrongOptions"></a><div id="WrongOptions-def"><a name="L54"></a><tt class="py-lineno">54</tt> <a class="py-toggle" href="#" id="WrongOptions-toggle" onclick="return toggle('WrongOptions');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="src.browser.command.WrongOptions-class.html">WrongOptions</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WrongOptions-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="WrongOptions-expanded"><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="UnknownCommand"></a><div id="UnknownCommand-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="UnknownCommand-toggle" onclick="return toggle('UnknownCommand');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="src.browser.command.UnknownCommand-class.html">UnknownCommand</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnknownCommand-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="UnknownCommand-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
+<a name="CommandError"></a><div id="CommandError-def"><a name="L60"></a><tt class="py-lineno">60</tt> <a class="py-toggle" href="#" id="CommandError-toggle" onclick="return toggle('CommandError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="src.browser.command.CommandError-class.html">CommandError</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CommandError-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="CommandError-expanded"><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="src-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0 on Wed Mar 26 10:26:34 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

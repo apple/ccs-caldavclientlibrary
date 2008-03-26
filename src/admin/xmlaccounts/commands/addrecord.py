@@ -20,6 +20,9 @@ from uuid import uuid4
 from admin.xmlaccounts import recordtypes
 
 class AddRecord(Command):
+    """
+    Command that adds a record to the directory.
+    """
     
     CMDNAME = "add"
 
@@ -27,11 +30,17 @@ class AddRecord(Command):
         super(AddRecord, self).__init__(self.CMDNAME, "Add a record of the specified type.")
 
     def doCommand(self):
+        """
+        Run the command.
+        """
         if self.doAdd():
             return self.writeAccounts()
         return 0
     
     def doAdd(self):
+        """
+        Prompts the user for details and then adds a new record to the directory.
+        """
         
         # Prompt for each thing we need in the record
         record = XMLRecord()

@@ -14,6 +14,10 @@
 # limitations under the License.
 ##
 
+"""
+XML element names used in the XML directory file.
+"""
+
 ELEMENT_ACCOUNTS        = "accounts"
 ELEMENT_USER            = "user"
 ELEMENT_GROUP           = "group"

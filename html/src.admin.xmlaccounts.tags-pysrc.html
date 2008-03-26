@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>src.admin.xmlaccounts.tags</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="src-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="src-module.html">Package&nbsp;src</a> ::
+        <a href="src.admin-module.html">Package&nbsp;admin</a> ::
+        <a href="src.admin.xmlaccounts-module.html">Package&nbsp;xmlaccounts</a> ::
+        Module&nbsp;tags
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="src.admin.xmlaccounts.tags-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="src.admin.xmlaccounts.tags-module.html">Module src.admin.xmlaccounts.tags</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># Copyright (c) 2007-2008 Apple Inc. All rights reserved.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># You may obtain a copy of the License at</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># See the License for the specific language governing permissions and</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">##</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">XML element names used in the XML directory file.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_ACCOUNTS=src.admin.xmlaccounts.tags-module.html#ELEMENT_ACCOUNTS"><a title="src.admin.xmlaccounts.tags.ELEMENT_ACCOUNTS" class="py-name" href="#" onclick="return doclink('link-0', 'ELEMENT_ACCOUNTS', 'link-0');">ELEMENT_ACCOUNTS</a></tt>        <tt class="py-op">=</tt> <tt class="py-string">"accounts"</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_USER=src.admin.xmlaccounts.tags-module.html#ELEMENT_USER"><a title="src.admin.xmlaccounts.tags.ELEMENT_USER" class="py-name" href="#" onclick="return doclink('link-1', 'ELEMENT_USER', 'link-1');">ELEMENT_USER</a></tt>            <tt class="py-op">=</tt> <tt class="py-string">"user"</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_GROUP=src.admin.xmlaccounts.tags-module.html#ELEMENT_GROUP"><a title="src.admin.xmlaccounts.tags.ELEMENT_GROUP" class="py-name" href="#" onclick="return doclink('link-2', 'ELEMENT_GROUP', 'link-2');">ELEMENT_GROUP</a></tt>           <tt class="py-op">=</tt> <tt class="py-string">"group"</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_LOCATION=src.admin.xmlaccounts.tags-module.html#ELEMENT_LOCATION"><a title="src.admin.xmlaccounts.tags.ELEMENT_LOCATION" class="py-name" href="#" onclick="return doclink('link-3', 'ELEMENT_LOCATION', 'link-3');">ELEMENT_LOCATION</a></tt>        <tt class="py-op">=</tt> <tt class="py-string">"location"</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_RESOURCE=src.admin.xmlaccounts.tags-module.html#ELEMENT_RESOURCE"><a title="src.admin.xmlaccounts.tags.ELEMENT_RESOURCE" class="py-name" href="#" onclick="return doclink('link-4', 'ELEMENT_RESOURCE', 'link-4');">ELEMENT_RESOURCE</a></tt>        <tt class="py-op">=</tt> <tt class="py-string">"resource"</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_UID=src.admin.xmlaccounts.tags-module.html#ELEMENT_UID"><a title="src.admin.xmlaccounts.tags.ELEMENT_UID" class="py-name" href="#" onclick="return doclink('link-5', 'ELEMENT_UID', 'link-5');">ELEMENT_UID</a></tt>             <tt class="py-op">=</tt> <tt class="py-string">"uid"</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_GUID=src.admin.xmlaccounts.tags-module.html#ELEMENT_GUID"><a title="src.admin.xmlaccounts.tags.ELEMENT_GUID" class="py-name" href="#" onclick="return doclink('link-6', 'ELEMENT_GUID', 'link-6');">ELEMENT_GUID</a></tt>            <tt class="py-op">=</tt> <tt class="py-string">"guid"</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_PASSWORD=src.admin.xmlaccounts.tags-module.html#ELEMENT_PASSWORD"><a title="src.admin.xmlaccounts.tags.ELEMENT_PASSWORD" class="py-name" href="#" onclick="return doclink('link-7', 'ELEMENT_PASSWORD', 'link-7');">ELEMENT_PASSWORD</a></tt>        <tt class="py-op">=</tt> <tt class="py-string">"password"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_NAME=src.admin.xmlaccounts.tags-module.html#ELEMENT_NAME"><a title="src.admin.xmlaccounts.tags.ELEMENT_NAME" class="py-name" href="#" onclick="return doclink('link-8', 'ELEMENT_NAME', 'link-8');">ELEMENT_NAME</a></tt>            <tt class="py-op">=</tt> <tt class="py-string">"name"</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_MEMBERS=src.admin.xmlaccounts.tags-module.html#ELEMENT_MEMBERS"><a title="src.admin.xmlaccounts.tags.ELEMENT_MEMBERS" class="py-name" href="#" onclick="return doclink('link-9', 'ELEMENT_MEMBERS', 'link-9');">ELEMENT_MEMBERS</a></tt>         <tt class="py-op">=</tt> <tt class="py-string">"members"</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_MEMBER=src.admin.xmlaccounts.tags-module.html#ELEMENT_MEMBER"><a title="src.admin.xmlaccounts.tags.ELEMENT_MEMBER" class="py-name" href="#" onclick="return doclink('link-10', 'ELEMENT_MEMBER', 'link-10');">ELEMENT_MEMBER</a></tt>          <tt class="py-op">=</tt> <tt class="py-string">"member"</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_CUADDR=src.admin.xmlaccounts.tags-module.html#ELEMENT_CUADDR"><a title="src.admin.xmlaccounts.tags.ELEMENT_CUADDR" class="py-name" href="#" onclick="return doclink('link-11', 'ELEMENT_CUADDR', 'link-11');">ELEMENT_CUADDR</a></tt>          <tt class="py-op">=</tt> <tt class="py-string">"cuaddr"</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_AUTOSCHEDULE=src.admin.xmlaccounts.tags-module.html#ELEMENT_AUTOSCHEDULE"><a title="src.admin.xmlaccounts.tags.ELEMENT_AUTOSCHEDULE" class="py-name" href="#" onclick="return doclink('link-12', 'ELEMENT_AUTOSCHEDULE', 'link-12');">ELEMENT_AUTOSCHEDULE</a></tt>    <tt class="py-op">=</tt> <tt class="py-string">"auto-schedule"</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_DISABLECALENDAR=src.admin.xmlaccounts.tags-module.html#ELEMENT_DISABLECALENDAR"><a title="src.admin.xmlaccounts.tags.ELEMENT_DISABLECALENDAR" class="py-name" href="#" onclick="return doclink('link-13', 'ELEMENT_DISABLECALENDAR', 'link-13');">ELEMENT_DISABLECALENDAR</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"disable-calendar"</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ELEMENT_PROXIES=src.admin.xmlaccounts.tags-module.html#ELEMENT_PROXIES"><a title="src.admin.xmlaccounts.tags.ELEMENT_PROXIES" class="py-name" href="#" onclick="return doclink('link-14', 'ELEMENT_PROXIES', 'link-14');">ELEMENT_PROXIES</a></tt>         <tt class="py-op">=</tt> <tt class="py-string">"proxies"</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ATTRIBUTE_REALM=src.admin.xmlaccounts.tags-module.html#ATTRIBUTE_REALM"><a title="src.admin.xmlaccounts.tags.ATTRIBUTE_REALM" class="py-name" href="#" onclick="return doclink('link-15', 'ATTRIBUTE_REALM', 'link-15');">ATTRIBUTE_REALM</a></tt>         <tt class="py-op">=</tt> <tt class="py-string">"realm"</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ATTRIBUTE_REPEAT=src.admin.xmlaccounts.tags-module.html#ATTRIBUTE_REPEAT"><a title="src.admin.xmlaccounts.tags.ATTRIBUTE_REPEAT" class="py-name" href="#" onclick="return doclink('link-16', 'ATTRIBUTE_REPEAT', 'link-16');">ATTRIBUTE_REPEAT</a></tt>        <tt class="py-op">=</tt> <tt class="py-string">"repeat"</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable src.admin.xmlaccounts.tags.ATTRIBUTE_RECORDTYPE=src.admin.xmlaccounts.tags-module.html#ATTRIBUTE_RECORDTYPE"><a title="src.admin.xmlaccounts.tags.ATTRIBUTE_RECORDTYPE" class="py-name" href="#" onclick="return doclink('link-17', 'ATTRIBUTE_RECORDTYPE', 'link-17');">ATTRIBUTE_RECORDTYPE</a></tt>    <tt class="py-op">=</tt> <tt class="py-string">"type"</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="src-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0 on Wed Mar 26 10:26:33 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

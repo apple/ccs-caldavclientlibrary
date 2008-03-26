@@ -22,6 +22,9 @@ from protocol.utils.xmlhelpers import SubElementWithData
 from xml.etree.ElementTree import Element
 
 class XMLRecord(object):
+    """
+    Represents a single principal record. This class can parse and generate the appropriate XML.
+    """
     
     def __init__(self):
         self.recordType = None
@@ -38,6 +41,12 @@ class XMLRecord(object):
         self.proxyFor = set()
     
     def parseXML(self, node):
+        """
+        Parse a single principal record from XML.
+
+        @param node: the XML element for the principal being parsed.
+        @type node: C{xml.etree.ElementTree.Element}
+        """
         self.recordType = recordtypes.TAGS_TO_RECORD_TYPES[node.tag]
         self.repeat = int(node.get(tags.ATTRIBUTE_REPEAT, "0"))
         for child in node.getchildren():
@@ -72,12 +81,27 @@ class XMLRecord(object):
                 raise RuntimeError("Unknown account attribute: %s" % (child.tag,))
 
     def _parseMembers(self, node, addto):
+        """
+        Parse an XML <members> or <proxies> element list.
+
+        @param node: the <members> or <proxies> element to parse.
+        @type node: C{xml.etree.ElementTree.Element}
+        @param addto: the list to add the parsed information into. The items in the list are tuples
+            of the record type and record uid.
+        @type addto: C{list}
+        """
         for child in node.getchildren():
             if child.tag == tags.ELEMENT_MEMBER:
                 recordType = child.get(tags.ATTRIBUTE_RECORDTYPE, recordtypes.recordType_users)
                 addto.add((recordType, child.text))
 
     def writeXML(self):
+        """
+        Generate a single XML principal record element.
+        
+        @return: the root element for the principal record.
+        @rtype: C{xml.etree.ElementTree.Element}
+        """
         
         root = Element(recordtypes.RECORD_TYPES_TO_TAGS[self.recordType])
         if self.repeat:

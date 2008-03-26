@@ -26,12 +26,22 @@ class ListRecords(Command):
         super(ListRecords, self).__init__(self.CMDNAME, "List all records of the specified type.")
 
     def allRecordsAllowed(self):
+        """
+        Indicate that this command can list all records in one go as well as each
+        individual record type.
+        """
         return True
 
     def doCommand(self):
+        """
+        Run the command.
+        """
         self.listRecords(self.recordType)
 
     def listRecords(self, recordType):
+        """
+        Lists records of the specified record type from the directory.
+        """
         
         if recordType == recordtypes.recordType_all:
             users = [l for l in self.directory.records.itervalues()]

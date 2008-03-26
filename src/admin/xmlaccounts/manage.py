@@ -20,6 +20,9 @@ from admin.xmlaccounts.commands import registered
 import sys
 
 def usage():
+    """
+    Print out the command line usage.
+    """
     cmds = registered.keys()
     cmds.sort()
     print """USAGE: manage CMD [OPTIONS]
@@ -32,6 +35,10 @@ command to see what options are supported.
 """ % ("\n".join(["\t%s" % (cmd,) for cmd in cmds]),)
 
 def runit():
+    """
+    Run the command based on command line arguments.
+    """
+
     # Dispatch a command based on the first argument
     if len(sys.argv) == 1:
         usage()

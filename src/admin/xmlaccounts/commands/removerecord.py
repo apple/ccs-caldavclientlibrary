@@ -37,6 +37,15 @@ Options:
 """ % (self.cmdname,)
 
     def execute(self, argv):
+        """
+        Execute the command specified by the command line arguments.
+        
+        @param argv: command line arguments.
+        @type argv: C{list}
+        
+        @return: 1 for success, 0 for failure.
+        @rtype: C{int}
+        """
         
         # Check first argument for type
         argv = self.getTypeArgument(argv)
@@ -76,11 +85,17 @@ Options:
         return self.doCommand()
 
     def doCommand(self):
+        """
+        Run the command.
+        """
         if self.doRemove():
             return self.writeAccounts()
         return 0
     
     def doRemove(self):
+        """
+        Removes an existing record from the directory.
+        """
         
         # First check record exists
         record = self.directory.getRecord(self.recordType, self.uid)
