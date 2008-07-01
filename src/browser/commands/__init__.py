@@ -22,10 +22,13 @@ __all__ = [
     "history",
     "logging",
     "ls",
+    "mkcal",
+    "mkdir",
     "principal",
     "props",
     "proxies",
     "quit",
+    "rm",
     "server",
     "whoami",
 ]

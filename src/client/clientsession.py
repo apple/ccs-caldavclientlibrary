@@ -31,6 +31,9 @@ from protocol.webdav.get import Get
 from protocol.webdav.propnames import PropNames
 from protocol.webdav.propall import PropAll
 from protocol.webdav.acl import ACL
+from protocol.webdav.delete import Delete
+from protocol.webdav.makecollection import MakeCollection
+from protocol.caldav.makecalendar import MakeCalendar
 import types
 import httplib
 
@@ -419,6 +422,45 @@ class CalDAVSession(Session):
         self.runSession(request)
         
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
+            self.handleHTTPError(request)
+
+    def makeCollection(self, rurl):
+        
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV MKCOL
+        request = MakeCollection(self, rurl.relativeURL())
+    
+        # Process it
+        self.runSession(request)
+        
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
+            self.handleHTTPError(request)
+
+    def makeCalendar(self, rurl, displayname=None, description=None):
+        
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV MKCALENDAR
+        request = MakeCalendar(self, rurl.relativeURL(), displayname, description)
+    
+        # Process it
+        self.runSession(request)
+        
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
+            self.handleHTTPError(request)
+
+    def deleteResource(self, rurl):
+        
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV DELETE
+        request = Delete(self, rurl.relativeURL())
+    
+        # Process it
+        self.runSession(request)
+        
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent):
             self.handleHTTPError(request)
 
     def readData(self, rurl):
