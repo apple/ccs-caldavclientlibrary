@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2009 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -85,3 +85,8 @@ alternate_URI_set   = QName(DAVNamespace, "alternate-URI-set")
 principal_URL       = QName(DAVNamespace, "principal-URL")
 group_member_set    = QName(DAVNamespace, "group-member-set")
 group_membership    = QName(DAVNamespace, "group-membership")
+
+quota_available_bytes = QName(DAVNamespace, "quota-available-bytes")
+quota_used_bytes      = QName(DAVNamespace, "quota-used-bytes")
+
+current_user_principal = QName(DAVNamespace, "current-user-principal")

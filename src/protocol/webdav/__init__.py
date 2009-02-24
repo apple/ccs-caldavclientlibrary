@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2009 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 ##
 
 from protocol.webdav.propfindparser import PropFindParser
-from protocol.webdav.definitions import davxml
+from protocol.webdav.definitions import davxml, csxml
 
 PropFindParser.textProperties.add(davxml.creationdate)
 PropFindParser.textProperties.add(davxml.displayname)
@@ -24,9 +24,16 @@ PropFindParser.textProperties.add(davxml.getcontentlength)
 PropFindParser.textProperties.add(davxml.getcontenttype)
 PropFindParser.textProperties.add(davxml.getetag)
 PropFindParser.textProperties.add(davxml.getlastmodified)
+PropFindParser.textProperties.add(davxml.quota_available_bytes)
+PropFindParser.textProperties.add(davxml.quota_used_bytes)
+
+PropFindParser.hrefProperties.add(davxml.current_user_principal)
+PropFindParser.hrefProperties.add(davxml.owner)
+PropFindParser.hrefProperties.add(davxml.principal_URL)
 
 PropFindParser.hrefListProperties.add(davxml.principal_collection_set)
-PropFindParser.hrefProperties.add(davxml.principal_URL)
 PropFindParser.hrefListProperties.add(davxml.alternate_URI_set)
 PropFindParser.hrefListProperties.add(davxml.group_member_set)
 PropFindParser.hrefListProperties.add(davxml.group_membership)
+PropFindParser.hrefListProperties.add(csxml.expanded_group_member_set)
+PropFindParser.hrefListProperties.add(csxml.expanded_group_membership)

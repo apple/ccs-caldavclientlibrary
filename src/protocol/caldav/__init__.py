@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2009 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 from protocol.webdav.propfindparser import PropFindParser
 from protocol.webdav.definitions import davxml
-from protocol.caldav.definitions import caldavxml
+from protocol.caldav.definitions import caldavxml, csxml
 
 PropFindParser.textProperties.add(caldavxml.calendar_description)
 PropFindParser.textProperties.add(caldavxml.calendar_timezone)
@@ -26,3 +26,5 @@ PropFindParser.hrefListProperties.add(caldavxml.calendar_user_address_set)
 PropFindParser.hrefListProperties.add(caldavxml.calendar_free_busy_set)
 PropFindParser.hrefProperties.add(caldavxml.schedule_outbox_URL)
 PropFindParser.hrefProperties.add(caldavxml.schedule_inbox_URL)
+PropFindParser.hrefProperties.add(csxml.calendar_proxy_read_for)
+PropFindParser.hrefProperties.add(csxml.calendar_proxy_write_for)
