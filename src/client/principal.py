@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2007 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2009 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,9 +32,9 @@ class PrincipalCache(object):
             principal = CalDAVPrincipal(session, path)
             principal.loadDetails()
             self.cache[path.toString()] = principal
-            self.cache[principal.principalURL.toString()] = principal
+            self.cache[principal.principalURL] = principal
             for uri in principal.alternateURIs:
-                self.cache[uri.toString()] = principal
+                self.cache[uri] = principal
         elif refresh:
             self.cache[path.toString()].loadDetails(refresh=True)
         return self.cache[path.toString()]
