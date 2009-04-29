@@ -25,6 +25,7 @@ from protocol.webdav.propfindparser import PropFindParser
 from protocol.webdav.principalmatch import PrincipalMatch
 from protocol.http.authentication.basic import Basic
 from protocol.http.authentication.digest import Digest
+from protocol.http.authentication.gssapi import Kerberos
 from protocol.webdav.proppatch import PropPatch
 from xml.etree.ElementTree import Element
 from protocol.webdav.get import Get
@@ -664,6 +665,8 @@ class CalDAVSession(Session):
                 return Basic(self.user, self.pswd), False
             elif item.lower().startswith("digest"):
                 return Digest(self.user, self.pswd, wwwhdrs), False
+            elif item.lower().startswith("negotiate"):
+                return Kerberos(self.user), False
         else:
             return None, True
 
