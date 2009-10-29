@@ -27,6 +27,7 @@ __all__ = [
     "principal",
     "props",
     "proxies",
+    "put",
     "quit",
     "rm",
     "server",
