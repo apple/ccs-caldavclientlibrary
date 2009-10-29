@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2007 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2009 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,29 +14,33 @@
 # limitations under the License.
 ##
 
-from protocol.webdav.session import Session
-from protocol.webdav.propfind import PropFind
-from protocol.webdav.definitions import davxml
 from protocol.caldav.definitions import headers
-from protocol.http.data.string import ResponseDataString
-from protocol.url import URL
-from protocol.webdav.definitions import statuscodes
-from protocol.webdav.propfindparser import PropFindParser
-from protocol.webdav.principalmatch import PrincipalMatch
+from protocol.caldav.makecalendar import MakeCalendar
 from protocol.http.authentication.basic import Basic
 from protocol.http.authentication.digest import Digest
-from protocol.http.authentication.gssapi import Kerberos
-from protocol.webdav.proppatch import PropPatch
-from xml.etree.ElementTree import Element
-from protocol.webdav.get import Get
-from protocol.webdav.propnames import PropNames
-from protocol.webdav.propall import PropAll
+try:
+    from protocol.http.authentication.gssapi import Kerberos
+except ImportError:
+    Kerberos = None
+from protocol.http.data.string import ResponseDataString, RequestDataString
+from protocol.url import URL
 from protocol.webdav.acl import ACL
+from protocol.webdav.definitions import davxml
+from protocol.webdav.definitions import statuscodes
 from protocol.webdav.delete import Delete
+from protocol.webdav.get import Get
 from protocol.webdav.makecollection import MakeCollection
-from protocol.caldav.makecalendar import MakeCalendar
-import types
+from protocol.webdav.principalmatch import PrincipalMatch
+from protocol.webdav.propall import PropAll
+from protocol.webdav.propfind import PropFind
+from protocol.webdav.propfindparser import PropFindParser
+from protocol.webdav.propnames import PropNames
+from protocol.webdav.proppatch import PropPatch
+from protocol.webdav.put import Put
+from protocol.webdav.session import Session
+from xml.etree.ElementTree import Element
 import httplib
+import types
 
 class CalDAVSession(Session):
     
@@ -495,6 +499,22 @@ class CalDAVSession(Session):
         # Return data as a string and etag
         return dout.getData(), etag
 
+    def writeData(self, rurl, data, contentType):
+
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV PUT
+        request = Put(self, rurl.relativeURL())
+        dout = RequestDataString(data, contentType)
+        request.setData(dout)
+    
+        # Process it
+        self.runSession(request)
+    
+        # Check response status
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+
     def openSession(self):
         # Create connection
         if self.ssl:
@@ -665,7 +685,7 @@ class CalDAVSession(Session):
                 return Basic(self.user, self.pswd), False
             elif item.lower().startswith("digest"):
                 return Digest(self.user, self.pswd, wwwhdrs), False
-            elif item.lower().startswith("negotiate"):
+            elif item.lower().startswith("negotiate") and Kerberos is not None:
                 return Kerberos(self.user), False
         else:
             return None, True
