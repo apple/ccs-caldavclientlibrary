@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?eclipse-pydev version="1.0"?>
 
 <pydev_project>
@@ -9,5 +9,7 @@
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>/Volumes/Data/Users/cyrusdaboo/Documents/Development/Apple/eclipse/PyCalendar/src</path>
 <path>/System/Library/Frameworks/Python.framework/Versions/2.5/Extras/lib/python/PyObjC</path>
+<path>/Volumes/Data/Users/cyrusdaboo/Documents/Development/Apple/eclipse/PyKerberos/build/lib.macosx-10.6-universal-2.6</path>
 </pydev_pathproperty>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">/System/Library/Frameworks/Python.framework/Versions/2.5/Resources/Python.app/Contents/MacOS/Python</pydev_property>
 </pydev_project>
