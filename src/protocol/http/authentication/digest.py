@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2007 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2009 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ from protocol.http.authentication.authenticator import Authenticator
 from protocol.http.util import parsetoken
 from protocol.http.definitions import headers
 from StringIO import StringIO
-import sha
-import md5
+import hashlib
 
 class Digest(Authenticator):
 
@@ -99,9 +98,9 @@ class Digest(Authenticator):
             break
 
     algorithms = {
-        'md5': md5.new,
-        'md5-sess': md5.new,
-        'sha': sha.new,
+        'md5': hashlib.md5,
+        'md5-sess': hashlib.md5,
+        'sha': hashlib.sha1,
     }
     
     # DigestCalcHA1
