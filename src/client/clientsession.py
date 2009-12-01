@@ -30,6 +30,7 @@ from protocol.webdav.definitions import statuscodes
 from protocol.webdav.delete import Delete
 from protocol.webdav.get import Get
 from protocol.webdav.makecollection import MakeCollection
+from protocol.webdav.move import Move
 from protocol.webdav.principalmatch import PrincipalMatch
 from protocol.webdav.propall import PropAll
 from protocol.webdav.propfind import PropFind
@@ -466,6 +467,20 @@ class CalDAVSession(Session):
         self.runSession(request)
         
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent):
+            self.handleHTTPError(request)
+
+    def moveResource(self, rurlFrom, rurlTo):
+        
+        assert(isinstance(rurlFrom, URL))
+        assert(isinstance(rurlTo, URL))
+
+        # Create WebDAV MOVE
+        request = Move(self, rurlFrom.relativeURL(), rurlTo.absoluteURL())
+    
+        # Process it
+        self.runSession(request)
+        
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
 
     def readData(self, rurl):

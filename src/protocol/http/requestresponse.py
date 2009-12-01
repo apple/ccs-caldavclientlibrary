@@ -111,7 +111,7 @@ class RequestResponse(object):
     def addHeaders(self, hdrs):
 
         # Write host
-        hdrs.append((headers.Host, self.session.server))
+        hdrs.append((headers.Host, "%s:%s" % (self.session.server, self.session.port,)))
         
         # Do ETag matching
         if self.etag:

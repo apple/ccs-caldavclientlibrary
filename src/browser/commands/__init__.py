@@ -24,6 +24,7 @@ __all__ = [
     "ls",
     "mkcal",
     "mkdir",
+    "mv",
     "principal",
     "props",
     "proxies",
