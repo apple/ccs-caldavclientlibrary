@@ -76,7 +76,7 @@ class Cmd(Command):
             raise WrongOptions
 
         resource = URL(url=path)
-        self.shell.account.session.writeResource(resource, data, content_type)
+        self.shell.account.session.writeData(resource, data, content_type)
 
         return True
 

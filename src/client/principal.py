@@ -33,8 +33,9 @@ class PrincipalCache(object):
             principal.loadDetails()
             self.cache[path.toString()] = principal
             self.cache[principal.principalURL] = principal
-            for uri in principal.alternateURIs:
-                self.cache[uri] = principal
+            if principal.alternateURIs is not None:
+                for uri in principal.alternateURIs:
+                    self.cache[uri] = principal
         elif refresh:
             self.cache[path.toString()].loadDetails(refresh=True)
         return self.cache[path.toString()]

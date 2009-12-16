@@ -521,7 +521,7 @@ class CalDAVSession(Session):
         # Create WebDAV PUT
         request = Put(self, rurl.relativeURL())
         dout = RequestDataString(data, contentType)
-        request.setData(dout)
+        request.setData(dout, None)
     
         # Process it
         self.runSession(request)
