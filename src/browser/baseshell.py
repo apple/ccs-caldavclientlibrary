@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -74,10 +74,10 @@ class BaseShell(object):
             try:
                 self.execute(cmdline)
             except SystemExit, e:
-                print "Exiting shell: %s" % (e.message,)
+                print "Exiting shell: %s" % (e.code,)
                 break
             except UnknownCommand, e:
-                print "Command '%s' unknown." % (e.message,)
+                print "Command '%s' unknown." % (e,)
             except Exception, e:
                 traceback.print_exc()
 
