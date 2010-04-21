@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2009 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 # limitations under the License.
 ##
 
+from client.httpshandler import SmartHTTPConnection
 from protocol.caldav.definitions import headers
 from protocol.caldav.makecalendar import MakeCalendar
 from protocol.http.authentication.basic import Basic
@@ -40,7 +41,6 @@ from protocol.webdav.proppatch import PropPatch
 from protocol.webdav.put import Put
 from protocol.webdav.session import Session
 from xml.etree.ElementTree import Element
-import httplib
 import types
 
 class CalDAVSession(Session):
@@ -532,11 +532,7 @@ class CalDAVSession(Session):
 
     def openSession(self):
         # Create connection
-        if self.ssl:
-            self.connect = httplib.HTTPSConnection(self.server, self.port)
-        else:
-            self.connect = httplib.HTTPConnection(self.server, self.port)
-        self.connect.connect()
+        self.connect = SmartHTTPConnection(self.server, self.port, self.ssl)
         
         # Write to log file
         if self.loghttp and self.log:

@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2007 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,17 +14,14 @@
 # limitations under the License.
 ##
 
+from client.httpshandler import SmartHTTPConnection
 from protocol.webdav.session import Session
 from protocol.webdav.options import Options
-import httplib
 
 def run(session, request):
     
     # Create connection
-    if session.ssl:
-        connect = httplib.HTTPSConnection(session.server, session.port)
-    else:
-        connect = httplib.HTTPConnection(session.server, session.port)
+    connect = SmartHTTPConnection(session.server, session.port, session.ssl)
     connect.set_debuglevel(1)
 
     # Do headers
