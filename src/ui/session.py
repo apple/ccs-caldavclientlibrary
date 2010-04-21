@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,10 @@ class Session(object):
     Maintains the basic information for a session and the root resource.
     """
     
-    def __init__(self, server, user, pswd, logging):
+    def __init__(self, server, path, user, pswd, logging):
         
         self.server = server
+        self.path = path
         self.user = user
         self.pswd = pswd
             
@@ -35,4 +36,4 @@ class Session(object):
         self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=paths, principal=paths, logging=logging)
         
     def getRoot(self):
-        return Resource(self, "/")
+        return Resource(self, self.path)

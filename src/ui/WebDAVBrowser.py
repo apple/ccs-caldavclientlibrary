@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,9 +42,7 @@ from Foundation import * #@UnusedWildImport
 
 from PyObjCTools import NibClassBuilder, AppHelper
 
-from objc import IBOutlet #@UnusedImport
-from objc import YES, NO
-from objc import selector #@UnusedImport
+import objc
 
 from protocol.utils import xmlhelpers
 from ui.session import Session
@@ -124,6 +122,46 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
     for the various NSViews and toolbar items. It basically our controller.
     """
 
+    list = objc.IBOutlet()
+
+    listView = objc.IBOutlet()
+
+    mainSplitterView = objc.IBOutlet()
+
+    passwordText = objc.IBOutlet()
+
+    pathLabel = objc.IBOutlet()
+
+    pathText = objc.IBOutlet()
+
+    progress = objc.IBOutlet()
+
+    propertiesView = objc.IBOutlet()
+
+    serverText = objc.IBOutlet()
+
+    startupSheet = objc.IBOutlet()
+
+    table = objc.IBOutlet()
+
+    text = objc.IBOutlet()
+
+    toolbarBrowserViewButton = objc.IBOutlet()
+
+    toolbarDataViewButton = objc.IBOutlet()
+
+    userText = objc.IBOutlet()
+
+    webView = objc.IBOutlet()
+
+    window = objc.IBOutlet()
+
+    browser = objc.IBOutlet()
+
+    columnView = objc.IBOutlet()
+
+    dataView = objc.IBOutlet()
+
     BROWSERVIEW_COLUMNS = 0
     BROWSERVIEW_LIST    = 1
 
@@ -177,6 +215,11 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         lastServer = NSUserDefaults.standardUserDefaults().stringForKey_("LastServer")
         if lastServer and len(lastServer):
             self.serverText.setStringValue_(lastServer)
+        lastPath = NSUserDefaults.standardUserDefaults().stringForKey_("LastPath")
+        if lastPath and len(lastPath):
+            self.pathText.setStringValue_(lastPath)
+        else:
+            self.pathText.setStringValue_("/")
         lastUser = NSUserDefaults.standardUserDefaults().stringForKey_("LastUser")
         if lastUser and len(lastUser):
             self.userText.setStringValue_(lastUser)
@@ -294,6 +337,7 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             self.browserview = view
             self.refreshView()
     
+    @objc.IBAction
     def changeBrowserView_(self, sender):
         """
         User clicked a browser toolbar button.
@@ -317,12 +361,14 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             self.dataview = view
             self.refreshView()
     
+    @objc.IBAction
     def changeDataView_(self, sender):
         """
         User clicked a view toolbar button.
         """
         self.setDataView(sender.selectedSegment())
         
+    @objc.IBAction
     def resetServer_(self, sender):
         """
         Display the sheet asking for server details.
@@ -364,6 +410,7 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
                 self.webView.mainFrame().loadHTMLString_baseURL_(self.selectedData, url)
             self.progress.stopAnimation_(self)
 
+    @objc.IBAction
     def startupOKAction_(self, btn):
         """
         User clicked OK in the server setup sheet.
@@ -371,12 +418,14 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         
         # Create the actual session.
         server = self.serverText.stringValue()
+        path = self.pathText.stringValue()
         user = self.userText.stringValue()
         pswd = self.passwordText.stringValue()
-        self.session = Session(server, user, pswd, logging=False)
+        self.session = Session(server, path, user, pswd, logging=False)
         self.window.setTitle_(self.serverText.stringValue())
-        self.pathLabel.setStringValue_("/")
+        self.pathLabel.setStringValue_(self.session.path)
         NSUserDefaults.standardUserDefaults().setObject_forKey_(server, "LastServer")
+        NSUserDefaults.standardUserDefaults().setObject_forKey_(path, "LastPath")
         NSUserDefaults.standardUserDefaults().setObject_forKey_(user, "LastUser")
         
         # List the root resource.
@@ -393,20 +442,22 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         self.browser.loadColumnZero()
         self.list.reloadItem_(None)
 
+    @objc.IBAction
     def startupCancelAction_(self, btn):
         """
         User clicked the cancel button in the server sheet.
         """
         self.startupSheet.close()
         NSApplication.sharedApplication().endSheet_(self.startupSheet)
-    
+
+    @objc.IBAction
     def browserAction_(self, browser):
         """
         Something changed in the column browser.
         """
         
         # Update current path.
-        self.pathLabel.setStringValue_(browser.path())
+        self.pathLabel.setStringValue_((self.session.path if len(self.session.path) > 1 else "") + browser.path())
 
         # Get new selected resource and refresh the data view.
         self.selectedResource = None
@@ -514,6 +565,7 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             "Modified": resource.getLastMod(),
         }[tableColumn.identifier()]
 
+    @objc.IBAction
     def tableAction_(self, table):
         """
         Called when the selection in the properties list changes.
