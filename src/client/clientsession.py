@@ -89,6 +89,12 @@ class CalDAVSession(Session):
                     self.log.write("Found principal path: %s" % (self.principalPath.absoluteURL(),))
                 return
     
+    def setUserPswd(self, user, pswd):
+        
+        self.user = user
+        self.pswd = pswd
+        self.authorization = None
+
     def testResource(self, rurl):
 
         assert(isinstance(rurl, URL))
