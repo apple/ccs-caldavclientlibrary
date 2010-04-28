@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ from xml.etree.ElementTree import QName
 import readline
 import os
 import getopt
+import shlex
 
 class Cmd(Command):
     
@@ -41,7 +42,7 @@ class Cmd(Command):
         path = None
 
         try:
-            opts, args = getopt.getopt(options.split(), 'i')
+            opts, args = getopt.getopt(shlex.split(options), 'i')
         except getopt.GetoptError, e:
             print str(e)
             print self.usage(name)

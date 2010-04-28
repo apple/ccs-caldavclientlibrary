@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ from browser import utils
 from browser.subshell import SubShell
 from browser import commands
 import getopt
+import shlex
 
 class Cmd(Command):
     
@@ -37,7 +38,7 @@ class Cmd(Command):
         principal = self.shell.account.getPrincipal()
 
         try:
-            opts, args = getopt.getopt(options.split(), 'irwp:')
+            opts, args = getopt.getopt(shlex.split(options), 'irwp:')
         except getopt.GetoptError, e:
             print str(e)
             print self.usage(name)

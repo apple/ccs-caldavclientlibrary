@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2009 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from browser.command import WrongOptions
 from protocol.url import URL
 import os
 import getopt
+import shlex
 
 class Cmd(Command):
     
@@ -32,7 +33,7 @@ class Cmd(Command):
         content_type = "text/plain"
         path = None
 
-        opts, args = getopt.getopt(options.split(), 'f:t:')
+        opts, args = getopt.getopt(shlex.split(options), 'f:t:')
 
         for name, value in opts:
             

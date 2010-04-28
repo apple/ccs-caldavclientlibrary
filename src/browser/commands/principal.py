@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from browser.command import WrongOptions
 from protocol.url import URL
 from browser import utils
 import getopt
+import shlex
 
 class Cmd(Command):
     
@@ -32,7 +33,7 @@ class Cmd(Command):
         principal = None
         print_proxies = False
 
-        opts, args = getopt.getopt(options.split(), 'fnp:x')
+        opts, args = getopt.getopt(shlex.split(options), 'fnp:x')
 
         for name, value in opts:
             

@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from browser.command import WrongOptions
 from protocol.url import URL
 import os
 import getopt
+import shlex
 
 class Cmd(Command):
     
@@ -27,7 +28,7 @@ class Cmd(Command):
         self.cmds = ("cat",)
         
     def execute(self, name, options):
-        opts, args = getopt.getopt(options.split(), '')
+        opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) or len(args) != 1:
             print self.usage(name)
             raise WrongOptions()

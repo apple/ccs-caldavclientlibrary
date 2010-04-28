@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ from protocol.webdav.definitions import davxml
 from protocol.url import URL
 import os
 import getopt
+import shlex
 
 class Cmd(Command):
     
@@ -32,7 +33,7 @@ class Cmd(Command):
         longlist = False
         path = None
 
-        opts, args = getopt.getopt(options.split(), 'l')
+        opts, args = getopt.getopt(shlex.split(options), 'l')
 
         for name, _ignore_value in opts:
             

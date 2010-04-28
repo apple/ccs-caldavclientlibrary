@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ from protocol.url import URL
 from browser import utils
 import os
 import getopt
+import shlex
 
 class Cmd(Command):
     
@@ -33,7 +34,7 @@ class Cmd(Command):
         all = False
         path = None
 
-        opts, args = getopt.getopt(options.split(), 'an')
+        opts, args = getopt.getopt(shlex.split(options), 'an')
 
         for name, _ignore_value in opts:
             
