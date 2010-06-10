@@ -536,6 +536,9 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
             self.handleHTTPError(request)
 
+    def displayHTTPError(self, request):
+        print request.status_code
+
     def openSession(self):
         # Create connection
         self.connect = SmartHTTPConnection(self.server, self.port, self.ssl)
@@ -693,7 +696,7 @@ class CalDAVSession(Session):
             self.log.write("\n        <-------- END HTTP RESPONSE -------->\n")
 
     def handleHTTPError(self, request):
-        print "Ignoring error"
+        print "Ignoring error: %d" % (request.getStatusCode(),)
 
     def getAuthorizor(self, first_time, wwwhdrs):
         
