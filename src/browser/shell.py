@@ -23,10 +23,11 @@ import browser.commands
 import atexit
 import getopt
 import sys
+import urlparse
 
 class Shell(BaseShell):
     
-    def __init__(self, server, user, pswd, logging):
+    def __init__(self, server, path, user, pswd, logging):
         
         super(Shell, self).__init__("caldav_client")
         self.prefix = self.wd = "/"
@@ -39,7 +40,7 @@ class Shell(BaseShell):
         # Create the account
         ssl = server.startswith("https://")
         server = server[8:] if ssl else server[7:]
-        paths = "/principals/users/%s/" % (self.user,)
+        paths = path
         self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=paths, principal=paths, logging=logging)
         
         atexit.register(self.saveHistory)
@@ -102,13 +103,18 @@ def runit():
     if not server or not (server.startswith("http://") or server.startswith("https://")):
         print usage()
         raise SystemExit()
+    splits = urlparse.urlsplit(server)
+    server = splits.scheme + "://" + splits.netloc
+    path = splits.path
+    if not path:
+        path = "/"
     
     if not user:
         user = raw_input("User: ")
     if not pswd:
         pswd = getpass("Password: ")
 
-    shell = Shell(server, user, pswd, logging)
+    shell = Shell(server, path, user, pswd, logging)
     shell.run()
 
 if __name__ == '__main__':
