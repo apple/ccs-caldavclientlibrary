@@ -33,11 +33,13 @@ class Cmd(Command):
         longlist = False
         path = None
 
-        opts, args = getopt.getopt(shlex.split(options), 'l')
+        opts, args = getopt.getopt(shlex.split(options), 'al')
 
         for name, _ignore_value in opts:
             
-            if name == "-l":
+            if name == "-a":
+                pass
+            elif name == "-l":
                 longlist = True
             else:
                 print "Unknown option: %s" % (name,)
