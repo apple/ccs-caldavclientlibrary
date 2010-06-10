@@ -32,13 +32,17 @@ class Cmd(Command):
         
         longlist = False
         path = None
+        displayname = False
 
-        opts, args = getopt.getopt(shlex.split(options), 'al')
+        opts, args = getopt.getopt(shlex.split(options), 'adl')
 
         for name, _ignore_value in opts:
             
             if name == "-a":
                 pass
+            elif name == "-d":
+                displayname = True
+                longlist = True
             elif name == "-l":
                 longlist = True
             else:
@@ -62,7 +66,7 @@ class Cmd(Command):
 
         props = (davxml.resourcetype,)
         if longlist:
-            props += (davxml.getcontentlength, davxml.getlastmodified,)
+            props += (davxml.displayname, davxml.getcontentlength, davxml.getlastmodified,)
         results = self.shell.account.session.getPropertiesOnHierarchy(resource, props)
         items = results.keys()
         items.sort()
@@ -75,7 +79,10 @@ class Cmd(Command):
                 if not size:
                     size = "0"
                 modtime = props.get(davxml.getlastmodified, "-")
-                print "% 8s %s %s" % (size, modtime, rurl[len(path):])
+                if displayname:
+                    print "% 8s %s %s '%s'" % (size, modtime, rurl[len(path):], props.get(davxml.displayname, ''))
+                else:
+                    print "% 8s %s %s" % (size, modtime, rurl[len(path):])
             else:
                 print rurl[len(path):]
             
@@ -89,6 +96,7 @@ class Cmd(Command):
 PATH is a relative or absolute path.
 
 Options:
+-d   long listing + DAV:displayname
 -l   long listing
 """ % (name,)
 
