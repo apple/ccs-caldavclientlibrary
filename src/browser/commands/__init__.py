@@ -30,6 +30,7 @@ __all__ = [
     "proxies",
     "put",
     "quit",
+    "quota",
     "rm",
     "server",
     "user",
