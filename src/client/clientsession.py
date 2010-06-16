@@ -40,7 +40,7 @@ from protocol.webdav.propnames import PropNames
 from protocol.webdav.proppatch import PropPatch
 from protocol.webdav.put import Put
 from protocol.webdav.session import Session
-from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import Element, tostring
 import types
 
 class CalDAVSession(Session):
@@ -142,7 +142,7 @@ class CalDAVSession(Session):
     
         return results
 
-    def getProperties(self, rurl, props):
+    def getProperties(self, rurl, props, xmldata=False):
 
         assert(isinstance(rurl, URL))
 
@@ -181,7 +181,7 @@ class CalDAVSession(Session):
                             results[name] = value
                     for name, value in item.getNodeProperties().iteritems():
                         if name not in results:
-                            results[name] = value
+                            results[name] = tostring(value) if xmldata else value
                     bad = item.getBadProperties()
         else:
             self.handleHTTPError(request)

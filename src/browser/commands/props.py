@@ -32,14 +32,17 @@ class Cmd(Command):
         
         names = False
         all = False
+        xmllist = False
         path = None
 
-        opts, args = getopt.getopt(shlex.split(options), 'an')
+        opts, args = getopt.getopt(shlex.split(options), 'aln')
 
         for name, _ignore_value in opts:
             
             if name == "-a":
                 all = True
+            elif name == "-l":
+                xmllist = True
             elif name == "-n":
                 names = True
             else:
@@ -69,7 +72,7 @@ class Cmd(Command):
                 props = None
             else:
                 props = self.shell.account.session.getPropertyNames(resource)
-            results, bad = self.shell.account.session.getProperties(resource, props)
+            results, bad = self.shell.account.session.getProperties(resource, props, xmllist)
             print "OK Properties:"
             utils.printProperties(results)
             if bad:
@@ -88,7 +91,8 @@ PATH is a relative or absolute path.
 Options:
 -n    list property names only
 -a    list all properties via allprop
-    if neither of the above are set then property names are first listed, and then values of those looked up.
+-l    list actual property XML values
+    if neither -n nor -a are set then property names are first listed, and then values of those looked up.
     only one of -n and -a can be set.
 """ % (name,)
 

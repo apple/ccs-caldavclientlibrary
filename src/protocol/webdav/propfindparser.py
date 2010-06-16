@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -114,17 +114,29 @@ class PropFindParser(MultiResponseParser):
         if badstatus:
             result.addBadProperty(QName(prop.tag), badstatus)
 
-        elif prop.tag in PropFindParser.textProperties:
-            self.parsePropElementText(prop, result)
-
-        elif prop.tag in PropFindParser.hrefProperties:
-            self.parsePropElementHref(prop, result, False)
-
-        elif prop.tag in PropFindParser.hrefListProperties:
-            self.parsePropElementHref(prop, result, True)
-
+        # Determine what type of content we have
         else:
-            self.parsePropElementUnknown(prop, result)
+            children = prop.getchildren()
+            children_length = len(children)
+            if children_length == 0:
+                self.parsePropElementText(prop, result)
+            elif prop.text is None or not prop.text.strip():
+                if children_length == 1:
+                    if children[0].tag == davxml.href:
+                        self.parsePropElementHref(prop, result, False)
+                    else:
+                        self.parsePropElementUnknown(prop, result)
+                else:
+                    allHref = True
+                    for child in children:
+                        if child.tag != davxml.href:
+                            allHref = False
+                    if allHref:
+                        self.parsePropElementHref(prop, result, True)
+                    else:
+                        self.parsePropElementUnknown(prop, result)
+            else:
+                self.parsePropElementUnknown(prop, result)
 
     def parsePropElementText(self, prop, result):
         # Grab the element data
