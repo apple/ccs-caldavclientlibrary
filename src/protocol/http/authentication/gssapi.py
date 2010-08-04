@@ -76,7 +76,7 @@ class Kerberos(Authenticator):
             if hdr[0] == "Host":
                 host = hdr[1]
 
-        tail, sep, head = host.rpartition(':')
+        tail, _ignore_sep, head = host.rpartition(':')
         domain = tail if tail else head
 
         # do GSS init
