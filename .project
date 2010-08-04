@@ -3,6 +3,7 @@
 	<name>CalDAVClientLibrary</name>
 	<comment></comment>
 	<projects>
+		<project>PyKerberos</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
