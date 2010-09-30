@@ -19,8 +19,6 @@ from client.calendar import Calendar
 from protocol.url import URL
 from protocol.webdav.definitions import davxml
 from protocol.caldav.definitions import headers
-import types
-
 
 class PrincipalCache(object):
     
@@ -42,6 +40,9 @@ class PrincipalCache(object):
 
 principalCache = PrincipalCache()
 
+def make_tuple(item):
+    return item if isinstance(item, tuple) else (item,)
+    
 class CalDAVPrincipal(object):
     
     def __init__(self, session, path):
@@ -125,13 +126,13 @@ class CalDAVPrincipal(object):
             if self.valid:
                 self.displayname = results.get(davxml.displayname, None)
                 self.principalURL = results.get(davxml.principal_URL, None)
-                self.alternateURIs = results.get(davxml.alternate_URI_set, None)
-                self.memberset = results.get(davxml.group_member_set, None)
-                self.memberships = results.get(davxml.group_membership, None)
-                self.homeset = results.get(caldavxml.calendar_home_set, None)
+                self.alternateURIs = make_tuple(results.get(davxml.alternate_URI_set, None))
+                self.memberset = make_tuple(results.get(davxml.group_member_set, None))
+                self.memberships = make_tuple(results.get(davxml.group_membership, None))
+                self.homeset = make_tuple(results.get(caldavxml.calendar_home_set, None))
                 self.outboxURL = results.get(caldavxml.schedule_outbox_URL, None)
                 self.inboxURL = results.get(caldavxml.schedule_inbox_URL, None)
-                self.cuaddrs = results.get(caldavxml.calendar_user_address_set, None)
+                self.cuaddrs = make_tuple(results.get(caldavxml.calendar_user_address_set, None))
 
         # Get proxy resource details if proxy support is available
         if self.session.hasDAVVersion(headers.calendar_proxy) and not self.proxyFor:
@@ -154,7 +155,7 @@ class CalDAVPrincipal(object):
 
     def listCalendars(self, root=None):
         calendars = []
-        home = self.homeset[0] if type(self.homeset) in (types.TupleType,) else self.homeset
+        home = self.homeset[0]
         if not home.path.endswith("/"):
             home.path += "/"
 
