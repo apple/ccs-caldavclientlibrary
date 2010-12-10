@@ -67,7 +67,9 @@ originator                = QName(CalDAVNamespace, "originator")
 recipient                 = QName(CalDAVNamespace, "recipient")
 schedule                  = QName(CalDAVNamespace, "schedule")
 
+schedule_inbox            = QName(CalDAVNamespace, "schedule-inbox")
 schedule_inbox_URL        = QName(CalDAVNamespace, "schedule-inbox-URL")
+schedule_outbox           = QName(CalDAVNamespace, "schedule-outbox")
 schedule_outbox_URL       = QName(CalDAVNamespace, "schedule-outbox-URL")
 calendar_user_address_set = QName(CalDAVNamespace, "calendar-user-address-set")
 

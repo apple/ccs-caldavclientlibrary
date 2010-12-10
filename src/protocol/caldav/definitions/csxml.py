@@ -20,3 +20,10 @@ CSNamespace = "http://calendarserver.org/ns/"
 
 calendar_proxy_read_for    = QName(CSNamespace, "calendar-proxy-read-for")
 calendar_proxy_write_for   = QName(CSNamespace, "calendar-proxy-write-for")
+
+notification               = QName(CSNamespace, "notification")
+notification_URL           = QName(CSNamespace, "notification-URL")
+
+# Are these really in this namespace?
+dropbox_home               = QName(CSNamespace, "dropbox-home")
+dropbox_home_URL           = QName(CSNamespace, "dropbox-home-URL")
