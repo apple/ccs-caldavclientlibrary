@@ -14,23 +14,43 @@
 # limitations under the License.
 ##
 
-from xml.etree.ElementTree import ElementTree
+from xml.etree.ElementTree import ElementTree, _namespace_map
 from xml.etree.ElementTree import Comment
 from xml.etree.ElementTree import _escape_cdata
 from xml.etree.ElementTree import ProcessingInstruction
 from xml.etree.ElementTree import QName
-from xml.etree.ElementTree import fixtag
 from xml.etree.ElementTree import _raise_serialization_error
 from xml.etree.ElementTree import _encode
 from xml.etree.ElementTree import _escape_attrib
 from StringIO import StringIO
 from xml.etree.ElementTree import SubElement
+import string
 
 def SubElementWithData(parent, tag, data=None, attrs={}):
     element = SubElement(parent, tag, attrs)
     if data:
         element.text = data
     return element
+
+def myfixtag(tag, namespaces):
+    # given a decorated tag (of the form {uri}tag), return prefixed
+    # tag and namespace declaration, if any
+    if isinstance(tag, QName):
+        tag = tag.text
+    namespace_uri, tag = string.split(tag[1:], "}", 1)
+    prefix = namespaces.get(namespace_uri)
+    if prefix is None:
+        prefix = _namespace_map.get(namespace_uri)
+        if prefix is None:
+            prefix = "ns%d" % len(namespaces)
+        namespaces[namespace_uri] = prefix
+        if prefix == "xml":
+            xmlns = None
+        else:
+            xmlns = ("xmlns:%s" % prefix, namespace_uri)
+    else:
+        xmlns = None
+    return "%s:%s" % (prefix, tag), xmlns
 
 class BetterElementTree(ElementTree):
     
@@ -57,7 +77,7 @@ class BetterElementTree(ElementTree):
             xmlns_items = [] # new namespaces in this scope
             try:
                 if isinstance(tag, QName) or tag[:1] == "{":
-                    tag, xmlns = fixtag(tag, namespaces)
+                    tag, xmlns = myfixtag(tag, namespaces)
                     if xmlns: xmlns_items.append(xmlns)
             except TypeError:
                 _raise_serialization_error(tag)
@@ -68,13 +88,13 @@ class BetterElementTree(ElementTree):
                 for k, v in items:
                     try:
                         if isinstance(k, QName) or k[:1] == "{":
-                            k, xmlns = fixtag(k, namespaces)
+                            k, xmlns = myfixtag(k, namespaces)
                             if xmlns: xmlns_items.append(xmlns)
                     except TypeError:
                         _raise_serialization_error(k)
                     try:
                         if isinstance(v, QName):
-                            v, xmlns = fixtag(v, namespaces)
+                            v, xmlns = myfixtag(v, namespaces)
                             if xmlns: xmlns_items.append(xmlns)
                     except TypeError:
                         _raise_serialization_error(v)

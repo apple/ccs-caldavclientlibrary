@@ -129,7 +129,7 @@ class RequestResponse(object):
     def addContentHeaders(self, hdrs):
         # Check for content
         if self.hasRequestData():
-            hdrs.append((headers.ContentLength, self.request_data.getContentLength()))
+            hdrs.append((headers.ContentLength, str(self.request_data.getContentLength())))
             hdrs.append((headers.ContentType, self.request_data.getContentType()))
 
     def setResponseStatus(self, version, status, reason):
