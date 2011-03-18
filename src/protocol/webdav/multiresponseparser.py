@@ -21,7 +21,7 @@ class MultiResponseParser(XMLResponseParser):
 
     def parse(self, multistatus_node):
         # Must have a node
-        if not multistatus_node:
+        if multistatus_node is None:
             return
         
         # Verify that the node is the correct element <DAV:multistatus>
