@@ -36,6 +36,7 @@ getcontenttype     = QName(DAVNamespace, "getcontenttype")
 getlastmodified    = QName(DAVNamespace, "getlastmodified")
 resourcetype       = QName(DAVNamespace, "resourcetype")
 collection         = QName(DAVNamespace, "collection")
+synctoken          = QName(DAVNamespace, "sync-token")
 
 lockinfo      = QName(DAVNamespace, "lockinfo")
 lockscope     = QName(DAVNamespace, "lockscope")

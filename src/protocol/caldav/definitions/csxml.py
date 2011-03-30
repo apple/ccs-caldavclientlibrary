@@ -20,6 +20,7 @@ CSNamespace = "http://calendarserver.org/ns/"
 
 calendar_proxy_read_for    = QName(CSNamespace, "calendar-proxy-read-for")
 calendar_proxy_write_for   = QName(CSNamespace, "calendar-proxy-write-for")
+getctag                    = QName(CSNamespace, "getctag")
 
 notification               = QName(CSNamespace, "notification")
 notification_URL           = QName(CSNamespace, "notification-URL")
