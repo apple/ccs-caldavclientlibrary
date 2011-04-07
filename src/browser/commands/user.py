@@ -38,4 +38,4 @@ class Cmd(Command):
 """ % (name,)
 
     def helpDescription(self):
-        return "Allows chnaging the current server login id and password."
+        return "Allows changing the current server login id and password."
