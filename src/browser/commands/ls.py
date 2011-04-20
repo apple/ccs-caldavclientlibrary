@@ -125,7 +125,7 @@ class Cmd(Command):
             # Write out each one
             for line in lines:
                 for ctr, col in enumerate(line):
-                    if ctr in (0, 1):
+                    if ctr in (0, 1) and longlist:
                         print col.rjust(widths[ctr] + 2),
                     else:
                         print col.ljust(widths[ctr] + 2),
