@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2009 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -91,3 +91,6 @@ quota_available_bytes = QName(DAVNamespace, "quota-available-bytes")
 quota_used_bytes      = QName(DAVNamespace, "quota-used-bytes")
 
 current_user_principal = QName(DAVNamespace, "current-user-principal")
+
+mkcol          = QName(DAVNamespace, "mkcol")
+mkcol_response = QName(DAVNamespace, "mkcol-response")

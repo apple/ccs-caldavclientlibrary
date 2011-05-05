@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2010 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 from client.httpshandler import SmartHTTPConnection
 from protocol.caldav.definitions import headers
 from protocol.caldav.makecalendar import MakeCalendar
+from protocol.carddav.makeaddressbook import MakeAddressBook
 from protocol.http.authentication.basic import Basic
 from protocol.http.authentication.digest import Digest
 try:
@@ -455,6 +456,19 @@ class CalDAVSession(Session):
 
         # Create WebDAV MKCALENDAR
         request = MakeCalendar(self, rurl.relativeURL(), displayname, description)
+    
+        # Process it
+        self.runSession(request)
+        
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
+            self.handleHTTPError(request)
+
+    def makeAddressBook(self, rurl, displayname=None, description=None):
+        
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV extended MKCOL
+        request = MakeAddressBook(self, rurl.relativeURL(), displayname, description)
     
         # Process it
         self.runSession(request)

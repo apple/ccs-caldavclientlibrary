@@ -13,27 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##
-
-__all__ = [
-    "acl",
-    "cat",
-    "cd",
-    "help",
-    "history",
-    "logging",
-    "ls",
-    "mkadbk",
-    "mkcal",
-    "mkdir",
-    "mv",
-    "principal",
-    "props",
-    "proxies",
-    "put",
-    "quit",
-    "quota",
-    "rm",
-    "server",
-    "user",
-    "whoami",
-]
