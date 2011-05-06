@@ -33,6 +33,7 @@ from protocol.webdav.delete import Delete
 from protocol.webdav.get import Get
 from protocol.webdav.makecollection import MakeCollection
 from protocol.webdav.move import Move
+from protocol.webdav.post import Post
 from protocol.webdav.principalmatch import PrincipalMatch
 from protocol.webdav.propall import PropAll
 from protocol.webdav.propfind import PropFind
@@ -550,6 +551,22 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
             self.handleHTTPError(request)
 
+    def importData(self, rurl, data, contentType):
+
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV POST
+        request = Post(self, rurl.relativeURL())
+        dout = RequestDataString(data, contentType)
+        request.setData(dout, None)
+    
+        # Process it
+        self.runSession(request)
+    
+        # Check response status
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.MultiStatus, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+
     def displayHTTPError(self, request):
         print request.status_code
 
@@ -701,6 +718,7 @@ class CalDAVSession(Session):
             ))
             for hdr in response.msg.headers:
                 self.log.write(hdr)
+            self.log.write("\n")
 
         # Now get the data
         self.readResponseData(request, response)

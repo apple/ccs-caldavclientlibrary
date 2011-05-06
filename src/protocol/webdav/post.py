@@ -14,27 +14,10 @@
 # limitations under the License.
 ##
 
-__all__ = [
-    "acl",
-    "cat",
-    "cd",
-    "help",
-    "history",
-    "import",
-    "logging",
-    "ls",
-    "mkadbk",
-    "mkcal",
-    "mkdir",
-    "mv",
-    "principal",
-    "props",
-    "proxies",
-    "put",
-    "quit",
-    "quota",
-    "rm",
-    "server",
-    "user",
-    "whoami",
-]
+from protocol.webdav.definitions import methods
+from protocol.webdav.requestresponse import RequestResponse
+
+class Post(RequestResponse):
+
+    def __init__(self, session, url):
+        super(Post, self).__init__(session, methods.POST, url)
