@@ -119,3 +119,17 @@ class TestRequest(unittest.TestCase):
             (davxml.getetag,     "2",),
             (davxml.displayname, "Name2",),
         ))
+
+
+    def test_ResourceNotFound(self):
+        parser = self.parseXML("""<?xml version='1.0' encoding='UTF-8'?>
+<multistatus xmlns='DAV:'>
+  <response>
+    <href>/calendars/__uids__/user01/inbox/event.ics</href>
+    <status>HTTP/1.1 404 Not Found</status>
+  </response>
+</multistatus>
+""")
+        results = parser.getResults()
+        result = results["/calendars/__uids__/user01/inbox/event.ics"]
+        self.assertEqual("HTTP/1.1 404 Not Found", result.getStatus())

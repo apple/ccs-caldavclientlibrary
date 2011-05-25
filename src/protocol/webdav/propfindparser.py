@@ -29,6 +29,7 @@ class PropFindParser(MultiResponseParser):
     class PropFindResult(object):
         
         def __init__(self):
+            self.status = None
             self.textProperties = {}
             self.hrefProperties = {}
             self.nodeProperties = {}
@@ -38,6 +39,11 @@ class PropFindParser(MultiResponseParser):
             self.resource = resource
         def getResource(self):
             return self.resource
+
+        def setStatus(self, status):
+            self.status = status
+        def getStatus(self):
+            return self.status
         
         def addTextProperty(self, name, value):
             self.textProperties[name] = value
@@ -82,6 +88,9 @@ class PropFindParser(MultiResponseParser):
             # Is it propstat
             elif child.tag == davxml.propstat:
                 self.parsePropStat(child, result)
+
+            elif child.tag == davxml.status:
+                result.setStatus(child.text)
         
         # Add the resource only if we got one
         if result.getResource():
