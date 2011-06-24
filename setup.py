@@ -22,11 +22,17 @@ Usage:
 """ 
 
 from distutils.core import setup
-import py2app
+data_files = []
+try:
+    import py2app
+except ImportError:
+    pass
+else:
+    data_files.append("src/ui/WebDAVBrowser.nib")
 
 plist = dict(NSMainNibFile="WebDAVBrowser")
 setup(
     app=["src/ui/WebDAVBrowser.py"],
-    data_files=["src/ui/WebDAVBrowser.nib", ],
+    data_files=data_files,
     options=dict(py2app=dict(plist=plist, includes=["urllib", "sha", "md5",], packages=["src/client", "src/protocol", "src/ui",])),
 )
