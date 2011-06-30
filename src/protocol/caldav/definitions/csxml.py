@@ -28,3 +28,7 @@ notification_URL           = QName(CSNamespace, "notification-URL")
 # Are these really in this namespace?
 dropbox_home               = QName(CSNamespace, "dropbox-home")
 dropbox_home_URL           = QName(CSNamespace, "dropbox-home-URL")
+
+# Defined by caldav-pubsubdiscovery
+xmpp_server                = QName(CSNamespace, "xmpp-server")
+xmpp_uri                   = QName(CSNamespace, "xmpp-uri")
