@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,19 +20,37 @@ Script for building the UI app (OS X only).
 Usage:
     python setup.py py2app
 """ 
+import os
 
 from distutils.core import setup
 data_files = []
+package_data = {}
 try:
     import py2app
 except ImportError:
     pass
 else:
-    data_files.append("src/ui/WebDAVBrowser.nib")
+    data_files.append("caldavclientlibrary/ui/WebDAVBrowser.nib")
+    package_data['caldavclientlibrary'] = [
+        'ui/WebDAVBrowser.nib/*',
+        ]
+
+packages = []
+for dirpath, dirnames, filenames in os.walk('caldavclientlibrary'):
+    if '__init__.py' in filenames:
+        packages.append(dirpath)
 
 plist = dict(NSMainNibFile="WebDAVBrowser")
 setup(
-    app=["src/ui/WebDAVBrowser.py"],
+    app=["caldavclientlibrary/ui/WebDAVBrowser.py"],
+    packages=packages,
     data_files=data_files,
-    options=dict(py2app=dict(plist=plist, includes=["urllib", "sha", "md5",], packages=["src/client", "src/protocol", "src/ui",])),
+    package_data=package_data,
+    scripts=['runshell.py', 'runadmin.py'],
+    options=dict(py2app=dict(plist=plist, includes=["urllib", "sha", "md5",],
+                             packages=["caldavclientlibrary/client",
+                                       "caldavclientlibrary/protocol",
+                                       "caldavclientlibrary/ui",
+                                       "caldavclientlibrary/admin",
+                                       ])),
 )

@@ -1,7 +1,5 @@
-#!/usr/bin/env python
-
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2007 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,16 +14,16 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.protocol.http.authentication.basic import Basic
+from caldavclientlibrary.protocol.http.definitions import headers
 
-if __name__ == "__main__":
+import unittest
 
-    import os
-    import sys
-
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+class TestBasic(unittest.TestCase):
+    
+    def testBasic(self):
+        
+        auther = Basic("user", "pswd")
+        hdrs = []
+        auther.addHeaders(hdrs, None)
+        self.assertTrue((headers.Authorization, "Basic dXNlcjpwc3dk") in hdrs)

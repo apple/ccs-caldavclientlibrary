@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,16 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.protocol.http.definitions.methods import * #@UnusedWildImport
 
-if __name__ == "__main__":
+# RFC2518 - WebDAV Request Methods
 
-    import os
-    import sys
-
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+MKCOL     = "MKCOL"
+MOVE      = "MOVE"
+COPY      = "COPY"
+PROPFIND  = "PROPFIND"
+PROPPATCH = "PROPPATCH"
+LOCK      = "LOCK"
+UNLOCK    = "UNLOCK"
+REPORT    = "REPORT"           # RFC3253
+ACL       = "ACL"              # RFC3744

@@ -3,7 +3,8 @@ README for CalDAVClientLibrary
 INTRODUCTION
 
 CalDAVCLientLibrary is a Python library and tool for CalDAV. It is
-comprised of four main modules:
+comprised of five main modules in the top-level caldavclientlibrary
+package:
 
 protocol: this implements an HTTP/WebDAV/CalDAV protocol stack, using
 httplib to communicate with the server.

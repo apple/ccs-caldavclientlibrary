@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,13 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
+from caldavclientlibrary.protocol.webdav.definitions import methods
 
-if __name__ == "__main__":
+class Report(RequestResponse):
 
-    import os
-    import sys
+    def __init__(self, session, url):
+        super(Report, self).__init__(session, methods.REPORT, url)
 
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+    def _setOutput(self, response_data):
+        self.response_data = response_data;

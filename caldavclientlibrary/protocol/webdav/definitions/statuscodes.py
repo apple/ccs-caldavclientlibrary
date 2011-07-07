@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,11 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.protocol.http.definitions.statuscodes import * #@UnusedWildImport
 
-if __name__ == "__main__":
-
-    import os
-    import sys
-
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+Processing = 102
+MultiStatus = 207
+UnprocessableEntity = 422
+Locked = 423
+FailedDependency = 424
+InsufficientStorage = 507

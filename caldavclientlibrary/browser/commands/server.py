@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,25 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.browser.command import Command
+from caldavclientlibrary.browser.command import WrongOptions
 
-if __name__ == "__main__":
+class Cmd(Command):
+    
+    def __init__(self):
+        super(Command, self).__init__()
+        self.cmds = ("server", )
+        
+    def execute(self, name, options):
+        if options:
+            print self.usage(name)
+            raise WrongOptions()
+        print self.shell.server
+        return True
 
-    import os
-    import sys
+    def usage(self, name):
+        return """Usage: %s
+""" % (name,)
 
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+    def helpDescription(self):
+        return "Displays the current server."

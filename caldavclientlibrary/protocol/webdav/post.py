@@ -1,7 +1,5 @@
-#!/usr/bin/env python
-
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,16 +14,10 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.protocol.webdav.definitions import methods
+from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 
-if __name__ == "__main__":
+class Post(RequestResponse):
 
-    import os
-    import sys
-
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+    def __init__(self, session, url):
+        super(Post, self).__init__(session, methods.POST, url)

@@ -25,8 +25,7 @@ if __name__ == "__main__":
     import os
     import sys
 
-    cwd = os.getcwd()
-    sys.path.append(os.path.join(cwd, "src"))
+    sys.path.append(os.getcwd())
 
-    from src.browser import shell
+    from caldavclientlibrary.browser import shell
     shell.runit()

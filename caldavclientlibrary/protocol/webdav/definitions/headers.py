@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,26 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+# RFC2518 9 - Request Header fields (only the ones we need)
 
-if __name__ == "__main__":
+from caldavclientlibrary.protocol.http.definitions.headers import * #@UnusedWildImport
 
-    import os
-    import sys
-
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+DAV = "DAV"
+DAV1 = "1"
+DAV2 = "2"
+DAVbis = "bis"
+DAVACL = "access-control"        # ACL extension RFC3744
+Depth = "Depth"
+Depth0 = "0"
+Depth1 = "1"
+DepthInfinity = "infinity"
+Destination = "Destination"
+If = "If"
+ForceAuthentication = "Force-Authentication"
+LockToken = "Lock-Token"
+Overwrite = "Overwrite"
+OverwriteTrue = "T"
+OverwriteFalse = "F"
+Timeout = "Timeout"
+TimeoutSeconds = "Second-"
+TimeoutInfinite = "Infinite"

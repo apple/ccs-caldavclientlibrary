@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,17 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.protocol.webdav.definitions.headers import * #@UnusedWildImport
 
-if __name__ == "__main__":
+# RFC4791
+CalendarAccess   = "calendar-access"
 
-    import os
-    import sys
+# draft caldav-schedule
+CalendarSchedule = "calendar-schedule"
 
-    sys.path.append(os.getcwd())
+Originator = "Originator"
+Recipient  = "Recipient"
 
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+# Extensions
+
+calendar_proxy = "calendar-proxy"

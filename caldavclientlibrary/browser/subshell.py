@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,21 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.browser.command import Command
+from caldavclientlibrary.browser.baseshell import BaseShell
 
-if __name__ == "__main__":
+class SubShell(BaseShell):
+    
+    def __init__(self, shell, prefix, cmds):
+        
+        super(SubShell, self).__init__("caldav_client.%s" % (prefix,))
+        self.shell = shell
+        self.prefix = prefix
+        self.preserve_history = True
+        self.registerCommands(cmds)
 
-    import os
-    import sys
+    def registerCommands(self, cmds):
+        for cmd in cmds:
+            if isinstance(cmd, Command):
+                self.registerCommand(cmd)
 
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()

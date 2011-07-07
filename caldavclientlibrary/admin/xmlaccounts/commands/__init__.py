@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,15 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.admin.xmlaccounts.commands.addrecord import AddRecord
+from caldavclientlibrary.admin.xmlaccounts.commands.changepassword import ChangePassword
+from caldavclientlibrary.admin.xmlaccounts.commands.listrecords import ListRecords
+from caldavclientlibrary.admin.xmlaccounts.commands.removerecord import RemoveRecord
 
-if __name__ == "__main__":
+# Commands register themselves in this dict
+registered = {}
 
-    import os
-    import sys
-
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+registered[AddRecord.CMDNAME] = AddRecord
+registered[ChangePassword.CMDNAME] = ChangePassword
+registered[ListRecords.CMDNAME] = ListRecords
+registered[RemoveRecord.CMDNAME] = RemoveRecord

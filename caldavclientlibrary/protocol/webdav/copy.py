@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 # Copyright (c) 2007-2008 Apple Inc. All rights reserved.
 #
@@ -16,16 +14,9 @@
 # limitations under the License.
 ##
 
-#
-# Runs the CalDAVTester test suite ensuring that required packages are available.
-#
+from caldavclientlibrary.protocol.webdav.copymovebase import CopyMoveBase
 
-if __name__ == "__main__":
+class Copy(CopyMoveBase):
 
-    import os
-    import sys
-
-    sys.path.append(os.getcwd())
-
-    from caldavclientlibrary.admin.xmlaccounts import manage
-    manage.runit()
+    def __init__(self, session, url_old, absurl_new, overwrite=False):
+        super(Copy, self).__init__(session, url_old, absurl_new, overwrite=overwrite, delete_original=False)
