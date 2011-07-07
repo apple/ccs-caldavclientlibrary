@@ -32,3 +32,4 @@ dropbox_home_URL           = QName(CSNamespace, "dropbox-home-URL")
 # Defined by caldav-pubsubdiscovery
 xmpp_server                = QName(CSNamespace, "xmpp-server")
 xmpp_uri                   = QName(CSNamespace, "xmpp-uri")
+pushkey                    = QName(CSNamespace, "pushkey")
