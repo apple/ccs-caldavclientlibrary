@@ -1,0 +1,1085 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="caldavclientlibrary-module.html">Package&nbsp;caldavclientlibrary</a> ::
+        <a href="caldavclientlibrary.ui-module.html">Package&nbsp;ui</a> ::
+        <a href="caldavclientlibrary.ui.WebDAVBrowser-module.html">Module&nbsp;WebDAVBrowser</a> ::
+        Class&nbsp;WebDAVBrowserDelegate
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class WebDAVBrowserDelegate</h1><p class="nomargin-top"><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+PyObjCTools.NibClassBuilder.AutoBaseClass --+
+                                            |
+                                           <strong class="uidshort">WebDAVBrowserDelegate</strong>
+</pre>
+
+<hr />
+<p>Class defined in NIB file. This acts as the delegate and responder for
+  the various NSViews and toolbar items. It basically our controller.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="awakeFromNib"></a><span class="summary-sig-name">awakeFromNib</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.awakeFromNib">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="createToolbar"></a><span class="summary-sig-name">createToolbar</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Create the toolbar for our app.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.createToolbar">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="createToolbarItems"></a><span class="summary-sig-name">createToolbarItems</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Create the toolbar item and define the default and allowed set.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.createToolbarItems">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="toolbarDefaultItemIdentifiers_"></a><span class="summary-sig-name">toolbarDefaultItemIdentifiers_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">anIdentifier</span>)</span><br />
+      Return the default set of toolbar items.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.toolbarDefaultItemIdentifiers_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="toolbarAllowedItemIdentifiers_"></a><span class="summary-sig-name">toolbarAllowedItemIdentifiers_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">anIdentifier</span>)</span><br />
+      Return the allowed set of toolbar items.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.toolbarAllowedItemIdentifiers_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#toolbar_itemForItemIdentifier_willBeInsertedIntoToolbar_" class="summary-sig-name">toolbar_itemForItemIdentifier_willBeInsertedIntoToolbar_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">toolbar</span>,
+        <span class="summary-sig-arg">itemIdentifier</span>,
+        <span class="summary-sig-arg">flag</span>)</span><br />
+      Delegate method fired when the toolbar is about to insert an item 
+      into the toolbar.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.toolbar_itemForItemIdentifier_willBeInsertedIntoToolbar_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setBrowserView"></a><span class="summary-sig-name">setBrowserView</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Change the browser view pane to the specified list type.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.setBrowserView">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#changeBrowserView_" class="summary-sig-name">changeBrowserView_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sender</span>)</span><br />
+      User clicked a browser toolbar button.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.changeBrowserView_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setDataView"></a><span class="summary-sig-name">setDataView</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Change the data view pane to the specified type.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.setDataView">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#changeDataView_" class="summary-sig-name">changeDataView_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sender</span>)</span><br />
+      User clicked a view toolbar button.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.changeDataView_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#resetServer_" class="summary-sig-name">resetServer_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sender</span>)</span><br />
+      Display the sheet asking for server details.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.resetServer_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="refreshData_"></a><span class="summary-sig-name">refreshData_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sender</span>)</span><br />
+      Force a refresh of the data for the current selected resource.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.refreshData_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="refreshView"></a><span class="summary-sig-name">refreshView</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Refresh the actual data view for the selected resource.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.refreshView">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#startupOKAction_" class="summary-sig-name">startupOKAction_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">btn</span>)</span><br />
+      User clicked OK in the server setup sheet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.startupOKAction_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#startupCancelAction_" class="summary-sig-name">startupCancelAction_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">btn</span>)</span><br />
+      User clicked the cancel button in the server sheet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.startupCancelAction_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#browserAction_" class="summary-sig-name">browserAction_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">browser</span>)</span><br />
+      Something changed in the column browser.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.browserAction_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="browser_willDisplayCell_atRow_column_"></a><span class="summary-sig-name">browser_willDisplayCell_atRow_column_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">browser</span>,
+        <span class="summary-sig-arg">cell</span>,
+        <span class="summary-sig-arg">row</span>,
+        <span class="summary-sig-arg">col</span>)</span><br />
+      Delegate method to set the actual stuff displayed in a column view 
+      row.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.browser_willDisplayCell_atRow_column_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="browser_numberOfRowsInColumn_"></a><span class="summary-sig-name">browser_numberOfRowsInColumn_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">browser</span>,
+        <span class="summary-sig-arg">col</span>)</span><br />
+      Delegate method that returns the number of rows in a column view 
+      column.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.browser_numberOfRowsInColumn_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="outlineViewSelectionDidChange_"></a><span class="summary-sig-name">outlineViewSelectionDidChange_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">notification</span>)</span><br />
+      Delegate method called when the selection in the outline view 
+      changes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.outlineViewSelectionDidChange_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="outlineView_numberOfChildrenOfItem_"></a><span class="summary-sig-name">outlineView_numberOfChildrenOfItem_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outlineView</span>,
+        <span class="summary-sig-arg">item</span>)</span><br />
+      Delegate method to return the number of children of an item in the 
+      outline view.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.outlineView_numberOfChildrenOfItem_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="outlineView_isItemExpandable_"></a><span class="summary-sig-name">outlineView_isItemExpandable_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outlineView</span>,
+        <span class="summary-sig-arg">item</span>)</span><br />
+      Delegate method to return the whether an item in the outline view is 
+      expandable.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.outlineView_isItemExpandable_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="outlineView_child_ofItem_"></a><span class="summary-sig-name">outlineView_child_ofItem_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outlineView</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">item</span>)</span><br />
+      Delegate method to return the item associated with a row in the 
+      outline view.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.outlineView_child_ofItem_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="outlineView_objectValueForTableColumn_byItem_"></a><span class="summary-sig-name">outlineView_objectValueForTableColumn_byItem_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outlineView</span>,
+        <span class="summary-sig-arg">tableColumn</span>,
+        <span class="summary-sig-arg">item</span>)</span><br />
+      Delegate method to return the data displayed in the outline view.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.outlineView_objectValueForTableColumn_byItem_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#tableAction_" class="summary-sig-name">tableAction_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">table</span>)</span><br />
+      Called when the selection in the properties list changes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.tableAction_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#numberOfRowsInTableView_" class="summary-sig-name">numberOfRowsInTableView_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tableView</span>)</span><br />
+      Delegate method to return the number of rows in the list.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.numberOfRowsInTableView_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="tableView_objectValueForTableColumn_row_"></a><span class="summary-sig-name">tableView_objectValueForTableColumn_row_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tableView</span>,
+        <span class="summary-sig-arg">col</span>,
+        <span class="summary-sig-arg">row</span>)</span><br />
+      Delegate method to return the text for a list cell.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.tableView_objectValueForTableColumn_row_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="tableView_shouldEditTableColumn_row_"></a><span class="summary-sig-name">tableView_shouldEditTableColumn_row_</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tableView</span>,
+        <span class="summary-sig-arg">col</span>,
+        <span class="summary-sig-arg">row</span>)</span><br />
+      Delegate method to indicate whether a cell can be edited.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.tableView_shouldEditTableColumn_row_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propValueToText"></a><span class="summary-sig-name">propValueToText</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Do a sensible print of a property value taking type into account.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.propValueToText">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="list"></a><span class="summary-name">list</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="listView"></a><span class="summary-name">listView</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="mainSplitterView"></a><span class="summary-name">mainSplitterView</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="passwordText"></a><span class="summary-name">passwordText</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="pathLabel"></a><span class="summary-name">pathLabel</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="pathText"></a><span class="summary-name">pathText</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="progress"></a><span class="summary-name">progress</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="propertiesView"></a><span class="summary-name">propertiesView</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="serverText"></a><span class="summary-name">serverText</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="startupSheet"></a><span class="summary-name">startupSheet</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="table"></a><span class="summary-name">table</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="text"></a><span class="summary-name">text</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="toolbarBrowserViewButton"></a><span class="summary-name">toolbarBrowserViewButton</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="toolbarDataViewButton"></a><span class="summary-name">toolbarDataViewButton</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="userText"></a><span class="summary-name">userText</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="webView"></a><span class="summary-name">webView</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="window"></a><span class="summary-name">window</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="browser"></a><span class="summary-name">browser</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="columnView"></a><span class="summary-name">columnView</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="dataView"></a><span class="summary-name">dataView</span> = <code title="objc.IBOutlet()">objc.IBOutlet()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="BROWSERVIEW_COLUMNS"></a><span class="summary-name">BROWSERVIEW_COLUMNS</span> = <code title="0">0</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="BROWSERVIEW_LIST"></a><span class="summary-name">BROWSERVIEW_LIST</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DATAVIEW_PROPERTIES"></a><span class="summary-name">DATAVIEW_PROPERTIES</span> = <code title="0">0</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DATAVIEW_DATA"></a><span class="summary-name">DATAVIEW_DATA</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="selectedDetails"></a><span class="summary-name">selectedDetails</span> = <code title="None">None</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="toolbar_itemForItemIdentifier_willBeInsertedIntoToolbar_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">toolbar_itemForItemIdentifier_willBeInsertedIntoToolbar_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">toolbar</span>,
+        <span class="sig-arg">itemIdentifier</span>,
+        <span class="sig-arg">flag</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.toolbar_itemForItemIdentifier_willBeInsertedIntoToolbar_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Delegate method fired when the toolbar is about to insert an item into
+  the toolbar.  Item is identified by itemIdentifier.</p>
+  <p>Effectively makes a copy of the cached reference instance of the 
+  toolbar item identified by itemIdentifier.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="changeBrowserView_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">changeBrowserView_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sender</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.changeBrowserView_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>User clicked a browser toolbar button.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@objc.IBAction</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="changeDataView_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">changeDataView_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sender</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.changeDataView_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>User clicked a view toolbar button.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@objc.IBAction</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="resetServer_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">resetServer_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sender</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.resetServer_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Display the sheet asking for server details.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@objc.IBAction</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="startupOKAction_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">startupOKAction_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">btn</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.startupOKAction_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>User clicked OK in the server setup sheet.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@objc.IBAction</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="startupCancelAction_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">startupCancelAction_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">btn</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.startupCancelAction_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>User clicked the cancel button in the server sheet.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@objc.IBAction</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="browserAction_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">browserAction_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">browser</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.browserAction_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Something changed in the column browser.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@objc.IBAction</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="tableAction_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tableAction_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">table</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.tableAction_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Called when the selection in the properties list changes.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@objc.IBAction</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="numberOfRowsInTableView_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">numberOfRowsInTableView_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tableView</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="caldavclientlibrary.ui.WebDAVBrowser-pysrc.html#WebDAVBrowserDelegate.numberOfRowsInTableView_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Delegate method to return the number of rows in the list.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>tableView</code></strong> ()</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul  7 15:01:47 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

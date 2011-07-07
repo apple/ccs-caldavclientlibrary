@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>caldavclientlibrary.admin.xmlaccounts.commands</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="caldavclientlibrary-module.html">Package&nbsp;caldavclientlibrary</a> ::
+        <a href="caldavclientlibrary.admin-module.html">Package&nbsp;admin</a> ::
+        <a href="caldavclientlibrary.admin.xmlaccounts-module.html">Package&nbsp;xmlaccounts</a> ::
+        Package&nbsp;commands
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="caldavclientlibrary.admin.xmlaccounts.commands-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="caldavclientlibrary.admin.xmlaccounts.commands-module.html">Package caldavclientlibrary.admin.xmlaccounts.commands</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2007-2008 Apple Inc. All rights reserved.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"># you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment"># You may obtain a copy of the License at</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"># http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"># Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment"># distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"># See the License for the specific language governing permissions and</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package caldavclientlibrary=caldavclientlibrary-module.html"><a title="caldavclientlibrary" class="py-name" href="#" onclick="return doclink('link-0', 'caldavclientlibrary', 'link-0');">caldavclientlibrary</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package caldavclientlibrary.admin=caldavclientlibrary.admin-module.html"><a title="caldavclientlibrary.admin" class="py-name" href="#" onclick="return doclink('link-1', 'admin', 'link-1');">admin</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package caldavclientlibrary.admin.xmlaccounts=caldavclientlibrary.admin.xmlaccounts-module.html"><a title="caldavclientlibrary.admin.xmlaccounts" class="py-name" href="#" onclick="return doclink('link-2', 'xmlaccounts', 'link-2');">xmlaccounts</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package caldavclientlibrary.admin.xmlaccounts.commands=caldavclientlibrary.admin.xmlaccounts.commands-module.html,Package caldavclientlibrary.browser.commands=caldavclientlibrary.browser.commands-module.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands
+caldavclientlibrary.browser.commands" class="py-name" href="#" onclick="return doclink('link-3', 'commands', 'link-3');">commands</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module caldavclientlibrary.admin.xmlaccounts.commands.addrecord=caldavclientlibrary.admin.xmlaccounts.commands.addrecord-module.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord" class="py-name" href="#" onclick="return doclink('link-4', 'addrecord', 'link-4');">addrecord</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord=caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord-class.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord" class="py-name" href="#" onclick="return doclink('link-5', 'AddRecord', 'link-5');">AddRecord</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="caldavclientlibrary" class="py-name" href="#" onclick="return doclink('link-6', 'caldavclientlibrary', 'link-0');">caldavclientlibrary</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="caldavclientlibrary.admin" class="py-name" href="#" onclick="return doclink('link-7', 'admin', 'link-1');">admin</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts" class="py-name" href="#" onclick="return doclink('link-8', 'xmlaccounts', 'link-2');">xmlaccounts</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands
+caldavclientlibrary.browser.commands" class="py-name" href="#" onclick="return doclink('link-9', 'commands', 'link-3');">commands</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module caldavclientlibrary.admin.xmlaccounts.commands.changepassword=caldavclientlibrary.admin.xmlaccounts.commands.changepassword-module.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.changepassword" class="py-name" href="#" onclick="return doclink('link-10', 'changepassword', 'link-10');">changepassword</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Class caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword=caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword-class.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword" class="py-name" href="#" onclick="return doclink('link-11', 'ChangePassword', 'link-11');">ChangePassword</a></tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="caldavclientlibrary" class="py-name" href="#" onclick="return doclink('link-12', 'caldavclientlibrary', 'link-0');">caldavclientlibrary</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="caldavclientlibrary.admin" class="py-name" href="#" onclick="return doclink('link-13', 'admin', 'link-1');">admin</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts" class="py-name" href="#" onclick="return doclink('link-14', 'xmlaccounts', 'link-2');">xmlaccounts</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands
+caldavclientlibrary.browser.commands" class="py-name" href="#" onclick="return doclink('link-15', 'commands', 'link-3');">commands</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Module caldavclientlibrary.admin.xmlaccounts.commands.listrecords=caldavclientlibrary.admin.xmlaccounts.commands.listrecords-module.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.listrecords" class="py-name" href="#" onclick="return doclink('link-16', 'listrecords', 'link-16');">listrecords</a></tt> <tt class="py-keyword">import</tt> <tt id="link-17" class="py-name" targets="Class caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords=caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords-class.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords" class="py-name" href="#" onclick="return doclink('link-17', 'ListRecords', 'link-17');">ListRecords</a></tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-18" class="py-name"><a title="caldavclientlibrary" class="py-name" href="#" onclick="return doclink('link-18', 'caldavclientlibrary', 'link-0');">caldavclientlibrary</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="caldavclientlibrary.admin" class="py-name" href="#" onclick="return doclink('link-19', 'admin', 'link-1');">admin</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts" class="py-name" href="#" onclick="return doclink('link-20', 'xmlaccounts', 'link-2');">xmlaccounts</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands
+caldavclientlibrary.browser.commands" class="py-name" href="#" onclick="return doclink('link-21', 'commands', 'link-3');">commands</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Module caldavclientlibrary.admin.xmlaccounts.commands.removerecord=caldavclientlibrary.admin.xmlaccounts.commands.removerecord-module.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.removerecord" class="py-name" href="#" onclick="return doclink('link-22', 'removerecord', 'link-22');">removerecord</a></tt> <tt class="py-keyword">import</tt> <tt id="link-23" class="py-name" targets="Class caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord=caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord-class.html"><a title="caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord" class="py-name" href="#" onclick="return doclink('link-23', 'RemoveRecord', 'link-23');">RemoveRecord</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-comment"># Commands register themselves in this dict</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable caldavclientlibrary.admin.xmlaccounts.commands.registered=caldavclientlibrary.admin.xmlaccounts.commands-module.html#registered"><a title="caldavclientlibrary.admin.xmlaccounts.commands.registered" class="py-name" href="#" onclick="return doclink('link-24', 'registered', 'link-24');">registered</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt id="link-25" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.registered" class="py-name" href="#" onclick="return doclink('link-25', 'registered', 'link-24');">registered</a></tt><tt class="py-op">[</tt><tt id="link-26" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord" class="py-name" href="#" onclick="return doclink('link-26', 'AddRecord', 'link-5');">AddRecord</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Variable caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord.CMDNAME=caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord-class.html#CMDNAME,Variable caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword.CMDNAME=caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword-class.html#CMDNAME,Variable caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords.CMDNAME=caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords-class.html#CMDNAME,Variable caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord.CMDNAME=caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord-class.html#CMDNAME"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord.CMDNAME" class="py-name" href="#" onclick="return doclink('link-27', 'CMDNAME', 'link-27');">CMDNAME</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord" class="py-name" href="#" onclick="return doclink('link-28', 'AddRecord', 'link-5');">AddRecord</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt id="link-29" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.registered" class="py-name" href="#" onclick="return doclink('link-29', 'registered', 'link-24');">registered</a></tt><tt class="py-op">[</tt><tt id="link-30" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword" class="py-name" href="#" onclick="return doclink('link-30', 'ChangePassword', 'link-11');">ChangePassword</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord.CMDNAME" class="py-name" href="#" onclick="return doclink('link-31', 'CMDNAME', 'link-27');">CMDNAME</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword" class="py-name" href="#" onclick="return doclink('link-32', 'ChangePassword', 'link-11');">ChangePassword</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt id="link-33" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.registered" class="py-name" href="#" onclick="return doclink('link-33', 'registered', 'link-24');">registered</a></tt><tt class="py-op">[</tt><tt id="link-34" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords" class="py-name" href="#" onclick="return doclink('link-34', 'ListRecords', 'link-17');">ListRecords</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord.CMDNAME" class="py-name" href="#" onclick="return doclink('link-35', 'CMDNAME', 'link-27');">CMDNAME</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords" class="py-name" href="#" onclick="return doclink('link-36', 'ListRecords', 'link-17');">ListRecords</a></tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt id="link-37" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.registered" class="py-name" href="#" onclick="return doclink('link-37', 'registered', 'link-24');">registered</a></tt><tt class="py-op">[</tt><tt id="link-38" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord" class="py-name" href="#" onclick="return doclink('link-38', 'RemoveRecord', 'link-23');">RemoveRecord</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.addrecord.AddRecord.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.changepassword.ChangePassword.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.listrecords.ListRecords.CMDNAME
+caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord.CMDNAME" class="py-name" href="#" onclick="return doclink('link-39', 'CMDNAME', 'link-27');">CMDNAME</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="caldavclientlibrary.admin.xmlaccounts.commands.removerecord.RemoveRecord" class="py-name" href="#" onclick="return doclink('link-40', 'RemoveRecord', 'link-23');">RemoveRecord</a></tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul  7 15:01:50 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

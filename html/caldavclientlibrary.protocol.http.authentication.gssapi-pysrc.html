@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>caldavclientlibrary.protocol.http.authentication.gssapi</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="caldavclientlibrary-module.html">Package&nbsp;caldavclientlibrary</a> ::
+        <a href="caldavclientlibrary.protocol-module.html">Package&nbsp;protocol</a> ::
+        <a href="caldavclientlibrary.protocol.http-module.html">Package&nbsp;http</a> ::
+        <a href="caldavclientlibrary.protocol.http.authentication-module.html">Package&nbsp;authentication</a> ::
+        Module&nbsp;gssapi
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="caldavclientlibrary.protocol.http.authentication.gssapi-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="caldavclientlibrary.protocol.http.authentication.gssapi-module.html">Module caldavclientlibrary.protocol.http.authentication.gssapi</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2006-2007 Apple Inc. All rights reserved.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2008 Lime Nest LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2008 Lime Spot LLC</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2009 Ramon Ziai</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># You may obtain a copy of the License at</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># See the License for the specific language governing permissions and</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">Parts of the following are inspired by urllib2_kerberos,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">which is also under the Apache 2.0 License,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">see http://limedav.com/hg/urllib2_kerberos</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package caldavclientlibrary=caldavclientlibrary-module.html"><a title="caldavclientlibrary" class="py-name" href="#" onclick="return doclink('link-0', 'caldavclientlibrary', 'link-0');">caldavclientlibrary</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package caldavclientlibrary.protocol=caldavclientlibrary.protocol-module.html"><a title="caldavclientlibrary.protocol" class="py-name" href="#" onclick="return doclink('link-1', 'protocol', 'link-1');">protocol</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package caldavclientlibrary.protocol.http=caldavclientlibrary.protocol.http-module.html"><a title="caldavclientlibrary.protocol.http" class="py-name" href="#" onclick="return doclink('link-2', 'http', 'link-2');">http</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package caldavclientlibrary.protocol.http.authentication=caldavclientlibrary.protocol.http.authentication-module.html"><a title="caldavclientlibrary.protocol.http.authentication" class="py-name" href="#" onclick="return doclink('link-3', 'authentication', 'link-3');">authentication</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module caldavclientlibrary.protocol.http.authentication.authenticator=caldavclientlibrary.protocol.http.authentication.authenticator-module.html"><a title="caldavclientlibrary.protocol.http.authentication.authenticator" class="py-name" href="#" onclick="return doclink('link-4', 'authenticator', 'link-4');">authenticator</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class caldavclientlibrary.protocol.http.authentication.authenticator.Authenticator=caldavclientlibrary.protocol.http.authentication.authenticator.Authenticator-class.html"><a title="caldavclientlibrary.protocol.http.authentication.authenticator.Authenticator" class="py-name" href="#" onclick="return doclink('link-5', 'Authenticator', 'link-5');">Authenticator</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="caldavclientlibrary" class="py-name" href="#" onclick="return doclink('link-6', 'caldavclientlibrary', 'link-0');">caldavclientlibrary</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="caldavclientlibrary.protocol" class="py-name" href="#" onclick="return doclink('link-7', 'protocol', 'link-1');">protocol</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="caldavclientlibrary.protocol.http" class="py-name" href="#" onclick="return doclink('link-8', 'http', 'link-2');">http</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Package caldavclientlibrary.protocol.caldav.definitions=caldavclientlibrary.protocol.caldav.definitions-module.html,Package caldavclientlibrary.protocol.carddav.definitions=caldavclientlibrary.protocol.carddav.definitions-module.html,Package caldavclientlibrary.protocol.http.definitions=caldavclientlibrary.protocol.http.definitions-module.html,Package caldavclientlibrary.protocol.webdav.definitions=caldavclientlibrary.protocol.webdav.definitions-module.html"><a title="caldavclientlibrary.protocol.caldav.definitions
+caldavclientlibrary.protocol.carddav.definitions
+caldavclientlibrary.protocol.http.definitions
+caldavclientlibrary.protocol.webdav.definitions" class="py-name" href="#" onclick="return doclink('link-9', 'definitions', 'link-9');">definitions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-10" class="py-name" targets="Module caldavclientlibrary.protocol.caldav.definitions.headers=caldavclientlibrary.protocol.caldav.definitions.headers-module.html,Module caldavclientlibrary.protocol.http.definitions.headers=caldavclientlibrary.protocol.http.definitions.headers-module.html,Module caldavclientlibrary.protocol.webdav.definitions.headers=caldavclientlibrary.protocol.webdav.definitions.headers-module.html"><a title="caldavclientlibrary.protocol.caldav.definitions.headers
+caldavclientlibrary.protocol.http.definitions.headers
+caldavclientlibrary.protocol.webdav.definitions.headers" class="py-name" href="#" onclick="return doclink('link-10', 'headers', 'link-10');">headers</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">kerberos</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="Kerberos"></a><div id="Kerberos-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="Kerberos-toggle" onclick="return toggle('Kerberos');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html">Kerberos</a><tt class="py-op">(</tt><tt class="py-base-class">Authenticator</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kerberos-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Kerberos-expanded"><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="Kerberos.__init__"></a><div id="Kerberos.__init__-def"><a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="Kerberos.__init__-toggle" onclick="return toggle('Kerberos.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">user</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kerberos.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Kerberos.__init__-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt id="link-11" class="py-name" targets="Variable caldavclientlibrary.protocol.webdav.definitions.davxml.self=caldavclientlibrary.protocol.webdav.definitions.davxml-module.html#self"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-11', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Module caldavclientlibrary.browser.commands.user=caldavclientlibrary.browser.commands.user-module.html"><a title="caldavclientlibrary.browser.commands.user" class="py-name" href="#" onclick="return doclink('link-12', 'user', 'link-12');">user</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="caldavclientlibrary.browser.commands.user" class="py-name" href="#" onclick="return doclink('link-13', 'user', 'link-12');">user</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt id="link-14" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-14', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">context</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="Kerberos.addHeaders"></a><div id="Kerberos.addHeaders-def"><a name="L36"></a><tt class="py-lineno"> 36</tt> <a class="py-toggle" href="#" id="Kerberos.addHeaders-toggle" onclick="return toggle('Kerberos.addHeaders');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#addHeaders">addHeaders</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">hdrs</tt><tt class="py-op">,</tt> <tt class="py-param">request</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kerberos.addHeaders-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Kerberos.addHeaders-expanded"><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">neg_value</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-15', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos.negotiate_value()=caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#negotiate_value"><a title="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos.negotiate_value" class="py-name" href="#" onclick="return doclink('link-16', 'negotiate_value', 'link-16');">negotiate_value</a></tt><tt class="py-op">(</tt><tt class="py-name">hdrs</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">header</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-17', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos.generate_request_header()=caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#generate_request_header"><a title="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos.generate_request_header" class="py-name" href="#" onclick="return doclink('link-18', 'generate_request_header', 'link-18');">generate_request_header</a></tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">,</tt> <tt class="py-name">hdrs</tt><tt class="py-op">,</tt> <tt class="py-name">neg_value</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">         </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-comment"># Generate header</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">hdrs</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="caldavclientlibrary.protocol.caldav.definitions.headers
+caldavclientlibrary.protocol.http.definitions.headers
+caldavclientlibrary.protocol.webdav.definitions.headers" class="py-name" href="#" onclick="return doclink('link-19', 'headers', 'link-10');">headers</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.headers.Authorization=caldavclientlibrary.protocol.caldav.definitions.headers-module.html#Authorization,Variable caldavclientlibrary.protocol.http.definitions.headers.Authorization=caldavclientlibrary.protocol.http.definitions.headers-module.html#Authorization,Variable caldavclientlibrary.protocol.webdav.definitions.headers.Authorization=caldavclientlibrary.protocol.webdav.definitions.headers-module.html#Authorization"><a title="caldavclientlibrary.protocol.caldav.definitions.headers.Authorization
+caldavclientlibrary.protocol.http.definitions.headers.Authorization
+caldavclientlibrary.protocol.webdav.definitions.headers.Authorization" class="py-name" href="#" onclick="return doclink('link-20', 'Authorization', 'link-20');">Authorization</a></tt><tt class="py-op">,</tt> <tt class="py-name">header</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt id="link-21" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-21', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos.clean_context()=caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#clean_context"><a title="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos.clean_context" class="py-name" href="#" onclick="return doclink('link-22', 'clean_context', 'link-22');">clean_context</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">         </tt>
+<a name="Kerberos.negotiate_value"></a><div id="Kerberos.negotiate_value-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="Kerberos.negotiate_value-toggle" onclick="return toggle('Kerberos.negotiate_value');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#negotiate_value">negotiate_value</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">headers</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kerberos.negotiate_value-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Kerberos.negotiate_value-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-docstring">"""checks for "Negotiate" in proper auth header</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        taken from urllib2_kerberos, see http://limedav.com/hg/urllib2_kerberos</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">authreq</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">hdr</tt> <tt class="py-keyword">in</tt> <tt id="link-23" class="py-name"><a title="caldavclientlibrary.protocol.caldav.definitions.headers
+caldavclientlibrary.protocol.http.definitions.headers
+caldavclientlibrary.protocol.webdav.definitions.headers" class="py-name" href="#" onclick="return doclink('link-23', 'headers', 'link-10');">headers</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">hdr</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt> <tt class="py-op">==</tt> <tt class="py-string">"www-authenticate"</tt> <tt class="py-keyword">and</tt> <tt class="py-string">"Negotiate"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">hdr</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-name">authreq</tt> <tt class="py-op">=</tt> <tt class="py-name">hdr</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">authreq</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-name">rx</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(?:.*,)*\s*Negotiate\s*([^,]*),?'</tt><tt class="py-op">,</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">I</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">            <tt class="py-name">mo</tt> <tt class="py-op">=</tt> <tt class="py-name">rx</tt><tt class="py-op">.</tt><tt class="py-name">search</tt><tt class="py-op">(</tt><tt class="py-name">authreq</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">mo</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                <tt class="py-comment"># regex failed</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-comment"># header not found</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">     </tt>
+<a name="Kerberos.generate_request_header"></a><div id="Kerberos.generate_request_header-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="Kerberos.generate_request_header-toggle" onclick="return toggle('Kerberos.generate_request_header');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#generate_request_header">generate_request_header</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">req</tt><tt class="py-op">,</tt> <tt class="py-param">headers</tt><tt class="py-op">,</tt> <tt class="py-param">neg_value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kerberos.generate_request_header-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Kerberos.generate_request_header-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        taken from urllib2_kerberos, see http://limedav.com/hg/urllib2_kerberos</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">host</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-comment"># assuming that "Host" is one of the headers, which is usually the case</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">hdr</tt> <tt class="py-keyword">in</tt> <tt id="link-24" class="py-name"><a title="caldavclientlibrary.protocol.caldav.definitions.headers
+caldavclientlibrary.protocol.http.definitions.headers
+caldavclientlibrary.protocol.webdav.definitions.headers" class="py-name" href="#" onclick="return doclink('link-24', 'headers', 'link-10');">headers</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">hdr</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"Host"</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                <tt class="py-name">host</tt> <tt class="py-op">=</tt> <tt class="py-name">hdr</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">tail</tt><tt class="py-op">,</tt> <tt class="py-name">_ignore_sep</tt><tt class="py-op">,</tt> <tt id="link-25" class="py-name" targets="Module caldavclientlibrary.protocol.webdav.head=caldavclientlibrary.protocol.webdav.head-module.html"><a title="caldavclientlibrary.protocol.webdav.head" class="py-name" href="#" onclick="return doclink('link-25', 'head', 'link-25');">head</a></tt> <tt class="py-op">=</tt> <tt class="py-name">host</tt><tt class="py-op">.</tt><tt class="py-name">rpartition</tt><tt class="py-op">(</tt><tt class="py-string">':'</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">domain</tt> <tt class="py-op">=</tt> <tt class="py-name">tail</tt> <tt class="py-keyword">if</tt> <tt class="py-name">tail</tt> <tt class="py-keyword">else</tt> <tt id="link-26" class="py-name"><a title="caldavclientlibrary.protocol.webdav.head" class="py-name" href="#" onclick="return doclink('link-26', 'head', 'link-25');">head</a></tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-comment"># do GSS init</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-name">result</tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-27', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">context</tt> <tt class="py-op">=</tt> <tt class="py-name">kerberos</tt><tt class="py-op">.</tt><tt class="py-name">authGSSClientInit</tt><tt class="py-op">(</tt><tt class="py-string">"http@%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">domain</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-comment"># authGSSClientInit returned negative result</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-comment"># authGSSClientInit() succeeded</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt id="link-28" class="py-name" targets="Package caldavclientlibrary.protocol.http.data=caldavclientlibrary.protocol.http.data-module.html,Module caldavclientlibrary.protocol.http.data.data=caldavclientlibrary.protocol.http.data.data-module.html"><a title="caldavclientlibrary.protocol.http.data
+caldavclientlibrary.protocol.http.data.data" class="py-name" href="#" onclick="return doclink('link-28', 'data', 'link-28');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">neg_value</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt id="link-29" class="py-name"><a title="caldavclientlibrary.protocol.http.data
+caldavclientlibrary.protocol.http.data.data" class="py-name" href="#" onclick="return doclink('link-29', 'data', 'link-28');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">neg_value</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">kerberos</tt><tt class="py-op">.</tt><tt class="py-name">authGSSClientStep</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-30', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">context</tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name"><a title="caldavclientlibrary.protocol.http.data
+caldavclientlibrary.protocol.http.data.data" class="py-name" href="#" onclick="return doclink('link-31', 'data', 'link-28');">data</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">            <tt class="py-comment"># authGSSClientStep returned bad result</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-comment"># authGSSClientStep() succeeded</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt id="link-32" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.response=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#response,Variable caldavclientlibrary.protocol.webdav.definitions.davxml.response=caldavclientlibrary.protocol.webdav.definitions.davxml-module.html#response"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.response
+caldavclientlibrary.protocol.webdav.definitions.davxml.response" class="py-name" href="#" onclick="return doclink('link-32', 'response', 'link-32');">response</a></tt> <tt class="py-op">=</tt> <tt class="py-name">kerberos</tt><tt class="py-op">.</tt><tt class="py-name">authGSSClientResponse</tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-33', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">context</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-comment"># authGSSClientResponse() succeeded</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">         </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"Negotiate %s"</tt> <tt class="py-op">%</tt> <tt id="link-34" class="py-name"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.response
+caldavclientlibrary.protocol.webdav.definitions.davxml.response" class="py-name" href="#" onclick="return doclink('link-34', 'response', 'link-32');">response</a></tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">     </tt>
+<a name="Kerberos.clean_context"></a><div id="Kerberos.clean_context-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="Kerberos.clean_context-toggle" onclick="return toggle('Kerberos.clean_context');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.http.authentication.gssapi.Kerberos-class.html#clean_context">clean_context</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kerberos.clean_context-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Kerberos.clean_context-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        taken from urllib2_kerberos, see http://limedav.com/hg/urllib2_kerberos</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-35" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-35', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">context</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-name">kerberos</tt><tt class="py-op">.</tt><tt class="py-name">authGSSClientClean</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-36', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">context</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">            <tt id="link-37" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-37', 'self', 'link-11');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">context</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div></div><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul  7 15:01:49 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

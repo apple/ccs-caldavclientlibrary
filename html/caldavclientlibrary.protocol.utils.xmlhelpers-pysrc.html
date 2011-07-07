@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>caldavclientlibrary.protocol.utils.xmlhelpers</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="caldavclientlibrary-module.html">Package&nbsp;caldavclientlibrary</a> ::
+        <a href="caldavclientlibrary.protocol-module.html">Package&nbsp;protocol</a> ::
+        <a href="caldavclientlibrary.protocol.utils-module.html">Package&nbsp;utils</a> ::
+        Module&nbsp;xmlhelpers
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="caldavclientlibrary.protocol.utils.xmlhelpers-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="caldavclientlibrary.protocol.utils.xmlhelpers-module.html">Module caldavclientlibrary.protocol.utils.xmlhelpers</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2007-2008 Apple Inc. All rights reserved.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># You may obtain a copy of the License at</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># See the License for the specific language governing permissions and</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ElementTree</tt><tt class="py-op">,</tt> <tt class="py-name">_namespace_map</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Comment</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">_escape_cdata</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ProcessingInstruction</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QName</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">_raise_serialization_error</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">_encode</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">_escape_attrib</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">StringIO</tt> <tt class="py-keyword">import</tt> <tt class="py-name">StringIO</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">SubElement</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module caldavclientlibrary.protocol.http.data.string=caldavclientlibrary.protocol.http.data.string-module.html"><a title="caldavclientlibrary.protocol.http.data.string" class="py-name" href="#" onclick="return doclink('link-0', 'string', 'link-0');">string</a></tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="SubElementWithData"></a><div id="SubElementWithData-def"><a name="L29"></a><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="SubElementWithData-toggle" onclick="return toggle('SubElementWithData');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.utils.xmlhelpers-module.html#SubElementWithData">SubElementWithData</a><tt class="py-op">(</tt><tt class="py-param">parent</tt><tt class="py-op">,</tt> <tt class="py-param">tag</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">attrs</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SubElementWithData-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SubElementWithData-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-name">element</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">parent</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">,</tt> <tt class="py-name">attrs</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-1" class="py-name" targets="Package caldavclientlibrary.protocol.http.data=caldavclientlibrary.protocol.http.data-module.html,Module caldavclientlibrary.protocol.http.data.data=caldavclientlibrary.protocol.http.data.data-module.html"><a title="caldavclientlibrary.protocol.http.data
+caldavclientlibrary.protocol.http.data.data" class="py-name" href="#" onclick="return doclink('link-1', 'data', 'link-1');">data</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">element</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text=caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate-class.html#text"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-2', 'text', 'link-2');">text</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="caldavclientlibrary.protocol.http.data
+caldavclientlibrary.protocol.http.data.data" class="py-name" href="#" onclick="return doclink('link-3', 'data', 'link-1');">data</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">element</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="myfixtag"></a><div id="myfixtag-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="myfixtag-toggle" onclick="return toggle('myfixtag');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.utils.xmlhelpers-module.html#myfixtag">myfixtag</a><tt class="py-op">(</tt><tt class="py-param">tag</tt><tt class="py-op">,</tt> <tt class="py-param">namespaces</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="myfixtag-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="myfixtag-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-comment"># given a decorated tag (of the form {uri}tag), return prefixed</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-comment"># tag and namespace declaration, if any</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">tag</tt><tt class="py-op">,</tt> <tt class="py-name">QName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">tag</tt> <tt class="py-op">=</tt> <tt class="py-name">tag</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-4', 'text', 'link-2');">text</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-name">namespace_uri</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="caldavclientlibrary.protocol.http.data.string" class="py-name" href="#" onclick="return doclink('link-5', 'string', 'link-0');">string</a></tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">tag</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">"}"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-name">prefix</tt> <tt class="py-op">=</tt> <tt class="py-name">namespaces</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module caldavclientlibrary.protocol.webdav.get=caldavclientlibrary.protocol.webdav.get-module.html"><a title="caldavclientlibrary.protocol.webdav.get" class="py-name" href="#" onclick="return doclink('link-6', 'get', 'link-6');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">namespace_uri</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">prefix</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">prefix</tt> <tt class="py-op">=</tt> <tt class="py-name">_namespace_map</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="caldavclientlibrary.protocol.webdav.get" class="py-name" href="#" onclick="return doclink('link-7', 'get', 'link-6');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">namespace_uri</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">prefix</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">            <tt class="py-name">prefix</tt> <tt class="py-op">=</tt> <tt class="py-string">"ns%d"</tt> <tt class="py-op">%</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">namespaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">namespaces</tt><tt class="py-op">[</tt><tt class="py-name">namespace_uri</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">prefix</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">prefix</tt> <tt class="py-op">==</tt> <tt class="py-string">"xml"</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-name">xmlns</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-name">xmlns</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"xmlns:%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">prefix</tt><tt class="py-op">,</tt> <tt class="py-name">namespace_uri</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">xmlns</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">"%s:%s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">prefix</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">xmlns</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="BetterElementTree"></a><div id="BetterElementTree-def"><a name="L55"></a><tt class="py-lineno"> 55</tt> <a class="py-toggle" href="#" id="BetterElementTree-toggle" onclick="return toggle('BetterElementTree');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree-class.html">BetterElementTree</a><tt class="py-op">(</tt><tt class="py-base-class">ElementTree</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BetterElementTree-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BetterElementTree-expanded"><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">     </tt>
+<a name="BetterElementTree.writeUTF8"></a><div id="BetterElementTree.writeUTF8-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="BetterElementTree.writeUTF8-toggle" onclick="return toggle('BetterElementTree.writeUTF8');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree-class.html#writeUTF8">writeUTF8</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BetterElementTree.writeUTF8-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BetterElementTree.writeUTF8-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt id="link-8" class="py-name" targets="Variable caldavclientlibrary.protocol.webdav.definitions.davxml.self=caldavclientlibrary.protocol.webdav.definitions.davxml-module.html#self"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-8', 'self', 'link-8');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">_root</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name" targets="Module caldavclientlibrary.protocol.http.data.file=caldavclientlibrary.protocol.http.data.file-module.html"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-9', 'file', 'link-9');">file</a></tt><tt class="py-op">,</tt> <tt class="py-string">"write"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt id="link-10" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-10', 'file', 'link-9');">file</a></tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-11', 'file', 'link-9');">file</a></tt><tt class="py-op">,</tt> <tt class="py-string">"wb"</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">encoding</tt> <tt class="py-op">=</tt> <tt class="py-string">"utf-8"</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt id="link-12" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-12', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method caldavclientlibrary.client.clientsession.CalDAVSession.logger.write()=caldavclientlibrary.client.clientsession.CalDAVSession.logger-class.html#write,Method caldavclientlibrary.protocol.http.data.data.ResponseData.write()=caldavclientlibrary.protocol.http.data.data.ResponseData-class.html#write,Method caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write()=caldavclientlibrary.protocol.http.data.file.ResponseDataFile-class.html#write,Method caldavclientlibrary.protocol.http.data.string.ResponseDataString.write()=caldavclientlibrary.protocol.http.data.string.ResponseDataString-class.html#write,Variable caldavclientlibrary.protocol.webdav.definitions.davxml.write=caldavclientlibrary.protocol.webdav.definitions.davxml-module.html#write"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-13', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"&lt;?xml version='1.0' encoding='%s'?&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt id="link-14" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-14', 'self', 'link-8');">self</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree._prettywrite()=caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree-class.html#_prettywrite"><a title="caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree._prettywrite" class="py-name" href="#" onclick="return doclink('link-15', '_prettywrite', 'link-15');">_prettywrite</a></tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-16', 'file', 'link-9');">file</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-17', 'self', 'link-8');">self</a></tt><tt class="py-op">.</tt><tt class="py-name">_root</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt id="link-18" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-18', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-19', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"\r\n"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="BetterElementTree._prettywrite"></a><div id="BetterElementTree._prettywrite-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="BetterElementTree._prettywrite-toggle" onclick="return toggle('BetterElementTree._prettywrite');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree-class.html#_prettywrite">_prettywrite</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">file</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">,</tt> <tt class="py-param">namespaces</tt><tt class="py-op">,</tt> <tt class="py-param">depth</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BetterElementTree._prettywrite-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BetterElementTree._prettywrite-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-comment"># write XML to file</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">tag</tt> <tt class="py-op">=</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt class="py-name">tag</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">tag</tt> <tt class="py-keyword">is</tt> <tt class="py-name">Comment</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt id="link-20" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-20', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-21', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"\r\n"</tt> <tt class="py-op">+</tt> <tt class="py-string">"  "</tt> <tt class="py-op">*</tt> <tt class="py-name">depth</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt id="link-22" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-22', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-23', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"&lt;!-- %s --&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-name">_escape_cdata</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-24', 'text', 'link-2');">text</a></tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">tag</tt> <tt class="py-keyword">is</tt> <tt class="py-name">ProcessingInstruction</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt id="link-25" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-25', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-26', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"\r\n"</tt> <tt class="py-op">+</tt> <tt class="py-string">"  "</tt> <tt class="py-op">*</tt> <tt class="py-name">depth</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt id="link-27" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-27', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-28', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"&lt;?%s?&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-name">_escape_cdata</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-29', 'text', 'link-2');">text</a></tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-name">items</tt> <tt class="py-op">=</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-name">xmlns_items</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> <tt class="py-comment"># new namespaces in this scope</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">tag</tt><tt class="py-op">,</tt> <tt class="py-name">QName</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">tag</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"{"</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                    <tt class="py-name">tag</tt><tt class="py-op">,</tt> <tt class="py-name">xmlns</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name" targets="Function caldavclientlibrary.protocol.utils.xmlhelpers.myfixtag()=caldavclientlibrary.protocol.utils.xmlhelpers-module.html#myfixtag"><a title="caldavclientlibrary.protocol.utils.xmlhelpers.myfixtag" class="py-name" href="#" onclick="return doclink('link-30', 'myfixtag', 'link-30');">myfixtag</a></tt><tt class="py-op">(</tt><tt class="py-name">tag</tt><tt class="py-op">,</tt> <tt class="py-name">namespaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">xmlns</tt><tt class="py-op">:</tt> <tt class="py-name">xmlns_items</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">xmlns</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">TypeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-name">_raise_serialization_error</tt><tt class="py-op">(</tt><tt class="py-name">tag</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt id="link-31" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-31', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-32', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"\r\n"</tt> <tt class="py-op">+</tt> <tt class="py-string">"  "</tt> <tt class="py-op">*</tt> <tt class="py-name">depth</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">            <tt id="link-33" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-33', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-34', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"&lt;"</tt> <tt class="py-op">+</tt> <tt class="py-name">_encode</tt><tt class="py-op">(</tt><tt class="py-name">tag</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">items</tt> <tt class="py-keyword">or</tt> <tt class="py-name">xmlns_items</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                <tt class="py-name">items</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-comment"># lexical order</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">items</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">QName</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">k</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"{"</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                            <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">xmlns</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="caldavclientlibrary.protocol.utils.xmlhelpers.myfixtag" class="py-name" href="#" onclick="return doclink('link-35', 'myfixtag', 'link-30');">myfixtag</a></tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">namespaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                            <tt class="py-keyword">if</tt> <tt class="py-name">xmlns</tt><tt class="py-op">:</tt> <tt class="py-name">xmlns_items</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">xmlns</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                    <tt class="py-keyword">except</tt> <tt class="py-name">TypeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                        <tt class="py-name">_raise_serialization_error</tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">QName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                            <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">xmlns</tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="caldavclientlibrary.protocol.utils.xmlhelpers.myfixtag" class="py-name" href="#" onclick="return doclink('link-36', 'myfixtag', 'link-30');">myfixtag</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">namespaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                            <tt class="py-keyword">if</tt> <tt class="py-name">xmlns</tt><tt class="py-op">:</tt> <tt class="py-name">xmlns_items</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">xmlns</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                    <tt class="py-keyword">except</tt> <tt class="py-name">TypeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                        <tt class="py-name">_raise_serialization_error</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">                    <tt id="link-37" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-37', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-38', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">" %s=\"%s\""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">_encode</tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                                               <tt class="py-name">_escape_attrib</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xmlns_items</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                    <tt id="link-39" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-39', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-40', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">" %s=\"%s\""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">_encode</tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                                               <tt class="py-name">_escape_attrib</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-41', 'text', 'link-2');">text</a></tt> <tt class="py-keyword">or</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                <tt id="link-42" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-42', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-43', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"&gt;"</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-44', 'text', 'link-2');">text</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                    <tt id="link-45" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-45', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-46', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-name">_escape_cdata</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-47', 'text', 'link-2');">text</a></tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">n</tt> <tt class="py-keyword">in</tt> <tt class="py-name">node</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">                    <tt id="link-48" class="py-name"><a title="caldavclientlibrary.protocol.webdav.definitions.davxml.self" class="py-name" href="#" onclick="return doclink('link-48', 'self', 'link-8');">self</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree._prettywrite" class="py-name" href="#" onclick="return doclink('link-49', '_prettywrite', 'link-15');">_prettywrite</a></tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-50', 'file', 'link-9');">file</a></tt><tt class="py-op">,</tt> <tt class="py-name">n</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">,</tt> <tt class="py-name">namespaces</tt><tt class="py-op">,</tt> <tt class="py-name">depth</tt><tt class="py-op">=</tt><tt class="py-name">depth</tt><tt class="py-op">+</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="caldavclientlibrary.ui.WebDAVBrowser.WebDAVBrowserDelegate.text" class="py-name" href="#" onclick="return doclink('link-51', 'text', 'link-2');">text</a></tt> <tt class="py-keyword">or</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">                    <tt id="link-52" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-52', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-53', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"\r\n"</tt> <tt class="py-op">+</tt> <tt class="py-string">"  "</tt> <tt class="py-op">*</tt> <tt class="py-name">depth</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                <tt id="link-54" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-54', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-55', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">"&lt;/"</tt> <tt class="py-op">+</tt> <tt class="py-name">_encode</tt><tt class="py-op">(</tt><tt class="py-name">tag</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;"</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">                <tt id="link-56" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-56', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-57', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">" /&gt;"</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xmlns_items</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">                <tt class="py-keyword">del</tt> <tt class="py-name">namespaces</tt><tt class="py-op">[</tt><tt class="py-name">v</tt><tt class="py-op">]</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt class="py-name">tail</tt><tt class="py-op">:</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">            <tt id="link-58" class="py-name"><a title="caldavclientlibrary.protocol.http.data.file" class="py-name" href="#" onclick="return doclink('link-58', 'file', 'link-9');">file</a></tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="caldavclientlibrary.client.clientsession.CalDAVSession.logger.write
+caldavclientlibrary.protocol.http.data.data.ResponseData.write
+caldavclientlibrary.protocol.http.data.file.ResponseDataFile.write
+caldavclientlibrary.protocol.http.data.string.ResponseDataString.write
+caldavclientlibrary.protocol.webdav.definitions.davxml.write" class="py-name" href="#" onclick="return doclink('link-59', 'write', 'link-13');">write</a></tt><tt class="py-op">(</tt><tt class="py-name">_escape_cdata</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt class="py-name">tail</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="elementToString"></a><div id="elementToString-def"><a name="L122"></a><tt class="py-lineno">122</tt> <a class="py-toggle" href="#" id="elementToString-toggle" onclick="return toggle('elementToString');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="caldavclientlibrary.protocol.utils.xmlhelpers-module.html#elementToString">elementToString</a><tt class="py-op">(</tt><tt class="py-param">element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="elementToString-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="elementToString-expanded"><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-name">os</tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-name">xmldoc</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name" targets="Class caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree=caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree-class.html"><a title="caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree" class="py-name" href="#" onclick="return doclink('link-60', 'BetterElementTree', 'link-60');">BetterElementTree</a></tt><tt class="py-op">(</tt><tt class="py-name">element</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-name">xmldoc</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name" targets="Method caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree.writeUTF8()=caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree-class.html#writeUTF8"><a title="caldavclientlibrary.protocol.utils.xmlhelpers.BetterElementTree.writeUTF8" class="py-name" href="#" onclick="return doclink('link-61', 'writeUTF8', 'link-61');">writeUTF8</a></tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul  7 15:01:48 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

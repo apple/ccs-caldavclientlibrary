@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>caldavclientlibrary.protocol.carddav.definitions.carddavxml</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="caldavclientlibrary-module.html">Package&nbsp;caldavclientlibrary</a> ::
+        <a href="caldavclientlibrary.protocol-module.html">Package&nbsp;protocol</a> ::
+        <a href="caldavclientlibrary.protocol.carddav-module.html">Package&nbsp;carddav</a> ::
+        <a href="caldavclientlibrary.protocol.carddav.definitions-module.html">Package&nbsp;definitions</a> ::
+        Module&nbsp;carddavxml
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="caldavclientlibrary.protocol.carddav.definitions.carddavxml-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html">Module caldavclientlibrary.protocol.carddav.definitions.carddavxml</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2007-2011 Apple Inc. All rights reserved.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># Licensed under the Apache License, Version 2.0 (the "License");</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"># you may not use this file except in compliance with the License.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment"># You may obtain a copy of the License at</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"># http://www.apache.org/licenses/LICENSE-2.0</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"># Unless required by applicable law or agreed to in writing, software</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment"># distributed under the License is distributed on an "AS IS" BASIS,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"># See the License for the specific language governing permissions and</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"># limitations under the License.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QName</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#CardDAVNamespace"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-0', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"urn:ietf:params:xml:ns:carddav"</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment"># draft-</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#addressbook"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook" class="py-name" href="#" onclick="return doclink('link-1', 'addressbook', 'link-1');">addressbook</a></tt>                      <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-2', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"addressbook"</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_description=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#addressbook_description"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_description" class="py-name" href="#" onclick="return doclink('link-3', 'addressbook_description', 'link-3');">addressbook_description</a></tt>          <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-4', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"addressbook-description"</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.supported_addressbook_data=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#supported_addressbook_data"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.supported_addressbook_data" class="py-name" href="#" onclick="return doclink('link-5', 'supported_addressbook_data', 'link-5');">supported_addressbook_data</a></tt>       <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-6" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-6', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"supported-addressbook-data"</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.max_resource_size=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#max_resource_size,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.max_resource_size=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#max_resource_size"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.max_resource_size
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.max_resource_size" class="py-name" href="#" onclick="return doclink('link-7', 'max_resource_size', 'link-7');">max_resource_size</a></tt>                <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-8', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"max-resource-size"</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_home_set=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#addressbook_home_set"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_home_set" class="py-name" href="#" onclick="return doclink('link-9', 'addressbook_home_set', 'link-9');">addressbook_home_set</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-10', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"addressbook-home-set"</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.supported_collation=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#supported_collation,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.supported_collation=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#supported_collation"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.supported_collation
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.supported_collation" class="py-name" href="#" onclick="return doclink('link-11', 'supported_collation', 'link-11');">supported_collation</a></tt>  <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-12', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"supported-collation"</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_query=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#addressbook_query"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_query" class="py-name" href="#" onclick="return doclink('link-13', 'addressbook_query', 'link-13');">addressbook_query</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-14', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"addressbook-query"</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.address_data=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#address_data"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.address_data" class="py-name" href="#" onclick="return doclink('link-15', 'address_data', 'link-15');">address_data</a></tt>         <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-16', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"address-data"</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.comp=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#comp,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.comp=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#comp"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.comp
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.comp" class="py-name" href="#" onclick="return doclink('link-17', 'comp', 'link-17');">comp</a></tt>                 <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-18', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"comp"</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.allcomp=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#allcomp,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.allcomp=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#allcomp"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.allcomp
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.allcomp" class="py-name" href="#" onclick="return doclink('link-19', 'allcomp', 'link-19');">allcomp</a></tt>              <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-20', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"allcomp"</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.prop=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#prop,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.prop=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#prop,Variable caldavclientlibrary.protocol.webdav.definitions.davxml.prop=caldavclientlibrary.protocol.webdav.definitions.davxml-module.html#prop"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.prop
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.prop
+caldavclientlibrary.protocol.webdav.definitions.davxml.prop" class="py-name" href="#" onclick="return doclink('link-21', 'prop', 'link-21');">prop</a></tt>                 <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-22', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"prop"</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.filter=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#filter,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.filter=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#filter"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.filter
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.filter" class="py-name" href="#" onclick="return doclink('link-23', 'filter', 'link-23');">filter</a></tt>               <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-24', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"filter"</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.comp_filter=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#comp_filter,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.comp_filter=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#comp_filter"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.comp_filter
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.comp_filter" class="py-name" href="#" onclick="return doclink('link-25', 'comp_filter', 'link-25');">comp_filter</a></tt>          <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-26', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"comp-filter"</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt id="link-27" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.prop_filter=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#prop_filter,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.prop_filter=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#prop_filter"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.prop_filter
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.prop_filter" class="py-name" href="#" onclick="return doclink('link-27', 'prop_filter', 'link-27');">prop_filter</a></tt>          <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-28', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"prop-filter"</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt id="link-29" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.param_filter=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#param_filter,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.param_filter=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#param_filter"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.param_filter
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.param_filter" class="py-name" href="#" onclick="return doclink('link-29', 'param_filter', 'link-29');">param_filter</a></tt>         <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-30', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"param-filter"</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt id="link-31" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.is_not_defined=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#is_not_defined,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.is_not_defined=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#is_not_defined"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.is_not_defined
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.is_not_defined" class="py-name" href="#" onclick="return doclink('link-31', 'is_not_defined', 'link-31');">is_not_defined</a></tt>       <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-32', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"is-not-defined"</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt id="link-33" class="py-name" targets="Variable caldavclientlibrary.protocol.caldav.definitions.caldavxml.text_match=caldavclientlibrary.protocol.caldav.definitions.caldavxml-module.html#text_match,Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.text_match=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#text_match"><a title="caldavclientlibrary.protocol.caldav.definitions.caldavxml.text_match
+caldavclientlibrary.protocol.carddav.definitions.carddavxml.text_match" class="py-name" href="#" onclick="return doclink('link-33', 'text_match', 'link-33');">text_match</a></tt>           <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-34', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"text-match"</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt id="link-35" class="py-name" targets="Variable caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_multiget=caldavclientlibrary.protocol.carddav.definitions.carddavxml-module.html#addressbook_multiget"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.addressbook_multiget" class="py-name" href="#" onclick="return doclink('link-35', 'addressbook_multiget', 'link-35');">addressbook_multiget</a></tt> <tt class="py-op">=</tt> <tt class="py-name">QName</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="caldavclientlibrary.protocol.carddav.definitions.carddavxml.CardDAVNamespace" class="py-name" href="#" onclick="return doclink('link-36', 'CardDAVNamespace', 'link-0');">CardDAVNamespace</a></tt><tt class="py-op">,</tt> <tt class="py-string">"addressbook-multiget"</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="caldavclientlibrary-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul  7 15:01:48 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
