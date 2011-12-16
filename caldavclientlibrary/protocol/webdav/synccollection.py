@@ -15,55 +15,63 @@
 ##
 
 from StringIO import StringIO
-from caldavclientlibrary.protocol.caldav.definitions import caldavxml
 from caldavclientlibrary.protocol.http.data.string import RequestDataString
 from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
-from caldavclientlibrary.protocol.webdav.definitions import davxml
+from caldavclientlibrary.protocol.webdav.definitions import davxml, headers
 from caldavclientlibrary.protocol.webdav.report import Report
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
 
-class Multiget(Report):
+class SyncCollection(Report):
 
-    def __init__(self, session, url, hrefs, props=()):
-        super(Multiget, self).__init__(session, url)
+    def __init__(self, session, url, depth, synctoken, props=()):
+        assert(depth in (headers.Depth0, headers.Depth1, headers.DepthInfinity))
+
+        super(SyncCollection, self).__init__(session, url)
+        self.depth = depth
+        self.synctoken = synctoken
         self.props = props
-        self.hrefs = hrefs
+        
+        self.initRequestData()
 
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
+
+    def addHeaders(self, hdrs):
+        # Do default
+        super(SyncCollection, self).addHeaders(hdrs)
+        
+        # Add depth header
+        hdrs.append((headers.Depth, self.depth))
     
     def generateXML(self, os):
         # Structure of document is:
         #
-        # <CalDAV:calendar-multiget>
+        # <DAV:sync-collection>
+        #   <DAV:sync-token>xxx</DAV:sync-token>
         #   <DAV:prop>
         #     <<names of each property as elements>>
         #   </DAV:prop>
-        #   <DAV:href>...</DAV:href>
-        #   ...
-        # </CalDAV:calendar-multiget>
+        # </DAV:sync-collection>
         
-        # <CalDAV:calendar-multiget> element
-        multiget = Element(caldavxml.calendar_multiget)
+        # <DAV:sync-collection> element
+        synccollection = Element(davxml.sync_collection)
         
+        # Add sync-token element
+        SubElement(synccollection, davxml.sync_token).text = self.synctoken
+
         if self.props:
             # <DAV:prop> element
-            prop = SubElement(multiget, davxml.prop)
+            prop = SubElement(synccollection, davxml.prop)
             
             # Now add each property
             for propname in self.props:
                 # Add property element taking namespace into account
                 SubElement(prop, propname)
         
-        # Now add each href
-        for href in self.hrefs:
-            # Add href elements
-            SubElement(multiget, davxml.href).text = href
-        
         # Now we have the complete document, so write it out (no indentation)
-        xmldoc = BetterElementTree(multiget)
+        xmldoc = BetterElementTree(synccollection)
         xmldoc.writeUTF8(os)

@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2009 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,13 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.protocol.caldav.definitions import caldavxml
+from caldavclientlibrary.client.addressbook import AddressBook
 from caldavclientlibrary.client.calendar import Calendar
+from caldavclientlibrary.protocol.caldav.definitions import caldavxml
+from caldavclientlibrary.protocol.caldav.definitions import headers
+from caldavclientlibrary.protocol.carddav.definitions import carddavxml
 from caldavclientlibrary.protocol.url import URL
 from caldavclientlibrary.protocol.webdav.definitions import davxml
-from caldavclientlibrary.protocol.caldav.definitions import headers
 
 class PrincipalCache(object):
     
@@ -63,6 +65,7 @@ class CalDAVPrincipal(object):
     Outbox URL        : %s
     Inbox URL         : %s
     Calendar Addresses: %s
+    Address Book Homes: %s
 """ % (
           self.principalPath,
           self.displayname,
@@ -73,7 +76,8 @@ class CalDAVPrincipal(object):
           self.homeset,
           self.outboxURL,
           self.inboxURL,
-          self.cuaddrs
+          self.cuaddrs,
+          self.adbkhomeset,
       )
 
     def _initFields(self):
@@ -88,6 +92,7 @@ class CalDAVPrincipal(object):
         self.outboxURL = ""
         self.inboxURL = ""
         self.cuaddrs = ()
+        self.adbkhomeset = ()
         
         self.proxyFor = None
         self.proxyreadURL = ""
@@ -111,6 +116,7 @@ class CalDAVPrincipal(object):
                 caldavxml.schedule_outbox_URL,
                 caldavxml.schedule_inbox_URL,
                 caldavxml.calendar_user_address_set,
+                carddavxml.addressbook_home_set,
             ),
         )
         if results:
@@ -133,6 +139,7 @@ class CalDAVPrincipal(object):
                 self.outboxURL = results.get(caldavxml.schedule_outbox_URL, None)
                 self.inboxURL = results.get(caldavxml.schedule_inbox_URL, None)
                 self.cuaddrs = make_tuple(results.get(caldavxml.calendar_user_address_set, None))
+                self.adbkhomeset = make_tuple(results.get(carddavxml.addressbook_home_set, None))
 
         # Get proxy resource details if proxy support is available
         if self.session.hasDAVVersion(headers.calendar_proxy) and not self.proxyFor:
@@ -227,3 +234,17 @@ class CalDAVPrincipal(object):
         
         self.session.setProperties(self.proxywriteURL, ((davxml.group_member_set, principals),))            
     
+    def listAddressBooks(self, root=None):
+        adbks = []
+        home = self.adbkhomeset[0]
+        if not home.path.endswith("/"):
+            home.path += "/"
+
+        results = self.session.getPropertiesOnHierarchy(home, (davxml.resourcetype,))
+        for path, items in results.iteritems():
+            if davxml.resourcetype in items:
+                rtype = items[davxml.resourcetype]
+                if rtype.find(str(davxml.collection)) is not None and rtype.find(str(carddavxml.addressbook)) is not None:
+                    adbks.append(AddressBook(path=path, session=self.session))
+        return adbks
+

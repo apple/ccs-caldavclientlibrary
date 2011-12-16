@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,14 +67,19 @@ class PropFindParser(MultiResponseParser):
 
     def __init__(self):
         self.results = {}
+        self.others = set()
     
     def getResults(self):
         return self.results
+
+    def getOthers(self):
+        return self.others
 
     # Parse the response element down to the properties
     def parseResponse(self, response):
         # Verify that the node is the correct element <DAV:response>
         if response.tag != davxml.response:
+            self.others.add(response)
             return
         
         # Node is the right type, so iterate over all child response nodes and process each one

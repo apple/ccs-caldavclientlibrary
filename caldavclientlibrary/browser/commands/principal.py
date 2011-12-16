@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -69,6 +69,7 @@ class Cmd(Command):
     Outbox URL        : %s
     Inbox URL         : %s
     Calendar Addresses: %s
+    Address Book Homes: %s
 """ % (
           principal.principalPath,
           principal.getSmartDisplayName(),
@@ -80,10 +81,13 @@ class Cmd(Command):
           principal.outboxURL,
           principal.inboxURL,
           utils.printList(principal.cuaddrs),
+          utils.printList(principal.adbkhomeset),
       ),
 
         if print_proxies:
             utils.printProxyPrincipals(self.shell.account, principal, True, True, resolve, False, refresh)
+
+        print ""
 
         return True
 
@@ -98,4 +102,4 @@ Options:
 """ % (name,)
 
     def helpDescription(self):
-        return "Displays the current server login id."
+        return "Get details on principals."

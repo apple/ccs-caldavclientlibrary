@@ -20,6 +20,8 @@ from caldavclientlibrary.protocol.caldav.makecalendar import MakeCalendar
 from caldavclientlibrary.protocol.carddav.makeaddressbook import MakeAddressBook
 from caldavclientlibrary.protocol.http.authentication.basic import Basic
 from caldavclientlibrary.protocol.http.authentication.digest import Digest
+from caldavclientlibrary.protocol.webdav.synccollection import SyncCollection
+from caldavclientlibrary.protocol.http.util import parseStatusLine
 try:
     from caldavclientlibrary.protocol.http.authentication.gssapi import Kerberos
 except ImportError:
@@ -65,7 +67,7 @@ class CalDAVSession(Session):
 
         # Paths
         self.rootPath = URL(url=root)
-        self.principalPath = URL(url=principal)
+        self.principalPath = URL(url=principal) if principal else None
         
         self._initCalDAVState()
 
@@ -77,6 +79,13 @@ class CalDAVSession(Session):
         
     def _discoverPrincipal(self):
         
+        current = self.getCurrentPrincipalResource(self.rootPath)
+        if current:
+            self.principalPath = current
+            if self.log:
+                self.log.write("Found current principal path: %s\n" % (self.principalPath.absoluteURL(),))
+            return
+            
         hrefs = self.getHrefListProperty(self.rootPath, davxml.principal_collection_set)
         if not hrefs:
             return
@@ -88,7 +97,7 @@ class CalDAVSession(Session):
             if results:
                 self.principalPath = results[0]
                 if self.log:
-                    self.log.write("Found principal path: %s" % (self.principalPath.absoluteURL(),))
+                    self.log.write("Found principal path: %s\n" % (self.principalPath.absoluteURL(),))
                 return
     
     def setUserPswd(self, user, pswd):
@@ -318,7 +327,7 @@ class CalDAVSession(Session):
         results = ()
 
         # Create WebDAV principal-match
-        request = PrincipalMatch(self, rurl.realtiveURL(), (davxml.principal_URL,))
+        request = PrincipalMatch(self, rurl.relativeURL(), (davxml.principal_URL,))
         result = ResponseDataString()
         request.setOutput(result)
     
@@ -336,7 +345,7 @@ class CalDAVSession(Session):
 
                 # Get child element name (decode URL)
                 name = URL(url=item.getResource(), decode=True)
-                results += (name.path,)
+                results += (name,)
 
         else:
             self.handleHTTPError(request)
@@ -361,6 +370,14 @@ class CalDAVSession(Session):
                 return results[0]
         
         return None
+
+    # Do current-user-principal property on the passed in url
+    def getCurrentPrincipalResource(self, rurl):
+        
+        assert(isinstance(rurl, URL))
+
+        hrefs = self.getHrefListProperty(rurl, davxml.current_user_principal)
+        return hrefs[0] if hrefs else None
 
     def setProperties(self, rurl, props):
 
@@ -476,6 +493,53 @@ class CalDAVSession(Session):
         
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
+
+    def syncCollection(self, rurl, synctoken, props=()):
+
+        assert(isinstance(rurl, URL))
+
+        newsynctoken = ""
+        changed = set()
+        removed = set()
+        other = set()
+
+        # Create WebDAV sync REPORT
+        request = SyncCollection(self, rurl.relativeURL(), headers.Depth1, synctoken, props)
+        result = ResponseDataString()
+        request.setOutput(result)
+    
+        # Process it
+        self.runSession(request)
+    
+        # If its a 207 we want to parse the XML
+        if request.getStatusCode() == statuscodes.MultiStatus:
+
+            parser = PropFindParser()
+            parser.parseData(result.getData())
+    
+            # Look at each propfind result
+            for item in parser.getResults().itervalues():
+
+                # Get child element name (decode URL)
+                name = URL(url=item.getResource(), decode=True)
+                status = parseStatusLine(item.status)
+                if status == 404:
+                    removed.add(name)
+                elif status / 100 != 2:
+                    other.add(name)
+                else:
+                    changed.add(name)
+
+            # Get the new token
+            for node in parser.getOthers():
+                if node.tag == davxml.sync_token:
+                    newsynctoken = node.text
+                    break
+            
+        else:
+            self.handleHTTPError(request)
+    
+        return (newsynctoken, changed, removed, other,)
 
     def deleteResource(self, rurl):
         

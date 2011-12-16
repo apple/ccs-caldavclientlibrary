@@ -14,10 +14,9 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.browser.command import Command
+from caldavclientlibrary.browser.command import Command, CommandError
 from caldavclientlibrary.browser.command import WrongOptions
 from caldavclientlibrary.protocol.url import URL
-import os
 import getopt
 import shlex
 
@@ -25,32 +24,44 @@ class Cmd(Command):
     
     def __init__(self):
         super(Command, self).__init__()
-        self.cmds = ("cat", "more",)
+        self.cmds = ("calendars",)
         
     def execute(self, name, options):
         opts, args = getopt.getopt(shlex.split(options), '')
-        if len(opts) or len(args) != 1:
+        if len(opts) != 0:
             print self.usage(name)
-            raise WrongOptions()
+            raise WrongOptions
 
-        path = args[0]
+        if len(args) > 1:
+            print "Wrong number of arguments: %d" % (len(args),)
+            print self.usage(name)
+            raise WrongOptions
+        ppath = URL(url=args[0]) if args else None
+        principal = self.shell.account.getPrincipal(ppath)
+        if principal is None:
+            print "No principal found for %s" % (ppath if ppath else "current principal")
+            raise CommandError
 
-        if not path.startswith("/"):
-            path = os.path.join(self.shell.wd, path)
-        resource = URL(url=path)
+        homeset = principal.homeset
+        if not homeset:
+            print "No calendar home set found for %s" % (principal.principalPath,)
+            raise CommandError
 
-        data, _ignore_etag = self.shell.account.session.readData(resource)
-        print data
+        newpath = homeset[0].path
+        result = self.shell.setWD(newpath)
 
-        return True
+        if not result:
+            print "%s: No such directory" % (newpath,)
+            
+        return result
 
     def complete(self, text):
         return self.shell.wdcomplete(text)
 
     def usage(self, name):
-        return """Usage: %s PATH
-PATH is a relative or absolute path.
+        return """Usage: %s [PRINCIPAL]
+PRINCIPAL is a principal-URL.
 """ % (name,)
 
     def helpDescription(self):
-        return "Display contents of a file or directory."
+        return "Change working directory to calendar home for current or specified principal."

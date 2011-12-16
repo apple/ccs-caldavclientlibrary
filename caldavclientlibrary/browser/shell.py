@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,8 +40,7 @@ class Shell(BaseShell):
         # Create the account
         ssl = server.startswith("https://")
         server = server[8:] if ssl else server[7:]
-        paths = path
-        self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=paths, principal=paths, logging=logging)
+        self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=path, principal=None, logging=logging)
         
         atexit.register(self.saveHistory)
 

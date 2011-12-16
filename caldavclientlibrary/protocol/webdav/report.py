@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,5 +22,5 @@ class Report(RequestResponse):
     def __init__(self, session, url):
         super(Report, self).__init__(session, methods.REPORT, url)
 
-    def _setOutput(self, response_data):
+    def setOutput(self, response_data):
         self.response_data = response_data;

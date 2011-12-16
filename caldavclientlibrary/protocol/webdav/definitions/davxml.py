@@ -94,3 +94,6 @@ current_user_principal = QName(DAVNamespace, "current-user-principal")
 
 mkcol          = QName(DAVNamespace, "mkcol")
 mkcol_response = QName(DAVNamespace, "mkcol-response")
+
+sync_collection = QName(DAVNamespace, "sync-collection")
+sync_token      = QName(DAVNamespace, "sync-token")

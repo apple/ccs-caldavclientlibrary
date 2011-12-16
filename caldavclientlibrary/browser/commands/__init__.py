@@ -16,8 +16,10 @@
 
 __all__ = [
     "acl",
+    "addressbooks",
     "cat",
     "cd",
+    "calendars",
     "help",
     "history",
     "import",
@@ -35,6 +37,7 @@ __all__ = [
     "quota",
     "rm",
     "server",
+    "sync",
     "user",
     "whoami",
 ]
