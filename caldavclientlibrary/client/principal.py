@@ -28,7 +28,7 @@ class PrincipalCache(object):
         self.cache = {}
         
     def getPrincipal(self, session, path, refresh=False):
-        if path.toString() not in self.cache:
+        if path and path.toString() not in self.cache:
             principal = CalDAVPrincipal(session, path)
             principal.loadDetails()
             self.cache[path.toString()] = principal
@@ -38,7 +38,7 @@ class PrincipalCache(object):
                     self.cache[uri] = principal
         elif refresh:
             self.cache[path.toString()].loadDetails(refresh=True)
-        return self.cache[path.toString()]
+        return self.cache[path.toString()] if path else None
 
 principalCache = PrincipalCache()
 
