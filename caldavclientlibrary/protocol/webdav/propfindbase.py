@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
-from caldavclientlibrary.protocol.webdav.definitions import methods
-from caldavclientlibrary.protocol.webdav.definitions import headers
-from caldavclientlibrary.protocol.http.data.string import RequestDataString
 from StringIO import StringIO
+from caldavclientlibrary.protocol.http.data.string import RequestDataString
+from caldavclientlibrary.protocol.webdav.definitions import headers
+from caldavclientlibrary.protocol.webdav.definitions import methods
+from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 
 class PropFindBase(RequestResponse):
 
@@ -43,6 +43,10 @@ class PropFindBase(RequestResponse):
         
         # Add depth header
         hdrs.append((headers.Depth, self.depth))
-
+        
+        # Optional ones
+        if self.session.useBriefHeader:
+            hdrs.append((headers.Brief, "t"))
+            
     def generateXML(self, os):
         raise NotImplementedError

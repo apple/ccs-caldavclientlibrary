@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,3 +37,4 @@ OverwriteFalse = "F"
 Timeout = "Timeout"
 TimeoutSeconds = "Second-"
 TimeoutInfinite = "Infinite"
+Brief = "Brief"                 # MS extension

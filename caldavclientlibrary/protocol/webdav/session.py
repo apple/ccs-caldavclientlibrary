@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.protocol.http.session import Session as HTTPSession
-from caldavclientlibrary.protocol.http.requestresponse import RequestResponse
 from caldavclientlibrary.protocol.http.data.string import ResponseDataString
 from caldavclientlibrary.protocol.http.definitions import methods
 from caldavclientlibrary.protocol.http.definitions import statuscodes
+from caldavclientlibrary.protocol.http.requestresponse import RequestResponse
+from caldavclientlibrary.protocol.http.session import Session as HTTPSession
 from caldavclientlibrary.protocol.webdav.definitions import headers
 
 class Session(HTTPSession):
@@ -27,6 +27,9 @@ class Session(HTTPSession):
         super(Session, self).__init__(server, port, ssl, log)
         self.initialised = False
         self.version = ()
+        
+        # Features for entire session
+        self.useBriefHeader = True
 
     def initialise(self, host, base_uri):
         # Set host change

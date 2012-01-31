@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
 # limitations under the License.
 ##
 
+from caldavclientlibrary.protocol.webdav.definitions import methods, headers
 from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
-from caldavclientlibrary.protocol.webdav.definitions import methods
 
 class Report(RequestResponse):
 
@@ -24,3 +24,12 @@ class Report(RequestResponse):
 
     def setOutput(self, response_data):
         self.response_data = response_data;
+
+    def addHeaders(self, hdrs):
+        # Do default
+        super(RequestResponse, self).addHeaders(hdrs)
+        
+        # Optional ones
+        if self.session.useBriefHeader:
+            hdrs.append((headers.Brief, "t"))
+    

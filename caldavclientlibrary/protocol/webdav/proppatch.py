@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
 # limitations under the License.
 ##
 
-from xml.etree.ElementTree import Element
-from caldavclientlibrary.protocol.webdav.definitions import davxml
-from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
-from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
-from xml.etree.ElementTree import SubElement
-from caldavclientlibrary.protocol.webdav.definitions import methods
-from caldavclientlibrary.protocol.http.data.string import RequestDataString
 from StringIO import StringIO
+from caldavclientlibrary.protocol.http.data.string import RequestDataString
+from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
+from caldavclientlibrary.protocol.webdav.definitions import davxml, headers
+from caldavclientlibrary.protocol.webdav.definitions import methods
+from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
+from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import SubElement
 
 class PropPatch(RequestResponse):
 
@@ -41,6 +41,14 @@ class PropPatch(RequestResponse):
     def setOutput(self, response_data):
         self.response_data = response_data
 
+    def addHeaders(self, hdrs):
+        # Do default
+        super(PropPatch, self).addHeaders(hdrs)
+        
+        # Optional ones
+        if self.session.useBriefHeader:
+            hdrs.append((headers.Brief, "t"))
+            
     def generateXML(self, os):
         # Structure of document is:
         #
