@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2010 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ class CalDAVAccount(object):
     def setUserPswd(self, user, pswd):
         
         self.session.setUserPswd(user, pswd)
+        self.principal = principalCache.getPrincipal(self.session, self.session.principalPath)
 
     def getPrincipal(self, path=None, refresh=False):
         if path:

@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2006-2011 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -105,6 +105,7 @@ class CalDAVSession(Session):
         self.user = user
         self.pswd = pswd
         self.authorization = None
+        self._discoverPrincipal()
 
     def testResource(self, rurl):
 
