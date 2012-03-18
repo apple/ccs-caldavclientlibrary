@@ -797,13 +797,15 @@ class CalDAVSession(Session):
 
     def getAuthorizor(self, first_time, wwwhdrs):
         
-        for item in wwwhdrs:
-            if item.lower().startswith("basic"):
-                return Basic(self.user, self.pswd), False
-            elif item.lower().startswith("digest"):
-                return Digest(self.user, self.pswd, wwwhdrs), False
-            elif item.lower().startswith("negotiate") and Kerberos is not None:
-                return Kerberos(self.user), False
+        for witem in wwwhdrs:
+            for item in witem.split(","):
+                item = item.strip() 
+                if item.lower().startswith("basic"):
+                    return Basic(self.user, self.pswd), False
+                elif item.lower().startswith("digest"):
+                    return Digest(self.user, self.pswd, wwwhdrs), False
+                elif item.lower().startswith("negotiate") and Kerberos is not None:
+                    return Kerberos(self.user), False
         else:
             return None, True
 
