@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2011 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ from xml.etree.ElementTree import SubElement
 
 class SyncCollection(Report):
 
-    def __init__(self, session, url, depth, synctoken, props=()):
-        assert(depth in (headers.Depth0, headers.Depth1, headers.DepthInfinity))
+    def __init__(self, session, url, level, synctoken, props=()):
+        assert(level in (davxml.sync_level_1, davxml.sync_level_infinite,))
 
         super(SyncCollection, self).__init__(session, url)
-        self.depth = depth
+        self.level = level
         self.synctoken = synctoken
         self.props = props
         
@@ -45,13 +45,14 @@ class SyncCollection(Report):
         super(SyncCollection, self).addHeaders(hdrs)
         
         # Add depth header
-        hdrs.append((headers.Depth, self.depth))
+        hdrs.append((headers.Depth, headers.Depth0))
     
     def generateXML(self, os):
         # Structure of document is:
         #
         # <DAV:sync-collection>
         #   <DAV:sync-token>xxx</DAV:sync-token>
+        #   <DAV:sync-level>xxx</DAV:sync-level>
         #   <DAV:prop>
         #     <<names of each property as elements>>
         #   </DAV:prop>
@@ -63,10 +64,13 @@ class SyncCollection(Report):
         # Add sync-token element
         SubElement(synccollection, davxml.sync_token).text = self.synctoken
 
+        # Add sync-token element
+        SubElement(synccollection, davxml.sync_level).text = self.level
+
+        # <DAV:prop> element
+        prop = SubElement(synccollection, davxml.prop)
+
         if self.props:
-            # <DAV:prop> element
-            prop = SubElement(synccollection, davxml.prop)
-            
             # Now add each property
             for propname in self.props:
                 # Add property element taking namespace into account

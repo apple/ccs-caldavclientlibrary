@@ -101,3 +101,7 @@ mkcol_response = QName(DAVNamespace, "mkcol-response")
 
 sync_collection = QName(DAVNamespace, "sync-collection")
 sync_token      = QName(DAVNamespace, "sync-token")
+sync_level      = QName(DAVNamespace, "sync-level")
+sync_level_1        = "1"
+sync_level_infinite = "infinite"
+

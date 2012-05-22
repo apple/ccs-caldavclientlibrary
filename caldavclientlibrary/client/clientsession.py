@@ -505,7 +505,7 @@ class CalDAVSession(Session):
         other = set()
 
         # Create WebDAV sync REPORT
-        request = SyncCollection(self, rurl.relativeURL(), headers.Depth1, synctoken, props)
+        request = SyncCollection(self, rurl.relativeURL(), davxml.sync_level_1, synctoken, props)
         result = ResponseDataString()
         request.setOutput(result)
     
