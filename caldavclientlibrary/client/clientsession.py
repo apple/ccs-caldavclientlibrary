@@ -21,7 +21,6 @@ from caldavclientlibrary.protocol.carddav.makeaddressbook import MakeAddressBook
 from caldavclientlibrary.protocol.http.authentication.basic import Basic
 from caldavclientlibrary.protocol.http.authentication.digest import Digest
 from caldavclientlibrary.protocol.webdav.synccollection import SyncCollection
-from caldavclientlibrary.protocol.http.util import parseStatusLine
 try:
     from caldavclientlibrary.protocol.http.authentication.gssapi import Kerberos
 except ImportError:
@@ -523,10 +522,9 @@ class CalDAVSession(Session):
 
                 # Get child element name (decode URL)
                 name = URL(url=item.getResource(), decode=True)
-                status = parseStatusLine(item.status)
-                if status == 404:
+                if item.status == 404:
                     removed.add(name)
-                elif status / 100 != 2:
+                elif item.status / 100 != 2:
                     other.add(name)
                 else:
                     changed.add(name)

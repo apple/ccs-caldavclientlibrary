@@ -30,6 +30,8 @@ class Multiget(Report):
         self.props = props
         self.hrefs = hrefs
 
+        self.initRequestData()
+
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
