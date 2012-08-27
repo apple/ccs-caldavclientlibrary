@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 from caldavclientlibrary.browser.command import Command
 from caldavclientlibrary.browser.command import WrongOptions
-from caldavclientlibrary.protocol.caldav.definitions import csxml
+from caldavclientlibrary.protocol.caldav.definitions import csxml, caldavxml
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 from caldavclientlibrary.protocol.url import URL
 import os
@@ -33,12 +33,14 @@ class Cmd(Command):
         
         longlist = False
         path = None
+        rtype = False
         displayname = False
         ctag = False
         etag = False
+        supported_components = False
         synctoken = False
 
-        opts, args = getopt.getopt(shlex.split(options), 'acdels')
+        opts, args = getopt.getopt(shlex.split(options), 'acdeilrs')
 
         for name, _ignore_value in opts:
             
@@ -53,7 +55,13 @@ class Cmd(Command):
             elif name == "-e":
                 etag = True
                 longlist = True
+            elif name == "-i":
+                supported_components = True
+                longlist = True
             elif name == "-l":
+                longlist = True
+            elif name == "-r":
+                rtype = True
                 longlist = True
             elif name == "-s":
                 synctoken = True
@@ -84,6 +92,8 @@ class Cmd(Command):
             props += (csxml.getctag,)
         if etag:
             props += (davxml.getetag,)
+        if supported_components:
+            props += (caldavxml.supported_calendar_component_set,)
         if synctoken:
             props += (davxml.synctoken,)
         results = self.shell.account.session.getPropertiesOnHierarchy(resource, props)
@@ -103,12 +113,19 @@ class Cmd(Command):
                 modtime = props.get(davxml.getlastmodified, "-")
                 line.append(modtime)
                 line.append(rurl[len(path):])
+                if rtype:
+                    if isinstance(props.get(davxml.resourcetype), str):
+                        line.append("type:-")
+                    else:
+                        line.append("type:%s" % (",".join([child.tag.split("}")[1] for child in props.get(davxml.resourcetype).getchildren()])))
                 if displayname:
                     line.append("name:'%s'" % (props.get(davxml.displayname, '-'),))
                 if ctag:
                     line.append("ctag:'%s'" % (props.get(csxml.getctag, '-'),))
                 if etag:
                     line.append("etag:'%s'" % (props.get(davxml.getetag, '-'),))
+                if supported_components and props.get(caldavxml.supported_calendar_component_set) is not None:
+                    line.append("comp:%s" % (",".join([child.get("name", "") for child in props.get(caldavxml.supported_calendar_component_set).getchildren()])))
                 if synctoken:
                     line.append("sync:'%s'" % (props.get(davxml.synctoken, '-'),))
             else:
@@ -143,7 +160,9 @@ Options:
 -c   long listing + CS:getctag
 -d   long listing + DAV:displayname
 -e   long listing + DAV:getetag
+-i   long listing + CALDAV:supported-calendar-component-set
 -l   long listing
+-r   long listing + DAV:resourcetype
 -s   long listing + DAV:sync-token
 """ % (name,)
 
