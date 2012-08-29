@@ -90,6 +90,8 @@ class Cmd(Command):
             props += (davxml.getcontentlength, davxml.getlastmodified,)
         if ctag:
             props += (csxml.getctag,)
+        if displayname:
+            props += (davxml.displayname,)
         if etag:
             props += (davxml.getetag,)
         if supported_components:
