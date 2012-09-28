@@ -21,12 +21,13 @@ class ChangePassword(Command):
     """
     Command to change the password of an existing directory record.
     """
-    
+
     CMDNAME = "passwd"
 
     def __init__(self):
         super(ChangePassword, self).__init__(self.CMDNAME, "Change the password for a record.")
         self.uid = None
+
 
     def usage(self):
         print """USAGE: %s TYPE [OPTIONS]
@@ -39,24 +40,25 @@ Options:
     --uid UID of record to change
 """ % (self.cmdname,)
 
+
     def execute(self, argv):
         """
         Execute the command specified by the command line arguments.
-        
+
         @param argv: command line arguments.
         @type argv: C{list}
-        
+
         @return: 1 for success, 0 for failure.
         @rtype: C{int}
         """
-        
+
         # Check first argument for type
         argv = self.getTypeArgument(argv)
         if argv is None:
             return 0
-        
-        opts, args = getopt.getopt(argv, 'f:h', ["help", "uid=",])
-        
+
+        opts, args = getopt.getopt(argv, 'f:h', ["help", "uid=", ])
+
         for name, value in opts:
             if name == "-f":
                 self.path = value
@@ -82,10 +84,11 @@ Options:
             print "Arguments not allowed."
             self.usage()
             return 0
-        
+
         if not self.loadAccounts():
             return 0
         return self.doCommand()
+
 
     def doCommand(self):
         """
@@ -94,18 +97,18 @@ Options:
         if self.doChangePassword():
             return self.writeAccounts()
         return 0
-    
+
+
     def doChangePassword(self):
         """
         Prompts the user for details and then changes the password of a record in the directory.
         """
-        
+
         # First check record exists
         record = self.directory.getRecord(self.recordType, self.uid)
         if record is None:
             print "No '%s' record matching uid '%s'" % (self.recordType, self.uid,)
             return 0
-            
+
         record.password = self.promptPassword()
         return 1
-

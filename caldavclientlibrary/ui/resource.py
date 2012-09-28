@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2008 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ class Resource(object):
     Maintains data for a WebDAV resource, including list of properties,
     child resources and actual data.
     """
-    
+
     def __init__(self, session, path, lastmod="", size="", type=""):
-        
+
         self.session = session
         self.path = path.rstrip("/")
         self.iscollection = path.endswith("/")
@@ -36,23 +36,30 @@ class Resource(object):
         self.details = None
         self.data = None
 
+
     def getPath(self):
         return self.path
+
 
     def getName(self):
         return os.path.basename(self.path)
 
+
     def getLastMod(self):
         return self.lastmod
+
 
     def getSize(self):
         return self.size
 
+
     def getType(self):
         return self.type
 
+
     def isCollection(self):
         return self.iscollection
+
 
     def findPath(self, path=None, elements=None):
         if path:
@@ -67,6 +74,7 @@ class Resource(object):
                         return child
         return None
 
+
     def findChild(self, name):
         if self.children:
             for child in self.children:
@@ -74,9 +82,10 @@ class Resource(object):
                     return child
         return None
 
+
     def listChildren(self):
         if self.children is None:
-            resource = URL(url=self.path+"/")
+            resource = URL(url=self.path + "/")
             props = (
                 davxml.resourcetype,
                 davxml.getlastmodified,
@@ -95,8 +104,9 @@ class Resource(object):
             ) for rurl in items if rurl != self.path + "/"]
         return self.children
 
+
     def getDetails(self):
-        resource = URL(url=self.path+"/")
+        resource = URL(url=self.path + "/")
         props = (davxml.resourcetype,)
         props += (davxml.getcontentlength, davxml.getlastmodified,)
         props, _ignore_bad = self.session.account.session.getProperties(resource, props)
@@ -106,9 +116,10 @@ class Resource(object):
         modtime = props.get(davxml.getlastmodified, "-")
         return ["Size: %s" % (size,), "Modtime: %s" % (modtime,)]
 
+
     def getAllDetails(self):
         if self.details is None:
-            resource = URL(url=self.path+"/")
+            resource = URL(url=self.path + "/")
             props = self.session.account.session.getPropertyNames(resource)
             results, _ignore_bad = self.session.account.session.getProperties(resource, props)
             sorted = results.keys()
@@ -116,17 +127,20 @@ class Resource(object):
             self.details = [(key, results[key],) for key in sorted]
         return self.details
 
+
     def getData(self):
         if self.data is None:
-            resource = URL(url=self.path+"/")
+            resource = URL(url=self.path + "/")
             self.data, _ignore_etag = self.session.account.session.readData(resource)
         return self.data
+
 
     def getDataAsHTML(self):
         data = self.getData()
         if not self.type.startswith("text/html"):
             data = "<HTML><BODY>%s</BODY></HTML>" % (data.replace("\r\n", "\n").replace("\r", "\n").replace("\n", "<br>\n"),)
         return data
+
 
     def clear(self):
         self.children = None

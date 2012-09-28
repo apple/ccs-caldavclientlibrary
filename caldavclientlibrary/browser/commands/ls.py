@@ -24,13 +24,14 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("ls",)
-        
+
+
     def execute(self, name, options):
-        
+
         longlist = False
         path = None
         rtype = False
@@ -43,7 +44,7 @@ class Cmd(Command):
         opts, args = getopt.getopt(shlex.split(options), 'acdeilrs')
 
         for name, _ignore_value in opts:
-            
+
             if name == "-a":
                 pass
             elif name == "-c":
@@ -70,7 +71,7 @@ class Cmd(Command):
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -133,14 +134,14 @@ class Cmd(Command):
             else:
                 line.append(rurl[len(path):])
             lines.append(line)
-        
+
         if lines:
             # Get column widths
-            widths = [0] * len(lines[0]) 
+            widths = [0] * len(lines[0])
             for line in lines:
                 for ctr, col in enumerate(line):
                     widths[ctr] = max(widths[ctr], len(col))
-            
+
             # Write out each one
             for line in lines:
                 for ctr, col in enumerate(line):
@@ -151,8 +152,10 @@ class Cmd(Command):
                 print
         return True
 
+
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
@@ -167,6 +170,7 @@ Options:
 -r   long listing + DAV:resourcetype
 -s   long listing + DAV:sync-token
 """ % (name,)
+
 
     def helpDescription(self):
         return "List the contents of a directory."

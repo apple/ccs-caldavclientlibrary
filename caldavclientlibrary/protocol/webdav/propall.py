@@ -25,19 +25,20 @@ class PropAll(PropFindBase):
         super(PropAll, self).__init__(session, url, depth)
         self.initRequestData()
 
+
     def generateXML(self, os):
         # Structure of document is:
         #
         # <DAV:propfind>
         #   <DAV:allprop/>
         # </DAV:propfind>
-        
+
         # <DAV:propfind> element
         propfind = Element(davxml.propfind)
-        
+
         # <DAV:propname> element
         propfind.append(Element(davxml.allprop))
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(propfind)
         xmldoc.writeUTF8(os)

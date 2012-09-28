@@ -24,6 +24,7 @@ class Options(RequestResponse):
     def __init__(self, session, url):
         super(Options, self).__init__(session, methods.OPTIONS, url)
 
+
     def getAllowed(self):
 
         methods = ()
@@ -34,8 +35,9 @@ class Options(RequestResponse):
                 while value:
                     token, value = parsetoken(value, ", \t")
                     methods += (token,)
-                    
+
         return methods
+
 
     def isAllowed(self, method):
         methods = ()
@@ -47,5 +49,5 @@ class Options(RequestResponse):
                     token, value = parsetoken(value, ", \t")
                     if method == token:
                         return True
-                    
+
         return False

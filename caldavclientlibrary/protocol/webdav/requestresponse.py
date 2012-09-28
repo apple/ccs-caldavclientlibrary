@@ -24,8 +24,10 @@ class RequestResponse(HTTPRequestResponse):
         super(RequestResponse, self).__init__(session, method, ruri, etag, etag_match)
         self.lock = lock
 
+
     def setLock(self, lock):
         self.lock = lock
+
 
     def addHeaders(self, hdrs):
         # Do inherited

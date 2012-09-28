@@ -21,17 +21,19 @@ from caldavclientlibrary.protocol.webdav.definitions import headers
 import unittest
 
 class TestPropNames(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = PropNames(server, "/", headers.Depth0)
         self.assertEqual(request.getMethod(), "PROPFIND")
-    
+
+
+
 class TestRequestHeaders(unittest.TestCase):
-    
+
     def test_Depth0Headers(self):
-        
+
         server = Session("www.example.com")
         request = PropNames(server, "/", headers.Depth0)
         hdrs = request.generateRequestHeader()
@@ -39,8 +41,9 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
+
     def test_Depth1Headers(self):
-        
+
         server = Session("www.example.com")
         request = PropNames(server, "/", headers.Depth1)
         hdrs = request.generateRequestHeader()
@@ -48,8 +51,9 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
+
     def test_DepthInfinityHeaders(self):
-        
+
         server = Session("www.example.com")
         request = PropNames(server, "/", headers.DepthInfinity)
         hdrs = request.generateRequestHeader()
@@ -57,10 +61,12 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 1" in hdrs)
         self.assertTrue("Depth: infinity" in hdrs)
 
+
+
 class TestRequestBody(unittest.TestCase):
- 
+
     def test_GenerateXML(self):
-        
+
         server = Session("www.example.com")
         request = PropNames(server, "/", headers.Depth0)
         os = StringIO()
@@ -72,11 +78,17 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
+
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

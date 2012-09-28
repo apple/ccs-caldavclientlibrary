@@ -21,87 +21,96 @@ from caldavclientlibrary.protocol.http.util import parseStatusLine
 import unittest
 
 class TestParseQuoted(unittest.TestCase):
-    
+
     def testParseQuotedOK(self):
-        
+
         data = {
-            "\"\""                                  : ("",                         ""),
-            "\"quoted\""                            : ("quoted",                   ""),
-            "\"quoted words\""                      : ("quoted words",             ""),
-            "\"quoting a \\\"word\\\"\""            : ("quoting a \"word\"",       ""),
-            "\"\" after"                            : ("",                         "after"),
-            "\"quoted\" after"                      : ("quoted",                   "after"),
-            "\"quoted words\" after"                : ("quoted words",             "after"),
-            "\"quoting a \\\"word\\\"\" after"      : ("quoting a \"word\"",       "after"),
+            "\"\""                                  : ("", ""),
+            "\"quoted\""                            : ("quoted", ""),
+            "\"quoted words\""                      : ("quoted words", ""),
+            "\"quoting a \\\"word\\\"\""            : ("quoting a \"word\"", ""),
+            "\"\" after"                            : ("", "after"),
+            "\"quoted\" after"                      : ("quoted", "after"),
+            "\"quoted words\" after"                : ("quoted words", "after"),
+            "\"quoting a \\\"word\\\"\" after"      : ("quoting a \"word\"", "after"),
             "\"quoting a \\\"word\\\" after\" after": ("quoting a \"word\" after", "after"),
-            "\"quoted\"after"                       : ("quoted",                   "after"),
-            "\""                                    : ("",                         ""),
-            "\"unterminated"                        : ("unterminated",             ""),
-            "\"unterminated words"                  : ("unterminated words",       ""),
-            "\"unterminated a \\\"word\\\""         : ("unterminated a \"word\"",  ""),
+            "\"quoted\"after"                       : ("quoted", "after"),
+            "\""                                    : ("", ""),
+            "\"unterminated"                        : ("unterminated", ""),
+            "\"unterminated words"                  : ("unterminated words", ""),
+            "\"unterminated a \\\"word\\\""         : ("unterminated a \"word\"", ""),
          }
-        
+
         for input, result in data.iteritems():
             self.assertEqual(parsequoted(input), result)
-        
+
+
     def testParseQuotedBAD(self):
-        
+
         data = (
             "",
             "unquoted",
             "unquoted \"quoted\"",
         )
-        
+
         for input in data:
             self.assertRaises(AssertionError, parsequoted, input)
 
+
+
 class TestParseToken(unittest.TestCase):
-    
+
     def testParseTokenOK(self):
-        
+
         data = {
-            ""                                      : ("",          ""),
-            "unquoted"                              : ("unquoted",  ""),
-            "unquoted words"                        : ("unquoted",  "words"),
-            "unquoted  words"                       : ("unquoted",  "words"),
+            ""                                      : ("", ""),
+            "unquoted"                              : ("unquoted", ""),
+            "unquoted words"                        : ("unquoted", "words"),
+            "unquoted  words"                       : ("unquoted", "words"),
             "unquoting a \"word\""                  : ("unquoting", "a \"word\""),
-            "unquoted\twords"                       : ("unquoted",  "words"),
+            "unquoted\twords"                       : ("unquoted", "words"),
             "unquoting\ta \"word\""                 : ("unquoting", "a \"word\""),
-            "unquoted: words"                       : ("unquoted",  "words"),
+            "unquoted: words"                       : ("unquoted", "words"),
             "unquoting: a \"word\""                 : ("unquoting", "a \"word\""),
 
-            "\"\""                                  : ("",                         ""),
-            "\"quoted\""                            : ("quoted",                   ""),
-            "\"quoted words\""                      : ("quoted words",             ""),
-            "\"quoting a \\\"word\\\"\""            : ("quoting a \"word\"",       ""),
-            "\"\" after"                            : ("",                         "after"),
-            "\"quoted\" after"                      : ("quoted",                   "after"),
-            "\"quoted words\" after"                : ("quoted words",             "after"),
-            "\"quoting a \\\"word\\\"\" after"      : ("quoting a \"word\"",       "after"),
+            "\"\""                                  : ("", ""),
+            "\"quoted\""                            : ("quoted", ""),
+            "\"quoted words\""                      : ("quoted words", ""),
+            "\"quoting a \\\"word\\\"\""            : ("quoting a \"word\"", ""),
+            "\"\" after"                            : ("", "after"),
+            "\"quoted\" after"                      : ("quoted", "after"),
+            "\"quoted words\" after"                : ("quoted words", "after"),
+            "\"quoting a \\\"word\\\"\" after"      : ("quoting a \"word\"", "after"),
             "\"quoting a \\\"word\\\" after\" after": ("quoting a \"word\" after", "after"),
-            "\"quoted\"after"                       : ("quoted",                   "after"),
-            "\""                                    : ("",                         ""),
-            "\"unterminated"                        : ("unterminated",             ""),
-            "\"unterminated words"                  : ("unterminated words",       ""),
-            "\"unterminated a \\\"word\\\""         : ("unterminated a \"word\"",  ""),
+            "\"quoted\"after"                       : ("quoted", "after"),
+            "\""                                    : ("", ""),
+            "\"unterminated"                        : ("unterminated", ""),
+            "\"unterminated words"                  : ("unterminated words", ""),
+            "\"unterminated a \\\"word\\\""         : ("unterminated a \"word\"", ""),
         }
-        
+
         for input, result in data.iteritems():
             self.assertEqual(parsetoken(input, " \t:"), result)
 
+
+
 class TestParseStatusLine(unittest.TestCase):
-    
+
     def testParseTokenOK(self):
         self.assertEqual(parseStatusLine("HTTP/1.1 200 OK"), 200)
-    
+
+
     def testParseTokenBadStatus(self):
         self.assertEqual(parseStatusLine("HTTP/1.2 2001 OK"), 0)
-    
+
+
     def testParseTokenBadVersion(self):
         self.assertEqual(parseStatusLine("HTTP/1.2 200 OK"), 0)
-    
+
+
     def testParseTokenBadNumber(self):
         self.assertEqual(parseStatusLine("HTTP/1.1 OK"), 0)
-    
+
+
     def testParseTokenBad(self):
         self.assertEqual(parseStatusLine("HTTP/1.1"), 0)

@@ -18,10 +18,10 @@
 # RFC2616 5.1.1 - Request Methods
 
 OPTIONS = "OPTIONS"
-GET     = "GET"
-HEAD    = "HEAD"
-POST    = "POST"
-PUT     = "PUT"
-DELETE  = "DELETE"
-TRACE   = "TRACE"
+GET = "GET"
+HEAD = "HEAD"
+POST = "POST"
+PUT = "PUT"
+DELETE = "DELETE"
+TRACE = "TRACE"
 CONNECT = "CONNECT"

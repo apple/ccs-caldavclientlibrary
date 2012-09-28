@@ -22,14 +22,15 @@ class Report(RequestResponse):
     def __init__(self, session, url):
         super(Report, self).__init__(session, methods.REPORT, url)
 
+
     def setOutput(self, response_data):
-        self.response_data = response_data;
+        self.response_data = response_data
+
 
     def addHeaders(self, hdrs):
         # Do default
         super(RequestResponse, self).addHeaders(hdrs)
-        
+
         # Optional ones
         if self.session.useBriefHeader:
             hdrs.append((headers.Brief, "t"))
-    

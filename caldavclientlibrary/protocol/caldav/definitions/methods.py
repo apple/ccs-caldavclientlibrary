@@ -18,4 +18,4 @@ from caldavclientlibrary.protocol.webdav.definitions.methods import * #@UnusedWi
 
 # RFC4791 - CalDAV Request Methods
 
-MKCALENDAR = "MKCALENDAR";
+MKCALENDAR = "MKCALENDAR"

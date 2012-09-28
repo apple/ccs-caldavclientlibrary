@@ -20,16 +20,19 @@ from caldavclientlibrary.protocol.webdav.move import Move
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = Move(server, "/a", "http://www.example.com/b")
         self.assertEqual(request.getMethod(), "MOVE")
 
+
+
 class TestRequestHeaders(unittest.TestCase):
+
     def test_NoSpecialHeaders(self):
-        
+
         server = Session("www.example.com")
         request = Move(server, "/a", "http://www.example.com/b")
         hdrs = request.generateRequestHeader()
@@ -37,9 +40,10 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("If-Match:" in hdrs)
         self.assertTrue("Overwrite: F" in hdrs)
         self.assertTrue("Destination: http://www.example.com/b" in hdrs)
-    
+
+
     def test_IfMatchHeader(self):
-        
+
         server = Session("www.example.com")
         request = Move(server, "/a", "http://www.example.com/b")
         request.setData(etag="\"12345\"")
@@ -48,9 +52,10 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("If-Match: \"12345\"" in hdrs)
         self.assertTrue("Overwrite: F" in hdrs)
         self.assertTrue("Destination: http://www.example.com/b" in hdrs)
-    
+
+
     def test_OverwriteHeader(self):
-        
+
         server = Session("www.example.com")
         request = Move(server, "/a", "http://www.example.com/b", overwrite=True)
         hdrs = request.generateRequestHeader()
@@ -59,14 +64,22 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Overwrite: T" in hdrs)
         self.assertTrue("Destination: http://www.example.com/b" in hdrs)
 
+
+
 class TestRequestBody(unittest.TestCase):
     pass
+
+
 
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

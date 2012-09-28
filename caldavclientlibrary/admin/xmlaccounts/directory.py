@@ -24,31 +24,33 @@ class XMLDirectory(object):
     """
     Model object for the XML-based directory. This can parse and generate the full XML file.
     """
-    
+
     def __init__(self):
         self.realm = ""
         self.records = {}
         for type in recordtypes.RECORD_TYPES:
             self.records[type] = []
-    
+
+
     def addRecord(self, record):
         """
         Add a new principal record to the directory.
-        
+
         @param record: the record to add.
         @type record: L{admin.xmlaccounts.record.XMLRecord}
         """
         self.records[record.recordType].append(record)
-        
+
+
     def containsRecord(self, recordType, uid):
         """
         Test whether the directory contains a record of the specified type and user id.
-        
+
         @param recordType: a principal record type.
         @type recordType: one of L{admin.xmlaccounts.recordtypes.RECORD_TYPES}
         @param uid: the user id to check.
         @type uid: C{str}
-        
+
         @return: C{True} if present in the directory, C{False} otherwise.
         @rtype: C{boolean}
         """
@@ -57,14 +59,15 @@ class XMLDirectory(object):
                 return True
         else:
             return False
-        
+
+
     def containsGUID(self, guid):
         """
         Test whether the directory contains a record with the specified GUID.
-        
+
         @param guid: the GUID to check.
         @type guid: C{str}
-        
+
         @return: C{True} if present in the directory, C{False} otherwise.
         @rtype: C{boolean}
         """
@@ -73,7 +76,8 @@ class XMLDirectory(object):
                 if record.guid == guid:
                     return True
         return False
-        
+
+
     def getRecord(self, recordType, uid):
         """
         Return the record in the directory with the matching record type and user id.
@@ -82,7 +86,7 @@ class XMLDirectory(object):
         @type recordType: one of L{admin.xmlaccounts.recordtypes.RECORD_TYPES}
         @param uid: the user id to check.
         @type uid: C{str}
-        
+
         @return: the matching record, or C{None} if not found.
         @rtype: L{admin.xmlaccounts.record.XMLRecord}
         """
@@ -91,16 +95,17 @@ class XMLDirectory(object):
                 return record
         else:
             return None
-        
+
+
     def removeRecord(self, recordType, uid):
         """
         Remove the record with the matching type and user id from the directory.
-        
+
         @param recordType: a principal record type.
         @type recordType: one of L{admin.xmlaccounts.recordtypes.RECORD_TYPES}
         @param uid: the user id to remove.
         @type uid: C{str}
-        
+
         @return: C{True} if found and removed, C{False} otherwise.
         @rtype: C{boolean}
         """
@@ -110,7 +115,8 @@ class XMLDirectory(object):
                 return True
         else:
             return False
-        
+
+
     def parseXML(self, node):
         """
         Parse an entire XML directory.
@@ -125,23 +131,25 @@ class XMLDirectory(object):
                 record = XMLRecord()
                 record.parseXML(child)
                 self.records[record.recordType].append(record)
-                
+
             # TODO: Now resolve group and proxy references
+
 
     def writeXML(self):
         """
         Generate an entire XML directory.
-        
+
         @return: the root element for the principal record.
         @rtype: C{xml.etree.ElementTree.Element}
         """
-        
+
         root = Element(tags.ELEMENT_ACCOUNTS)
         if self.realm:
             root.set(tags.ATTRIBUTE_REALM, self.realm)
         for type in recordtypes.RECORD_TYPES:
             self.writeXMLRecords(root, self.records[type])
         return root
+
 
     def writeXMLRecords(self, root, records):
         """

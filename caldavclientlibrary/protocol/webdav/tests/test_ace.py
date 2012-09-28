@@ -24,29 +24,30 @@ from StringIO import StringIO
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def verifyXML(self, x, y=None):
-        
+
         x = x.replace("\n", "\r\n")
         if y:
             y = y.replace("\n", "\r\n")
-            
+
         # Parse the XML data
         a = ACE()
         a.parseACE(XML(x))
-        
+
         # Generate the XML data
         aclnode = Element(davxml.acl)
         a.generateACE(aclnode)
         os = StringIO()
         xmldoc = BetterElementTree(aclnode.getchildren()[0])
         xmldoc.writeUTF8(os)
-        
+
         # Verify data
         self.assertEqual(os.getvalue(), y if y else x)
 
+
     def test_XML1(self):
-        
+
         self.verifyXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:ace xmlns:ns0="DAV:">
   <ns0:principal>
@@ -60,8 +61,9 @@ class TestRequest(unittest.TestCase):
 </ns0:ace>
 """)
 
+
     def test_XML2(self):
-        
+
         self.verifyXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:ace xmlns:ns0="DAV:">
   <ns0:principal>
@@ -78,8 +80,9 @@ class TestRequest(unittest.TestCase):
 </ns0:ace>
 """)
 
+
     def test_XML3(self):
-        
+
         self.verifyXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:ace xmlns:ns0="DAV:">
   <ns0:principal>
@@ -95,8 +98,9 @@ class TestRequest(unittest.TestCase):
 </ns0:ace>
 """)
 
+
     def test_XML4(self):
-        
+
         self.verifyXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:ace xmlns:ns0="DAV:">
   <ns0:invert>
@@ -114,8 +118,9 @@ class TestRequest(unittest.TestCase):
 </ns0:ace>
 """)
 
+
     def test_XML5(self):
-        
+
         self.verifyXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:ace xmlns:ns0="DAV:">
   <ns0:principal>
@@ -130,5 +135,3 @@ class TestRequest(unittest.TestCase):
   </ns0:grant>
 </ns0:ace>
 """)
-
-

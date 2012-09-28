@@ -21,11 +21,12 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("calendars",)
-        
+
+
     def execute(self, name, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) != 0:
@@ -52,16 +53,19 @@ class Cmd(Command):
 
         if not result:
             print "%s: No such directory" % (newpath,)
-            
+
         return result
+
 
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s [PRINCIPAL]
 PRINCIPAL is a principal-URL.
 """ % (name,)
+
 
     def helpDescription(self):
         return "Change working directory to calendar home for current or specified principal."

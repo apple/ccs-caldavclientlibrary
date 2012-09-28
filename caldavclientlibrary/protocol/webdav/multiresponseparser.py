@@ -23,14 +23,15 @@ class MultiResponseParser(XMLResponseParser):
         # Must have a node
         if multistatus_node is None:
             return
-        
+
         # Verify that the node is the correct element <DAV:multistatus>
         if multistatus_node.tag != davxml.multistatus:
             return
-        
+
         # Node is the right type, so iterator over all child response nodes and process each one
         for response in multistatus_node.getchildren():
             self.parseResponse(response)
-    
+
+
     def parseResponse(self, response):
         raise NotImplementedError

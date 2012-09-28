@@ -23,13 +23,14 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("props",)
-        
+
+
     def execute(self, name, options):
-        
+
         names = False
         all = False
         xmllist = False
@@ -38,7 +39,7 @@ class Cmd(Command):
         opts, args = getopt.getopt(shlex.split(options), 'aln')
 
         for name, _ignore_value in opts:
-            
+
             if name == "-a":
                 all = True
             elif name == "-l":
@@ -49,7 +50,7 @@ class Cmd(Command):
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -78,11 +79,13 @@ class Cmd(Command):
             if bad:
                 print "Failed Properties:"
                 utils.printProperties(bad)
-            
+
         return True
+
 
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
@@ -95,6 +98,7 @@ Options:
     if neither -n nor -a are set then property names are first listed, and then values of those looked up.
     only one of -n and -a can be set.
 """ % (name,)
+
 
     def helpDescription(self):
         return "List the properties of a directory or file."

@@ -22,13 +22,14 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("import",)
-        
+
+
     def execute(self, name, options):
-        
+
         fname = None
         content_type = None
         path = None
@@ -36,7 +37,7 @@ class Cmd(Command):
         opts, args = getopt.getopt(shlex.split(options), 'acf:')
 
         for name, value in opts:
-            
+
             if name == "-f":
                 fname = value
             elif name == "-a":
@@ -51,12 +52,12 @@ class Cmd(Command):
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if not fname:
             print "File name must be provided"
             print self.usage(name)
             raise WrongOptions
-            
+
         elif len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -87,8 +88,10 @@ class Cmd(Command):
 
         return True
 
+
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s OPTIONS PATH
@@ -101,6 +104,7 @@ Options:
 
 One of -c or -a is REQUIRED.
 """ % (name,)
+
 
     def helpDescription(self):
         return "Import data to a collection on the server."

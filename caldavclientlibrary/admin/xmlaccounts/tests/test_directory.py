@@ -22,26 +22,27 @@ from xml.etree.ElementTree import XML
 import unittest
 
 class TestDirectory(unittest.TestCase):
-    
+
     def checkXML(self, x):
-        
+
         x = x.replace("\n", "\r\n")
-            
+
         # Parse the XML data
         a = XMLDirectory()
         a.parseXML(XML(x))
-        
+
         # Generate the XML data
         node = a.writeXML()
         os = StringIO()
         xmldoc = BetterElementTree(node)
         xmldoc.writeUTF8(os)
-        
+
         # Verify data
         self.assertEqual(os.getvalue(), x)
 
+
     def test_accounts(self):
-        
+
         self.checkXML("""<?xml version='1.0' encoding='utf-8'?>
 <accounts realm="Test Realm">
   <user>

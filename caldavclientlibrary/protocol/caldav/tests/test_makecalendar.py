@@ -20,20 +20,25 @@ from StringIO import StringIO
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = MakeCalendar(server, "/")
         self.assertEqual(request.getMethod(), "MKCALENDAR")
-    
+
+
+
 class TestRequestHeaders(unittest.TestCase):
     pass
 
+
+
 class TestRequestBody(unittest.TestCase):
- 
+
     def test_GenerateXMLDisplayname(self):
-        
+
         server = Session("www.example.com")
         request = MakeCalendar(server, "/", "home")
         os = StringIO()
@@ -47,8 +52,9 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
     def test_GenerateXMLMultipleProperties(self):
-        
+
         server = Session("www.example.com")
         request = MakeCalendar(server, "/", "home", "my personal calendar")
         os = StringIO()
@@ -63,8 +69,9 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
     def test_GenerateXMLCDATAProperty(self):
-        
+
         server = Session("www.example.com")
         timezone = """BEGIN:VCALENDAR
 PRODID:-//Example Corp.//CalDAV Client//EN
@@ -101,11 +108,17 @@ END:VCALENDAR
 """.replace("\n", "\r\n") % (timezone.replace("&", "&amp;"),)
 )
 
+
+
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

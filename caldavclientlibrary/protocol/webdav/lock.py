@@ -26,14 +26,14 @@ from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
 class Lock(RequestResponse):
 
     eExclusive = 0
-    eShared    = 1
+    eShared = 1
 
-    eResourceMustExist     = 0
-    eResourceMustNotExist  = 1
-    eResourceMayExist      = 2
+    eResourceMustExist = 0
+    eResourceMustNotExist = 1
+    eResourceMayExist = 2
 
     def __init__(self, session, url, depth, scope, owner, timeout, exists=eResourceMustExist):
-        
+
         assert(depth in (headers.Depth0, headers.Depth1, headers.DepthInfinity))
         assert(scope in (Lock.eExclusive, Lock.eShared,))
         assert(exists in (Lock.eResourceMustExist, Lock.eResourceMustNotExist, Lock.eResourceMayExist))
@@ -44,7 +44,7 @@ class Lock(RequestResponse):
         self.scope = scope
         self.owner = owner
         self.timeout = timeout
-    
+
         # Do appropriate etag based on exists
         if exists == Lock.eResourceMustExist:
             self.etag = "*"
@@ -54,8 +54,9 @@ class Lock(RequestResponse):
             self.etag_match = False
         elif exists == Lock.eResourceMayExist:
             pass
-    
+
         self.initRequestData()
+
 
     def initRequestData(self):
         # Write XML info to a string
@@ -63,18 +64,20 @@ class Lock(RequestResponse):
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
 
+
     def addHeaders(self, hdrs):
         # Do default
         super(Lock, self).addHeaders(hdrs)
-    
+
         # Add depth header
         hdrs.append((headers.Depth, self.depth))
-    
+
         # Add timeout header
         if self.timeout == -1:
             hdrs.append((headers.Timeout, headers.TimeoutInfinite))
         elif self.timeout > 0:
             hdrs.append((headers.Timeout, "%s%d" % (headers.TimeoutSeconds, self.timeout)))
+
 
     def generateXML(self, os):
         # Structure of document is:
@@ -90,43 +93,44 @@ class Lock(RequestResponse):
         #     <<owner>>
         #   </DAV:owner>
         # </DAV:lockinfo>
-        
+
         # <DAV:lockinfo> element
         lockinfo = Element(davxml.lockinfo)
-        
+
         # <DAV:lockscope> element
         lockscope = Element(davxml.lockscope)
         lockinfo.append(lockscope)
-        
+
         # <DAV:exclusive/> | <DAV:shared/> element
         lockscope.append(Element(davxml.exclusive if self.scope == Lock.eExclusive else davxml.shared))
-        
+
         # <DAV:locktype> element
         locktype = Element(davxml.locktype)
         lockinfo.append(locktype)
-        
+
         # <DAV:write/> element
         locktype.append(Element(davxml.write))
-        
+
         # <DAV:owner> element is optional
         if self.owner:
             # <DAV:owner> element
             owner = Element(davxml.owner)
             owner.text = self.owner
             lockinfo.append(owner)
-    
+
         # Now we have the complete document, so write it out (no indentation)
         BetterElementTree(lockinfo).writeUTF8(os)
 
+
     def getLockToken(self):
-    
+
         # Get the Lock-Token header from response headers
         result = ""
         if self.hasResponseHeader(headers.LockToken):
 
             # Get Coded-URL
             codedurl = self.getResponseHeader(headers.LockToken)
-            
+
             # Strip leading/trailing <>
             codeurl = codedurl.strip()
             if codeurl.startswith("<") and codeurl.endswith(">"):

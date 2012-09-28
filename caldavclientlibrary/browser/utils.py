@@ -26,7 +26,7 @@ def printPrincipalPaths(account, principals, resolve, refresh):
     if resolve:
         results = [account.getPrincipal(item, refresh=refresh) for item in principals]
         results.sort(key=lambda x: x.getSmartDisplayName())
-        strlen = reduce(lambda x,y: max(x, len(y.getSmartDisplayName()) + 1), results, 0)
+        strlen = reduce(lambda x, y: max(x, len(y.getSmartDisplayName()) + 1), results, 0)
         results = ["%- *s (%s)" % (strlen, principal.getSmartDisplayName(), principal.principalURL) for principal in results]
     else:
         results = [item.relativeURL() for item in principals]
@@ -37,8 +37,10 @@ def printPrincipalPaths(account, principals, resolve, refresh):
     else:
         for item in results:
             result += "\n        %s" % (item,)
-    
+
     return result
+
+
 
 def printPrincipals(account, principals, resolve, refresh):
 
@@ -49,7 +51,7 @@ def printPrincipals(account, principals, resolve, refresh):
             for principal in results:
                 principal.loadDetails(True)
         results.sort(key=lambda x: x.getSmartDisplayName())
-        strlen = reduce(lambda x,y: max(x, len(y.getSmartDisplayName()) + 1), results, 0)
+        strlen = reduce(lambda x, y: max(x, len(y.getSmartDisplayName()) + 1), results, 0)
         results = ["%- *s (%s)" % (strlen, principal.getSmartDisplayName(), principal.principalURL) for principal in results]
     else:
         results = [item.principalURL for item in principals]
@@ -60,8 +62,10 @@ def printPrincipals(account, principals, resolve, refresh):
     else:
         for item in results:
             result += "\n        %s" % (item,)
-    
+
     return result
+
+
 
 def printProxyPrincipals(account, principal, read=True, write=True, resolve=True, refresh_main=False, refresh=False):
     if read:
@@ -69,6 +73,8 @@ def printProxyPrincipals(account, principal, read=True, write=True, resolve=True
         refresh_main = False
     if write:
         print "    Read-Write Proxies: %s" % printPrincipals(account, principal.getWriteProxies(refresh_main), resolve, refresh)
+
+
 
 def printProperties(items):
     sorted = items.keys()
@@ -82,6 +88,8 @@ def printProperties(items):
         else:
             print "    %s: %s" % (key, value,)
 
+
+
 def printList(items):
     result = ""
     if len(items) == 1:
@@ -93,30 +101,38 @@ def printList(items):
             result += "\n        %s" % (item,)
         return result
 
+
+
 def printTwoColumnList(items, indent=0):
-    
-    strlen = reduce(lambda x,y: max(x, len(y[0]) + 1), items, 0)
+
+    strlen = reduce(lambda x, y: max(x, len(y[0]) + 1), items, 0)
     sorted = list(items)
     sorted.sort(key=lambda x: x[0])
     for col1, col2 in sorted:
-        print "%s%- *s - %s" % (" "*indent, strlen, col1, col2,)
+        print "%s%- *s - %s" % (" " * indent, strlen, col1, col2,)
+
+
 
 def printPrincipalList(principals):
-    
+
     result = ""
     for ctr, principal in enumerate(principals):
-        result += "\n% 2d. %s (%s)" % (ctr+1, principal.getSmartDisplayName(), principal.principalURL)
+        result += "\n% 2d. %s (%s)" % (ctr + 1, principal.getSmartDisplayName(), principal.principalURL)
     return result
+
+
 
 def printACEList(aces, account):
-    
+
     result = ""
     for ctr, ace in enumerate(aces):
-        result += "\n% 2d. %s" % (ctr+1, printACE(ace, account))
+        result += "\n% 2d. %s" % (ctr + 1, printACE(ace, account))
     return result
 
+
+
 def printACE(ace, account):
-    
+
     principalText = ace.principal
     if principalText == str(davxml.href):
         principal = account.getPrincipal(URL(url=ace.data))
@@ -144,6 +160,8 @@ def printACE(ace, account):
     result += "\n"
     return result
 
+
+
 def textInput(title, insert=None):
     if insert:
         title = "%s [%s]:" % (title, insert,)
@@ -153,19 +171,25 @@ def textInput(title, insert=None):
     if not result:
         result = insert
     return result
-    
-def numericInput(title, low, high, allow_q = False, insert=None):
+
+
+
+def numericInput(title, low, high, allow_q=False, insert=None):
     if allow_q:
-        result = choiceInput(title, [str(num) for num in range(low, high+1)] + ["q",], insert)
+        result = choiceInput(title, [str(num) for num in range(low, high + 1)] + ["q", ], insert)
         if result != "q":
             result = int(result)
         return result
     else:
-        return int(choiceInput(title, [str(num) for num in range(low, high+1)], insert))
-    
+        return int(choiceInput(title, [str(num) for num in range(low, high + 1)], insert))
+
+
+
 def yesNoInput(title, insert=None):
     return choiceInput(title, ("y", "n"), insert)
-    
+
+
+
 def choiceInput(title, choices, insert=None):
     while True:
         result = textInput(title, insert)
@@ -174,7 +198,9 @@ def choiceInput(title, choices, insert=None):
         if result in choices:
             return result
         print "Invalid input. Try again."
-    
+
+
+
 def multiChoiceInput(title, choices, insert=None):
     while True:
         result = textInput(title, insert)

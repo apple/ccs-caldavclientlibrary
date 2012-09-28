@@ -19,11 +19,12 @@ from caldavclientlibrary.browser.command import WrongOptions
 from getpass import getpass
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
-        self.cmds = ("user", )
-        
+        self.cmds = ("user",)
+
+
     def execute(self, name, options):
         if options:
             print self.usage(name)
@@ -33,9 +34,11 @@ class Cmd(Command):
         self.shell.setUserPswd(user, pswd)
         return True
 
+
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
+
 
     def helpDescription(self):
         return "Allows changing the current server login id and password."

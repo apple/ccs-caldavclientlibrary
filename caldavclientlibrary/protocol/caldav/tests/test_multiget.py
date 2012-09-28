@@ -21,20 +21,25 @@ from caldavclientlibrary.protocol.webdav.definitions import davxml
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = Multiget(server, "/", ())
         self.assertEqual(request.getMethod(), "REPORT")
-    
+
+
+
 class TestRequestHeaders(unittest.TestCase):
     pass
 
+
+
 class TestRequestBody(unittest.TestCase):
- 
+
     def test_GenerateXMLOneHrefOnly(self):
-        
+
         server = Session("www.example.com")
         request = Multiget(server, "/", ("/a",))
         os = StringIO()
@@ -46,8 +51,9 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
     def test_GenerateXMLMultipleHrefsOnly(self):
-        
+
         server = Session("www.example.com")
         request = Multiget(server, "/", ("/a", "/b",))
         os = StringIO()
@@ -60,8 +66,9 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
     def test_GenerateXMLMultipleHrefsOneProperty(self):
-        
+
         server = Session("www.example.com")
         request = Multiget(server, "/", ("/a", "/b",), (davxml.getetag,))
         os = StringIO()
@@ -77,8 +84,9 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
     def test_GenerateXMLMultipleHrefsMultipleProperties(self):
-        
+
         server = Session("www.example.com")
         request = Multiget(server, "/", ("/a", "/b",), (davxml.getetag, davxml.displayname,))
         os = StringIO()
@@ -95,11 +103,17 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
+
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

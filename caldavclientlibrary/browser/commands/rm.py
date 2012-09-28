@@ -23,21 +23,22 @@ import readline
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("rm",)
-        
+
+
     def execute(self, name, options):
 
         opts, args = getopt.getopt(shlex.split(options), '')
 
         for name, _ignore_value in opts:
-            
+
             print "Unknown option: %s" % (name,)
             print self.usage(name)
             raise WrongOptions
-        
+
         paths = []
         if len(args) == 0:
             print "Wrong number of arguments: %d" % (len(args),)
@@ -54,7 +55,7 @@ class Cmd(Command):
                 return True
             elif result[0] == "y":
                 break
-            
+
         for arg in args:
             path = arg
             if not path.startswith("/"):
@@ -63,17 +64,20 @@ class Cmd(Command):
 
             resource = URL(url=path)
             self.shell.account.session.deleteResource(resource)
-            
+
         return True
+
 
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s PATH *[PATH]
 PATH is a relative or absolute path.
 
 """ % (name,)
+
 
     def helpDescription(self):
         return "Deletes one or more resources."

@@ -25,6 +25,7 @@ class CopyMoveBase(RequestResponse):
         self.absurl_new = absurl_new
         self.overwrite = overwrite
 
+
     def setData(self, etag):
         self.request_data = None
         self.response_data = None
@@ -34,12 +35,13 @@ class CopyMoveBase(RequestResponse):
             self.etag = etag
             self.etag_match = True
 
+
     def addHeaders(self, hdrs):
         # Do default
         super(CopyMoveBase, self).addHeaders(hdrs)
-        
+
         # Add Destination header
         hdrs.append((headers.Destination, self.absurl_new))
-        
+
         # Add Overwrite header
         hdrs.append((headers.Overwrite, headers.OverwriteTrue if self.overwrite else headers.OverwriteFalse))

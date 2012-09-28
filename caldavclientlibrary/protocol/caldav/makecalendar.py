@@ -31,8 +31,9 @@ class MakeCalendar(RequestResponse):
         self.displayname = displayname
         self.description = description
         self.timezone = timezone
-        
+
         self.initRequestData()
+
 
     def initRequestData(self):
         if self.displayname or self.description or self.timezone:
@@ -40,7 +41,8 @@ class MakeCalendar(RequestResponse):
             os = StringIO()
             self.generateXML(os)
             self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
-    
+
+
     def generateXML(self, os):
         # Structure of document is:
         #
@@ -55,22 +57,22 @@ class MakeCalendar(RequestResponse):
 
         # <DAV:prop> element
         prop = SubElement(mkcalendar, davxml.prop)
-        
+
         # <DAV:displayname> element
         if self.displayname:
             displayname = SubElement(prop, davxml.displayname)
             displayname.text = self.displayname
-        
+
         # <CalDAV:calendar-description> element
         if self.description:
             description = SubElement(prop, caldavxml.calendar_description)
             description.text = self.description
-        
+
         # <CalDAV:timezone> element
         if self.timezone:
             timezone = SubElement(prop, caldavxml.calendar_timezone)
             timezone.text = self.timezone
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(mkcalendar)
         xmldoc.writeUTF8(os)

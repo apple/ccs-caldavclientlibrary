@@ -24,17 +24,18 @@ import readline
 import traceback
 
 class BaseShell(object):
-    
+
     def __init__(self, history_name):
-        
+
         self.prefix = ""
         self.commands = {}
         self.history = []
         self.history_name = history_name
         self.preserve_history = False
         self.last_wd_complete = ("", ())
-        
+
         self.readHistory()
+
 
     def readHistory(self):
         try:
@@ -42,19 +43,23 @@ class BaseShell(object):
         except IOError:
             pass
 
+
     def saveHistory(self):
         readline.write_history_file(os.path.expanduser("~/.%s" % (self.history_name,)))
 
+
     def registerCommands(self, cmds):
         raise NotImplementedError
+
 
     def registerCommand(self, command):
         for cmd in command.getCmds():
             self.commands[cmd] = command
         command.setShell(self)
 
+
     def run(self):
-        
+
         # Preserve existing history
         if self.preserve_history:
             old_history = [readline.get_history_item(index) for index in xrange(readline.get_current_history_length())]
@@ -87,8 +92,9 @@ class BaseShell(object):
             readline.clear_history()
             map(readline.add_history, old_history)
 
+
     def execute(self, cmdline):
-        
+
         # Check for history recall
         if cmdline == "!!" and self.history:
             cmdline = self.history[-1]
@@ -98,8 +104,8 @@ class BaseShell(object):
         elif cmdline.startswith("!"):
             try:
                 index = int(cmdline[1:])
-                if index> 0 and index <= len(self.history):
-                    cmdline = self.history[index-1]
+                if index > 0 and index <= len(self.history):
+                    cmdline = self.history[index - 1]
                     print cmdline
                     if readline.get_current_history_length():
                         readline.replace_history_item(readline.get_current_history_length() - 1, cmdline)
@@ -108,12 +114,12 @@ class BaseShell(object):
             except ValueError:
                 print "%s: event not found" % (cmdline,)
                 return
-            
+
         # split the command line into command and options
         splits = cmdline.split(" ", 1)
         cmd = splits[0]
         options = splits[1] if len(splits) == 2 else ""
-        
+
         # Find matching command
         try:
             if cmd not in self.commands:
@@ -124,9 +130,10 @@ class BaseShell(object):
         finally:
             # Store in history
             self.history.append(cmdline)
-    
+
+
     def help(self, cmd=None):
-        
+
         if cmd:
             if cmd in self.commands:
                 cmds = ((cmd, self.commands[cmd]),)
@@ -138,7 +145,7 @@ class BaseShell(object):
             cmds.sort()
             cmds = [(cmd, self.commands[cmd]) for cmd in cmds]
             full_help = False
-        
+
         if full_help:
             if self.commands[cmd].hasHelp(cmd):
                 print self.commands[cmd].help(cmd)
@@ -149,8 +156,9 @@ class BaseShell(object):
                     results.append(cmd.helpListing(name))
             utils.printTwoColumnList(results)
 
+
     def complete(self, text, state):
-        
+
         # If there is no space in the text we complete a command
         #print "complete: %s %d" % (text, state)
         results = []
@@ -167,8 +175,9 @@ class BaseShell(object):
 
         return results[state]
 
+
     def wdcomplete(self, text):
-        
+
         #print "\nwdcomplete: %s" % (text,)
 
         # Look at cache and return that
@@ -203,6 +212,6 @@ class BaseShell(object):
             textlen = len(text)
             results = [result for result in results if result[:textlen] == text]
             #print results
-        
+
         self.last_wd_complete = (text, results,)
         return results

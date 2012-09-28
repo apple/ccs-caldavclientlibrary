@@ -30,14 +30,15 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("acl",)
         self.subshell = None
-        
+
+
     def execute(self, name, options):
-        
+
         interactive = False
         path = None
 
@@ -47,16 +48,16 @@ class Cmd(Command):
             print str(e)
             print self.usage(name)
             raise WrongOptions
-            
+
         for name, _ignore_value in opts:
-            
+
             if name == "-i":
                 interactive = True
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -80,11 +81,12 @@ class Cmd(Command):
             else:
                 aces = ACE.parseFromACL(results[davxml.acl])
                 print utils.printACEList(aces, self.shell.account)
-            
+
         return True
 
+
     def doInteractiveMode(self, resource, acls):
-        
+
         print "Entering ACL edit mode on resource: %s" % (resource.relativeURL(),)
         if not self.subshell:
             self.subshell = SubShell(self.shell, "ACL", (
@@ -99,7 +101,8 @@ class Cmd(Command):
         self.subshell.resource = resource
         self.subshell.account = self.shell.account
         self.subshell.run()
-        
+
+
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
 PATH is a relative or absolute path.
@@ -109,11 +112,14 @@ Options:
     if not present, existing ACLs will be printed.
 """ % (name,)
 
+
     def helpDescription(self):
         return "Manage the access privileges of a directory or file."
 
+
+
 class CommonACLCommand(Command):
-    
+
     def displayACEList(self):
         # First list the current set
         results, bad = self.shell.shell.account.session.getProperties(self.shell.resource, (davxml.acl,))
@@ -124,6 +130,7 @@ class CommonACLCommand(Command):
             aces = ACE.parseFromACL(results[davxml.acl])
             print utils.printACEList(aces, self.shell.shell.account)
             return aces
+
 
     def createACE(self, oldace=None):
 
@@ -137,17 +144,17 @@ class CommonACLCommand(Command):
         insert = None
         if oldace:
             mapper = {
-                str(davxml.href):             "1",
-                str(davxml.all):              "2",
-                str(davxml.authenticated):    "3",
-                str(davxml.unauthenticated):  "4",
-                str(davxml.property):         "5",
+                str(davxml.href): "1",
+                str(davxml.all): "2",
+                str(davxml.authenticated): "3",
+                str(davxml.unauthenticated): "4",
+                str(davxml.property): "5",
             }
             insert = mapper.get(oldace.principal)
         choice = utils.numericInput("Select type: ", 1, 5, insert=insert)
         if choice == "q":
             return None
-        
+
         if choice == 1:
             href = utils.textInput("Enter principal path: ", insert=oldace.data if oldace else None)
             principal = self.shell.shell.account.getPrincipal(URL(url=href))
@@ -163,13 +170,13 @@ class CommonACLCommand(Command):
             prop = utils.textInput("Enter property qname: ", insert=str(oldace.data) if oldace else None)
             ace.principal = str(davxml.property)
             ace.data = QName(prop)
-        
+
         invert = utils.yesNoInput("Invert principal [y/n]: ", insert=("y" if oldace.invert else "n") if oldace else None)
         ace.invert = (invert == "y")
-        
+
         grant = utils.choiceInput("Grant or Deny privileges [g/d]: ", ("g", "d",), insert=("g" if oldace.grant else "d") if oldace else None)
         ace.grant = (grant == "g")
-        
+
         print "Privileges:"
         print "  a. {DAV}read"
         print "  b. {DAV}write"
@@ -190,7 +197,7 @@ class CommonACLCommand(Command):
                  )
         if "q" in choice:
             return None
-        
+
         mappedPrivs = {
             'a': davxml.read,
             'b': davxml.write,
@@ -208,16 +215,20 @@ class CommonACLCommand(Command):
         ace.privs = ()
         for char in choice:
             ace.privs += (mappedPrivs[char],)
-        
+
         return ace
-        
+
+
+
 class Add(CommonACLCommand):
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("add",)
-    
+
+
     def execute(self, name, options):
-        
+
         # First list the current set
         aces = self.displayACEList()
         if aces:
@@ -237,7 +248,7 @@ class Add(CommonACLCommand):
                 except ValueError:
                     print "Invalid input, try again."
                     continue
-                
+
                 # Try and get the new ace
                 ace = self.createACE()
                 if not ace:
@@ -246,23 +257,29 @@ class Add(CommonACLCommand):
 
                 # Now remove those that cannot be edited
                 aces = [ace for ace in aces if ace.canChange()]
-                
+
                 # Now execute
                 self.shell.shell.account.session.setACL(self.shell.resource, aces)
                 break
-                
+
+
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
+
     def helpDescription(self):
         return "Add ACL to existing resource."
 
+
+
 class Change(CommonACLCommand):
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("change",)
-    
+
+
     def execute(self, name, options):
 
         # First list the current set
@@ -282,12 +299,12 @@ class Change(CommonACLCommand):
                 except ValueError:
                     print "Invalid input, try again."
                     continue
-                
+
                 # Check that the targeted ace is editable
                 if not aces[number - 1].canChange():
                     print "You cannot change a protected or inherited ace."
                     break
-                
+
                 # Try and get the new ace
                 ace = self.createACE(oldace=aces[number - 1])
                 if not ace:
@@ -296,25 +313,31 @@ class Change(CommonACLCommand):
 
                 # Now remove those that cannot be edited
                 aces = [ace for ace in aces if ace.canChange()]
-                
+
                 # Now execute
                 self.shell.shell.account.session.setACL(self.shell.resource, aces)
                 break
+
 
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
+
     def helpDescription(self):
         return "Change ACL on existing resource."
 
+
+
 class Remove(CommonACLCommand):
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("remove",)
-    
+
+
     def execute(self, name, options):
-        
+
         # First list the current set
         aces = self.displayACEList()
         if aces:
@@ -332,42 +355,50 @@ class Remove(CommonACLCommand):
                 except ValueError:
                     print "Invalid input, try again."
                     continue
-                
+
                 # Check that the targeted ace is editable
-                if not aces[number-1].canChange():
+                if not aces[number - 1].canChange():
                     print "You cannot remove a protected or inherited ace."
                     break
-                
+
                 # Remove the one we are removing
-                del aces[number-1]
-                
+                del aces[number - 1]
+
                 # Now remove those that cannot be edited
                 aces = [ace for ace in aces if ace.canChange()]
-                
+
                 # Now execute
                 self.shell.shell.account.session.setACL(self.shell.resource, aces)
                 break
-                
+
+
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
+
 
     def helpDescription(self):
         return "Remove ACL on existing resource."
 
+
+
 class List(CommonACLCommand):
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("list",)
-    
+
+
     def execute(self, name, options):
-        
+
         self.displayACEList()
         return True
+
 
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
+
 
     def helpDescription(self):
         return "List current ACLs on existing resource."

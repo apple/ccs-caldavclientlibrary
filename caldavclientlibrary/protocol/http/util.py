@@ -16,7 +16,7 @@
 
 
 def parsetoken(text, delimiters=" \t"):
-    
+
     if not text:
         return "", ""
 
@@ -29,14 +29,16 @@ def parsetoken(text, delimiters=" \t"):
                 break
         else:
             return text, ""
-        
+
         return token, lstripdelimiters(text[pos:], delimiters)
-        
+
+
+
 def parsequoted(text, delimiters=" \t"):
-    
+
     assert(text)
     assert(text[0] == '"')
-    
+
     pos = 1
     while True:
         next_pos = text.find('"', pos)
@@ -47,8 +49,10 @@ def parsequoted(text, delimiters=" \t"):
         else:
             return (
                 text[1:next_pos].replace("\\\\", "\\").replace("\\\"", "\""),
-                lstripdelimiters(text[next_pos+1:], delimiters)
+                lstripdelimiters(text[next_pos + 1:], delimiters)
             )
+
+
 
 def lstripdelimiters(text, delimiters):
     for pos, c in enumerate(text):
@@ -57,6 +61,8 @@ def lstripdelimiters(text, delimiters):
     else:
         return ""
 
+
+
 def parseStatusLine(status):
 
     status = status.strip()
@@ -64,11 +70,10 @@ def parseStatusLine(status):
     # Must have 'HTTP/1.1' version at start
     if status[0:9] != "HTTP/1.1 ":
         return 0
-    
+
     # Must have three digits followed by nothing or one space
     if not status[9:12].isdigit() or (len(status) > 12 and status[12] != " "):
         return 0
-    
+
     # Read in the status code
     return int(status[9:12])
-

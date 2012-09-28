@@ -20,26 +20,30 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("help", "?",)
-        
+
+
     def execute(self, name, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) or len(args) > 1:
             print self.usage(name)
             raise WrongOptions()
-        self.shell.help(cmd = (None if len(args) == 0 else args[0]))
+        self.shell.help(cmd=(None if len(args) == 0 else args[0]))
         return True
+
 
     def usage(self, name):
         return """Usage: %s [CMD]
 CMD is the name of a command.
 """ % (name,)
 
+
     def hasHelp(self, name):
         return name in ("help",)
+
 
     def helpDescription(self):
         return "Displays help about a command."

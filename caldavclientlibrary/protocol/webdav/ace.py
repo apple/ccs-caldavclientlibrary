@@ -30,15 +30,19 @@ class ACE(object):
         self.protected = False
         self.inherited = False
 
+
     def getPrincipal(self):
         return self.principal
+
 
     def setPrincipal(self, principal, data=None):
         self.principal = principal
         self.data = data
 
+
     def canChange(self):
         return not self.protected and not self.inherited
+
 
     @staticmethod
     def parseFromACL(aclnode):
@@ -50,9 +54,10 @@ class ACE(object):
             newace.parseACE(node)
             aces.append(newace)
         return aces
-         
+
+
     def parseACE(self, acenode):
-        
+
         assert(acenode and acenode.tag == davxml.ace)
 
         # Get invert
@@ -67,7 +72,7 @@ class ACE(object):
         principal = principal_parent.find(str(davxml.principal))
         if not principal or len(principal.getchildren()) != 1:
             return False
-        
+
         # Determine principal info
         child = principal.getchildren()[0]
         if child.tag == davxml.href:
@@ -81,7 +86,7 @@ class ACE(object):
                 self.setPrincipal(child.tag, QName(child.getchildren()[0].tag))
             else:
                 self.setPrincipal(child.tag)
-        
+
         # Determine rights
         self.grant = True
         child = acenode.find(str(davxml.grant))
@@ -91,17 +96,18 @@ class ACE(object):
                 self.grant = False
         if child:
             self.parsePrivileges(child)
-    
+
         # Determine protected/inherited state
         self.protected = acenode.find(str(davxml.protected)) is not None
         self.inherited = acenode.find(str(davxml.inherited)) is not None
-        
+
         return True
 
+
     def parsePrivileges(self, parent):
-        
+
         assert(parent.tag in (davxml.grant, davxml.deny,))
-        
+
         # Parent node contains one of more privilege nodes which we parse
         self.privs = ()
         for privilege in parent.getchildren():
@@ -112,6 +118,7 @@ class ACE(object):
             # Now get rights within the privilege
             self.privs += (privilege.getchildren()[0].tag,)
 
+
     def generateACE(self, aclnode):
         # Structure of ace is:
         #
@@ -119,16 +126,16 @@ class ACE(object):
         #     <DAV:principal>...</DAV:principal>
         #       <DAV:grant>...</DAV:grant>
         #   </DAV:ace>
-    
+
         # <DAV:ace> element
         ace = SubElement(aclnode, davxml.ace)
-        
+
         if self.invert:
             invert = SubElement(ace, davxml.invert)
 
         # <DAV:principal> element
         principal = SubElement(invert if self.invert else ace, davxml.principal)
-        
+
         # Principal type
         if self.principal == davxml.href:
 
@@ -146,17 +153,17 @@ class ACE(object):
             # <DAV:property> element - the UID is the property element name
             property = SubElement(principal, davxml.property)
             SubElement(property, self.data)
-        
+
         # Do grant rights for each one set
         if self.grant:
             # <DAV:grant> element
             privs = SubElement(ace, davxml.grant)
-        
+
         # Do deny rights for each one set
         else:
             # <DAV:deny> element
             privs = SubElement(ace, davxml.deny)
-        
+
         for item in self.privs:
             priv = SubElement(privs, davxml.privilege)
             SubElement(priv, item)
@@ -166,4 +173,3 @@ class ACE(object):
             SubElement(ace, davxml.protected)
         if self.inherited:
             SubElement(ace, davxml.inherited)
-            

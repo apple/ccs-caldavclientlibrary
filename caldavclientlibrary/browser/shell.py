@@ -26,34 +26,36 @@ import sys
 import urlparse
 
 class Shell(BaseShell):
-    
+
     def __init__(self, server, path, user, pswd, logging):
-        
+
         super(Shell, self).__init__("caldav_client")
         self.prefix = self.wd = "/"
         self.server = server
         self.user = user
         self.pswd = pswd
-    
+
         self.registerCommands()
-        
+
         # Create the account
         ssl = server.startswith("https://")
         server = server[8:] if ssl else server[7:]
         self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=path, principal=None, logging=logging)
-        
+
         atexit.register(self.saveHistory)
+
 
     def registerCommands(self):
         module = caldavclientlibrary.browser.commands
         for item in module.__all__:
-            mod = __import__("caldavclientlibrary.browser.commands." + item, globals(), locals(), ["Cmd",])
+            mod = __import__("caldavclientlibrary.browser.commands." + item, globals(), locals(), ["Cmd", ])
             cmd_class = mod.Cmd
             if type(cmd_class) is type and issubclass(cmd_class, Command):
                 self.registerCommand(cmd_class())
 
+
     def setWD(self, newwd):
-        
+
         # Check that the new one exists
         resource = (newwd if newwd.endswith("/") else newwd + "/")
         if not self.account.session.testResource(URL(url=resource)):
@@ -61,11 +63,14 @@ class Shell(BaseShell):
         self.prefix = self.wd = newwd
         return True
 
+
     def setUserPswd(self, user, pswd):
-        
+
         self.user = user
         self.pswd = pswd
         self.account.setUserPswd(user, pswd)
+
+
 
 def usage():
     return """Usage: shell [OPTIONS]
@@ -77,6 +82,8 @@ Options:
 --pswd=PSWD     password for user - will be prompted if not prsent [OPTIONAL].
 """
 
+
+
 def runit():
     logging = False
     server = None
@@ -84,9 +91,9 @@ def runit():
     pswd = None
 
     opts, _ignore_args = getopt.getopt(sys.argv[1:], 'lh', ["help", "server=", "user=", "pswd="])
-    
+
     for name, value in opts:
-        
+
         if name == "-l":
             logging = True
         elif name == "--server":
@@ -107,7 +114,7 @@ def runit():
     path = splits.path
     if not path:
         path = "/"
-    
+
     if not user:
         user = raw_input("User: ")
     if not pswd:
@@ -115,6 +122,7 @@ def runit():
 
     shell = Shell(server, path, user, pswd, logging)
     shell.run()
+
 
 if __name__ == '__main__':
 

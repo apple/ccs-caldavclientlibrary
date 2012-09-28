@@ -21,11 +21,12 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("cd",)
-        
+
+
     def execute(self, name, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) or len(args) != 1:
@@ -47,16 +48,19 @@ class Cmd(Command):
 
         if not result:
             print "%s: %s No such directory" % (name, options,)
-            
+
         return result
+
 
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s PATH
 PATH is a relative or absolute path.
 """ % (name,)
+
 
     def helpDescription(self):
         return "Change working directory."

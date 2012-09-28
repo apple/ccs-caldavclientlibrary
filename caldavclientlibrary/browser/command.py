@@ -15,48 +15,62 @@
 ##
 
 class Command(object):
-    
+
     def __init__(self):
-        
+
         self.shell = None
         self.cmds = ()
-        
+
+
     def execute(self, name, options):
         raise NotImplementedError
+
 
     def usage(self, name):
         raise NotImplementedError
 
+
     def hasHelp(self, name):
         return name in self.cmds
+
 
     def help(self, name):
         result = "Command: %s\n" % (name,)
         result += "Description: %s\n" % (self.helpDescription(),)
         result += self.usage(name)
         return result
-        
+
+
     def helpListing(self, name):
         return (name, self.helpDescription())
-        
+
+
     def helpDescription(self):
         return ""
-    
+
+
     def setShell(self, shell):
         self.shell = shell
-        
+
+
     def getCmds(self):
         return self.cmds
+
 
     def complete(self, text):
         return ()
 
+
+
 class WrongOptions(Exception):
     pass
+
+
 
 class UnknownCommand(Exception):
     pass
 
+
+
 class CommandError(Exception):
     pass
-

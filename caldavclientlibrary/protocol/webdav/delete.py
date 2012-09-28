@@ -22,6 +22,7 @@ class Delete(RequestResponse):
     def __init__(self, session, url):
         super(Delete, self).__init__(session, methods.DELETE, url)
 
+
     def setData(self, etag=None):
         self.request_data = None
         self.response_data = None

@@ -28,15 +28,17 @@ class Query(Report):
     def __init__(self, session, url, props=()):
         super(Query, self).__init__(session, url)
         self.props = props
-        
+
         self.initRequestData()
+
 
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
-    
+
+
     def generateXML(self, os):
         # Structure of document is:
         #
@@ -46,25 +48,26 @@ class Query(Report):
         #   </DAV:prop>
         #   <CALDAV:filter>...</CALDAV:filter>
         # </CalDAV:calendar-query>
-        
+
         # <CalDAV:calendar-query> element
         query = Element(caldavxml.calendar_query)
-        
+
         if self.props:
             # <DAV:prop> element
             prop = SubElement(query, davxml.prop)
-            
+
             # Now add each property
             for propname in self.props:
                 # Add property element taking namespace into account
                 SubElement(prop, propname)
-        
+
         # Now add each href
         self.addFilterElement(query)
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(query)
         xmldoc.writeUTF8(os)
+
 
     def addFilterElement(self, query):
         """
@@ -73,13 +76,16 @@ class Query(Report):
         """
         raise NotImplementedError
 
+
+
 class QueryVEVENTTimeRange(Query):
 
     def __init__(self, session, url, trstart, trend, props=()):
-        
+
         self.trstart = trstart
         self.trend = trend
         super(QueryVEVENTTimeRange, self).__init__(session, url, props)
+
 
     def addFilterElement(self, query):
         """
@@ -99,8 +105,8 @@ class QueryVEVENTTimeRange(Query):
         # </CalDAV:calendar-query>
 
         filter = SubElement(query, caldavxml.filter)
-        calcompfilter = SubElement(filter, caldavxml.comp_filter, {"name":"VCALENDAR"})
-        eventcompfilter = SubElement(calcompfilter, caldavxml.comp_filter, {"name":"VEVENT"})
+        calcompfilter = SubElement(filter, caldavxml.comp_filter, {"name": "VCALENDAR"})
+        eventcompfilter = SubElement(calcompfilter, caldavxml.comp_filter, {"name": "VEVENT"})
 
         tr = {}
         if self.trstart:
@@ -108,4 +114,3 @@ class QueryVEVENTTimeRange(Query):
         if self.trend:
             tr["end"] = self.trend
         SubElement(eventcompfilter, caldavxml.time_range, tr)
-

@@ -22,11 +22,12 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
-        self.cmds = ("principal", )
-        
+        self.cmds = ("principal",)
+
+
     def execute(self, name, options):
         refresh = False
         resolve = True
@@ -36,7 +37,7 @@ class Cmd(Command):
         opts, args = getopt.getopt(shlex.split(options), 'fnp:x')
 
         for name, value in opts:
-            
+
             if name == "-f":
                 refresh = True
             elif name == "-n":
@@ -91,6 +92,7 @@ class Cmd(Command):
 
         return True
 
+
     def usage(self, name):
         return """Usage: %s [OPTIONS]
 Options:
@@ -100,6 +102,7 @@ Options:
     -n do not resolve references to other principals.
     -x print proxy details as well.
 """ % (name,)
+
 
     def helpDescription(self):
         return "Get details on principals."

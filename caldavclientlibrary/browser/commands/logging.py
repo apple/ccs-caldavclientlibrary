@@ -20,11 +20,12 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
-        self.cmds = ("logging", )
-        
+        self.cmds = ("logging",)
+
+
     def execute(self, name, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) or len(args) > 1:
@@ -33,7 +34,7 @@ class Cmd(Command):
         if args and args[0] not in ("on", "off",):
             print self.usage(name)
             raise WrongOptions()
-        
+
         if args:
             state = args[0]
         else:
@@ -46,12 +47,14 @@ class Cmd(Command):
             print "HTTP logging turned off"
         return True
 
+
     def usage(self, name):
         return """Usage: %s [on|off]
 on  - turn HTTP protocol logging on
 off - turn HTTP protocol logging off
 without either argument - toggle the state of logging
 """ % (name,)
+
 
     def helpDescription(self):
         return "Changes the current state of HTTP logging."

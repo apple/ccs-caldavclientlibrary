@@ -20,24 +20,34 @@ from caldavclientlibrary.protocol.webdav.report import Report
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = Report(server, "/")
         self.assertEqual(request.getMethod(), "REPORT")
-    
+
+
+
 class TestRequestHeaders(unittest.TestCase):
     pass
+
+
 
 class TestRequestBody(unittest.TestCase):
     pass
 
+
+
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

@@ -32,12 +32,14 @@ class Multiget(Report):
 
         self.initRequestData()
 
+
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
-    
+
+
     def generateXML(self, os):
         # Structure of document is:
         #
@@ -48,24 +50,24 @@ class Multiget(Report):
         #   <DAV:href>...</DAV:href>
         #   ...
         # </CalDAV:calendar-multiget>
-        
+
         # <CalDAV:calendar-multiget> element
         multiget = Element(caldavxml.calendar_multiget)
-        
+
         if self.props:
             # <DAV:prop> element
             prop = SubElement(multiget, davxml.prop)
-            
+
             # Now add each property
             for propname in self.props:
                 # Add property element taking namespace into account
                 SubElement(prop, propname)
-        
+
         # Now add each href
         for href in self.hrefs:
             # Add href elements
             SubElement(multiget, davxml.href).text = href
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(multiget)
         xmldoc.writeUTF8(os)

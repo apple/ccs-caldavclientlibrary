@@ -29,26 +29,30 @@ class PropPatch(RequestResponse):
         super(PropPatch, self).__init__(session, methods.PROPPATCH, url)
         self.setprops = setprops
         self.delprops = delprops
-        
+
         self.initRequestData()
+
 
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
-        self.generateXML(os);
-        self.request_data = RequestDataString(os.getvalue(), "text/xml; charset=utf-8");
-    
+        self.generateXML(os)
+        self.request_data = RequestDataString(os.getvalue(), "text/xml; charset=utf-8")
+
+
     def setOutput(self, response_data):
         self.response_data = response_data
+
 
     def addHeaders(self, hdrs):
         # Do default
         super(PropPatch, self).addHeaders(hdrs)
-        
+
         # Optional ones
         if self.session.useBriefHeader:
             hdrs.append((headers.Brief, "t"))
-            
+
+
     def generateXML(self, os):
         # Structure of document is:
         #
@@ -60,10 +64,10 @@ class PropPatch(RequestResponse):
         #     <<names of each property as elements>>
         #   </DAV:remove>
         # </DAV:propertyupdate>
-        
+
         # <DAV:propertyupdate> element
         propertyupdate = Element(davxml.propertyupdate)
-        
+
         # <DAV:set> element
         if self.setprops:
             set = SubElement(propertyupdate, davxml.set)

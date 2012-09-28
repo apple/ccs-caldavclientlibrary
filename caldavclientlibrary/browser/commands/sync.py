@@ -24,26 +24,27 @@ import shlex
 synctokens = {}
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("sync",)
-        
+
+
     def execute(self, name, options):
-        
+
         force = False
 
         opts, args = getopt.getopt(shlex.split(options), 'f')
 
         for name, _ignore_value in opts:
-            
+
             if name == "-f":
                 force = True
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -60,7 +61,7 @@ class Cmd(Command):
         synctoken = synctokens.get(path, "") if not force else ""
         newsyctoken, changed, removed, other = self.shell.account.session.syncCollection(resource, synctoken)
         synctokens[path] = newsyctoken
-        
+
         for item in changed:
             print "Changed: %s" % (item,)
         for item in removed:
@@ -71,8 +72,10 @@ class Cmd(Command):
 
         return True
 
+
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
@@ -81,6 +84,7 @@ PATH is a relative or absolute path.
 Options:
 -f   force full sync
 """ % (name,)
+
 
     def helpDescription(self):
         return "Sync the contents of a directory."

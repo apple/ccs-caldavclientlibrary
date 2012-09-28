@@ -18,20 +18,23 @@ from caldavclientlibrary.browser.command import Command
 from caldavclientlibrary.browser.command import WrongOptions
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("quit", "exit",)
-        
+
+
     def execute(self, name, options):
         if options:
             print self.usage(name)
             raise WrongOptions()
         raise SystemExit("quitting")
 
+
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
+
 
     def helpDescription(self):
         return "Terminates this session."

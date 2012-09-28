@@ -16,31 +16,40 @@
 
 
 class Data(object):
-    
+
     def __init__(self):
         pass
-        
+
+
     def start(self):
         pass
-    
+
+
     def stop(self):
         pass
+
+
 
 class RequestData(Data):
 
     def getContentLength(self):
         return self.content_length
 
+
     def getContentType(self):
         return self.content_type
-    
+
+
     def read(self):
         raise NotImplementedError
 
+
+
 class ResponseData(Data):
-    
+
     def write(self, data):
         raise NotImplementedError
+
 
     def clear(self):
         raise NotImplementedError

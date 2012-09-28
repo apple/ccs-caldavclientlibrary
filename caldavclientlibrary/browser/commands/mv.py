@@ -23,25 +23,26 @@ import readline
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("mv", "move",)
-        
+
+
     def execute(self, name, options):
 
         opts, args = getopt.getopt(shlex.split(options), 'n')
 
         doURLDecode = False
         for name, _ignore_value in opts:
-            
+
             if name == "-n":
                 doURLDecode = True
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if len(args) != 2:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -57,28 +58,31 @@ class Cmd(Command):
                 return True
             elif result[0] == "y":
                 break
-        
+
         fromResource = args[0]
         if not fromResource.startswith("/"):
             fromResource = os.path.join(self.shell.wd, fromResource)
         toResource = args[1]
         if not toResource.startswith("/"):
             toResource = os.path.join(self.shell.wd, toResource)
-        
+
         resourceFrom = URL(url=fromResource, decode=doURLDecode)
         resourceTo = URL(url=self.shell.server + toResource, decode=doURLDecode)
         self.shell.account.session.moveResource(resourceFrom, resourceTo)
-            
+
         return True
+
 
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s PATH PATH
 PATH is a relative or absolute path.
 
 """ % (name,)
+
 
     def helpDescription(self):
         return "Moves a resource."

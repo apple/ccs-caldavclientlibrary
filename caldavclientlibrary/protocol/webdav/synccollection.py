@@ -31,8 +31,9 @@ class SyncCollection(Report):
         self.level = level
         self.synctoken = synctoken
         self.props = props
-        
+
         self.initRequestData()
+
 
     def initRequestData(self):
         # Write XML info to a string
@@ -40,13 +41,15 @@ class SyncCollection(Report):
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
 
+
     def addHeaders(self, hdrs):
         # Do default
         super(SyncCollection, self).addHeaders(hdrs)
-        
+
         # Add depth header
         hdrs.append((headers.Depth, headers.Depth0))
-    
+
+
     def generateXML(self, os):
         # Structure of document is:
         #
@@ -57,10 +60,10 @@ class SyncCollection(Report):
         #     <<names of each property as elements>>
         #   </DAV:prop>
         # </DAV:sync-collection>
-        
+
         # <DAV:sync-collection> element
         synccollection = Element(davxml.sync_collection)
-        
+
         # Add sync-token element
         SubElement(synccollection, davxml.sync_token).text = self.synctoken
 
@@ -75,7 +78,7 @@ class SyncCollection(Report):
             for propname in self.props:
                 # Add property element taking namespace into account
                 SubElement(prop, propname)
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(synccollection)
         xmldoc.writeUTF8(os)

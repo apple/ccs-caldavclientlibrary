@@ -22,13 +22,14 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("put", "write",)
-        
+
+
     def execute(self, name, options):
-        
+
         fname = None
         content_type = "text/plain"
         path = None
@@ -36,7 +37,7 @@ class Cmd(Command):
         opts, args = getopt.getopt(shlex.split(options), 'f:t:')
 
         for name, value in opts:
-            
+
             if name == "-f":
                 fname = value
             elif name == "-t":
@@ -45,12 +46,12 @@ class Cmd(Command):
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if not fname:
             print "File name must be provided"
             print self.usage(name)
             raise WrongOptions
-            
+
         elif len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -81,8 +82,10 @@ class Cmd(Command):
 
         return True
 
+
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s OPTIONS PATH
@@ -92,6 +95,7 @@ Options:
 -f   file name of data to put [REQUIRED]
 -t   content-type of data being put [DEFAULT: text/plain]
 """ % (name,)
+
 
     def helpDescription(self):
         return "Write data to a file on the server."

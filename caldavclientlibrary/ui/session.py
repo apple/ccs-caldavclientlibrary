@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2010 Apple Inc. All rights reserved.
+# Copyright (c) 2007-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,19 +21,20 @@ class Session(object):
     """
     Maintains the basic information for a session and the root resource.
     """
-    
+
     def __init__(self, server, path, user, pswd, logging):
-        
+
         self.server = server
         self.path = path
         self.user = user
         self.pswd = pswd
-            
+
         # Create the account
         ssl = server.startswith("https://")
         server = server[8:] if ssl else server[7:]
         paths = "/principals/users/%s/" % (self.user,)
         self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=paths, principal=paths, logging=logging)
-        
+
+
     def getRoot(self):
         return Resource(self, self.path)

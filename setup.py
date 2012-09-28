@@ -19,14 +19,14 @@ Script for building the UI app (OS X only).
 
 Usage:
     python setup.py py2app
-""" 
+"""
 import os
 
 from distutils.core import setup
 data_files = []
 package_data = {}
 try:
-    import py2app
+    import py2app #@UnusedImport
 except ImportError:
     pass
 else:
@@ -47,7 +47,7 @@ setup(
     data_files=data_files,
     package_data=package_data,
     scripts=['runshell.py', 'runadmin.py'],
-    options=dict(py2app=dict(plist=plist, includes=["urllib", "sha", "md5",],
+    options=dict(py2app=dict(plist=plist, includes=["urllib", "sha", "md5", ],
                              packages=["caldavclientlibrary/client",
                                        "caldavclientlibrary/protocol",
                                        "caldavclientlibrary/ui",

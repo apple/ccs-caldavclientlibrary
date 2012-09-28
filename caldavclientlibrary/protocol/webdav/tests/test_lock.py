@@ -22,41 +22,46 @@ from StringIO import StringIO
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1)
         self.assertEqual(request.getMethod(), "LOCK")
 
+
+
 class TestRequestHeaders(unittest.TestCase):
 
     def test_NoSpecialHeaders(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1, exists=Lock.eResourceMayExist)
         hdrs = request.generateRequestHeader()
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
-    
+
+
     def test_IfMatchHeader(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1, exists=Lock.eResourceMustExist)
         hdrs = request.generateRequestHeader()
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertTrue("If-Match: *" in hdrs)
-    
+
+
     def test_IfNoneMatchHeader(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1, exists=Lock.eResourceMustNotExist)
         hdrs = request.generateRequestHeader()
         self.assertTrue("If-None-Match: *" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
 
+
     def test_Depth0Headers(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1, exists=Lock.eResourceMustNotExist)
         hdrs = request.generateRequestHeader()
@@ -64,8 +69,9 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
+
     def test_Depth1Headers(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth1, Lock.eExclusive, "user@example.com", -1, exists=Lock.eResourceMustNotExist)
         hdrs = request.generateRequestHeader()
@@ -73,8 +79,9 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
+
     def test_DepthInfinityHeaders(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.DepthInfinity, Lock.eExclusive, "user@example.com", -1, exists=Lock.eResourceMustNotExist)
         hdrs = request.generateRequestHeader()
@@ -83,10 +90,11 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Depth: infinity" in hdrs)
 
 
+
 class TestRequestBody(unittest.TestCase):
-    
+
     def test_GenerateXML(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1)
         os = StringIO()
@@ -104,13 +112,17 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
+
 class TestResponse(unittest.TestCase):
     pass
+
+
 
 class TestResponseHeaders(unittest.TestCase):
 
     def test_OneHeader(self):
-        
+
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1)
         request.getResponseHeaders().update({

@@ -17,13 +17,13 @@
 from caldavclientlibrary.protocol.webdav.definitions.headers import * #@UnusedWildImport
 
 # RFC4791
-CalendarAccess   = "calendar-access"
+CalendarAccess = "calendar-access"
 
 # draft caldav-schedule
 CalendarSchedule = "calendar-schedule"
 
 Originator = "Originator"
-Recipient  = "Recipient"
+Recipient = "Recipient"
 
 # Extensions
 

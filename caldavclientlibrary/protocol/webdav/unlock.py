@@ -21,14 +21,15 @@ from caldavclientlibrary.protocol.webdav.definitions import headers
 class Unlock(RequestResponse):
 
     def __init__(self, session, url, lock_token):
-        
+
         super(Unlock, self).__init__(session, methods.UNLOCK, url)
 
         self.lock_token = lock_token
 
+
     def addHeaders(self, hdrs):
         # Do default
         super(Unlock, self).addHeaders(hdrs)
-    
+
         # Add lock-token header
         hdrs.append((headers.LockToken, "<%s>" % (self.lock_token,)))

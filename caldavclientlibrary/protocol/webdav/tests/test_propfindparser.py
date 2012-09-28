@@ -20,15 +20,16 @@ from caldavclientlibrary.protocol.webdav.definitions import davxml
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def parseXML(self, x):
-        
+
         x = x.replace("\n", "\r\n")
-            
+
         # Parse the XML data
         p = PropFindParser()
         p.parse(XML(x))
         return p
+
 
     def checkResource(self, parser, resource, properties):
         result = parser.getResults().get(resource, None)
@@ -36,8 +37,9 @@ class TestRequest(unittest.TestCase):
         for prop, value in properties:
             self.assertEqual(result.getTextProperties().get(prop, None), value)
 
+
     def test_SinglePropSingleResource(self):
-        
+
         parser = self.parseXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:multistatus xmlns:ns0="DAV:">
   <ns0:response>
@@ -51,13 +53,14 @@ class TestRequest(unittest.TestCase):
   </ns0:response>
 </ns0:multistatus>
 """)
-        
+
         self.checkResource(parser, "/principals/users/a", (
             (davxml.getetag, "12345",),
         ))
 
+
     def test_MultiplePropsSingleResource(self):
-        
+
         parser = self.parseXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:multistatus xmlns:ns0="DAV:">
   <ns0:response>
@@ -72,19 +75,20 @@ class TestRequest(unittest.TestCase):
   </ns0:response>
 </ns0:multistatus>
 """)
-        
+
         result = parser.getResults().get("/principals/users/a", None)
         self.assertTrue(result is not None)
         self.assertEqual(result.getTextProperties().get(davxml.getetag, None), "12345")
         self.assertEqual(result.getTextProperties().get(davxml.displayname, None), "Name")
 
         self.checkResource(parser, "/principals/users/a", (
-            (davxml.getetag,     "12345",),
+            (davxml.getetag, "12345",),
             (davxml.displayname, "Name",),
         ))
 
+
     def test_MultiplePropsSingleMultipleResources(self):
-        
+
         parser = self.parseXML("""<?xml version='1.0' encoding='utf-8'?>
 <ns0:multistatus xmlns:ns0="DAV:">
   <ns0:response>
@@ -111,12 +115,12 @@ class TestRequest(unittest.TestCase):
 """)
 
         self.checkResource(parser, "/principals/users/a", (
-            (davxml.getetag,     "1",),
+            (davxml.getetag, "1",),
             (davxml.displayname, "Name1",),
         ))
 
         self.checkResource(parser, "/principals/users/b", (
-            (davxml.getetag,     "2",),
+            (davxml.getetag, "2",),
             (davxml.displayname, "Name2",),
         ))
 

@@ -24,17 +24,18 @@ from getpass import getpass
 import getopt
 
 class Command(object):
-    
+
     def __init__(self, cmdname, description):
         self.path = None
         self.cmdname = cmdname
         self.description = description
         self.recordType = None
 
+
     def usage(self):
         if self.allRecordsAllowed():
             print """USAGE: %s [TYPE] [OPTIONS]
-        
+
 TYPE: One of "all", "users", "groups", "locations" or "resources". Also,
 "a", "u", "g", "l" or "r" as shortcuts. Invalid or missing type is
 treated as "all".
@@ -44,13 +45,14 @@ Options:
 """ % (self.cmdname,)
         else:
             print """USAGE: %s TYPE [OPTIONS]
-        
+
 TYPE: One of "users", "groups", "locations" or "resources". Also,
 "u", "g", "l" or "r" as shortcuts.
 
 Options:
     -f  file path to accounts.xml
 """ % (self.cmdname,)
+
 
     def allRecordsAllowed(self):
         """
@@ -60,24 +62,25 @@ Options:
         """
         return False
 
+
     def execute(self, argv):
         """
         Execute the command specified by the command line arguments.
-        
+
         @param argv: command line arguments.
         @type argv: C{list}
-        
+
         @return: 1 for success, 0 for failure.
         @rtype: C{int}
         """
-        
+
         # Check first argument for type
         argv = self.getTypeArgument(argv)
         if argv is None:
             return 0
-        
+
         opts, args = getopt.getopt(argv, 'f:h', ["help", ])
-        
+
         for name, value in opts:
             if name == "-f":
                 self.path = value
@@ -97,10 +100,11 @@ Options:
             print "Arguments not allowed."
             self.usage()
             return 0
-        
+
         if not self.loadAccounts():
             return 0
         return self.doCommand()
+
 
     def getTypeArgument(self, argv):
         """
@@ -108,7 +112,7 @@ Options:
 
         @param argv: command line arguments.
         @type argv: C{list}
-        
+
         @return: the modified arguments (if a record type is found the corresponding argument is
             removed from the argv passed in).
         @rtype: C{list}
@@ -130,13 +134,14 @@ Options:
         else:
             return argv
 
+
     def mapType(self, type):
         """
         Map the specified user record type input to the actual record type identifier.
 
         @param type: user input from the command line.
         @type type: C{str}
-        
+
         @return: identifier matching the user input, or C{None} if no match.
         @rtype: L{admin.xmlaccounts.recordtypes}
         """
@@ -152,13 +157,13 @@ Options:
             "all"      : recordtypes.recordType_all,
             "a"        : recordtypes.recordType_all,
         }.get(type, None)
-        
+
+
     def loadAccounts(self):
         """
         Load the entire directory from the XML file.
         """
-        
-        
+
         f = open(self.path, "r")
         if not f:
             print "Could not open file: %s" % (self.path,)
@@ -169,11 +174,12 @@ Options:
         self.directory.parseXML(XML(xmldata))
         return 1
 
+
     def writeAccounts(self):
         """
         Write the entire directory to the XML file.
         """
-        
+
         node = self.directory.writeXML()
         os = StringIO()
         xmldoc = BetterElementTree(node)
@@ -186,11 +192,13 @@ Options:
         f.close()
         return 1
 
+
     def doCommand(self):
         """
         Run the command. Sub-classes must implement this.
         """
         raise NotImplementedError
+
 
     def promptPassword(self):
         """
@@ -203,6 +211,7 @@ Options:
                 print "Passwords do not match. Try again."
             else:
                 return password
+
 
     def getMemberList(self, prompt, title, type):
         """

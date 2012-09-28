@@ -19,7 +19,7 @@ from caldavclientlibrary.protocol.webdav.session import Session
 from caldavclientlibrary.protocol.webdav.options import Options
 
 def run(session, request):
-    
+
     # Create connection
     connect = SmartHTTPConnection(session.server, session.port, session.ssl)
     connect.set_debuglevel(1)
@@ -30,7 +30,7 @@ def run(session, request):
     for header, value in hdrs.iteritems():
         connect.putheader(header, value)
     connect.endheaders()
-    
+
     # Do request body
     stream = request.getRequestDataStream()
     if stream:
@@ -44,15 +44,16 @@ def run(session, request):
 
     # Get response
     response = connect.getresponse()
-    
+
     # Get response headers
     request.setResponseStatus(response.version, response.status, response.reason)
     request.setResponseHeaders(response.getheaders())
-    
+
     # Get response body
+
 
 if __name__ == '__main__':
     session = Session("www.mulberrymail.com")
     request = Options(session, "/")
-    
+
     run(session, request)

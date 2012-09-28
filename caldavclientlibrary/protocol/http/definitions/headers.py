@@ -18,28 +18,28 @@
 
 # RFC2616 4.5 - General Header fields (only the ones we need)
 
-Connection              = "Connection"
-ConnectionClose         = "close"
-Date                    = "Date"
-TransferEncoding        = "Transfer-Encoding"
+Connection = "Connection"
+ConnectionClose = "close"
+Date = "Date"
+TransferEncoding = "Transfer-Encoding"
 TransferEncodingChunked = "chunked"
 
 # RFC2616 5.3 - Request Header fields (only the ones we need)
 
 Authorization = "Authorization"
-Host          = "Host"
-IfMatch       = "If-Match"
-IfNoneMatch   = "If-None-Match"
+Host = "Host"
+IfMatch = "If-Match"
+IfNoneMatch = "If-None-Match"
 
 # RFC2616 6.2 - Response Header fields (only the ones we need)
 
-ETag            = "ETag"
-Location        = "Location"
-Server          = "Server"
+ETag = "ETag"
+Location = "Location"
+Server = "Server"
 WWWAuthenticate = "WWW-Authenticate"
 
 # RFC2616 7.1 - Entity Header fields (only the ones we need)
 
-Allow         = "Allow"
+Allow = "Allow"
 ContentLength = "Content-Length"
-ContentType   = "Content-Type"
+ContentType = "Content-Type"

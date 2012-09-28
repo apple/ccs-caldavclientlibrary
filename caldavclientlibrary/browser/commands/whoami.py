@@ -18,11 +18,12 @@ from caldavclientlibrary.browser.command import Command
 from caldavclientlibrary.browser.command import WrongOptions
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
-        self.cmds = ("whoami", )
-        
+        self.cmds = ("whoami",)
+
+
     def execute(self, name, options):
         if options:
             print self.usage(name)
@@ -30,9 +31,11 @@ class Cmd(Command):
         print self.shell.user
         return True
 
+
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
+
 
     def helpDescription(self):
         return "Displays the current server login id."

@@ -23,9 +23,9 @@ from caldavclientlibrary.protocol.http.definitions import methods
 import unittest
 
 class TestRequestHeaders(unittest.TestCase):
-    
+
     def test_NoEtag(self):
-        
+
         server = Session("www.example.com")
         request = RequestResponse(server, methods.GET, "/")
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
@@ -33,9 +33,10 @@ Host: www.example.com
 
 """.replace("\n", "\r\n")
 )
- 
+
+
     def test_EtagMatch(self):
-        
+
         server = Session("www.example.com")
         request = RequestResponse(server, methods.GET, "/", "\"etag\"", True)
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
@@ -44,9 +45,10 @@ If-Match: "etag"
 
 """.replace("\n", "\r\n")
 )
- 
+
+
     def test_EtagNoneMatch(self):
-        
+
         server = Session("www.example.com")
         request = RequestResponse(server, methods.GET, "/", "\"etag\"", False)
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
@@ -55,9 +57,10 @@ If-None-Match: "etag"
 
 """.replace("\n", "\r\n")
 )
- 
+
+
     def test_Content(self):
-        
+
         server = Session("www.example.com")
         request = RequestResponse(server, methods.GET, "/")
         rawdata = "Here is some data\r\non multiple lines."
@@ -71,8 +74,9 @@ Content-Type: text/plain
 """.replace("\n", "\r\n") % (len(rawdata),)
 )
 
+
     def test_ContentAndAuthorization(self):
-        
+
         server = Session("www.example.com")
         server.authorization = Basic("user", "pswd")
         request = RequestResponse(server, methods.GET, "/")

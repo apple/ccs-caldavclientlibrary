@@ -25,7 +25,7 @@ class XMLRecord(object):
     """
     Represents a single principal record. This class can parse and generate the appropriate XML.
     """
-    
+
     def __init__(self):
         self.recordType = None
         self.repeat = 0
@@ -39,7 +39,8 @@ class XMLRecord(object):
         self.enabledForCalendaring = True
         self.proxies = set()
         self.proxyFor = set()
-    
+
+
     def parseXML(self, node):
         """
         Parse a single principal record from XML.
@@ -80,6 +81,7 @@ class XMLRecord(object):
             else:
                 raise RuntimeError("Unknown account attribute: %s" % (child.tag,))
 
+
     def _parseMembers(self, node, addto):
         """
         Parse an XML <members> or <proxies> element list.
@@ -95,18 +97,19 @@ class XMLRecord(object):
                 recordType = child.get(tags.ATTRIBUTE_RECORDTYPE, recordtypes.recordType_users)
                 addto.add((recordType, child.text))
 
+
     def writeXML(self):
         """
         Generate a single XML principal record element.
-        
+
         @return: the root element for the principal record.
         @rtype: C{xml.etree.ElementTree.Element}
         """
-        
+
         root = Element(recordtypes.RECORD_TYPES_TO_TAGS[self.recordType])
         if self.repeat:
             root.set(tags.ATTRIBUTE_REPEAT, str(self.repeat))
-        
+
         SubElementWithData(root, tags.ELEMENT_UID, self.uid)
         SubElementWithData(root, tags.ELEMENT_GUID, self.guid)
         SubElementWithData(root, tags.ELEMENT_PASSWORD, self.password)
@@ -114,7 +117,7 @@ class XMLRecord(object):
         if self.recordType == recordtypes.recordType_groups:
             members = SubElementWithData(root, tags.ELEMENT_MEMBERS)
             for member in self.members:
-                SubElementWithData(members, tags.ELEMENT_MEMBER, member[1], {tags.ATTRIBUTE_RECORDTYPE:member[0]})
+                SubElementWithData(members, tags.ELEMENT_MEMBER, member[1], {tags.ATTRIBUTE_RECORDTYPE: member[0]})
         if self.calendarUserAddresses:
             for cuaddr in self.calendarUserAddresses:
                 SubElementWithData(root, tags.ELEMENT_CUADDR, cuaddr)
@@ -125,6 +128,6 @@ class XMLRecord(object):
         if self.recordType in (recordtypes.recordType_resources, recordtypes.recordType_locations,):
             proxies = SubElementWithData(root, tags.ELEMENT_PROXIES)
             for proxy in self.proxies:
-                SubElementWithData(proxies, tags.ELEMENT_MEMBER, proxy[1], {tags.ATTRIBUTE_RECORDTYPE:proxy[0]})
-        
+                SubElementWithData(proxies, tags.ELEMENT_MEMBER, proxy[1], {tags.ATTRIBUTE_RECORDTYPE: proxy[0]})
+
         return root

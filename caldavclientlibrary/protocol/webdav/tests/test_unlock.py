@@ -20,30 +20,40 @@ from caldavclientlibrary.protocol.webdav.unlock import Unlock
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = Unlock(server, "/", "locked-up-in-chains")
         self.assertEqual(request.getMethod(), "UNLOCK")
 
+
+
 class TestRequestHeaders(unittest.TestCase):
 
     def test_LockTokenHeaders(self):
-        
+
         server = Session("www.example.com")
         request = Unlock(server, "/", "locked-up-in-chains")
         hdrs = request.generateRequestHeader()
         self.assertTrue("Lock-Token: <locked-up-in-chains>" in hdrs)
 
+
+
 class TestRequestBody(unittest.TestCase):
     pass
+
+
 
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

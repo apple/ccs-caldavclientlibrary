@@ -20,56 +20,69 @@ from caldavclientlibrary.protocol.webdav.put import Put
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = Put(server, "/")
         self.assertEqual(request.getMethod(), "PUT")
-    
+
+
+
 class TestRequestHeaders(unittest.TestCase):
 
     def test_NoSpecialHeaders(self):
-        
+
         server = Session("www.example.com")
         request = Put(server, "/")
         request.setData(None, None)
         hdrs = request.generateRequestHeader()
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
-    
+
+
     def test_IfMatchHeader(self):
-        
+
         server = Session("www.example.com")
         request = Put(server, "/")
         request.setData(None, None, etag="\"12345\"")
         hdrs = request.generateRequestHeader()
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertTrue("If-Match: \"12345\"" in hdrs)
-    
+
+
     def test_IfNoneMatchHeader(self):
-        
+
         server = Session("www.example.com")
         request = Put(server, "/")
         request.setData(None, None, new_item=True)
         hdrs = request.generateRequestHeader()
         self.assertTrue("If-None-Match: *" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
-    
+
+
     def test_Bad(self):
-        
+
         server = Session("www.example.com")
         request = Put(server, "/")
         self.assertRaises(AssertionError, request.setData, None, None, **{"etag": "\"12345\"", "new_item": True})
 
+
+
 class TestRequestBody(unittest.TestCase):
     pass
+
+
 
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

@@ -32,6 +32,8 @@ def SubElementWithData(parent, tag, data=None, attrs={}):
         element.text = data
     return element
 
+
+
 def myfixtag(tag, namespaces):
     # given a decorated tag (of the form {uri}tag), return prefixed
     # tag and namespace declaration, if any
@@ -52,8 +54,10 @@ def myfixtag(tag, namespaces):
         xmlns = None
     return "%s:%s" % (prefix, tag), xmlns
 
+
+
 class BetterElementTree(ElementTree):
-    
+
     def writeUTF8(self, file):
         assert self._root is not None
         if not hasattr(file, "write"):
@@ -62,6 +66,7 @@ class BetterElementTree(ElementTree):
         file.write("<?xml version='1.0' encoding='%s'?>" % encoding)
         self._prettywrite(file, self._root, encoding, {})
         file.write("\r\n")
+
 
     def _prettywrite(self, file, node, encoding, namespaces, depth=0):
         # write XML to file
@@ -78,7 +83,8 @@ class BetterElementTree(ElementTree):
             try:
                 if isinstance(tag, QName) or tag[:1] == "{":
                     tag, xmlns = myfixtag(tag, namespaces)
-                    if xmlns: xmlns_items.append(xmlns)
+                    if xmlns:
+                        xmlns_items.append(xmlns)
             except TypeError:
                 _raise_serialization_error(tag)
             file.write("\r\n" + "  " * depth)
@@ -89,13 +95,15 @@ class BetterElementTree(ElementTree):
                     try:
                         if isinstance(k, QName) or k[:1] == "{":
                             k, xmlns = myfixtag(k, namespaces)
-                            if xmlns: xmlns_items.append(xmlns)
+                            if xmlns:
+                                xmlns_items.append(xmlns)
                     except TypeError:
                         _raise_serialization_error(k)
                     try:
                         if isinstance(v, QName):
                             v, xmlns = myfixtag(v, namespaces)
-                            if xmlns: xmlns_items.append(xmlns)
+                            if xmlns:
+                                xmlns_items.append(xmlns)
                     except TypeError:
                         _raise_serialization_error(v)
                     file.write(" %s=\"%s\"" % (_encode(k, encoding),
@@ -108,7 +116,7 @@ class BetterElementTree(ElementTree):
                 if node.text:
                     file.write(_escape_cdata(node.text, encoding))
                 for n in node:
-                    self._prettywrite(file, n, encoding, namespaces, depth=depth+1)
+                    self._prettywrite(file, n, encoding, namespaces, depth=depth + 1)
                 if not node.text or len(node):
                     file.write("\r\n" + "  " * depth)
                 file.write("</" + _encode(tag, encoding) + ">")
@@ -119,9 +127,10 @@ class BetterElementTree(ElementTree):
         if node.tail:
             file.write(_escape_cdata(node.tail, encoding))
 
+
+
 def elementToString(element):
     os = StringIO()
     xmldoc = BetterElementTree(element)
     xmldoc.writeUTF8(os)
     return os.getvalue()
-

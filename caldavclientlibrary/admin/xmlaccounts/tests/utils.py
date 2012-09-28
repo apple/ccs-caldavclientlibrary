@@ -22,20 +22,20 @@ from xml.etree.ElementTree import XML
 import unittest
 
 class TestCommon(unittest.TestCase):
-    
+
     def checkXML(self, x):
-        
+
         x = x.replace("\n", "\r\n")
-            
+
         # Parse the XML data
         a = XMLRecord()
         a.parseXML(XML(x))
-        
+
         # Generate the XML data
         node = a.writeXML()
         os = StringIO()
         xmldoc = BetterElementTree(node)
         xmldoc.writeUTF8(os)
-        
+
         # Verify data
         self.assertEqual(os.getvalue(), x)

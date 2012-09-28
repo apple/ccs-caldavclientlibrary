@@ -20,24 +20,28 @@ from caldavclientlibrary.protocol.webdav.get import Get
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = Get(server, "/")
         self.assertEqual(request.getMethod(), "GET")
 
+
+
 class TestRequestHeaders(unittest.TestCase):
+
     def test_NoSpecialHeaders(self):
-        
+
         server = Session("www.example.com")
         request = Get(server, "/")
         hdrs = request.generateRequestHeader()
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
-    
+
+
     def test_IfMatchHeader(self):
-        
+
         server = Session("www.example.com")
         request = Get(server, "/")
         request.setData(None, etag="\"12345\"")
@@ -45,14 +49,22 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertTrue("If-Match: \"12345\"" in hdrs)
 
+
+
 class TestRequestBody(unittest.TestCase):
     pass
+
+
 
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

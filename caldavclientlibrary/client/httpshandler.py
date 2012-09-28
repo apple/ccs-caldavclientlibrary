@@ -30,13 +30,14 @@ class HTTPSConnection_SSLv3(httplib.HTTPSConnection):
 https_v23_connects = set()
 https_v3_connects = set()
 
+
 def SmartHTTPConnection(host, port, ssl):
-    
-    def trySSL(cls, ):
+
+    def trySSL(cls,):
         connect = cls(host, port)
         connect.connect()
         return connect
-        
+
     if ssl:
         if (host, port) in https_v3_connects:
             try:
@@ -48,22 +49,21 @@ def SmartHTTPConnection(host, port, ssl):
                 return trySSL(httplib.HTTPSConnection)
             except:
                 https_v23_connects.remove((host, port))
-        
+
         try:
             https_v3_connects.add((host, port))
             return trySSL(HTTPSConnection_SSLv3)
         except:
             https_v3_connects.remove((host, port))
-            
+
         try:
             https_v23_connects.add((host, port))
             return trySSL(httplib.HTTPSConnection)
         except:
             https_v23_connects.remove((host, port))
-        
+
         raise RuntimeError("Cannot connect via with SSLv23 or SSLv3")
     else:
         connect = httplib.HTTPConnection(host, port)
         connect.connect()
         return connect
-

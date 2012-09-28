@@ -30,15 +30,17 @@ class Digest(Authenticator):
         self.stale = False
         self.clientCount = 0
 
+
     def setDetails(self, user, pswd, www_authenticate):
         self.fields['username'] = user
         self.fields['password'] = pswd
         self.parseAuthenticateHeader(www_authenticate)
 
+
     def addHeaders(self, hdrs, request):
         # Generate response
         self.generateResponse(request)
-        
+
         # Generate header
         os = StringIO()
         os.write("Digest username=\"%s\"," % (self.fields['username'],))
@@ -50,26 +52,27 @@ class Digest(Authenticator):
             os.write(" nc=\"%s\"" % (self.fields['nc'],))
             os.write(" cnonce=\"%s\"" % (self.fields['cnonce'],))
         os.write(" response=\"%s\"" % (self.response,))
-        
+
         if "algorithm" in self.fields:
             os.write(", algorithm=\"%s\"" % (self.fields['algorithm'],))
         if "opaque" in self.fields:
             os.write(", opaque=\"%s\"" % (self.fields['opaque'],))
-        
+
         hdrs.append((headers.Authorization, os.getvalue()))
+
 
     def parseAuthenticateHeader(self, hdrs):
         for hdr in hdrs:
 
             # Strip any space
             hdr = hdr.strip()
-            
+
             # Must have Digest token
             if hdr[:7].lower() != "digest ":
                 continue
             else:
                 hdr = hdr[7:]
-            
+
             # Get each name/value pair
             while True:
                 name, hdr = parsetoken(hdr, " \t=")
@@ -77,11 +80,11 @@ class Digest(Authenticator):
                 if not name or not hdr:
                     return
                 name = name.lower()
-                
+
                 value, hdr = parsetoken(hdr, ", ")
                 if not value:
                     return
-                
+
                 if name in ("realm", "domain", "nonce", "opaque", "algorithm", "qop"):
                     self.fields[name] = value
 
@@ -91,10 +94,10 @@ class Digest(Authenticator):
                 else:
                     # Unknown token - ignore
                     pass
-                
+
                 # Punt over space
                 hdr = hdr.strip()
-            
+
             break
 
     algorithms = {
@@ -102,7 +105,7 @@ class Digest(Authenticator):
         'md5-sess': hashlib.md5,
         'sha': hashlib.sha1,
     }
-    
+
     # DigestCalcHA1
     @staticmethod
     def calcHA1(
@@ -117,22 +120,22 @@ class Digest(Authenticator):
         """
         @param pszAlg: The name of the algorithm to use to calculate the Digest.
             Currently supported are md5 md5-sess and sha.
-    
+
         @param pszUserName: The username
         @param pszRealm: The realm
         @param pszPassword: The password
         @param pszNonce: The nonce
         @param pszCNonce: The cnonce
-    
+
         @param preHA1: If available this is a str containing a previously
             calculated HA1 as a hex string. If this is given then the values for
             pszUserName, pszRealm, and pszPassword are ignored.
         """
-    
+
         if (preHA1 and (pszUserName or pszRealm or pszPassword)):
             raise TypeError(("preHA1 is incompatible with the pszUserName, "
                              "pszRealm, and pszPassword arguments"))
-    
+
         if preHA1 is None:
             # We need to calculate the HA1 from the username:realm:password
             m = Digest.algorithms[pszAlg]()
@@ -145,7 +148,7 @@ class Digest(Authenticator):
         else:
             # We were given a username:realm:password
             HA1 = preHA1.decode('hex')
-    
+
         if pszAlg == "md5-sess":
             m = Digest.algorithms[pszAlg]()
             m.update(HA1)
@@ -154,9 +157,10 @@ class Digest(Authenticator):
             m.update(":")
             m.update(pszCNonce)
             HA1 = m.digest()
-    
+
         return HA1.encode('hex')
-    
+
+
     # DigestCalcResponse
     @staticmethod
     def calcResponse(
@@ -178,7 +182,7 @@ class Digest(Authenticator):
             m.update(":")
             m.update(pszHEntity)
         HA2 = m.digest().encode('hex')
-    
+
         m = Digest.algorithms[algo]()
         m.update(HA1)
         m.update(":")
@@ -194,6 +198,7 @@ class Digest(Authenticator):
         m.update(HA2)
         respHash = m.digest().encode('hex')
         return respHash
+
 
     def generateResponse(self, request):
         self.response = Digest.calcResponse(
@@ -214,4 +219,3 @@ class Digest(Authenticator):
             request.url,
             None,
         )
-

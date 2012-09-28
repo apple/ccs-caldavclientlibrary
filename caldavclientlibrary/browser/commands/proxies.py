@@ -24,12 +24,13 @@ import getopt
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
-        self.cmds = ("proxies", )
+        self.cmds = ("proxies",)
         self.subshell = None
-        
+
+
     def execute(self, name, options):
 
         interactive = False
@@ -45,7 +46,7 @@ class Cmd(Command):
             raise WrongOptions
 
         for name, value in opts:
-            
+
             if name == "-i":
                 interactive = True
             elif name == "-r":
@@ -58,7 +59,7 @@ class Cmd(Command):
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if len(args) > 0:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -71,8 +72,9 @@ class Cmd(Command):
 
         return True
 
+
     def doInteractiveMode(self, principal):
-        
+
         print "Entering Proxy edit mode on principal: %s (%s)" % (principal.getSmartDisplayName(), principal.principalURL)
         if not self.subshell:
             self.subshell = SubShell(self.shell, "Proxy", (
@@ -86,23 +88,27 @@ class Cmd(Command):
         self.subshell.principal = principal
         self.subshell.account = self.shell.account
         self.subshell.run()
-        
+
+
     def usage(self, name):
         return """Usage: %s [OPTIONS]
 PRINCIPAL - principal path to request proxies for.
- 
+
 Options:
     -i interactive mode for adding, changing and deleting proxies.
     -r read proxies [OPTIONAL]
     -w write proxies [OPTIONAL]
         if neither is present, both are displayed.
-        
+
     -p principal path to request proxies for [OPTIONAL]
         if not present, the current user's principal is used.
 """ % (name,)
 
+
     def helpDescription(self):
         return "Displays the delegates for the chosen user."
+
+
 
 class CommonProxiesCommand(Command):
 
@@ -118,7 +124,7 @@ class CommonProxiesCommand(Command):
             raise WrongOptions
 
         for name, _ignore_value in opts:
-            
+
             if name == "-r":
                 read = True
                 if write:
@@ -135,7 +141,7 @@ class CommonProxiesCommand(Command):
                 print "Unknown option: %s" % (name,)
                 print self.usage(name)
                 raise WrongOptions
-        
+
         if not read and not write:
             print "One of -r and -w must be specified."
             print self.usage(name)
@@ -145,11 +151,12 @@ class CommonProxiesCommand(Command):
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
             raise WrongOptions
-        
+
         return read
 
+
     def printProxyList(self, read):
-        
+
         if read:
             principals = self.shell.principal.getReadProxies()
         else:
@@ -160,11 +167,15 @@ class CommonProxiesCommand(Command):
             print "There are no proxies of the specified type."
         return principals
 
+
+
 class Add(CommonProxiesCommand):
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("add",)
-    
+
+
     def execute(self, name, options):
 
         read = self.parseOptions(name, options)
@@ -183,23 +194,29 @@ class Add(CommonProxiesCommand):
             else:
                 self.shell.principal.setWriteProxies(principals)
 
+
     def usage(self, name):
         return """Usage: %s [OPTIONS]
-    
+
 Options:
     -r add to read-only proxy list
     -w add to read-write proxy list
         one of -r or -w must be present.
 """ % (name,)
 
+
     def helpDescription(self):
         return "Add proxies on principal."
-        
+
+
+
 class Remove(CommonProxiesCommand):
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("remove",)
-    
+
+
     def execute(self, name, options):
 
         read = self.parseOptions(name, options)
@@ -209,38 +226,46 @@ class Remove(CommonProxiesCommand):
         choice = utils.numericInput("Select principal: ", 1, len(principals), allow_q=True)
         if choice == "q":
             return None
-        del principals[choice-1]
+        del principals[choice - 1]
         principals = [principal.principalURL for principal in principals]
         if read:
             self.shell.principal.setReadProxies(principals)
         else:
             self.shell.principal.setWriteProxies(principals)
 
+
     def usage(self, name):
         return """Usage: %s [OPTIONS]
-    
+
 Options:
     -r remove from read-only proxy list
     -w remove from read-write proxy list
         one of -r or -w must be present.
 """ % (name,)
 
+
     def helpDescription(self):
         return "Remove proxies on principal."
-        
+
+
+
 class List(CommonProxiesCommand):
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("list",)
-    
+
+
     def execute(self, name, options):
-        
+
         utils.printProxyPrincipals(self.shell.account, self.shell.principal, True, True, True, True)
         return True
+
 
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
+
 
     def helpDescription(self):
         return "List current ACLs on existing resource."

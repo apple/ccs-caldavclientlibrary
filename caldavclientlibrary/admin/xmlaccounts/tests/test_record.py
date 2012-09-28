@@ -22,26 +22,27 @@ from xml.etree.ElementTree import XML
 import unittest
 
 class TestRecord(unittest.TestCase):
-    
+
     def checkXML(self, x):
-        
+
         x = x.replace("\n", "\r\n")
-            
+
         # Parse the XML data
         a = XMLRecord()
         a.parseXML(XML(x))
-        
+
         # Generate the XML data
         node = a.writeXML()
         os = StringIO()
         xmldoc = BetterElementTree(node)
         xmldoc.writeUTF8(os)
-        
+
         # Verify data
         self.assertEqual(os.getvalue(), x)
 
+
     def test_user(self):
-        
+
         self.checkXML("""<?xml version='1.0' encoding='utf-8'?>
 <user>
   <uid>test</uid>
@@ -52,8 +53,9 @@ class TestRecord(unittest.TestCase):
 </user>
 """)
 
+
     def test_group(self):
-        
+
         self.checkXML("""<?xml version='1.0' encoding='utf-8'?>
 <group>
   <uid>users</uid>
@@ -66,8 +68,9 @@ class TestRecord(unittest.TestCase):
 </group>
 """)
 
+
     def test_location(self):
-        
+
         self.checkXML("""<?xml version='1.0' encoding='utf-8'?>
 <location>
   <uid>mercury</uid>

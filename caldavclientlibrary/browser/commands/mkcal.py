@@ -22,21 +22,22 @@ import os
 import shlex
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("mkcal",)
-        
+
+
     def execute(self, name, options):
 
         opts, args = getopt.getopt(shlex.split(options), '')
 
         for name, _ignore_value in opts:
-            
+
             print "Unknown option: %s" % (name,)
             print self.usage(name)
             raise WrongOptions
-        
+
         if len(args) != 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(name)
@@ -52,14 +53,17 @@ class Cmd(Command):
         self.shell.account.session.makeCalendar(resource)
         return True
 
+
     def complete(self, text):
         return self.shell.wdcomplete(text)
+
 
     def usage(self, name):
         return """Usage: %s PATH
 PATH is a relative or absolute path.
 
 """ % (name,)
+
 
     def helpDescription(self):
         return "Creates a calendar collection."

@@ -29,10 +29,12 @@ def usage():
 
 CMD: one of:
 %s
-    
+
 OPTIONS: specific to each command, use --help with the
 command to see what options are supported.
 """ % ("\n".join(["\t%s" % (cmd,) for cmd in cmds]),)
+
+
 
 def runit():
     """
@@ -43,8 +45,8 @@ def runit():
     if len(sys.argv) == 1:
         usage()
         sys.exit(0)
-    
-    if registered.has_key(sys.argv[1]):
+
+    if sys.argv[1] in registered:
         sys.exit(registered[sys.argv[1]]().execute(sys.argv[2:]))
     else:
         print "No command called '%s' is available." % (sys.argv[1],)

@@ -24,8 +24,9 @@ class PropFind(PropFindBase):
     def __init__(self, session, url, depth, props):
         super(PropFind, self).__init__(session, url, depth)
         self.props = props
-        
+
         self.initRequestData()
+
 
     def generateXML(self, os):
         # Structure of document is:
@@ -35,19 +36,19 @@ class PropFind(PropFindBase):
         #     <<names of each property as elements>>
         #   </DAV:prop>
         # </DAV:propfind>
-        
+
         # <DAV:propfind> element
         propfind = Element(davxml.propfind)
-        
+
         # <DAV:prop> element
         prop = Element(davxml.prop)
         propfind.append(prop)
-        
+
         # Now add each property
         for propname in self.props:
             # Add property element taking namespace into account
             prop.append(Element(propname))
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(propfind)
         xmldoc.writeUTF8(os)

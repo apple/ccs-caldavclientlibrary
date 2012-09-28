@@ -18,24 +18,27 @@ from caldavclientlibrary.browser.command import Command
 from caldavclientlibrary.browser.command import WrongOptions
 
 class Cmd(Command):
-    
+
     def __init__(self):
         super(Command, self).__init__()
-        self.cmds = ("history", )
-        
+        self.cmds = ("history",)
+
+
     def execute(self, name, options):
         if options:
             print self.usage(name)
             raise WrongOptions()
-        
+
         format = "%%0%ds %%s" % (len(self.shell.history),)
         for ctr, cmd in enumerate(self.shell.history):
-            print format % (ctr+1, cmd,)
+            print format % (ctr + 1, cmd,)
         return True
+
 
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
+
 
     def helpDescription(self):
         return "Displays the history of all commands used in this session."

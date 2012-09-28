@@ -23,11 +23,12 @@ class AddRecord(Command):
     """
     Command that adds a record to the directory.
     """
-    
+
     CMDNAME = "add"
 
     def __init__(self):
         super(AddRecord, self).__init__(self.CMDNAME, "Add a record of the specified type.")
+
 
     def doCommand(self):
         """
@@ -36,12 +37,13 @@ class AddRecord(Command):
         if self.doAdd():
             return self.writeAccounts()
         return 0
-    
+
+
     def doAdd(self):
         """
         Prompts the user for details and then adds a new record to the directory.
         """
-        
+
         # Prompt for each thing we need in the record
         record = XMLRecord()
         record.recordType = self.recordType
@@ -61,16 +63,16 @@ class AddRecord(Command):
             while True:
                 record.guid = raw_input("GUID [leave empty to auto-generate]: ")
                 if record.guid and self.directory.containsGUID(record.guid):
-                    print "GUID: '%s' already used in the directory" % (record.guid,) 
+                    print "GUID: '%s' already used in the directory" % (record.guid,)
                 else:
                     break
-            
+
             # password
             record.password = self.promptPassword()
 
             # name
             record.name = raw_input("Name: ")
-            
+
             # members
             if self.recordType in (recordtypes.recordType_groups,):
                 record.members = self.getMemberList("Enter members of this group", "Member", "members")
@@ -82,7 +84,7 @@ class AddRecord(Command):
                     record.calendarUserAddresses.add(cuaddr)
                 else:
                     break
-            
+
             # auto-schedule
             if self.recordType in (recordtypes.recordType_locations, recordtypes.recordType_resources,):
                 auto_schedule = raw_input("Turn on automatic scheduling [y/n]?: ")
@@ -101,11 +103,11 @@ class AddRecord(Command):
 
         except EOFError:
             return 0
-        
+
         # Now validate the record and save it
         if not record.guid:
             record.guid = str(uuid4())
-            
+
         self.directory.addRecord(record)
 
         return 1

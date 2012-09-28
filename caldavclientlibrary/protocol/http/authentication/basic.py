@@ -23,14 +23,16 @@ class Basic(Authenticator):
         self.user = user
         self.pswd = pswd
 
+
     def setDetails(self, user, pswd):
         self.user = user
         self.pswd = pswd
+
 
     def addHeaders(self, hdrs, request):
         # Generate the base64 encoded string
         encode = self.user + ":" + self.pswd
         base64 = encode.encode("base64").strip()
-    
+
         # Generate header
         hdrs.append((headers.Authorization, "Basic %s" % (base64,)))

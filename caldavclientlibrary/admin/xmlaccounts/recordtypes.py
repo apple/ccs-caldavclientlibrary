@@ -20,17 +20,17 @@ Defines the record type identifiers and various dict's to map between those and 
 
 from caldavclientlibrary.admin.xmlaccounts import tags
 
-recordType_users     = "users"
-recordType_groups    = "groups"
+recordType_users = "users"
+recordType_groups = "groups"
 recordType_locations = "locations"
-recordType_resources = "resources"            
-recordType_all       = "all"            
+recordType_resources = "resources"
+recordType_all = "all"
 
 RECORD_TYPES = (
     recordType_users,
     recordType_groups,
     recordType_locations,
-    recordType_resources,            
+    recordType_resources,
 )
 """Allowed record type identifiers."""
 
@@ -38,7 +38,7 @@ RECORD_TYPES_TO_TAGS = {
     recordType_users     : tags.ELEMENT_USER,
     recordType_groups    : tags.ELEMENT_GROUP,
     recordType_locations : tags.ELEMENT_LOCATION,
-    recordType_resources : tags.ELEMENT_RESOURCE,            
+    recordType_resources : tags.ELEMENT_RESOURCE,
 }
 """Maps between record type identifiers and their corresponding XML element names."""
 
@@ -46,6 +46,6 @@ TAGS_TO_RECORD_TYPES = {
     tags.ELEMENT_USER     : recordType_users,
     tags.ELEMENT_GROUP    : recordType_groups,
     tags.ELEMENT_LOCATION : recordType_locations,
-    tags.ELEMENT_RESOURCE : recordType_resources,            
+    tags.ELEMENT_RESOURCE : recordType_resources,
 }
 """Maps between XML element names and their corresponding record type identifiers."""

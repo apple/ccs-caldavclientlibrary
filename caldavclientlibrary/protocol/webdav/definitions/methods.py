@@ -18,12 +18,12 @@ from caldavclientlibrary.protocol.http.definitions.methods import * #@UnusedWild
 
 # RFC2518 - WebDAV Request Methods
 
-MKCOL     = "MKCOL"
-MOVE      = "MOVE"
-COPY      = "COPY"
-PROPFIND  = "PROPFIND"
+MKCOL = "MKCOL"
+MOVE = "MOVE"
+COPY = "COPY"
+PROPFIND = "PROPFIND"
 PROPPATCH = "PROPPATCH"
-LOCK      = "LOCK"
-UNLOCK    = "UNLOCK"
-REPORT    = "REPORT"           # RFC3253
-ACL       = "ACL"              # RFC3744
+LOCK = "LOCK"
+UNLOCK = "UNLOCK"
+REPORT = "REPORT"           # RFC3253
+ACL = "ACL"              # RFC3744

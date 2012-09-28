@@ -21,17 +21,19 @@ from caldavclientlibrary.protocol.webdav.definitions import davxml
 import unittest
 
 class TestRequest(unittest.TestCase):
-    
+
     def test_Method(self):
-        
+
         server = Session("www.example.com")
         request = PrincipalMatch(server, "/", ())
         self.assertEqual(request.getMethod(), "REPORT")
-    
+
+
+
 class TestRequestHeaders(unittest.TestCase):
-    
+
     def test_Depth0Headers(self):
-        
+
         server = Session("www.example.com")
         request = PrincipalMatch(server, "/", ())
         hdrs = request.generateRequestHeader()
@@ -39,10 +41,12 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
+
+
 class TestRequestBody(unittest.TestCase):
- 
+
     def test_GenerateXMLOneProperty(self):
-        
+
         server = Session("www.example.com")
         request = PrincipalMatch(server, "/", (davxml.getetag,))
         os = StringIO()
@@ -57,8 +61,9 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
     def test_GenerateXMLMultipleProperties(self):
-        
+
         server = Session("www.example.com")
         request = PrincipalMatch(server, "/", (davxml.getetag, davxml.displayname,))
         os = StringIO()
@@ -74,11 +79,17 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
 )
 
+
+
 class TestResponse(unittest.TestCase):
     pass
 
+
+
 class TestResponseHeaders(unittest.TestCase):
     pass
+
+
 
 class TestResponseBody(unittest.TestCase):
     pass

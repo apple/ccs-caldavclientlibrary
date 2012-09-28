@@ -18,5 +18,5 @@ from xml.etree.ElementTree import QName
 
 CSNamespace = "http://calendarserver.org/ns/"
 
-expanded_group_member_set    = QName(CSNamespace, "expanded-group-member-set")
-expanded_group_membership    = QName(CSNamespace, "expanded-group-membership")
+expanded_group_member_set = QName(CSNamespace, "expanded-group-member-set")
+expanded_group_membership = QName(CSNamespace, "expanded-group-membership")

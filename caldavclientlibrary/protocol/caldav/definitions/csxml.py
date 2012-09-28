@@ -18,18 +18,18 @@ from xml.etree.ElementTree import QName
 
 CSNamespace = "http://calendarserver.org/ns/"
 
-calendar_proxy_read_for    = QName(CSNamespace, "calendar-proxy-read-for")
-calendar_proxy_write_for   = QName(CSNamespace, "calendar-proxy-write-for")
-getctag                    = QName(CSNamespace, "getctag")
+calendar_proxy_read_for = QName(CSNamespace, "calendar-proxy-read-for")
+calendar_proxy_write_for = QName(CSNamespace, "calendar-proxy-write-for")
+getctag = QName(CSNamespace, "getctag")
 
-notification               = QName(CSNamespace, "notification")
-notification_URL           = QName(CSNamespace, "notification-URL")
+notification = QName(CSNamespace, "notification")
+notification_URL = QName(CSNamespace, "notification-URL")
 
 # Are these really in this namespace?
-dropbox_home               = QName(CSNamespace, "dropbox-home")
-dropbox_home_URL           = QName(CSNamespace, "dropbox-home-URL")
+dropbox_home = QName(CSNamespace, "dropbox-home")
+dropbox_home_URL = QName(CSNamespace, "dropbox-home-URL")
 
 # Defined by caldav-pubsubdiscovery
-xmpp_server                = QName(CSNamespace, "xmpp-server")
-xmpp_uri                   = QName(CSNamespace, "xmpp-uri")
-pushkey                    = QName(CSNamespace, "pushkey")
+xmpp_server = QName(CSNamespace, "xmpp-server")
+xmpp_uri = QName(CSNamespace, "xmpp-uri")
+pushkey = QName(CSNamespace, "pushkey")

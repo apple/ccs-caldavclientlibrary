@@ -28,25 +28,29 @@ class PropFindBase(RequestResponse):
         super(PropFindBase, self).__init__(session, methods.PROPFIND, url)
         self.depth = depth
 
+
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
-        self.generateXML(os);
-        self.request_data = RequestDataString(os.getvalue(), "text/xml; charset=utf-8");
-    
+        self.generateXML(os)
+        self.request_data = RequestDataString(os.getvalue(), "text/xml; charset=utf-8")
+
+
     def setOutput(self, response_data):
         self.response_data = response_data
+
 
     def addHeaders(self, hdrs):
         # Do default
         super(PropFindBase, self).addHeaders(hdrs)
-        
+
         # Add depth header
         hdrs.append((headers.Depth, self.depth))
-        
+
         # Optional ones
         if self.session.useBriefHeader:
             hdrs.append((headers.Brief, "t"))
-            
+
+
     def generateXML(self, os):
         raise NotImplementedError

@@ -25,6 +25,7 @@ class GetBase(RequestResponse):
         super(GetBase, self).__init__(session, methods.HEAD if head else methods.GET, url, lock=lock)
         self.head = head
 
+
     def setData(self, response_data, etag=None):
         self.request_data = None
         self.response_data = response_data
@@ -34,6 +35,7 @@ class GetBase(RequestResponse):
             self.etag = etag
             self.etag_match = True
 
+
     def getNewETag(self):
         # Get the ETag header from response headers
         if self.hasResponseHeader(headers.ETag):
@@ -41,10 +43,12 @@ class GetBase(RequestResponse):
         else:
             return None
 
+
     def getContentLength(self):
         # Always zero to prevent attempt to read response
         return 0 if self.head else self.content_length
-    
+
+
     def getChunked(self):
         # Always false to prevent attempt to read response
         return False if self.head else self.chunked

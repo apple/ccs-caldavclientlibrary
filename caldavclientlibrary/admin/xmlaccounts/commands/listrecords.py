@@ -19,11 +19,12 @@ from caldavclientlibrary.admin.xmlaccounts import recordtypes
 import itertools
 
 class ListRecords(Command):
-    
+
     CMDNAME = "list"
 
     def __init__(self):
         super(ListRecords, self).__init__(self.CMDNAME, "List all records of the specified type.")
+
 
     def allRecordsAllowed(self):
         """
@@ -32,27 +33,28 @@ class ListRecords(Command):
         """
         return True
 
+
     def doCommand(self):
         """
         Run the command.
         """
         self.listRecords(self.recordType)
 
+
     def listRecords(self, recordType):
         """
         Lists records of the specified record type from the directory.
         """
-        
+
         if recordType == recordtypes.recordType_all:
             users = [l for l in self.directory.records.itervalues()]
             print "Full List\n"
         else:
             users = (self.directory.records[recordType],)
             print "%s List\n" % (recordType.capitalize(),)
-        
-        
+
         table = [
-            ["UID", "GUID", "Name", "CUADDR",]
+            ["UID", "GUID", "Name", "CUADDR", ]
         ]
         if recordType == recordtypes.recordType_all:
             table[0].insert(0, "TYPE")
@@ -100,18 +102,19 @@ class ListRecords(Command):
                 elif user.recordType in (recordtypes.recordType_groups, recordtypes.recordType_locations, recordtypes.recordType_resources,):
                     row += (member,)
                 table.append(row)
-        
+
         self.printTable(table)
         return 1
-        
+
+
     def printTable(self, table):
-        
+
         maxWidths = [0 for _ignore in table[0]]
         for row in table:
             if row is not None:
                 for ctr, col in enumerate(row):
                     maxWidths[ctr] = max(maxWidths[ctr], len(col) if col else 0)
-        
+
         self.printDivider(maxWidths, False)
         for rowctr, row in enumerate(table):
             if row is None:
@@ -125,6 +128,7 @@ class ListRecords(Command):
             if not rowctr:
                 self.printDivider(maxWidths)
         self.printDivider(maxWidths, False)
+
 
     def printDivider(self, maxWidths, intermediate=True):
         t = "|" if intermediate else "+"

@@ -18,17 +18,17 @@ from caldavclientlibrary.browser.command import Command
 from caldavclientlibrary.browser.baseshell import BaseShell
 
 class SubShell(BaseShell):
-    
+
     def __init__(self, shell, prefix, cmds):
-        
+
         super(SubShell, self).__init__("caldav_client.%s" % (prefix,))
         self.shell = shell
         self.prefix = prefix
         self.preserve_history = True
         self.registerCommands(cmds)
 
+
     def registerCommands(self, cmds):
         for cmd in cmds:
             if isinstance(cmd, Command):
                 self.registerCommand(cmd)
-

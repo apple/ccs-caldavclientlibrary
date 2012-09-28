@@ -30,15 +30,17 @@ class PrincipalMatch(PropFindBase):
         super(PrincipalMatch, self).__init__(session, url, headers.Depth0)
         self.props = props
         self.method = methods.REPORT
-        
+
         self.initRequestData()
+
 
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
-    
+
+
     def generateXML(self, os):
         # Structure of document is:
         #
@@ -48,26 +50,26 @@ class PrincipalMatch(PropFindBase):
         #     <<names of each property as elements>>
         #   </DAV:prop>
         # </DAV:principal-match>
-        
+
         # <DAV:principal-match> element
         principalmatch = Element(davxml.principal_match)
-        
+
         # <DAV:self> element
         SubElement(principalmatch, davxml.self)
-        
+
         if self.props:
 
             # <DAV:prop> element
             prop = SubElement(principalmatch, davxml.prop)
-            
+
             # Now add each property
             for item in self.props:
 
                 # Add property element taking namespace into account
-    
+
                 # Look for DAV namespace and reuse that one
                 SubElement(prop, item)
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(principalmatch)
         xmldoc.writeUTF8(os)

@@ -29,15 +29,17 @@ class MakeAddressBook(RequestResponse):
         super(MakeAddressBook, self).__init__(session, methods.MKCOL, url)
         self.displayname = displayname
         self.description = description
-        
+
         self.initRequestData()
+
 
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
-    
+
+
     def generateXML(self, os):
         # Structure of document is:
         #
@@ -55,25 +57,25 @@ class MakeAddressBook(RequestResponse):
 
         # <DAV:set> element
         set = SubElement(mkcol, davxml.set)
-        
+
         # <DAV:prop> element
         prop = SubElement(set, davxml.prop)
-        
+
         # <WebDAV:resourcetype> element
         resourcetype = SubElement(prop, davxml.resourcetype)
         SubElement(resourcetype, davxml.collection)
         SubElement(resourcetype, carddavxml.addressbook)
-        
+
         # <DAV:displayname> element
         if self.displayname:
             displayname = SubElement(prop, davxml.displayname)
             displayname.text = self.displayname
-        
+
         # <CardDAV:addressbook-description> element
         if self.description:
             description = SubElement(prop, carddavxml.addressbook_description)
             description.text = self.description
-        
+
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(mkcol)
         xmldoc.writeUTF8(os)

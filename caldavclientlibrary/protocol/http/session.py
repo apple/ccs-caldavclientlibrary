@@ -18,12 +18,12 @@ from httplib import InvalidURL
 import httplib
 
 class Session(object):
-    
-    STATE_OPEN   = 0
+
+    STATE_OPEN = 0
     STATE_CLOSED = 1
-    
+
     def __init__(self, server, port=None, ssl=False, log=None):
-        
+
         self.server = server
         self.port = port
         self.ssl = ssl
@@ -32,27 +32,31 @@ class Session(object):
         self.authorization = None
         self.connection_state = Session.STATE_CLOSED
         self.log = log
-        
+
+
     def hasAuthorization(self):
         return self.authorization != None
-    
+
+
     def getAuthorization(self):
         return self.authorization
-    
+
+
     def addHeaders(self, hdrs, request):
         if self.hasAuthorization():
             self.getAuthorization().addHeaders(hdrs, request)
-    
+
+
     def setServer(self, server, port=None):
-        
+
         if port is None:
             i = server.rfind(':')
             j = server.rfind(']')
             if i > j:
                 try:
-                    port = int(server[i+1:])
+                    port = int(server[i + 1:])
                 except ValueError:
-                    raise InvalidURL("nonnumeric port: '%s'" % server[i+1:])
+                    raise InvalidURL("nonnumeric port: '%s'" % server[i + 1:])
                 server = server[:i]
             else:
                 port = httplib.HTTPS_PORT if self.ssl else httplib.HTTP_PORT
@@ -62,19 +66,20 @@ class Session(object):
         if self.server != server:
             self.server = server
             self.port = port
-            
+
             # Always clear out authorization when host changes
             self.authorization = None
-    
+
+
     def sendRequest(self, request):
         try:
 
             # First need a connection
-            self.needConnection();
-            
+            self.needConnection()
+
             # Now do the connection
-            self.doRequest(request);
-            
+            self.doRequest(request)
+
             # Check the final connection state and close if that's what the server wants
             if request.getConnectionClose():
                 self.closeConnection()
@@ -84,39 +89,48 @@ class Session(object):
             # log.err(e)
             self.connection_state = Session.STATE_CLOSED
             raise
-    
+
+
     def handleHTTPError(self, request):
         raise NotImplementedError
-    
+
+
     def displayHTTPError(self, request):
         raise NotImplementedError
-    
+
+
     def isConnectionOpen(self):
         return self.connection_state == Session.STATE_OPEN
+
 
     def needConnection(self):
         if not self.isConnectionOpen():
             self.openConnection()
+
 
     def openConnection(self):
         if not self.isConnectionOpen():
             self.openSession()
             self.connection_state = Session.STATE_OPEN
 
+
     def closeConnection(self):
         if self.isConnectionOpen():
-            self.closeSession();
+            self.closeSession()
             self.connection_state = Session.STATE_CLOSED
+
 
     def openSession(self):
         raise NotImplementedError
-    
+
+
     def closeSession(self):
         raise NotImplementedError
-    
+
+
     def runSession(self, request):
         raise NotImplementedError
-        
+
+
     def doRequest(self, request):
         raise NotImplementedError
-    
