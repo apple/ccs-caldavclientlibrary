@@ -21,6 +21,7 @@ from caldavclientlibrary.protocol.carddav.makeaddressbook import MakeAddressBook
 from caldavclientlibrary.protocol.http.authentication.basic import Basic
 from caldavclientlibrary.protocol.http.authentication.digest import Digest
 from caldavclientlibrary.protocol.webdav.synccollection import SyncCollection
+from caldavclientlibrary.protocol.caldav.query import QueryVEVENTTimeRange
 try:
     from caldavclientlibrary.protocol.http.authentication.gssapi import Kerberos
 except ImportError:
@@ -558,6 +559,42 @@ class CalDAVSession(Session):
             self.handleHTTPError(request)
 
         return (newsynctoken, changed, removed, other,)
+
+
+    def queryCollection(self, rurl, timerange, start, end, expand, props=()):
+
+        assert(isinstance(rurl, URL))
+
+        hrefs = set()
+
+        # Create CalDAV query REPORT
+        if timerange:
+            request = QueryVEVENTTimeRange(self, rurl.relativeURL(), start, end, expand, props=props)
+        else:
+            raise NotImplementedError
+        result = ResponseDataString()
+        request.setOutput(result)
+
+        # Process it
+        self.runSession(request)
+
+        # If its a 207 we want to parse the XML
+        if request.getStatusCode() == statuscodes.MultiStatus:
+
+            parser = PropFindParser()
+            parser.parseData(result.getData())
+
+            # Look at each propfind result
+            for item in parser.getResults().itervalues():
+
+                # Get child element name (decode URL)
+                name = URL(url=item.getResource(), decode=True)
+                hrefs.add(name)
+
+        else:
+            self.handleHTTPError(request)
+
+        return hrefs
 
 
     def deleteResource(self, rurl):

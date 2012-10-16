@@ -33,6 +33,7 @@ __all__ = [
     "props",
     "proxies",
     "put",
+    "query",
     "quit",
     "quota",
     "rm",
