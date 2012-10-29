@@ -32,7 +32,7 @@ class Cmd(Command):
     def execute(self, name, options):
 
         names = False
-        all = False
+        all_props = False
         xmllist = False
         path = None
 
@@ -41,7 +41,7 @@ class Cmd(Command):
         for name, _ignore_value in opts:
 
             if name == "-a":
-                all = True
+                all_props = True
             elif name == "-l":
                 xmllist = True
             elif name == "-n":
@@ -69,7 +69,7 @@ class Cmd(Command):
             results = self.shell.account.session.getPropertyNames(resource)
             print "    Properties: %s" % (utils.printList(results),)
         else:
-            if all:
+            if all_props:
                 props = None
             else:
                 props = self.shell.account.session.getPropertyNames(resource)

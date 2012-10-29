@@ -1,4 +1,4 @@
-##
+# #
 # Copyright (c) 2007-2010 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-##
+# #
 
 from caldavclientlibrary.browser import utils
 from caldavclientlibrary.browser.command import CommandError
@@ -22,6 +22,7 @@ from caldavclientlibrary.protocol.webdav.definitions import davxml
 import os
 import readline
 import traceback
+import urllib
 
 class BaseShell(object):
 
@@ -160,7 +161,7 @@ class BaseShell(object):
     def complete(self, text, state):
 
         # If there is no space in the text we complete a command
-        #print "complete: %s %d" % (text, state)
+        # print "complete: %s %d" % (text, state)
         results = []
         check = readline.get_line_buffer()[:readline.get_endidx()].lstrip()
         checklen = len(check)
@@ -178,14 +179,14 @@ class BaseShell(object):
 
     def wdcomplete(self, text):
 
-        #print "\nwdcomplete: %s" % (text,)
+        # print "\nwdcomplete: %s" % (text,)
 
         # Look at cache and return that
-        if self.last_wd_complete[0] == text:
-            return self.last_wd_complete[1]
+        # if self.last_wd_complete[0] == text:
+        #    return self.last_wd_complete[1]
 
         # Look for relative vs absolute
-        if text[0] == "/":
+        if text and text[0] == "/":
             dirname, _ignore_child = os.path.split(text)
             path = dirname
             if not path.endswith("/"):
@@ -200,18 +201,18 @@ class BaseShell(object):
             if not path.endswith("/"):
                 path += "/"
 
-        #print "pdc: %s, %s, %s, %s" % (self.wd, path, dirname, child)
+        # print "pdc: %s, %s, %s" % (self.wd, path, dirname)
         resource = URL(url=path)
 
         props = (davxml.resourcetype,)
         results = self.account.session.getPropertiesOnHierarchy(resource, props)
-        #print results.keys()
-        results = [result[pathlen:] for result in results.iterkeys() if len(result) > pathlen]
-        #print results
+        results = [urllib.unquote(result) for result in results.iterkeys()]
+        results = [result[pathlen:] for result in results if len(result) > pathlen]
+        # print results
         if text:
             textlen = len(text)
             results = [result for result in results if result[:textlen] == text]
-            #print results
+            # print results
 
         self.last_wd_complete = (text, results,)
         return results

@@ -22,6 +22,7 @@ from caldavclientlibrary.protocol.url import URL
 import os
 import getopt
 import shlex
+import urllib
 
 class Cmd(Command):
 
@@ -104,6 +105,7 @@ class Cmd(Command):
         items.sort()
         lines = []
         for rurl in items:
+            rurl = urllib.unquote(rurl)
             if rurl == path:
                 continue
             line = []
