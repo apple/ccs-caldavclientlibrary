@@ -28,7 +28,7 @@ class Cmd(Command):
         self.cmds = ("put", "write",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         fname = None
         content_type = "text/plain"
@@ -44,17 +44,17 @@ class Cmd(Command):
                 content_type = value
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if not fname:
             print "File name must be provided"
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         elif len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
         elif args:
             path = args[0]
@@ -62,19 +62,20 @@ class Cmd(Command):
                 path = os.path.join(self.shell.wd, path)
             if path.endswith("/"):
                 print "Cannot PUT to a directory: %s" % (path,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
         else:
             print "Path to PUT to must be provided"
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         # Read in data
+        fname = os.path.expanduser(fname)
         try:
             data = open(fname, "r").read()
         except IOError:
             print "Unable to read data from file: %s" % (fname,)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         resource = URL(url=path)

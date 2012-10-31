@@ -31,7 +31,7 @@ class Cmd(Command):
         self.subshell = None
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         interactive = False
         read = False
@@ -42,7 +42,7 @@ class Cmd(Command):
             opts, args = getopt.getopt(shlex.split(options), 'irwp:')
         except getopt.GetoptError, e:
             print str(e)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         for name, value in opts:
@@ -57,12 +57,12 @@ class Cmd(Command):
                 principal = self.shell.account.getPrincipal(URL(url=value))
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if len(args) > 0:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         if interactive:

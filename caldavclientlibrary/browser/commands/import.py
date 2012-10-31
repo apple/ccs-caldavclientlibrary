@@ -28,7 +28,7 @@ class Cmd(Command):
         self.cmds = ("import",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         fname = None
         content_type = None
@@ -50,17 +50,17 @@ class Cmd(Command):
                     raise WrongOptions
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if not fname:
             print "File name must be provided"
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         elif len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
         elif args:
             path = args[0]
@@ -68,11 +68,11 @@ class Cmd(Command):
                 path = os.path.join(self.shell.wd, path)
             if not path.endswith("/"):
                 print "Can only POST to a directory: %s" % (path,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
         else:
             print "Path to POST to must be provided"
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         # Read in data
@@ -80,7 +80,7 @@ class Cmd(Command):
             data = open(os.path.expanduser(fname), "r").read()
         except IOError:
             print "Unable to read data from file: %s" % (fname,)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         resource = URL(url=path)

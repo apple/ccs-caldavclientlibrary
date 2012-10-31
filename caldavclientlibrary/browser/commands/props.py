@@ -29,7 +29,7 @@ class Cmd(Command):
         self.cmds = ("props",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         names = False
         all_props = False
@@ -48,12 +48,12 @@ class Cmd(Command):
                 names = True
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
         elif args:
             path = args[0]

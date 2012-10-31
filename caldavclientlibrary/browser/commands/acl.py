@@ -37,7 +37,7 @@ class Cmd(Command):
         self.subshell = None
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         interactive = False
         path = None
@@ -46,7 +46,7 @@ class Cmd(Command):
             opts, args = getopt.getopt(shlex.split(options), 'i')
         except getopt.GetoptError, e:
             print str(e)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         for name, _ignore_value in opts:
@@ -55,12 +55,12 @@ class Cmd(Command):
                 interactive = True
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
         elif args:
             path = args[0]

@@ -30,7 +30,7 @@ class Cmd(Command):
         self.cmds = ("sync",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         force = False
 
@@ -42,12 +42,12 @@ class Cmd(Command):
                 force = True
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
         elif args:
             path = args[0]

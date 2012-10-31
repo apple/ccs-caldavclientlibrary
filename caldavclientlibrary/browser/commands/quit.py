@@ -24,9 +24,9 @@ class Cmd(Command):
         self.cmds = ("quit", "exit",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
         if options:
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions()
         raise SystemExit("quitting")
 

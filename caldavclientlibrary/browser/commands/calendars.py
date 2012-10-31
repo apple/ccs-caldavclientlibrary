@@ -27,15 +27,15 @@ class Cmd(Command):
         self.cmds = ("calendars",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) != 0:
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
         ppath = URL(url=args[0]) if args else None
         principal = self.shell.account.getPrincipal(ppath)

@@ -29,20 +29,20 @@ class Cmd(Command):
         self.cmds = ("rm",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         opts, args = getopt.getopt(shlex.split(options), '')
 
         for name, _ignore_value in opts:
 
             print "Unknown option: %s" % (name,)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         paths = []
         if len(args) == 0:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         while True:

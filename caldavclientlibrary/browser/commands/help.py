@@ -26,10 +26,10 @@ class Cmd(Command):
         self.cmds = ("help", "?",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) or len(args) > 1:
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions()
         self.shell.help(cmd=(None if len(args) == 0 else args[0]))
         return True

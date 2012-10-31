@@ -28,10 +28,10 @@ class Cmd(Command):
         self.cmds = ("cat", "more",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) or len(args) != 1:
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions()
 
         path = args[0]

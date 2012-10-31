@@ -27,10 +27,10 @@ class Cmd(Command):
         self.cmds = ("cd",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
         opts, args = getopt.getopt(shlex.split(options), '')
         if len(opts) or len(args) != 1:
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions()
 
         newpath = args[0]
@@ -47,7 +47,7 @@ class Cmd(Command):
             result = self.shell.setWD(os.path.normpath(os.path.join(oldpath, newpath)))
 
         if not result:
-            print "%s: %s No such directory" % (name, options,)
+            print "%s: %s No such directory" % (cmdname, options,)
 
         return result
 

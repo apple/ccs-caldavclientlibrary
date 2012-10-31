@@ -29,7 +29,7 @@ class Cmd(Command):
         self.cmds = ("mv", "move",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         opts, args = getopt.getopt(shlex.split(options), 'n')
 
@@ -40,12 +40,12 @@ class Cmd(Command):
                 doURLDecode = True
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if len(args) != 2:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         while True:

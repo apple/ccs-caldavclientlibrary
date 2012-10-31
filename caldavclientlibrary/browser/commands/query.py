@@ -31,7 +31,7 @@ class Cmd(Command):
         self.cmds = ("query",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
 
         timerange = False
         start = None
@@ -55,12 +55,12 @@ class Cmd(Command):
                 data = True
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         path = args[0] if len(args) else self.shell.wd

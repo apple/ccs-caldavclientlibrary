@@ -28,7 +28,7 @@ class Cmd(Command):
         self.cmds = ("principal",)
 
 
-    def execute(self, name, options):
+    def execute(self, cmdname, options):
         refresh = False
         resolve = True
         principal = None
@@ -48,12 +48,12 @@ class Cmd(Command):
                 print_proxies = True
             else:
                 print "Unknown option: %s" % (name,)
-                print self.usage(name)
+                print self.usage(cmdname)
                 raise WrongOptions
 
         if len(args) > 0:
             print "Wrong number of arguments: %d" % (len(args),)
-            print self.usage(name)
+            print self.usage(cmdname)
             raise WrongOptions
 
         if not principal:
