@@ -147,7 +147,7 @@ class URL(object):
             result += (urllib.quote(path) if encode else path)
 
         if self.extended:
-            result += (urllib.quote_plus(self.extended, "?=") if encode else self.extended)
+            result += (urllib.quote_plus(self.extended, "?&=") if encode else self.extended)
 
         return result
 

@@ -1,4 +1,4 @@
-##
+# #
 # Copyright (c) 2006-2012 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-##
+# #
 
 from caldavclientlibrary.client.httpshandler import SmartHTTPConnection
 from caldavclientlibrary.protocol.caldav.definitions import headers
@@ -689,6 +689,64 @@ class CalDAVSession(Session):
 
         # Check response status
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.MultiStatus, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+
+
+    def addAttachment(self, rurl, filename, data, contentType, return_representation):
+
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV POST
+        rurl.extended = "?action=attachment-add"
+        request = Post(self, rurl.relativeURL())
+        dout = RequestDataString(data, contentType)
+        request.setRequestHeader("Content-Disposition", "attachment;filename=%s" % (filename,))
+        if return_representation:
+            request.setRequestHeader("Prefer", "return-representation")
+        request.setData(dout, None)
+
+        # Process it
+        self.runSession(request)
+
+        # Check response status
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+
+
+    def updateAttachment(self, rurl, managed_id, filename, data, contentType, return_representation):
+
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV POST
+        rurl.extended = "?action=attachment-update&managed-id=%s" % (managed_id,)
+        request = Post(self, rurl.relativeURL())
+        request.setRequestHeader("Content-Disposition", "attachment;filename=%s" % (filename,))
+        if return_representation:
+            request.setRequestHeader("Prefer", "return-representation")
+        dout = RequestDataString(data, contentType)
+        request.setData(dout, None)
+
+        # Process it
+        self.runSession(request)
+
+        # Check response status
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+
+
+    def removeAttachment(self, rurl, managed_id):
+
+        assert(isinstance(rurl, URL))
+
+        # Create WebDAV POST
+        rurl.extended = "?action=attachment-remove&managed-id=%s" % (managed_id,)
+        request = Post(self, rurl.relativeURL())
+
+        # Process it
+        self.runSession(request)
+
+        # Check response status
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent,):
             self.handleHTTPError(request)
 
 

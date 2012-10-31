@@ -17,6 +17,7 @@
 __all__ = [
     "acl",
     "addressbooks",
+    "attach",
     "cat",
     "cd",
     "calendars",

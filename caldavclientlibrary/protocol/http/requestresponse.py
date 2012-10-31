@@ -38,6 +38,7 @@ class RequestResponse(object):
     def _initResponse(self):
         self.session = None
         self.request_data = None
+        self.request_headers = {}
         self.response_data = None
         self.method = methods.GET
         self.url = None
@@ -79,6 +80,10 @@ class RequestResponse(object):
 
     def queuedForSending(self, session):
         self.session = session
+
+
+    def setRequestHeader(self, name, value):
+        self.request_headers[name] = value
 
 
     def setData(self, request_data, response_data):
@@ -146,6 +151,10 @@ class RequestResponse(object):
 
         # Check for content
         self.addContentHeaders(hdrs)
+
+        # Do custom headers
+        for name, value in self.request_headers.items():
+            hdrs.append((name, value))
 
 
     def addContentHeaders(self, hdrs):
