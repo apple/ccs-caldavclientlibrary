@@ -40,8 +40,10 @@ class Cmd(Command):
             path = os.path.join(self.shell.wd, path)
         resource = URL(url=path)
 
-        data, _ignore_etag = self.shell.account.session.readData(resource)
-        print data
+        result = self.shell.account.session.readData(resource)
+        if result:
+            data, _ignore_etag = result
+            print data
 
         return True
 
