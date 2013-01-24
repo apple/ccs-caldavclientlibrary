@@ -171,7 +171,7 @@ class RequestResponse(object):
 
     def setResponseHeaders(self, hdrs):
         for header in hdrs:
-            splits = header.split(":")
+            splits = header.split(":", 1)
             self.headers.setdefault(splits[0].strip().lower(), []).append(splits[1].strip())
 
         # Now cache some useful header values
