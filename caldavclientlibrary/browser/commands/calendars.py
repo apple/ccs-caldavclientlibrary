@@ -37,7 +37,10 @@ class Cmd(Command):
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(cmdname)
             raise WrongOptions
-        ppath = URL(url=args[0]) if args else None
+        pid = args[0] if args else None
+        if pid and pid.find("/") == -1:
+            pid = "/principals/__uids__/%s/" % pid
+        ppath = URL(url=pid) if pid else None
         principal = self.shell.account.getPrincipal(ppath)
         if principal is None:
             print "No principal found for %s" % (ppath if ppath else "current principal")
@@ -63,7 +66,7 @@ class Cmd(Command):
 
     def usage(self, name):
         return """Usage: %s [PRINCIPAL]
-PRINCIPAL is a principal-URL.
+PRINCIPAL is a principal-URL or principal UID.
 """ % (name,)
 
 
