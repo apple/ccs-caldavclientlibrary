@@ -93,14 +93,13 @@ class CalDAVSession(Session):
         if not hrefs:
             return
 
-        # For each principal collection find one that matches self
+        # For each principal collection find current principal
         for href in hrefs:
-
-            results = self.getSelfHrefs(href)
-            if results:
-                self.principalPath = results[0]
+            current = self.getCurrentPrincipalResource(href)
+            if current:
+                self.principalPath = current
                 if self.log:
-                    self.log.write("Found principal path: %s\n" % (self.principalPath.absoluteURL(),))
+                    self.log.write("Found current principal path: %s\n" % (self.principalPath.absoluteURL(),))
                 return
 
 
