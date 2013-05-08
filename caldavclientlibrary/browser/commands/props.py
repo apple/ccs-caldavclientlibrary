@@ -100,6 +100,7 @@ Options:
 -n    list property names only
 -a    list all properties via allprop
 -l    list actual property XML values
+-p    list a specific property using the format "{NS}name"
     if neither -n nor -a are set then property names are first listed, and then values of those looked up.
     only one of -n and -a can be set.
 """ % (name,)
