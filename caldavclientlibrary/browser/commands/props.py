@@ -34,11 +34,12 @@ class Cmd(Command):
         names = False
         all_props = False
         xmllist = False
+        prop = None
         path = None
 
-        opts, args = getopt.getopt(shlex.split(options), 'aln')
+        opts, args = getopt.getopt(shlex.split(options), 'alnp:')
 
-        for name, _ignore_value in opts:
+        for name, value in opts:
 
             if name == "-a":
                 all_props = True
@@ -46,6 +47,8 @@ class Cmd(Command):
                 xmllist = True
             elif name == "-n":
                 names = True
+            elif name == "-p":
+                prop = value
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(cmdname)
@@ -71,6 +74,8 @@ class Cmd(Command):
         else:
             if all_props:
                 props = None
+            elif prop:
+                props = (prop,)
             else:
                 props = self.shell.account.session.getPropertyNames(resource)
             results, bad = self.shell.account.session.getProperties(resource, props, xmllist)
