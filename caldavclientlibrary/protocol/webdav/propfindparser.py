@@ -99,7 +99,7 @@ class PropFindParser(MultiResponseParser):
                 self.parsePropStat(child, result)
 
             elif child.tag == davxml.status:
-                result.setStatus(child.text)
+                result.setStatus(parseStatusLine(child.text))
 
         # Add the resource only if we got one
         if result.getResource():

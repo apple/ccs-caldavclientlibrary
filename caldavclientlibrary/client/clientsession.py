@@ -513,7 +513,7 @@ class CalDAVSession(Session):
             self.handleHTTPError(request)
 
 
-    def syncCollection(self, rurl, synctoken, props=()):
+    def syncCollection(self, rurl, synctoken, props=(), infinite=False):
 
         assert(isinstance(rurl, URL))
 
@@ -523,7 +523,7 @@ class CalDAVSession(Session):
         other = set()
 
         # Create WebDAV sync REPORT
-        request = SyncCollection(self, rurl.relativeURL(), davxml.sync_level_1, synctoken, props)
+        request = SyncCollection(self, rurl.relativeURL(), davxml.sync_level_infinite if infinite else davxml.sync_level_1, synctoken, props)
         result = ResponseDataString()
         request.setOutput(result)
 
@@ -541,9 +541,9 @@ class CalDAVSession(Session):
 
                 # Get child element name (decode URL)
                 name = URL(url=item.getResource(), decode=True)
-                if item.status == 404:
+                if int(item.status) == 404:
                     removed.add(name)
-                elif item.status / 100 != 2:
+                elif int(item.status) / 100 != 2:
                     other.add(name)
                 else:
                     changed.add(name)

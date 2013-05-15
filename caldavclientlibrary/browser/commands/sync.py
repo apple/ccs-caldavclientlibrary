@@ -21,7 +21,7 @@ import os
 import getopt
 import shlex
 
-synctokens = {}
+synctokens = [{}, {}]
 
 class Cmd(Command):
 
@@ -33,13 +33,16 @@ class Cmd(Command):
     def execute(self, cmdname, options):
 
         force = False
+        infinite = False
 
-        opts, args = getopt.getopt(shlex.split(options), 'f')
+        opts, args = getopt.getopt(shlex.split(options), 'fi')
 
         for name, _ignore_value in opts:
 
             if name == "-f":
                 force = True
+            elif name == "-i":
+                infinite = True
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(cmdname)
@@ -58,9 +61,9 @@ class Cmd(Command):
         if not path.endswith("/"):
             path += "/"
         resource = URL(url=path)
-        synctoken = synctokens.get(path, "") if not force else ""
-        newsyctoken, changed, removed, other = self.shell.account.session.syncCollection(resource, synctoken)
-        synctokens[path] = newsyctoken
+        synctoken = synctokens[0 if infinite else 1].get(path, "") if not force else ""
+        newsyctoken, changed, removed, other = self.shell.account.session.syncCollection(resource, synctoken, infinite=infinite)
+        synctokens[0 if infinite else 1][path] = newsyctoken
 
         for item in changed:
             print "Changed: %s" % (item,)
@@ -83,6 +86,7 @@ PATH is a relative or absolute path.
 
 Options:
 -f   force full sync
+-i   depth:infinite [DEFAULT depth:1]
 """ % (name,)
 
 
