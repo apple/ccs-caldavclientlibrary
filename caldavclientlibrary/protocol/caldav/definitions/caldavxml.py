@@ -81,6 +81,8 @@ response = QName(CalDAVNamespace, "response")
 recipient = QName(CalDAVNamespace, "recipient")
 request_status = QName(CalDAVNamespace, "request-status")
 
+schedule = QName(CalDAVNamespace, "schedule")
+
 calendar_free_busy_set = QName(CalDAVNamespace, "calendar-free-busy-set")
 
 # Extensions
