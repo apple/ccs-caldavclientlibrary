@@ -173,6 +173,12 @@ class URL(object):
         if comp.server:
             return False
 
+        if not self.path and not comp.path:
+            return True
+
+        if not self.path or not comp.path:
+            return False
+
         # Just compare paths, ignore trailing slash
         return self.path.rstrip("/") == comp.path.rstrip("/")
 
