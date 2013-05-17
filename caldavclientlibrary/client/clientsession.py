@@ -657,14 +657,14 @@ class CalDAVSession(Session):
         return dout.getData(), etag
 
 
-    def writeData(self, rurl, data, contentType):
+    def writeData(self, rurl, data, contentType, etag=None):
 
         assert(isinstance(rurl, URL))
 
         # Create WebDAV PUT
         request = Put(self, rurl.relativeURL())
         dout = RequestDataString(data, contentType)
-        request.setData(dout, None)
+        request.setData(dout, None, etag=etag)
 
         # Process it
         self.runSession(request)
