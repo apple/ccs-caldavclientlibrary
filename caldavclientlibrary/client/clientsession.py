@@ -15,14 +15,19 @@
 # #
 
 from caldavclientlibrary.client.httpshandler import SmartHTTPConnection
-from caldavclientlibrary.protocol.caldav.definitions import headers
+from caldavclientlibrary.protocol.caldav.definitions import headers, csxml
 from caldavclientlibrary.protocol.caldav.makecalendar import MakeCalendar
 from caldavclientlibrary.protocol.caldav.multiget import Multiget as CalMultiget
 from caldavclientlibrary.protocol.caldav.query import QueryVEVENTTimeRange
+from caldavclientlibrary.protocol.calendarserver.invite import RemoveInvitee, Invites, \
+    AddInvitee
 from caldavclientlibrary.protocol.carddav.makeaddressbook import MakeAddressBook
 from caldavclientlibrary.protocol.carddav.multiget import Multiget as AdbkMultiget
 from caldavclientlibrary.protocol.http.authentication.basic import Basic
 from caldavclientlibrary.protocol.http.authentication.digest import Digest
+import urllib
+from caldavclientlibrary.protocol.calendarserver.notifications import InviteNotification, \
+    InviteReply, ProcessNotification
 try:
     from caldavclientlibrary.protocol.http.authentication.gssapi import Kerberos
 except ImportError:
@@ -46,7 +51,7 @@ from caldavclientlibrary.protocol.webdav.proppatch import PropPatch
 from caldavclientlibrary.protocol.webdav.put import Put
 from caldavclientlibrary.protocol.webdav.session import Session
 from caldavclientlibrary.protocol.webdav.synccollection import SyncCollection
-from xml.etree.ElementTree import Element, tostring
+from xml.etree.ElementTree import Element, tostring, XML
 import types
 
 class CalDAVSession(Session):
@@ -749,6 +754,133 @@ class CalDAVSession(Session):
         # Check response status
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.MultiStatus, statuscodes.NoContent,):
             self.handleHTTPError(request)
+
+
+    def getInvites(self, rurl):
+        """
+        Get the invitation details for the specified resource by reading and parsing the CS:invite WebDAV property.
+
+        @param rurl: the resource whose property is to be read
+        @type rurl: L{URL}
+        """
+
+        assert(isinstance(rurl, URL))
+
+        results, bad = self.getProperties(rurl, (csxml.invite,))
+        if csxml.invite in bad:
+            return None
+        else:
+            return Invites().parseFromInvite(results.get(csxml.invite))
+
+
+    def addInvitee(self, rurl, user_uid, read_write, summary=None):
+        """
+        Add a sharing invite for the specified resource.
+
+        @param rurl: the resource to share
+        @type rurl: L{URL}
+        @param user_uid: short name or full principal path of user to share with
+        @type user_uid: C{str}
+        @param read_write: whether to share read-only C{False} or read-write C{True}
+        @type read_write: C{bool}
+        @param summary: summary description for the share
+        @type summary: C{str}
+        """
+
+        assert(isinstance(rurl, URL))
+
+        # Add invitation POST
+        request = AddInvitee(self, rurl.relativeURL(), user_uid, read_write, summary)
+
+        # Process it
+        self.runSession(request)
+
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+
+
+    def removeInvitee(self, rurl, invitee):
+        """
+        Remove an invite from a shared resource.
+
+        @param rurl: the resource currently being shared
+        @type rurl: L{URL}
+        @param invitee: invite DAV:href for the user being removed
+        @type invitee: C{str}
+        """
+
+        assert(isinstance(rurl, URL))
+
+        # Remove invitation POST
+        request = RemoveInvitee(self, rurl.relativeURL(), invitee)
+
+        # Process it
+        self.runSession(request)
+
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+
+
+    def getNotifications(self, rurl):
+        """
+        Get a list of L{Notification} objects for the specified notification collection.
+
+        @param rurl: a user's notification collection URL
+        @type rurl: L{URL}
+        """
+
+        assert(isinstance(rurl, URL))
+
+        # List all children of the notification collection
+        results = self.getPropertiesOnHierarchy(rurl, (davxml.getcontenttype,))
+        items = results.keys()
+        items.sort()
+        notifications = []
+        for path in items:
+            path = urllib.unquote(path)
+            nurl = URL(url=path)
+            if rurl == nurl:
+                continue
+            props = results[path]
+            if props.get(davxml.getcontenttype, "none").split(";")[0] in ("text/xml", "application/xml"):
+                data, _ignore_etag = self.readData(URL(url=path))
+                node = XML(data)
+                if node.tag == str(csxml.notification):
+                    for child in node.getchildren():
+                        if child.tag == str(csxml.invite_notification):
+                            notifications.append(InviteNotification().parseFromNotification(nurl, child))
+                        elif child.tag == str(csxml.invite_reply):
+                            notifications.append(InviteReply().parseFromNotification(nurl, child))
+
+        return notifications
+
+
+    def processNotification(self, notification, accept):
+        """
+        Accept or decline a sharing invite in the specified notification.
+
+        @param notification: the notification
+        @type notification: L{InviteNotification}
+        @param accept: whether to accept C{True} or decline C{False} the invite
+        @type accept: C{bool}
+        """
+
+        assert(isinstance(notification.url, URL))
+
+        # POST goes to home which is two segments up from the notification resource
+        rurl = notification.url.dirname().dirname()
+
+        # Add invitation POST
+        request = ProcessNotification(self, rurl.relativeURL(), notification, accept)
+
+        # Process it
+        self.runSession(request)
+
+        if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent,):
+            self.handleHTTPError(request)
+            return False
+        else:
+            return True
 
 
     def addAttachment(self, rurl, filename, data, contentType, return_representation):

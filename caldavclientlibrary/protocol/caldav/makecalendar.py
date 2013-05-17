@@ -40,7 +40,7 @@ class MakeCalendar(RequestResponse):
             # Write XML info to a string
             os = StringIO()
             self.generateXML(os)
-            self.request_data = RequestDataString(os.getvalue(), "text/xml charset=utf-8")
+            self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
 
 
     def generateXML(self, os):

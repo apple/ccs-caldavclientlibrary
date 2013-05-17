@@ -33,3 +33,35 @@ dropbox_home_URL = QName(CSNamespace, "dropbox-home-URL")
 xmpp_server = QName(CSNamespace, "xmpp-server")
 xmpp_uri = QName(CSNamespace, "xmpp-uri")
 pushkey = QName(CSNamespace, "pushkey")
+
+# Sharing
+invite = QName(CSNamespace, "invite")
+organizer = QName(CSNamespace, "organizer")
+user = QName(CSNamespace, "user")
+common_name = QName(CSNamespace, "common-name")
+first_name = QName(CSNamespace, "first-name")
+last_name = QName(CSNamespace, "last-name")
+
+invite_noresponse = QName(CSNamespace, "invite-noresponse")
+invite_accepted = QName(CSNamespace, "invite-accepted")
+invite_declined = QName(CSNamespace, "invite-declined")
+invite_invalid = QName(CSNamespace, "invite-invalid")
+
+access = QName(CSNamespace, "access")
+read = QName(CSNamespace, "read")
+summary = QName(CSNamespace, "summary")
+
+read_write = QName(CSNamespace, "read-write")
+
+share = QName(CSNamespace, "share")
+set = QName(CSNamespace, "set")
+remove = QName(CSNamespace, "remove")
+
+notification_URL = QName(CSNamespace, "notification-URL")
+notification = QName(CSNamespace, "notification")
+dtstamp = QName(CSNamespace, "dtstamp")
+invite_notification = QName(CSNamespace, "invite-notification")
+invite_reply = QName(CSNamespace, "invite-reply")
+uid = QName(CSNamespace, "uid")
+hosturl = QName(CSNamespace, "hosturl")
+in_reply_to = QName(CSNamespace, "in-reply-to")

@@ -16,7 +16,7 @@
 
 from caldavclientlibrary.client.addressbook import AddressBook
 from caldavclientlibrary.client.calendar import Calendar
-from caldavclientlibrary.protocol.caldav.definitions import caldavxml
+from caldavclientlibrary.protocol.caldav.definitions import caldavxml, csxml
 from caldavclientlibrary.protocol.caldav.definitions import headers
 from caldavclientlibrary.protocol.carddav.definitions import carddavxml
 from caldavclientlibrary.protocol.url import URL
@@ -111,6 +111,7 @@ class CalDAVPrincipal(object):
         self.inboxURL = ""
         self.cuaddrs = ()
         self.adbkhomeset = ()
+        self.notificationsURL = ""
 
         self.proxyFor = None
         self.proxyreadURL = ""
@@ -136,6 +137,7 @@ class CalDAVPrincipal(object):
                 caldavxml.schedule_inbox_URL,
                 caldavxml.calendar_user_address_set,
                 carddavxml.addressbook_home_set,
+                csxml.notification_URL,
             ),
         )
         if results:
@@ -159,6 +161,7 @@ class CalDAVPrincipal(object):
                 self.inboxURL = results.get(caldavxml.schedule_inbox_URL, None)
                 self.cuaddrs = make_tuple(results.get(caldavxml.calendar_user_address_set, ()))
                 self.adbkhomeset = make_tuple(results.get(carddavxml.addressbook_home_set, ()))
+                self.notification_URL = results.get(csxml.notification_URL, None)
 
         # Get proxy resource details if proxy support is available
         if self.session.hasDAVVersion(headers.calendar_proxy) and not self.proxyFor:

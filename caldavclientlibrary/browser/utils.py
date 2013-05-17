@@ -14,6 +14,8 @@
 # limitations under the License.
 ##
 
+from caldavclientlibrary.protocol.calendarserver.notifications import InviteNotification, \
+    InviteReply
 from caldavclientlibrary.protocol.url import URL
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 import readline
@@ -159,6 +161,59 @@ def printACE(ace, account):
     result += ", ".join(ace.privs)
     result += "\n"
     return result
+
+
+
+def printInviteList(invites, account):
+
+    result = "Organizer: %s (%s)" % (invites.organizer_cn, invites.organizer_uid,)
+    for ctr, user in enumerate(invites.invitees):
+        result += "\n% 2d. %s" % (ctr + 1, printInviteUser(user, account))
+    return result
+
+
+
+def printInviteUser(user, account):
+
+    return "%s (%s) Invite: %s  Access: %s  Summary: %s" % (
+        user.user_cn,
+        user.user_uid,
+        user.mode,
+        user.access,
+        user.summary,
+    )
+
+
+
+def printNotificationsList(notifications, account):
+
+    result = ""
+    if notifications:
+        for ctr, notification in enumerate(notifications):
+            result += "\n% 2d. %s" % (ctr + 1, printNotification(notification, account))
+    else:
+        "No notifications."
+    return result
+
+
+
+def printNotification(notification, account):
+
+    if isinstance(notification, InviteNotification):
+        return "Sharing Invite: From: %s (%s)  Access: %s  Summary: %s  Host-URL: %s" % (
+            notification.organizer_cn,
+            notification.organizer_uid,
+            notification.access,
+            notification.summary,
+            notification.hosturl,
+        )
+    elif isinstance(notification, InviteReply):
+        return "Sharing Reply: From: %s  Result: %s  Summary: %s  Host-URL: %s" % (
+            notification.user_uid,
+            notification.mode,
+            notification.summary,
+            notification.hosturl,
+        )
 
 
 

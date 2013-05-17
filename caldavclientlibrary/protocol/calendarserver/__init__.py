@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2007-2013 Apple Inc. All rights reserved.
+# Copyright (c) 2013 Apple Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,35 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##
-
-__all__ = [
-    "acl",
-    "addressbooks",
-    "attach",
-    "cat",
-    "cd",
-    "calendars",
-    "help",
-    "history",
-    "import",
-    "logging",
-    "ls",
-    "mkadbk",
-    "mkcal",
-    "mkdir",
-    "mv",
-    "notifications",
-    "principal",
-    "props",
-    "proxies",
-    "put",
-    "query",
-    "quit",
-    "quota",
-    "rm",
-    "server",
-    "share",
-    "sync",
-    "user",
-    "whoami",
-]
