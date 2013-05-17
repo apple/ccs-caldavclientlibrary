@@ -126,6 +126,6 @@ class TestResponseHeaders(unittest.TestCase):
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1)
         request.getResponseHeaders().update({
-            "Lock-Token": ("<user@example.com>",),
+            "lock-token": ("<user@example.com>",),
         })
         self.assertEqual(request.getLockToken(), "user@example.com")

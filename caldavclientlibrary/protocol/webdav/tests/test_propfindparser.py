@@ -136,4 +136,4 @@ class TestRequest(unittest.TestCase):
 """)
         results = parser.getResults()
         result = results["/calendars/__uids__/user01/inbox/event.ics"]
-        self.assertEqual("HTTP/1.1 404 Not Found", result.getStatus())
+        self.assertEqual(404, result.getStatus())

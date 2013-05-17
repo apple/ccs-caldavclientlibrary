@@ -51,7 +51,7 @@ class TestResponseHeaders(unittest.TestCase):
         server = Session("www.example.com")
         request = Options(server, "/")
         request.getResponseHeaders().update({
-            "Allow": ("GET, PUT, OPTIONS, HEAD",),
+            "allow": ("GET, PUT, OPTIONS, HEAD",),
         })
         self.assertEqual(set(request.getAllowed()), set(("GET", "PUT", "OPTIONS", "HEAD")))
         self.assertTrue(request.isAllowed("GET"))
@@ -65,7 +65,7 @@ class TestResponseHeaders(unittest.TestCase):
         server = Session("www.example.com")
         request = Options(server, "/")
         request.getResponseHeaders().update({
-            "Allow": ("GET, PUT", "OPTIONS, HEAD",),
+            "allow": ("GET, PUT", "OPTIONS, HEAD",),
         })
         self.assertEqual(set(request.getAllowed()), set(("GET", "PUT", "OPTIONS", "HEAD")))
         self.assertTrue(request.isAllowed("GET"))
