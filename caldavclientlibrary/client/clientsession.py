@@ -17,11 +17,12 @@
 from caldavclientlibrary.client.httpshandler import SmartHTTPConnection
 from caldavclientlibrary.protocol.caldav.definitions import headers
 from caldavclientlibrary.protocol.caldav.makecalendar import MakeCalendar
+from caldavclientlibrary.protocol.caldav.multiget import Multiget as CalMultiget
+from caldavclientlibrary.protocol.caldav.query import QueryVEVENTTimeRange
 from caldavclientlibrary.protocol.carddav.makeaddressbook import MakeAddressBook
+from caldavclientlibrary.protocol.carddav.multiget import Multiget as AdbkMultiget
 from caldavclientlibrary.protocol.http.authentication.basic import Basic
 from caldavclientlibrary.protocol.http.authentication.digest import Digest
-from caldavclientlibrary.protocol.webdav.synccollection import SyncCollection
-from caldavclientlibrary.protocol.caldav.query import QueryVEVENTTimeRange
 try:
     from caldavclientlibrary.protocol.http.authentication.gssapi import Kerberos
 except ImportError:
@@ -44,6 +45,7 @@ from caldavclientlibrary.protocol.webdav.propnames import PropNames
 from caldavclientlibrary.protocol.webdav.proppatch import PropPatch
 from caldavclientlibrary.protocol.webdav.put import Put
 from caldavclientlibrary.protocol.webdav.session import Session
+from caldavclientlibrary.protocol.webdav.synccollection import SyncCollection
 from xml.etree.ElementTree import Element, tostring
 import types
 
@@ -511,6 +513,64 @@ class CalDAVSession(Session):
 
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
+
+
+    def calendarMultiGet(self, rurl, hrefs, props):
+        """
+        Fetches the specified props for the specified hrefs using a single
+        multiget call. The return value is a dictionary where the keys are the
+        hrefs and the values are PropFindResult objects containing results for
+        the requested props.
+        """
+
+        assert(isinstance(rurl, URL))
+
+        request = CalMultiget(self, rurl.relativeURL(), hrefs=hrefs, props=props)
+        result = ResponseDataString()
+        request.setOutput(result)
+
+        # Process it
+        self.runSession(request)
+
+        # If it's a 207 we want to parse the XML
+        if request.getStatusCode() == statuscodes.MultiStatus:
+
+            parser = PropFindParser()
+            parser.parseData(result.getData())
+            return parser.getResults()
+
+        else:
+            self.handleHTTPError(request)
+            return None
+
+
+    def addressbookMultiGet(self, rurl, hrefs, props):
+        """
+        Fetches the specified props for the specified hrefs using a single
+        multiget call. The return value is a dictionary where the keys are the
+        hrefs and the values are PropFindResult objects containing results for
+        the requested props.
+        """
+
+        assert(isinstance(rurl, URL))
+
+        request = AdbkMultiget(self, rurl.relativeURL(), hrefs=hrefs, props=props)
+        result = ResponseDataString()
+        request.setOutput(result)
+
+        # Process it
+        self.runSession(request)
+
+        # If it's a 207 we want to parse the XML
+        if request.getStatusCode() == statuscodes.MultiStatus:
+
+            parser = PropFindParser()
+            parser.parseData(result.getData())
+            return parser.getResults()
+
+        else:
+            self.handleHTTPError(request)
+            return None
 
 
     def syncCollection(self, rurl, synctoken, props=(), infinite=False):
