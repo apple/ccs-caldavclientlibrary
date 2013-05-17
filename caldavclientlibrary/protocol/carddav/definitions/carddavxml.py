@@ -18,28 +18,33 @@ from xml.etree.ElementTree import QName
 
 CardDAVNamespace = "urn:ietf:params:xml:ns:carddav"
 
-# draft-
+# RFC 6352
 
-addressbook = QName(CardDAVNamespace, "addressbook")
 
 addressbook_description = QName(CardDAVNamespace, "addressbook-description")
 supported_addressbook_data = QName(CardDAVNamespace, "supported-addressbook-data")
+address_data_type = QName(CardDAVNamespace, "address-data-type")
 max_resource_size = QName(CardDAVNamespace, "max-resource-size")
 
 addressbook_home_set = QName(CardDAVNamespace, "addressbook-home-set")
 
+supported_collation_set = QName(CardDAVNamespace, "supported-collation-set")
+
+addressbook = QName(CardDAVNamespace, "addressbook")
 supported_collation = QName(CardDAVNamespace, "supported-collation")
 
 addressbook_query = QName(CardDAVNamespace, "addressbook-query")
 address_data = QName(CardDAVNamespace, "address-data")
-comp = QName(CardDAVNamespace, "comp")
-allcomp = QName(CardDAVNamespace, "allcomp")
+allprop = QName(CardDAVNamespace, "allprop")
 prop = QName(CardDAVNamespace, "prop")
 filter = QName(CardDAVNamespace, "filter")
-comp_filter = QName(CardDAVNamespace, "comp-filter")
 prop_filter = QName(CardDAVNamespace, "prop-filter")
 param_filter = QName(CardDAVNamespace, "param-filter")
 is_not_defined = QName(CardDAVNamespace, "is-not-defined")
 text_match = QName(CardDAVNamespace, "text-match")
+limit = QName(CardDAVNamespace, "limit")
+nresults = QName(CardDAVNamespace, "nresults")
 
 addressbook_multiget = QName(CardDAVNamespace, "addressbook-multiget")
+
+default_addressbook_url = QName(CardDAVNamespace, "default-addressbook-URL")

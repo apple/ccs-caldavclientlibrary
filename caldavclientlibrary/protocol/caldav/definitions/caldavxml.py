@@ -18,7 +18,7 @@ from xml.etree.ElementTree import QName
 
 CalDAVNamespace = "urn:ietf:params:xml:ns:caldav"
 
-# RFC4791
+# RFC 4791
 
 mkcalendar = QName(CalDAVNamespace, "mkcalendar")
 mkcalendar_response = QName(CalDAVNamespace, "mkcalendar-response")
@@ -61,22 +61,27 @@ calendar_multiget = QName(CalDAVNamespace, "calendar-multiget")
 
 free_busy_query = QName(CalDAVNamespace, "free-busy-query")
 
-# draft caldav-schedule
-calendar_free_busy_set = QName(CalDAVNamespace, "calendar-free-busy-set")
-originator = QName(CalDAVNamespace, "originator")
-recipient = QName(CalDAVNamespace, "recipient")
-schedule = QName(CalDAVNamespace, "schedule")
+# RFC 6638
 
-schedule_tag = QName(CalDAVNamespace, "schedule-tag")
-schedule_inbox = QName(CalDAVNamespace, "schedule-inbox")
-schedule_inbox_URL = QName(CalDAVNamespace, "schedule-inbox-URL")
 schedule_outbox = QName(CalDAVNamespace, "schedule-outbox")
 schedule_outbox_URL = QName(CalDAVNamespace, "schedule-outbox-URL")
+schedule_inbox = QName(CalDAVNamespace, "schedule-inbox")
+schedule_inbox_URL = QName(CalDAVNamespace, "schedule-inbox-URL")
 calendar_user_address_set = QName(CalDAVNamespace, "calendar-user-address-set")
+calendar_user_type = QName(CalDAVNamespace, "calendar-user-type")
+
+schedule_calendar_transp = QName(CalDAVNamespace, "schedule-calendar-transp")
+opaque = QName(CalDAVNamespace, "opaque")
+transparent = QName(CalDAVNamespace, "transparent")
+schedule_default_calendar_url = QName(CalDAVNamespace, "schedule-default-calendar-URL")
+schedule_tag = QName(CalDAVNamespace, "schedule-tag")
 
 schedule_response = QName(CalDAVNamespace, "schedule-response")
-response = QName(CalDAVNamespace, "timezone")
+response = QName(CalDAVNamespace, "response")
+recipient = QName(CalDAVNamespace, "recipient")
 request_status = QName(CalDAVNamespace, "request-status")
+
+calendar_free_busy_set = QName(CalDAVNamespace, "calendar-free-busy-set")
 
 # Extensions
 
