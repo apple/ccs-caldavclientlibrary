@@ -185,9 +185,12 @@ class BaseShell(object):
         # if self.last_wd_complete[0] == text:
         #    return self.last_wd_complete[1]
 
+        # Split on whitespace and use the last item as the token
+        tokens = text.split()
+
         # Look for relative vs absolute
-        if text and text[0] == "/":
-            dirname, _ignore_child = os.path.split(text)
+        if tokens[-1] and tokens[-1][0] == "/":
+            dirname, _ignore_child = os.path.split(tokens[-1])
             path = dirname
             if not path.endswith("/"):
                 path += "/"
@@ -195,7 +198,7 @@ class BaseShell(object):
         else:
             path = self.wd
             pathlen = len(path) + (0 if path.endswith("/") else 1)
-            dirname, _ignore_child = os.path.split(text)
+            dirname, _ignore_child = os.path.split(tokens[-1])
             if dirname:
                 path = os.path.join(path, dirname)
             if not path.endswith("/"):
@@ -209,10 +212,10 @@ class BaseShell(object):
         results = [urllib.unquote(result) for result in results.iterkeys()]
         results = [result[pathlen:] for result in results if len(result) > pathlen]
         # print results
-        if text:
-            textlen = len(text)
-            results = [result for result in results if result[:textlen] == text]
+        if tokens[-1]:
+            textlen = len(tokens[-1])
+            results = [result for result in results if result[:textlen] == tokens[-1]]
             # print results
 
-        self.last_wd_complete = (text, results,)
+        self.last_wd_complete = (tokens[-1], results,)
         return results

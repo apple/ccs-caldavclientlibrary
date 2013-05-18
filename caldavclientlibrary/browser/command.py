@@ -20,6 +20,7 @@ class Command(object):
 
         self.shell = None
         self.cmds = ()
+        self.do_wd_complete = False
 
 
     def execute(self, name, options):
@@ -58,7 +59,7 @@ class Command(object):
 
 
     def complete(self, text):
-        return ()
+        return () if not self.do_wd_complete else self.shell.wdcomplete(text)
 
 
 

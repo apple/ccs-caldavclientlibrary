@@ -26,6 +26,7 @@ class Cmd(Command):
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("attach",)
+        self.do_wd_complete = True
 
 
     def execute(self, cmdname, options):
@@ -116,10 +117,6 @@ class Cmd(Command):
             self.shell.account.session.removeAttachment(resource, removing)
 
         return True
-
-
-    def complete(self, text):
-        return self.shell.wdcomplete(text)
 
 
     def usage(self, name):

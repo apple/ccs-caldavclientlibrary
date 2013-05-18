@@ -31,6 +31,7 @@ class Cmd(Command):
         super(Command, self).__init__()
         self.cmds = ("share",)
         self.subshell = None
+        self.do_wd_complete = True
 
 
     def execute(self, cmdname, options):

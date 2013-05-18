@@ -27,6 +27,7 @@ class Cmd(Command):
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("rm",)
+        self.do_wd_complete = True
 
 
     def execute(self, cmdname, options):
@@ -66,10 +67,6 @@ class Cmd(Command):
             self.shell.account.session.deleteResource(resource)
 
         return True
-
-
-    def complete(self, text):
-        return self.shell.wdcomplete(text)
 
 
     def usage(self, name):

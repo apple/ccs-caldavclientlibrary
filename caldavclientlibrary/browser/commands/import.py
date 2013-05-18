@@ -26,6 +26,7 @@ class Cmd(Command):
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("import",)
+        self.do_wd_complete = True
 
 
     def execute(self, cmdname, options):
@@ -87,10 +88,6 @@ class Cmd(Command):
         self.shell.account.session.importData(resource, data, content_type)
 
         return True
-
-
-    def complete(self, text):
-        return self.shell.wdcomplete(text)
 
 
     def usage(self, name):
