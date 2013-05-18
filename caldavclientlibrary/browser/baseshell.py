@@ -64,6 +64,7 @@ class BaseShell(object):
         # Preserve existing history
         if self.preserve_history:
             old_history = [readline.get_history_item(index) for index in xrange(readline.get_current_history_length())]
+            old_history = filter(lambda x: x is not None, old_history)
             readline.clear_history()
             map(readline.add_history, self.history)
 

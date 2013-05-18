@@ -60,13 +60,10 @@ class Cmd(Command):
         resource = principal.notification_URL
 
         notifications = self.shell.account.session.getNotifications(resource)
-        if not notifications:
-            print "No notifications."
+        if interactive:
+            self.doInteractiveMode(resource, notifications)
         else:
-            if interactive:
-                self.doInteractiveMode(resource, notifications)
-            else:
-                print utils.printNotificationsList(notifications, self.shell.account)
+            print utils.printNotificationsList(notifications, self.shell.account)
 
         return True
 
