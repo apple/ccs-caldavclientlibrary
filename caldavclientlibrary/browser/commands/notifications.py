@@ -145,7 +145,7 @@ class Process(CommonNotificationsCommand):
                     continue
 
                 # Now execute and delete the notification if processed OK
-                if self.shell.shell.account.session.processNotification(notifications[number], self.accept):
+                if self.shell.shell.account.session.processNotification(self.shell.account.getPrincipal(None), notifications[number], self.accept):
                     self.shell.shell.account.session.deleteResource(notifications[number].url)
                 break
 

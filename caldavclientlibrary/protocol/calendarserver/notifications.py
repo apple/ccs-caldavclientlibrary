@@ -40,6 +40,7 @@ class InviteNotification(object):
     def __init__(self):
 
         self.url = None
+        self.shared_type = "calendar"
         self.uid = ""
         self.user_uid = ""
         self.access = "unknown"
@@ -53,6 +54,7 @@ class InviteNotification(object):
 
         self.url = url
 
+        self.shared_type = notification.get("shared-type", default="calendar")
         self.uid = notification.find(str(csxml.uid)).text
         self.user_uid = notification.find(str(davxml.href)).text
 

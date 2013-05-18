@@ -855,10 +855,12 @@ class CalDAVSession(Session):
         return notifications
 
 
-    def processNotification(self, notification, accept):
+    def processNotification(self, principal, notification, accept):
         """
         Accept or decline a sharing invite in the specified notification.
 
+        @param principal: the principal acting on the notification
+        @type principal: L{CalDAVPrincipal}
         @param notification: the notification
         @type notification: L{InviteNotification}
         @param accept: whether to accept C{True} or decline C{False} the invite
@@ -867,8 +869,8 @@ class CalDAVSession(Session):
 
         assert(isinstance(notification.url, URL))
 
-        # POST goes to home which is two segments up from the notification resource
-        rurl = notification.url.dirname().dirname()
+        # POST goes to home and we need to figure that out from the notification
+        rurl = principal.homeset[0] if notification.shared_type == "calendar" else principal.adbkhomeset[0]
 
         # Add invitation POST
         request = ProcessNotification(self, rurl.relativeURL(), notification, accept)
