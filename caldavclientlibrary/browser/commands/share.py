@@ -38,12 +38,9 @@ class Cmd(Command):
 
         interactive = False
         path = None
-        addressbook = False
-        calendar = False
-        group = False
 
         try:
-            opts, args = getopt.getopt(shlex.split(options), 'acgi')
+            opts, args = getopt.getopt(shlex.split(options), 'i')
         except getopt.GetoptError, e:
             print str(e)
             print self.usage(cmdname)
@@ -53,33 +50,10 @@ class Cmd(Command):
 
             if name == "-i":
                 interactive = True
-            elif name == "-a":
-                if calendar or group:
-                    print "Only one of -a, -c, or -g must be present"
-                    print self.usage(cmdname)
-                    raise WrongOptions
-                addressbook = True
-            elif name == "-c":
-                if addressbook or group:
-                    print "Only one of -a, -c, or -g must be present"
-                    print self.usage(cmdname)
-                    raise WrongOptions
-                calendar = True
-            elif name == "-c":
-                if addressbook or calendar:
-                    print "Only one of -a, -c, or -g must be present"
-                    print self.usage(cmdname)
-                    raise WrongOptions
-                group = True
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(cmdname)
                 raise WrongOptions
-
-        if not (addressbook or calendar or group):
-            print "One of -a, -c, or -g must be present"
-            print self.usage(cmdname)
-            raise WrongOptions
 
         if len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
@@ -132,12 +106,6 @@ PATH is a relative or absolute path.
 Options:
 -i    interactive mode for adding, changing and deleting invitees.
     if not present, existing invitees will be printed.
-
--a    sharing for an address book
--c    sharing for a calendar
--g    sharing for an address book group
-
-One of -a, -c or -g must be present.
 """ % (name,)
 
 
