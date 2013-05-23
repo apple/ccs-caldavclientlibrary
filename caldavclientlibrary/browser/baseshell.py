@@ -68,6 +68,7 @@ class BaseShell(object):
             readline.clear_history()
             map(readline.add_history, self.history)
 
+        old_completer = readline.get_completer()
         readline.set_completer(self.complete)
         readline.parse_and_bind("bind ^I rl_complete")
 
@@ -87,6 +88,8 @@ class BaseShell(object):
                 print "Command '%s' unknown." % (e,)
             except Exception, e:
                 traceback.print_exc()
+
+        readline.set_completer(old_completer)
 
         # Restore previous history
         if self.preserve_history:
@@ -169,7 +172,7 @@ class BaseShell(object):
         if " " not in check:
             for cmd in self.commands:
                 if cmd[:checklen] == check:
-                    results.append(cmd)
+                    results.append(cmd + " ")
         else:
             cmd, rest = check.split(" ", 1)
             if cmd in self.commands:
