@@ -35,15 +35,18 @@ class Cmd(Command):
 
         force = False
         infinite = False
+        synctoken = None
 
-        opts, args = getopt.getopt(shlex.split(options), 'fi')
+        opts, args = getopt.getopt(shlex.split(options), 'fit:')
 
-        for name, _ignore_value in opts:
+        for name, value in opts:
 
             if name == "-f":
                 force = True
             elif name == "-i":
                 infinite = True
+            elif name == "-t":
+                synctoken = value
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(cmdname)
@@ -62,7 +65,8 @@ class Cmd(Command):
         if not path.endswith("/"):
             path += "/"
         resource = URL(url=path)
-        synctoken = synctokens[0 if infinite else 1].get(path, "") if not force else ""
+        if synctoken is None:
+            synctoken = synctokens[0 if infinite else 1].get(path, "") if not force else ""
         newsyctoken, changed, removed, other = self.shell.account.session.syncCollection(resource, synctoken, infinite=infinite)
         synctokens[0 if infinite else 1][path] = newsyctoken
 
@@ -72,6 +76,8 @@ class Cmd(Command):
             print "Removed: %s" % (item,)
         for item in other:
             print "Error: %s" % (item,)
+        if newsyctoken:
+            print "Current token: %s" % (newsyctoken,)
         print ""
 
         return True
@@ -82,8 +88,9 @@ class Cmd(Command):
 PATH is a relative or absolute path.
 
 Options:
--f   force full sync
--i   depth:infinite [DEFAULT depth:1]
+-f       force full sync
+-i       depth:infinite [DEFAULT depth:1]
+-t TEXT  the token to use
 """ % (name,)
 
 
