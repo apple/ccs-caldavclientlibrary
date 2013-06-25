@@ -161,7 +161,7 @@ class Accept(Process):
 
 
     def helpDescription(self):
-        return "Remove invite on existing resource."
+        return "Accept an invite."
 
 
 
@@ -178,7 +178,7 @@ class Decline(Process):
 
 
     def helpDescription(self):
-        return "Remove invite on existing resource."
+        return "Decline an invite."
 
 
 
