@@ -160,7 +160,7 @@ class Add(CommonSharingCommand):
         user_uid, read_write, summary = self.createInvite()
 
         # Now execute
-        self.shell.shell.account.session.addInvitee(self.shell.resource, user_uid, read_write, summary)
+        self.shell.shell.account.session.addInvitees(self.shell.resource, [user_uid, ], read_write, summary)
 
 
     def usage(self, name):
@@ -204,7 +204,7 @@ class Change(CommonSharingCommand):
                 user_uid, read_write, summary = self.createInvite(invites.invitees[number])
 
                 # Now execute
-                self.shell.shell.account.session.addInvitee(self.shell.resource, user_uid, read_write, summary)
+                self.shell.shell.account.session.addInvitees(self.shell.resource, [user_uid, ], read_write, summary)
                 break
 
 

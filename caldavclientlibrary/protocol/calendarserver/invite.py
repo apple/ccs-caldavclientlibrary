@@ -100,14 +100,14 @@ class InviteUser(object):
 
 
 
-class AddInvitee(Post):
+class AddInvitees(Post):
     """
     HTTP POST request to add an invite for a sharee.
     """
 
-    def __init__(self, session, url, user_uid, read_write, summary=None):
-        super(AddInvitee, self).__init__(session, url)
-        self.user_uid = user_uid
+    def __init__(self, session, url, user_uids, read_write, summary=None):
+        super(AddInvitees, self).__init__(session, url)
+        self.user_uids = user_uids
         self.read_write = read_write
         self.summary = summary if summary is not None else "-"
 
@@ -130,24 +130,31 @@ class AddInvitee(Post):
         #     <CS:summary>...</CS:summary>
         #     <CS:read /> | <CS:read-write />
         #   </CS:set>
+        #   <CS:set>
+        #     <DAV:href>...</DAV:href>
+        #     <CS:summary>...</CS:summary>
+        #     <CS:read /> | <CS:read-write />
+        #   </CS:set>
+        #   ...
         # </CS:share>
 
         # <CS:share> element
         share = Element(csxml.share)
 
-        # <CS:set> element
-        set = SubElement(share, csxml.set)
+        for user_uid in self.user_uids:
+            # <CS:set> element
+            set = SubElement(share, csxml.set)
 
-        # <DAV:href> element
-        href = SubElement(set, davxml.href)
-        href.text = self.user_uid
+            # <DAV:href> element
+            href = SubElement(set, davxml.href)
+            href.text = user_uid
 
-        # <CS:summary> element
-        summary = SubElement(set, csxml.summary)
-        summary.text = self.summary
+            # <CS:summary> element
+            summary = SubElement(set, csxml.summary)
+            summary.text = self.summary
 
-        # <CS:read /> | <CS:read-write />
-        SubElement(set, csxml.read_write if self.read_write else csxml.read)
+            # <CS:read /> | <CS:read-write />
+            SubElement(set, csxml.read_write if self.read_write else csxml.read)
 
         # Now we have the complete document, so write it out (no indentation)
         xmldoc = BetterElementTree(share)

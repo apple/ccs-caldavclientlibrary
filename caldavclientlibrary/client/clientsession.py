@@ -20,7 +20,7 @@ from caldavclientlibrary.protocol.caldav.makecalendar import MakeCalendar
 from caldavclientlibrary.protocol.caldav.multiget import Multiget as CalMultiget
 from caldavclientlibrary.protocol.caldav.query import QueryVEVENTTimeRange
 from caldavclientlibrary.protocol.calendarserver.invite import RemoveInvitee, Invites, \
-    AddInvitee
+    AddInvitees
 from caldavclientlibrary.protocol.carddav.makeaddressbook import MakeAddressBook
 from caldavclientlibrary.protocol.carddav.multiget import Multiget as AdbkMultiget
 from caldavclientlibrary.protocol.http.authentication.basic import Basic
@@ -92,8 +92,6 @@ class CalDAVSession(Session):
         current = self.getCurrentPrincipalResource(self.rootPath)
         if current:
             self.principalPath = current
-            if self.log:
-                self.log.write("Found current principal path: %s\n" % (self.principalPath.absoluteURL(),))
             return
 
         hrefs = self.getHrefListProperty(self.rootPath, davxml.principal_collection_set)
@@ -105,8 +103,6 @@ class CalDAVSession(Session):
             current = self.getCurrentPrincipalResource(href)
             if current:
                 self.principalPath = current
-                if self.log:
-                    self.log.write("Found current principal path: %s\n" % (self.principalPath.absoluteURL(),))
                 return
 
 
@@ -773,14 +769,14 @@ class CalDAVSession(Session):
             return Invites().parseFromInvite(results.get(csxml.invite))
 
 
-    def addInvitee(self, rurl, user_uid, read_write, summary=None):
+    def addInvitees(self, rurl, user_uids, read_write, summary=None):
         """
         Add a sharing invite for the specified resource.
 
         @param rurl: the resource to share
         @type rurl: L{URL}
-        @param user_uid: short name or full principal path of user to share with
-        @type user_uid: C{str}
+        @param user_uids: short name or full principal path of user to share with
+        @type user_uids: C{str}
         @param read_write: whether to share read-only C{False} or read-write C{True}
         @type read_write: C{bool}
         @param summary: summary description for the share
@@ -790,7 +786,7 @@ class CalDAVSession(Session):
         assert(isinstance(rurl, URL))
 
         # Add invitation POST
-        request = AddInvitee(self, rurl.relativeURL(), user_uid, read_write, summary)
+        request = AddInvitees(self, rurl.relativeURL(), user_uids, read_write, summary)
 
         # Process it
         self.runSession(request)
