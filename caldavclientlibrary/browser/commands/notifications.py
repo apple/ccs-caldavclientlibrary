@@ -72,7 +72,7 @@ class Cmd(Command):
 
         print "Entering notifications edit mode on resource: %s" % (resource.relativeURL(),)
         if not self.subshell:
-            self.subshell = SubShell(self.shell, "Share", (
+            self.subshell = SubShell(self.shell, "Notifications", (
                 commands.help.Cmd(),
                 commands.logging.Cmd(),
                 commands.quit.Cmd(),
