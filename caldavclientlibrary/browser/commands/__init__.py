@@ -31,6 +31,7 @@ __all__ = [
     "mkdir",
     "mv",
     "notifications",
+    "post",
     "principal",
     "props",
     "proxies",
