@@ -770,7 +770,7 @@ class CalDAVSession(Session):
 
         results, bad = self.getProperties(rurl, (csxml.invite,))
         if csxml.invite in bad:
-            return None
+            return Invites()
         else:
             return Invites().parseFromInvite(results.get(csxml.invite))
 
