@@ -46,7 +46,7 @@ class Invites(object):
 
     def parseFromInvite(self, invite):
 
-        if invite is not None:
+        if len(invite) != 0:
             organizer = invite.find(str(csxml.organizer))
             if organizer is not None:
                 self.organizer_uid = organizer.find(str(davxml.href)).text

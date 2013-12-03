@@ -130,7 +130,7 @@ class CommonSharingCommand(Command):
 
         if oldinvite is None:
             href = utils.textInput("Enter principal id: ", None)
-            if href.startswith("user"):
+            if href.startswith("user") or href.startswith("puser"):
                 href = "/principals/users/%s" % (href,)
             principal = self.shell.shell.account.getPrincipal(URL(url=href))
             user_uid = principal.principalURL.relativeURL()
