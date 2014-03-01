@@ -49,7 +49,7 @@ class Cmd(Command):
             elif name == "-s":
                 start = value
             elif name == "-e":
-                start = value
+                end = value
             elif name == "-x":
                 expand = True
             elif name == "-d":
