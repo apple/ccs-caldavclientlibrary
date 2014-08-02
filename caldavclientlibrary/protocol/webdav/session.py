@@ -97,9 +97,11 @@ class Session(HTTPSession):
                 capa = ""
                 for name, value in request.getResponseHeaders().iteritems():
 
-                    if (not name.lower().startswith(headers.Server) and
+                    if (
+                        not name.lower().startswith(headers.Server) and
                         not name.lower().startswith(headers.Date) and
-                        name.lower().startswith("Content-")):
+                        name.lower().startswith("Content-")
+                    ):
 
                         capa += "%s: %s\n" % (name, value,)
 

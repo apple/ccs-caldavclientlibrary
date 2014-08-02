@@ -43,7 +43,8 @@ class TestRequestBody(unittest.TestCase):
         request = MakeAddressBook(server, "/", "home")
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcol xmlns:ns0="DAV:">
   <ns0:set>
     <ns0:prop>
@@ -56,7 +57,7 @@ class TestRequestBody(unittest.TestCase):
   </ns0:set>
 </ns0:mkcol>
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_GenerateXMLMultipleProperties(self):
@@ -65,7 +66,8 @@ class TestRequestBody(unittest.TestCase):
         request = MakeAddressBook(server, "/", "home", "my personal address book")
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcol xmlns:ns0="DAV:">
   <ns0:set>
     <ns0:prop>
@@ -79,7 +81,7 @@ class TestRequestBody(unittest.TestCase):
   </ns0:set>
 </ns0:mkcol>
 """.replace("\n", "\r\n")
-)
+        )
 
 
 

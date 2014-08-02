@@ -84,18 +84,18 @@ class CalDAVPrincipal(object):
     Calendar Addresses: %s
     Address Book Homes: %s
 """ % (
-          self.principalPath,
-          self.displayname,
-          self.principalURL,
-          self.alternateURIs,
-          self.memberset,
-          self.memberships,
-          self.homeset,
-          self.outboxURL,
-          self.inboxURL,
-          self.cuaddrs,
-          self.adbkhomeset,
-      )
+            self.principalPath,
+            self.displayname,
+            self.principalURL,
+            self.alternateURIs,
+            self.memberset,
+            self.memberships,
+            self.homeset,
+            self.outboxURL,
+            self.inboxURL,
+            self.cuaddrs,
+            self.adbkhomeset,
+        )
 
 
     def _initFields(self):

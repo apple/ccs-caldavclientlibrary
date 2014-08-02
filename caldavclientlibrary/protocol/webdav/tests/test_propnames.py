@@ -76,7 +76,7 @@ class TestRequestBody(unittest.TestCase):
   <ns0:propname />
 </ns0:propfind>
 """.replace("\n", "\r\n")
-)
+        )
 
 
 

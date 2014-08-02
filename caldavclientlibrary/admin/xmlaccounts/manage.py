@@ -14,7 +14,7 @@
 # limitations under the License.
 ##
 
-#import caldavclientlibrary.admin.xmlaccounts.commands
+# import caldavclientlibrary.admin.xmlaccounts.commands
 from caldavclientlibrary.admin.xmlaccounts.commands import registered
 
 import sys

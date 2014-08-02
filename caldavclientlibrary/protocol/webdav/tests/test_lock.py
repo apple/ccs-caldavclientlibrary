@@ -99,7 +99,8 @@ class TestRequestBody(unittest.TestCase):
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1)
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:lockinfo xmlns:ns0="DAV:">
   <ns0:lockscope>
     <ns0:exclusive />
@@ -110,7 +111,7 @@ class TestRequestBody(unittest.TestCase):
   <ns0:owner>user@example.com</ns0:owner>
 </ns0:lockinfo>
 """.replace("\n", "\r\n")
-)
+        )
 
 
 

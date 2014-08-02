@@ -64,7 +64,7 @@ class URL(object):
     )
 
     URLXCharacter = (# Allowable URL chars (all)
-          # RFC2732 uses '[...]' for IPv6 addressing - [] are now allowed
+        # RFC2732 uses '[...]' for IPv6 addressing - [] are now allowed
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, # 0 - 15
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, # 16 - 31
         0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, # 32 - 47

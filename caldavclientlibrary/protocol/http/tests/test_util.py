@@ -39,7 +39,7 @@ class TestParseQuoted(unittest.TestCase):
             "\"unterminated"                        : ("unterminated", ""),
             "\"unterminated words"                  : ("unterminated words", ""),
             "\"unterminated a \\\"word\\\""         : ("unterminated a \"word\"", ""),
-         }
+        }
 
         for input, result in data.iteritems():
             self.assertEqual(parsequoted(input), result)

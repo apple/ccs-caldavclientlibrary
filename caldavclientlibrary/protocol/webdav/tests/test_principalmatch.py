@@ -59,7 +59,7 @@ class TestRequestBody(unittest.TestCase):
   </ns0:prop>
 </ns0:principal-match>
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_GenerateXMLMultipleProperties(self):
@@ -77,7 +77,7 @@ class TestRequestBody(unittest.TestCase):
   </ns0:prop>
 </ns0:principal-match>
 """.replace("\n", "\r\n")
-)
+        )
 
 
 

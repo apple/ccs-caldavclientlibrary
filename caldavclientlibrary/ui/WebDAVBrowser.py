@@ -177,8 +177,8 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
 
     DATAVIEW_PROPERTIES = 0
     DATAVIEW_DATA = 1
-    #DATAVIEW_DELEGATES  = 2
-    #DATAVIEW_ACLS       = 3
+    # DATAVIEW_DELEGATES  = 2
+    # DATAVIEW_ACLS       = 3
 
     selectedDetails = None
 

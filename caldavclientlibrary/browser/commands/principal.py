@@ -72,18 +72,18 @@ class Cmd(Command):
     Calendar Addresses: %s
     Address Book Homes: %s
 """ % (
-          principal.principalPath,
-          principal.getSmartDisplayName(),
-          principal.principalURL,
-          utils.printList(principal.alternateURIs),
-          utils.printPrincipalPaths(self.shell.account, principal.memberset, resolve, refresh),
-          utils.printPrincipalPaths(self.shell.account, principal.memberships, resolve, refresh),
-          utils.printList(principal.homeset),
-          principal.outboxURL,
-          principal.inboxURL,
-          utils.printList(principal.cuaddrs),
-          utils.printList(principal.adbkhomeset),
-      ),
+            principal.principalPath,
+            principal.getSmartDisplayName(),
+            principal.principalURL,
+            utils.printList(principal.alternateURIs),
+            utils.printPrincipalPaths(self.shell.account, principal.memberset, resolve, refresh),
+            utils.printPrincipalPaths(self.shell.account, principal.memberships, resolve, refresh),
+            utils.printList(principal.homeset),
+            principal.outboxURL,
+            principal.inboxURL,
+            utils.printList(principal.cuaddrs),
+            utils.printList(principal.adbkhomeset),
+        ),
 
         if print_proxies:
             utils.printProxyPrincipals(self.shell.account, principal, True, True, resolve, False, refresh)

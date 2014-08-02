@@ -44,12 +44,13 @@ class TestRequestBody(unittest.TestCase):
         request = Multiget(server, "/", ("/a",))
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:addressbook-multiget xmlns:ns0="urn:ietf:params:xml:ns:carddav">
   <ns1:href xmlns:ns1="DAV:">/a</ns1:href>
 </ns0:addressbook-multiget>
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_GenerateXMLMultipleHrefsOnly(self):
@@ -58,13 +59,14 @@ class TestRequestBody(unittest.TestCase):
         request = Multiget(server, "/", ("/a", "/b",))
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:addressbook-multiget xmlns:ns0="urn:ietf:params:xml:ns:carddav">
   <ns1:href xmlns:ns1="DAV:">/a</ns1:href>
   <ns1:href xmlns:ns1="DAV:">/b</ns1:href>
 </ns0:addressbook-multiget>
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_GenerateXMLMultipleHrefsOneProperty(self):
@@ -73,7 +75,8 @@ class TestRequestBody(unittest.TestCase):
         request = Multiget(server, "/", ("/a", "/b",), (davxml.getetag,))
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:addressbook-multiget xmlns:ns0="urn:ietf:params:xml:ns:carddav">
   <ns1:prop xmlns:ns1="DAV:">
     <ns1:getetag />
@@ -82,7 +85,7 @@ class TestRequestBody(unittest.TestCase):
   <ns1:href xmlns:ns1="DAV:">/b</ns1:href>
 </ns0:addressbook-multiget>
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_GenerateXMLMultipleHrefsMultipleProperties(self):
@@ -91,7 +94,8 @@ class TestRequestBody(unittest.TestCase):
         request = Multiget(server, "/", ("/a", "/b",), (davxml.getetag, davxml.displayname,))
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:addressbook-multiget xmlns:ns0="urn:ietf:params:xml:ns:carddav">
   <ns1:prop xmlns:ns1="DAV:">
     <ns1:getetag />
@@ -101,7 +105,7 @@ class TestRequestBody(unittest.TestCase):
   <ns1:href xmlns:ns1="DAV:">/b</ns1:href>
 </ns0:addressbook-multiget>
 """.replace("\n", "\r\n")
-)
+        )
 
 
 

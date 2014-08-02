@@ -32,7 +32,7 @@ class TestRequestHeaders(unittest.TestCase):
 Host: www.example.com
 
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_EtagMatch(self):
@@ -44,7 +44,7 @@ Host: www.example.com
 If-Match: "etag"
 
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_EtagNoneMatch(self):
@@ -56,7 +56,7 @@ Host: www.example.com
 If-None-Match: "etag"
 
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_Content(self):
@@ -72,7 +72,7 @@ Content-Length: %d
 Content-Type: text/plain
 
 """.replace("\n", "\r\n") % (len(rawdata),)
-)
+        )
 
 
     def test_ContentAndAuthorization(self):
@@ -90,4 +90,4 @@ Content-Length: %d
 Content-Type: text/plain
 
 """.replace("\n", "\r\n") % (len(rawdata),)
-)
+        )

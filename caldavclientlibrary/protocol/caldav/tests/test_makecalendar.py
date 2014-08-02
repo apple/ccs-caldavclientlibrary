@@ -43,14 +43,15 @@ class TestRequestBody(unittest.TestCase):
         request = MakeCalendar(server, "/", "home")
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcalendar xmlns:ns0="urn:ietf:params:xml:ns:caldav">
   <ns1:prop xmlns:ns1="DAV:">
     <ns1:displayname>home</ns1:displayname>
   </ns1:prop>
 </ns0:mkcalendar>
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_GenerateXMLMultipleProperties(self):
@@ -59,7 +60,8 @@ class TestRequestBody(unittest.TestCase):
         request = MakeCalendar(server, "/", "home", "my personal calendar")
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcalendar xmlns:ns0="urn:ietf:params:xml:ns:caldav">
   <ns1:prop xmlns:ns1="DAV:">
     <ns1:displayname>home</ns1:displayname>
@@ -67,7 +69,7 @@ class TestRequestBody(unittest.TestCase):
   </ns1:prop>
 </ns0:mkcalendar>
 """.replace("\n", "\r\n")
-)
+        )
 
 
     def test_GenerateXMLCDATAProperty(self):
@@ -99,14 +101,15 @@ END:VCALENDAR
         request = MakeCalendar(server, "/", timezone=timezone)
         os = StringIO()
         request.generateXML(os)
-        self.assertEqual(os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
+        self.assertEqual(
+            os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcalendar xmlns:ns0="urn:ietf:params:xml:ns:caldav">
   <ns1:prop xmlns:ns1="DAV:">
     <ns0:calendar-timezone>%s</ns0:calendar-timezone>
   </ns1:prop>
 </ns0:mkcalendar>
 """.replace("\n", "\r\n") % (timezone.replace("&", "&amp;"),)
-)
+        )
 
 
 

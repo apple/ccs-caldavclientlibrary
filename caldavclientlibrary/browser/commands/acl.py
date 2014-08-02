@@ -193,9 +193,9 @@ class CommonACLCommand(Command):
         print "  l. {CALDAV}schedule"
         print "  q. quit without changes"
         choice = utils.multiChoiceInput(
-                     "Select multiple items: ",
-                     [char for char in "abcdefghijklq"],
-                 )
+            "Select multiple items: ",
+            [char for char in "abcdefghijklq"],
+        )
         if "q" in choice:
             return None
 
