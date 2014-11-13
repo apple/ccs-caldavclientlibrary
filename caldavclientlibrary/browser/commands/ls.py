@@ -111,7 +111,7 @@ class Cmd(Command):
                 continue
             line = []
             if longlist:
-                props = results[rurl]
+                props = results[urllib.quote(rurl)]
                 size = props.get(davxml.getcontentlength, "-")
                 if not size:
                     size = "0"
