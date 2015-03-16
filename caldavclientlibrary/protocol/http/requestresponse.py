@@ -142,6 +142,9 @@ class RequestResponse(object):
             host += ":%s" % (self.session.port,)
         hdrs.append((headers.Host, host))
 
+        # User-Agent
+        hdrs.append(("User-Agent", "Secret-Agent",))
+
         # Do ETag matching
         if self.etag:
             if self.etag_match:
