@@ -727,11 +727,17 @@ class CalDAVSession(Session):
             request = Put(self, rurl.relativeURL())
         elif method == "POST":
             request = Post(self, rurl.relativeURL())
-        dout = RequestDataString(data, contentType)
-        if method == "PUT":
-            request.setData(dout, None, etag=etag)
-        elif method == "POST":
-            request.setData(dout, None)
+
+        dout = ResponseDataString()
+
+        if data is not None:
+            din = RequestDataString(data, contentType)
+            if method == "PUT":
+                request.setData(din, dout, etag=etag)
+            elif method == "POST":
+                request.setData(din, dout)
+        else:
+            request.setData(None, dout)
 
         # Process it
         self.runSession(request)
@@ -739,6 +745,9 @@ class CalDAVSession(Session):
         # Check response status
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
             self.handleHTTPError(request)
+
+        # Return data as a string
+        return dout.getData()
 
 
     def importData(self, rurl, data, contentType):

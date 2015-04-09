@@ -21,6 +21,8 @@ __all__ = [
     "cat",
     "cd",
     "calendars",
+    "emptytrash",
+    "gettrash",
     "help",
     "history",
     "import",
