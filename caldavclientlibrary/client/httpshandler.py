@@ -79,7 +79,9 @@ def SmartHTTPConnection(host, port, ssl, afunix):
         connect.connect()
         return connect
 
-    if ssl:
+    if afunix:
+        connect = UnixSocketHTTPConnection(afunix)
+    elif ssl:
         # Iterate over the TL:S versions and find one that works and cache it for future use.
         for cached, connection_type in cached_types:
             if (host, port) in cached:
@@ -96,9 +98,7 @@ def SmartHTTPConnection(host, port, ssl, afunix):
                 cached.remove((host, port))
 
         raise RuntimeError("Cannot connect via with TLSv1, SSLv3 or SSLv23")
-    elif afunix is None:
-        connect = httplib.HTTPConnection(host, port)
     else:
-        connect = UnixSocketHTTPConnection(afunix)
+        connect = httplib.HTTPConnection(host, port)
     connect.connect()
     return connect
