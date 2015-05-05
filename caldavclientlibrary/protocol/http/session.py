@@ -22,11 +22,12 @@ class Session(object):
     STATE_OPEN = 0
     STATE_CLOSED = 1
 
-    def __init__(self, server, port=None, ssl=False, log=None):
+    def __init__(self, server, port=None, ssl=False, afunix=None, log=None):
 
         self.server = server
         self.port = port
         self.ssl = ssl
+        self.afunix = afunix
         if not self.port:
             self.port = httplib.HTTPS_PORT if ssl else httplib.HTTP_PORT
         self.authorization = None

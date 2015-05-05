@@ -19,8 +19,8 @@ from caldavclientlibrary.client.principal import principalCache
 
 class CalDAVAccount(object):
 
-    def __init__(self, server, port=None, ssl=False, user="", pswd="", principal=None, root=None, logging=False):
-        self.session = CalDAVSession(server, port, ssl, user, pswd, principal, root, logging)
+    def __init__(self, server, port=None, ssl=False, afunix=None, user="", pswd="", principal=None, root=None, logging=False):
+        self.session = CalDAVSession(server, port, ssl, afunix, user, pswd, principal, root, logging)
         self.principal = principalCache.getPrincipal(self.session, self.session.principalPath)
 
 

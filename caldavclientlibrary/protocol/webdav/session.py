@@ -23,8 +23,8 @@ from caldavclientlibrary.protocol.webdav.definitions import headers
 
 class Session(HTTPSession):
 
-    def __init__(self, server, port=None, ssl=False, log=None):
-        super(Session, self).__init__(server, port, ssl, log)
+    def __init__(self, server, port=None, ssl=False, afunix=None, log=None):
+        super(Session, self).__init__(server, port, ssl, afunix, log)
         self.initialised = False
         self.version = ()
 

@@ -62,8 +62,8 @@ class CalDAVSession(Session):
             print data.replace("\r\n", "\n"),
 
 
-    def __init__(self, server, port=None, ssl=False, user="", pswd="", principal=None, root=None, logging=False):
-        super(CalDAVSession, self).__init__(server, port, ssl, log=CalDAVSession.logger())
+    def __init__(self, server, port=None, ssl=False, afunix=None, user="", pswd="", principal=None, root=None, logging=False):
+        super(CalDAVSession, self).__init__(server, port, ssl, afunix, log=CalDAVSession.logger())
 
         self.loghttp = logging
 
@@ -960,7 +960,7 @@ class CalDAVSession(Session):
 
     def openSession(self):
         # Create connection
-        self.connect = SmartHTTPConnection(self.server, self.port, self.ssl)
+        self.connect = SmartHTTPConnection(self.server, self.port, self.ssl, self.afunix)
 
         # Write to log file
         if self.loghttp and self.log:

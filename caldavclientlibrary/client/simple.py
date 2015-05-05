@@ -21,7 +21,7 @@ from caldavclientlibrary.protocol.webdav.options import Options
 def run(session, request):
 
     # Create connection
-    connect = SmartHTTPConnection(session.server, session.port, session.ssl)
+    connect = SmartHTTPConnection(session.server, session.port, session.ssl, session.afunix)
     connect.set_debuglevel(1)
 
     # Do headers

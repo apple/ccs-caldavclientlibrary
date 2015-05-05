@@ -27,7 +27,7 @@ import urlparse
 
 class Shell(BaseShell):
 
-    def __init__(self, server, path, user, pswd, logging):
+    def __init__(self, server, path, user, pswd, logging, afunix=None):
 
         super(Shell, self).__init__("caldav_client")
         self.prefix = self.wd = "/"
@@ -40,7 +40,7 @@ class Shell(BaseShell):
         # Create the account
         ssl = server.startswith("https://")
         server = server[8:] if ssl else server[7:]
-        self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=path, principal=None, logging=logging)
+        self.account = CalDAVAccount(server, ssl=ssl, afunix=afunix, user=self.user, pswd=self.pswd, root=path, principal=None, logging=logging)
 
         atexit.register(self.saveHistory)
 
@@ -78,6 +78,7 @@ def usage():
 Options:
 -l              start with HTTP logging on.
 --server=HOST   url of the server include http/https scheme and port [REQUIRED].
+--unix=PATH     path to unix socket to connect to server [OPTIONAL]
 --user=USER     user name to login as - will be prompted if not prsent [OPTIONAL].
 --pswd=PSWD     password for user - will be prompted if not prsent [OPTIONAL].
 """
@@ -87,10 +88,11 @@ Options:
 def runit():
     logging = False
     server = None
+    afunix = None
     user = None
     pswd = None
 
-    opts, _ignore_args = getopt.getopt(sys.argv[1:], 'lh', ["help", "server=", "user=", "pswd="])
+    opts, _ignore_args = getopt.getopt(sys.argv[1:], 'lh', ["help", "server=", "unix=", "user=", "pswd="])
 
     for name, value in opts:
 
@@ -98,6 +100,8 @@ def runit():
             logging = True
         elif name == "--server":
             server = value
+        elif name == "--unix":
+            afunix = value
         elif name == "--user":
             user = value
         elif name == "--pswd":
@@ -120,7 +124,7 @@ def runit():
     if not pswd:
         pswd = getpass("Password: ")
 
-    shell = Shell(server, path, user, pswd, logging)
+    shell = Shell(server, path, user, pswd, logging, afunix=afunix)
     shell.run()
 
 

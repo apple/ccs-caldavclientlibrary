@@ -33,7 +33,7 @@ else:
     data_files.append("caldavclientlibrary/ui/WebDAVBrowser.nib")
     package_data['caldavclientlibrary'] = [
         'ui/WebDAVBrowser.nib/*',
-        ]
+    ]
 
 packages = []
 for dirpath, dirnames, filenames in os.walk('caldavclientlibrary'):
