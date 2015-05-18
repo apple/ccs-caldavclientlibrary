@@ -41,6 +41,7 @@ from caldavclientlibrary.protocol.webdav.delete import Delete
 from caldavclientlibrary.protocol.webdav.get import Get
 from caldavclientlibrary.protocol.webdav.makecollection import MakeCollection
 from caldavclientlibrary.protocol.webdav.move import Move
+from caldavclientlibrary.protocol.webdav.options import Options
 from caldavclientlibrary.protocol.webdav.post import Post
 from caldavclientlibrary.protocol.webdav.principalmatch import PrincipalMatch
 from caldavclientlibrary.protocol.webdav.propall import PropAll
@@ -727,6 +728,8 @@ class CalDAVSession(Session):
             request = Put(self, rurl.relativeURL())
         elif method == "POST":
             request = Post(self, rurl.relativeURL())
+        elif method == "OPTIONS":
+            request = Options(self, rurl.relativeURL())
 
         dout = ResponseDataString()
 

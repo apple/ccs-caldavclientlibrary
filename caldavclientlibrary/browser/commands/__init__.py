@@ -33,6 +33,7 @@ __all__ = [
     "mkdir",
     "mv",
     "notifications",
+    "options",
     "post",
     "principal",
     "props",
