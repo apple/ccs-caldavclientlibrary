@@ -39,6 +39,7 @@ __all__ = [
     "props",
     "proxies",
     "put",
+    "recovertrash",
     "query",
     "quit",
     "quota",
