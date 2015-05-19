@@ -43,7 +43,7 @@ class Cmd(Command):
             print
             print "Trashed Calendar Collections:"
             for calendar in jresult["trashedcollections"]:
-                print "  Name: {0.displayName}  - trashed: {0.whenTrashed} - children: {1}".format(calendar, len(calendar["children"]),)
+                print "  Name: {}  - trashed: {} - children: {} - RecoveryID: {}".format(calendar["displayName"], calendar["whenTrashed"], len(calendar["children"]), calendar["recoveryID"],)
 
         if "untrashedcollections" in jresult and jresult["untrashedcollections"]:
             print
@@ -52,7 +52,7 @@ class Cmd(Command):
                 print
                 print "  Calendar Collection: {} - children: {}".format(calendar["displayName"], len(calendar["children"]))
                 for child in calendar["children"]:
-                    print "    Title: {} - Start: {} - Trashed: {}".format(child["summary"], child["starttime"], child["whenTrashed"])
+                    print "    Title: {} - Start: {} - Trashed: {} - RecoveryID: {}".format(child["summary"], child["starttime"], child["whenTrashed"], child["recoveryID"])
 
         return True
 
