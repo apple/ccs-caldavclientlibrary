@@ -40,21 +40,20 @@ class Cmd(Command):
 
         recoveryID = None
         mode = "event"
-        opts, args = getopt.getopt(shlex.split(options), "cr:")
+        opts, args = getopt.getopt(shlex.split(options), "c")
 
         for name, value in opts:
 
-            if name == "-r":
-                recoveryID = value
-            elif name == "-c":
+            if name == "-c":
                 mode = "collection"
             else:
                 print("Unknown option: {}".format(name))
                 print self.usage(cmdname)
                 raise WrongOptions
 
-        resource = URL(url="{}?action=recovertrash&mode={}&id={}".format(homepath, mode, recoveryID))
-        self.shell.account.session.writeData(resource, None, None, method="POST")
+        for recoveryID in args:
+            resource = URL(url="{}?action=recovertrash&mode={}&id={}".format(homepath, mode, recoveryID))
+            self.shell.account.session.writeData(resource, None, None, method="POST")
 
         return True
 
