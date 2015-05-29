@@ -42,7 +42,7 @@ class Cmd(Command):
         mode = "event"
         opts, args = getopt.getopt(shlex.split(options), "c")
 
-        for name, value in opts:
+        for name, _ignore_value in opts:
 
             if name == "-c":
                 mode = "collection"
@@ -50,6 +50,11 @@ class Cmd(Command):
                 print("Unknown option: {}".format(name))
                 print self.usage(cmdname)
                 raise WrongOptions
+
+        if len(args) == 0:
+            print "Arguments must be supplied"
+            print self.usage(cmdname)
+            raise WrongOptions
 
         for recoveryID in args:
             resource = URL(url="{}?action=recovertrash&mode={}&id={}".format(homepath, mode, recoveryID))
@@ -59,7 +64,12 @@ class Cmd(Command):
 
 
     def usage(self, name):
-        return """Usage: %s
+        return """Usage: %s [OPTIONS] RID1, ...
+RIDx are recovery IDs.
+
+Options:
+-c    recover a collection
+
 """ % (name,)
 
 
