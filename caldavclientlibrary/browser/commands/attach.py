@@ -102,7 +102,8 @@ class Cmd(Command):
         if fname:
             fname = os.path.expanduser(fname)
             try:
-                data = open(fname, "r").read()
+                with open(fname, "r") as f:
+                    data = f.read()
             except IOError:
                 print "Unable to read data from file: %s" % (fname,)
                 print self.usage(cmdname)

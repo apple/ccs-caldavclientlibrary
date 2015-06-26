@@ -34,12 +34,15 @@ class Cmd(Command):
         fname = None
         content_type = "text/plain"
         path = None
+        data = None
 
-        opts, args = getopt.getopt(shlex.split(options), 'f:t:')
+        opts, args = getopt.getopt(shlex.split(options), 'd:f:t:')
 
         for name, value in opts:
 
-            if name == "-f":
+            if name == "-d":
+                data = value
+            elif name == "-f":
                 fname = value
             elif name == "-t":
                 content_type = value
@@ -48,11 +51,10 @@ class Cmd(Command):
                 print self.usage(cmdname)
                 raise WrongOptions
 
-        if not fname:
-            print "File name must be provided"
+        if data and fname:
+            print "Only one of -d or -f is allowed"
             print self.usage(cmdname)
             raise WrongOptions
-
         elif len(args) > 1:
             print "Wrong number of arguments: %d" % (len(args),)
             print self.usage(cmdname)
@@ -67,13 +69,15 @@ class Cmd(Command):
             raise WrongOptions
 
         # Read in data
-        fname = os.path.expanduser(fname)
-        try:
-            data = open(fname, "r").read()
-        except IOError:
-            print "Unable to read data from file: %s" % (fname,)
-            print self.usage(cmdname)
-            raise WrongOptions
+        if fname:
+            fname = os.path.expanduser(fname)
+            try:
+                with open(fname, "r") as f:
+                    data = f.read()
+            except IOError:
+                print "Unable to read data from file: %s" % (fname,)
+                print self.usage(cmdname)
+                raise WrongOptions
 
         resource = URL(url=path)
         self.shell.account.session.writeData(resource, data, content_type, method="POST")
@@ -86,8 +90,12 @@ class Cmd(Command):
 PATH is a relative or absolute path.
 
 Options:
--f   file name of data to put [REQUIRED]
+-f   file name of data to put [OPTIONAL]
+-d   string containing data to send [OPTIONAL]
 -t   content-type of data being put [DEFAULT: text/plain]
+
+Notes:
+Only one of -f or -d is allowed.
 """ % (name,)
 
 
