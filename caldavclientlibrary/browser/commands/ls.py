@@ -19,6 +19,8 @@ from caldavclientlibrary.browser.command import WrongOptions
 from caldavclientlibrary.protocol.caldav.definitions import csxml, caldavxml
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 from caldavclientlibrary.protocol.url import URL
+from pycalendar.icalendar.calendar import Calendar
+
 import os
 import getopt
 import shlex
@@ -42,8 +44,9 @@ class Cmd(Command):
         etag = False
         supported_components = False
         synctoken = False
+        details = False
 
-        opts, args = getopt.getopt(shlex.split(options), 'acdeilrs')
+        opts, args = getopt.getopt(shlex.split(options), 'acdDeilrs')
 
         for name, _ignore_value in opts:
 
@@ -55,6 +58,8 @@ class Cmd(Command):
             elif name == "-d":
                 displayname = True
                 longlist = True
+            elif name == "-D":
+                details = True
             elif name == "-e":
                 etag = True
                 longlist = True
@@ -106,6 +111,19 @@ class Cmd(Command):
         items.sort()
         lines = []
         for rurl in items:
+
+            summaries = []
+            if details:
+                data = self.shell.account.session.readData(URL(url=rurl))
+                try:
+                    cobject = Calendar.parseData(data[0])
+                    for comp in cobject.getComponents():
+                        for summary in [p.getValue().getValue() for p in comp.getProperties("SUMMARY")]:
+                            if summary not in summaries:
+                                summaries.append(summary)
+                except:
+                    summaries = ["<Could not parse>"]
+
             rurl = urllib.unquote(rurl)
             if rurl == path:
                 continue
@@ -136,6 +154,8 @@ class Cmd(Command):
                     line.append("sync:'%s'" % (props.get(davxml.synctoken, '-'),))
             else:
                 line.append(rurl[len(path):])
+            if details:
+                line.append("summary: {}".format("|".join(summaries)))
             lines.append(line)
 
         if lines:
@@ -168,6 +188,7 @@ Options:
 -l   long listing
 -r   long listing + DAV:resourcetype
 -s   long listing + DAV:sync-token
+-D   details including SUMMARY
 """ % (name,)
 
 
