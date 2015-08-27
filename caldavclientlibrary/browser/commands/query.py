@@ -23,6 +23,7 @@ import os
 import shlex
 import time
 from caldavclientlibrary.protocol.caldav.definitions import caldavxml
+from pycalendar.icalendar.calendar import Calendar
 
 class Cmd(Command):
 
@@ -39,8 +40,9 @@ class Cmd(Command):
         end = None
         expand = False
         data = False
+        details = False
 
-        opts, args = getopt.getopt(shlex.split(options), 'ts:e:xd')
+        opts, args = getopt.getopt(shlex.split(options), 'ts:e:xdD')
 
         for name, value in opts:
 
@@ -54,6 +56,8 @@ class Cmd(Command):
                 expand = True
             elif name == "-d":
                 data = True
+            elif name == "-D":
+                details = True
             else:
                 print "Unknown option: %s" % (name,)
                 print self.usage(cmdname)
@@ -85,7 +89,20 @@ class Cmd(Command):
             props += (caldavxml.calendar_data,)
         results = self.shell.account.session.queryCollection(resource, timerange, start, end, expand, props=props)
         for href in results:
-            print href
+            if details:
+                summaries = []
+                data = self.shell.account.session.readData(href)
+                try:
+                    cobject = Calendar.parseData(data[0])
+                    for comp in cobject.getComponents():
+                        for summary in [p.getValue().getValue() for p in comp.getProperties("SUMMARY")]:
+                            if summary not in summaries:
+                                summaries.append(summary)
+                except:
+                    summaries = ["<Could not parse>"]
+                print href, "summary: {}".format("|".join(summaries))
+            else:
+                print href
 
         return True
 
@@ -100,6 +117,7 @@ Options:
 -e        end time [DEFAULT tomorrow]
 -x        expand components
 -d        return data
+-D        print details including SUMMARY
 """ % (name,)
 
 
