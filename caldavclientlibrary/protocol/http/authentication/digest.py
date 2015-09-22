@@ -19,6 +19,7 @@ from caldavclientlibrary.protocol.http.util import parsetoken
 from caldavclientlibrary.protocol.http.definitions import headers
 from StringIO import StringIO
 import hashlib
+import uuid
 
 class Digest(Authenticator):
 
@@ -49,8 +50,8 @@ class Digest(Authenticator):
         os.write(" uri=\"%s\"," % (request.getURL(),))
         if "qop" in self.fields:
             os.write(" qop=auth,")
-            os.write(" nc=\"%s\"" % (self.fields['nc'],))
-            os.write(" cnonce=\"%s\"" % (self.fields['cnonce'],))
+            os.write(" nc=%s," % (self.fields['nc'],))
+            os.write(" cnonce=\"%s\"," % (self.fields['cnonce'],))
         os.write(" response=\"%s\"" % (self.response,))
 
         if "algorithm" in self.fields:
@@ -161,19 +162,22 @@ class Digest(Authenticator):
         return HA1.encode('hex')
 
 
-    # DigestCalcResponse
+    # DigestCalcHA2
     @staticmethod
-    def calcResponse(
-        HA1,
-        algo,
-        pszNonce,
-        pszNonceCount,
-        pszCNonce,
-        pszQop,
-        pszMethod,
-        pszDigestUri,
-        pszHEntity,
-    ):
+    def calcHA2(algo, pszMethod, pszDigestUri, pszQop, pszHEntity):
+        """
+        Compute H(A2) from RFC 2617.
+
+        @param pszAlg: The name of the algorithm to use to calculate the digest.
+            Currently supported are md5, md5-sess, and sha.
+        @param pszMethod: The request method.
+        @param pszDigestUri: The request URI.
+        @param pszQop: The Quality-of-Protection value.
+        @param pszHEntity: The hash of the entity body or C{None} if C{pszQop} is
+            not C{'auth-int'}.
+        @return: The hash of the A2 value for the calculation of the response
+            digest.
+        """
         m = Digest.algorithms[algo]()
         m.update(pszMethod)
         m.update(":")
@@ -181,8 +185,22 @@ class Digest(Authenticator):
         if pszQop == "auth-int":
             m.update(":")
             m.update(pszHEntity)
-        HA2 = m.digest().encode('hex')
+        HA2 = m.digest()
 
+        return HA2.encode('hex')
+
+
+    # DigestCalcResponse
+    @staticmethod
+    def calcResponse(
+        HA1,
+        HA2,
+        algo,
+        pszNonce,
+        pszNonceCount,
+        pszCNonce,
+        pszQop,
+    ):
         m = Digest.algorithms[algo]()
         m.update(HA1)
         m.update(":")
@@ -201,21 +219,36 @@ class Digest(Authenticator):
 
 
     def generateResponse(self, request):
+
+        if self.fields.get("qop", ""):
+            self.clientCount += 1
+            self.fields["cnonce"] = str(uuid.uuid4())
+            self.fields["nc"] = "%08x" % self.clientCount
+        else:
+            self.fields["cnonce"] = ""
+            self.fields["nc"] = ""
+
+        HA1 = Digest.calcHA1(
+            self.fields.get("algorithm", "md5"),
+            self.fields.get("username", ""),
+            self.fields.get("realm", ""),
+            self.fields.get("password", ""),
+            self.fields.get("nonce", ""),
+            self.fields.get("cnonce", ""),
+        )
+        HA2 = Digest.calcHA2(
+            self.fields.get("algorithm", "md5"),
+            request.method,
+            request.url,
+            self.fields.get("qop", ""),
+            None,
+        )
         self.response = Digest.calcResponse(
-            Digest.calcHA1(
-                self.fields.get("algorithm", "md5"),
-                self.fields.get("username", ""),
-                self.fields.get("realm", ""),
-                self.fields.get("password", ""),
-                self.fields.get("nonce", ""),
-                self.fields.get("cnonce", ""),
-            ),
+            HA1,
+            HA2,
             self.fields.get("algorithm", "md5"),
             self.fields.get("nonce", ""),
             self.fields.get("nc", ""),
             self.fields.get("cnonce", ""),
             self.fields.get("qop", ""),
-            request.method,
-            request.url,
-            None,
         )
