@@ -94,8 +94,15 @@ class CalDAVSession(Session):
         if current:
             self.principalPath = current
             return
+        current = self.getCurrentPrincipalResource(URL(url="/.well-known/caldav"))
+        if current:
+            self.principalPath = current
+            return
 
         hrefs = self.getHrefListProperty(self.rootPath, davxml.principal_collection_set)
+        if not hrefs:
+            return
+        hrefs = self.getHrefListProperty(URL(url="/.well-known/caldav"), davxml.principal_collection_set)
         if not hrefs:
             return
 
@@ -278,8 +285,8 @@ class CalDAVSession(Session):
                 # Get child element name (decode URL)
                 name = URL(url=item.getResource(), decode=True)
 
-                # Must match rurl
-                if name.equalRelative(rurl):
+                # Must match the URL the request was actually targeted at
+                if name.equalRelative(URL(url=request.url)):
 
                     if str(propname) in item.getNodeProperties():
 
