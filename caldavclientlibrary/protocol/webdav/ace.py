@@ -58,19 +58,19 @@ class ACE(object):
 
     def parseACE(self, acenode):
 
-        assert(acenode and acenode.tag == davxml.ace)
+        assert(len(acenode) and acenode.tag == davxml.ace)
 
         # Get invert
         self.invert = False
         principal_parent = acenode
         invert = acenode.find(str(davxml.invert))
-        if invert:
+        if invert is not None:
             self.invert = True
             principal_parent = invert
 
         # Get the principal
         principal = principal_parent.find(str(davxml.principal))
-        if not principal or len(principal.getchildren()) != 1:
+        if principal is None or len(principal.getchildren()) != 1:
             return False
 
         # Determine principal info
@@ -90,11 +90,11 @@ class ACE(object):
         # Determine rights
         self.grant = True
         child = acenode.find(str(davxml.grant))
-        if not child:
+        if child is None:
             child = acenode.find(str(davxml.deny))
-            if child:
+            if child is not None:
                 self.grant = False
-        if child:
+        if child is not None:
             self.parsePrivileges(child)
 
         # Determine protected/inherited state
