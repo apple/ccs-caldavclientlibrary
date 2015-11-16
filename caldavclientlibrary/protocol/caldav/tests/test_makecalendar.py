@@ -46,9 +46,11 @@ class TestRequestBody(unittest.TestCase):
         self.assertEqual(
             os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcalendar xmlns:ns0="urn:ietf:params:xml:ns:caldav">
-  <ns1:prop xmlns:ns1="DAV:">
-    <ns1:displayname>home</ns1:displayname>
-  </ns1:prop>
+  <ns1:set xmlns:ns1="DAV:">
+    <ns1:prop>
+      <ns1:displayname>home</ns1:displayname>
+    </ns1:prop>
+  </ns1:set>
 </ns0:mkcalendar>
 """.replace("\n", "\r\n")
         )
@@ -63,10 +65,12 @@ class TestRequestBody(unittest.TestCase):
         self.assertEqual(
             os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcalendar xmlns:ns0="urn:ietf:params:xml:ns:caldav">
-  <ns1:prop xmlns:ns1="DAV:">
-    <ns1:displayname>home</ns1:displayname>
-    <ns0:calendar-description>my personal calendar</ns0:calendar-description>
-  </ns1:prop>
+  <ns1:set xmlns:ns1="DAV:">
+    <ns1:prop>
+      <ns1:displayname>home</ns1:displayname>
+      <ns0:calendar-description>my personal calendar</ns0:calendar-description>
+    </ns1:prop>
+  </ns1:set>
 </ns0:mkcalendar>
 """.replace("\n", "\r\n")
         )
@@ -104,9 +108,11 @@ END:VCALENDAR
         self.assertEqual(
             os.getvalue(), """<?xml version='1.0' encoding='utf-8'?>
 <ns0:mkcalendar xmlns:ns0="urn:ietf:params:xml:ns:caldav">
-  <ns1:prop xmlns:ns1="DAV:">
-    <ns0:calendar-timezone>%s</ns0:calendar-timezone>
-  </ns1:prop>
+  <ns1:set xmlns:ns1="DAV:">
+    <ns1:prop>
+      <ns0:calendar-timezone>%s</ns0:calendar-timezone>
+    </ns1:prop>
+  </ns1:set>
 </ns0:mkcalendar>
 """.replace("\n", "\r\n") % (timezone.replace("&", "&amp;"),)
         )
