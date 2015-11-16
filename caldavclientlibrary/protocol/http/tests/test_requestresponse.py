@@ -30,6 +30,7 @@ class TestRequestHeaders(unittest.TestCase):
         request = RequestResponse(server, methods.GET, "/")
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
 Host: www.example.com
+User-Agent: Secret-Agent
 
 """.replace("\n", "\r\n")
         )
@@ -41,6 +42,7 @@ Host: www.example.com
         request = RequestResponse(server, methods.GET, "/", "\"etag\"", True)
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
 Host: www.example.com
+User-Agent: Secret-Agent
 If-Match: "etag"
 
 """.replace("\n", "\r\n")
@@ -53,6 +55,7 @@ If-Match: "etag"
         request = RequestResponse(server, methods.GET, "/", "\"etag\"", False)
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
 Host: www.example.com
+User-Agent: Secret-Agent
 If-None-Match: "etag"
 
 """.replace("\n", "\r\n")
@@ -68,6 +71,7 @@ If-None-Match: "etag"
         request.setData(data, None)
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
 Host: www.example.com
+User-Agent: Secret-Agent
 Content-Length: %d
 Content-Type: text/plain
 
@@ -85,6 +89,7 @@ Content-Type: text/plain
         request.setData(data, None)
         self.assertEqual(request.generateRequestHeader(), """GET / HTTP/1.1
 Host: www.example.com
+User-Agent: Secret-Agent
 Authorization: Basic dXNlcjpwc3dk
 Content-Length: %d
 Content-Type: text/plain
