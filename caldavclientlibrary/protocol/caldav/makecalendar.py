@@ -47,16 +47,21 @@ class MakeCalendar(RequestResponse):
         # Structure of document is:
         #
         # <CALDAV:mkcalendar>
-        #   <DAV:prop>
-        #     <<each property as elements>>
-        #   </DAV:prop>
+        #   <DAV:set>
+        #     <DAV:prop>
+        #       <<each property as elements>>
+        #     </DAV:prop>
+        #   </DAV:set>
         # </CALDAV:mkcalendar>
 
         # <CALDAV:mkcalendar> element
         mkcalendar = Element(caldavxml.mkcalendar)
 
+        # <DAV:set> element
+        set = SubElement(mkcalendar, davxml.set)
+
         # <DAV:prop> element
-        prop = SubElement(mkcalendar, davxml.prop)
+        prop = SubElement(set, davxml.prop)
 
         # <DAV:displayname> element
         if self.displayname:
