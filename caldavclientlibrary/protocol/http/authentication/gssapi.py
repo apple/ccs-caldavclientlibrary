@@ -1,4 +1,4 @@
-# Copyright (c) 2006-2015 Apple Inc. All rights reserved.
+# Copyright (c) 2006-2016 Apple Inc. All rights reserved.
 # Copyright (c) 2008 Lime Nest LLC
 # Copyright (c) 2008 Lime Spot LLC
 # Copyright (c) 2009 Ramon Ziai
