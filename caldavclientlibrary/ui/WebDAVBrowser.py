@@ -44,7 +44,7 @@ from Foundation import * #@UnusedWildImport
 
 from PyObjCTools import NibClassBuilder, AppHelper
 
-import objc
+#import objc
 
 from caldavclientlibrary.protocol.utils import xmlhelpers
 from caldavclientlibrary.ui.session import Session
@@ -241,8 +241,8 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         """
         toolbar = NSToolbar.alloc().initWithIdentifier_("Toolbar")
         toolbar.setDelegate_(self)
-        toolbar.setAllowsUserCustomization_(YES)
-        toolbar.setAutosavesConfiguration_(YES)
+        toolbar.setAllowsUserCustomization_(YES) #@UndefinedVariable
+        toolbar.setAutosavesConfiguration_(YES) #@UndefinedVariable
 
         self.createToolbarItems()
 
@@ -346,10 +346,10 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         }.get(view, None)
         if self.currentBrowserView != newView:
             if self.currentBrowserView:
-                self.currentBrowserView.setHidden_(YES)
+                self.currentBrowserView.setHidden_(YES) #@UndefinedVariable
             self.currentBrowserView = newView
             if self.currentBrowserView:
-                self.currentBrowserView.setHidden_(NO)
+                self.currentBrowserView.setHidden_(NO) #@UndefinedVariable
             self.browserview = view
             self.refreshView()
 
@@ -372,10 +372,10 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         }.get(view, None)
         if self.currentDataView != newView:
             if self.currentDataView:
-                self.currentDataView.setHidden_(YES)
+                self.currentDataView.setHidden_(YES) #@UndefinedVariable
             self.currentDataView = newView
             if self.currentDataView:
-                self.currentDataView.setHidden_(NO)
+                self.currentDataView.setHidden_(NO) #@UndefinedVariable
             self.dataview = view
             self.refreshView()
 
@@ -563,10 +563,10 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         Delegate method to return the whether an item in the outline view is expandable.
         """
         if item is None:
-            return YES
+            return YES #@UndefinedVariable
         else:
             resource = unwrap_object(item)
-            return YES if resource.isCollection() else NO
+            return YES if resource.isCollection() else NO #@UndefinedVariable
 
 
     def outlineView_child_ofItem_(self, outlineView, index, item):
