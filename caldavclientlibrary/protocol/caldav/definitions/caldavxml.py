@@ -87,6 +87,8 @@ calendar_free_busy_set = QName(CalDAVNamespace, "calendar-free-busy-set")
 
 # Extensions
 
+managed_attachments_server_url = QName(CalDAVNamespace, "managed-attachments-server-URL")
+
 CalendarServerNamespace = "http://calendarserver.org/ns/"
 
 calendar_proxy_read = QName(CalendarServerNamespace, "calendar-proxy-read")
