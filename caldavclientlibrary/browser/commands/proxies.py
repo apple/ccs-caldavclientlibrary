@@ -185,6 +185,8 @@ class Add(CommonProxiesCommand):
         choice = utils.textInput("New principal [q - quit]: ")
         if choice == "q":
             return None
+        if choice.startswith("user") or choice.startswith("puser"):
+            choice = "/principals/users/%s" % (choice,)
         principal = self.shell.account.getPrincipal(URL(url=choice))
         if principal:
             principals.append(principal)
