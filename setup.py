@@ -47,6 +47,8 @@ plist = dict(NSMainNibFile="WebDAVBrowser")
 # Options
 #
 
+version_string = "0.1"
+
 name = "CalDAVClientLibrary"
 
 description = "CalDAV/CardDAV client tool"
@@ -100,6 +102,16 @@ extensions = []
 #
 
 setup(
+    name=name,
+    version=version_string,
+    description=description,
+    long_description=long_description,
+    url=url,
+    classifiers=classifiers,
+    author=author,
+    author_email=author_email,
+    license=license,
+    platforms=platforms,
     app=["caldavclientlibrary/ui/WebDAVBrowser.py"],
     packages=packages,
     data_files=data_files,
