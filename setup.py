@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##
+from os.path import dirname, join
 
 """
 Script for building the UI app (OS X only).
@@ -41,6 +42,63 @@ for dirpath, dirnames, filenames in os.walk('caldavclientlibrary'):
         packages.append(dirpath)
 
 plist = dict(NSMainNibFile="WebDAVBrowser")
+
+#
+# Options
+#
+
+name = "CalDAVClientLibrary"
+
+description = "CalDAV/CardDAV client tool"
+
+long_description = file(join(dirname(__file__), "README")).read()
+
+url = "http://trac.calendarserver.org/wiki/CalDAVClientLibrary"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 2 :: Only",
+    "Topic :: Software Development :: Testing",
+]
+
+author = "Apple Inc."
+
+author_email = "calendarserver-dev@lists.macosforge.org"
+
+license = "Apache License, Version 2.0"
+
+platforms = ["all"]
+
+
+#
+# Dependencies
+#
+
+setup_requirements = []
+
+install_requirements = []
+
+extras_requirements = {}
+
+
+#
+# Set up Extension modules that need to be built
+#
+
+# from distutils.core import Extension
+
+extensions = []
+
+
+
+#
+# Run setup
+#
+
 setup(
     app=["caldavclientlibrary/ui/WebDAVBrowser.py"],
     packages=packages,
