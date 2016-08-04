@@ -55,7 +55,7 @@ description = "CalDAV/CardDAV client tool"
 
 long_description = file(join(dirname(__file__), "README")).read()
 
-url = "http://trac.calendarserver.org/wiki/CalDAVClientLibrary"
+url = "https://github.com/apple/ccs-caldavclientlibrary"
 
 classifiers = [
     "Development Status :: 4 - Beta",
