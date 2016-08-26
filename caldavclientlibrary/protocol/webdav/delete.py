@@ -17,11 +17,11 @@
 from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 from caldavclientlibrary.protocol.webdav.definitions import methods
 
+
 class Delete(RequestResponse):
 
     def __init__(self, session, url):
         super(Delete, self).__init__(session, methods.DELETE, url)
-
 
     def setData(self, etag=None):
         self.request_data = None

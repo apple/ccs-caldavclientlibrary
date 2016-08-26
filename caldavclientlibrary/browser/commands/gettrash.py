@@ -18,12 +18,12 @@ from caldavclientlibrary.browser.command import Command, CommandError
 from caldavclientlibrary.protocol.url import URL
 import json
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("gettrash",)
-
 
     def execute(self, cmdname, options):
 
@@ -56,11 +56,9 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
-
 
     def helpDescription(self):
         return "Get the contents of the trash of the current user."

@@ -22,11 +22,11 @@ from caldavclientlibrary.protocol.carddav.definitions import carddavxml
 from caldavclientlibrary.protocol.url import URL
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 
+
 class PrincipalCache(object):
 
     def __init__(self):
         self.cache = {}
-
 
     def getPrincipal(self, session, path, refresh=False):
         if path and path.toString() not in self.cache:
@@ -41,7 +41,6 @@ class PrincipalCache(object):
             self.cache[path.toString()].loadDetails(refresh=True)
         return self.cache[path.toString()] if path else None
 
-
     def invalidate(self, path):
         if path.toString() in self.cache:
             del self.cache[path.toString()]
@@ -49,26 +48,21 @@ class PrincipalCache(object):
 principalCache = PrincipalCache()
 
 
-
 def make_tuple(item):
     return item if isinstance(item, tuple) else (item,)
-
 
 
 def make_tuple_from_list(item):
     return item if isinstance(item, tuple) else ((item,) if item else ())
 
 
-
 class CalDAVPrincipal(object):
-
 
     def __init__(self, session, path):
 
         self.session = session
         self.principalPath = path
         self._initFields()
-
 
     def __str__(self):
         return """
@@ -97,7 +91,6 @@ class CalDAVPrincipal(object):
             self.adbkhomeset,
         )
 
-
     def _initFields(self):
         self.loaded = False
         self.valid = False
@@ -116,7 +109,6 @@ class CalDAVPrincipal(object):
         self.proxyFor = None
         self.proxyreadURL = ""
         self.proxywriteURL = ""
-
 
     def loadDetails(self, refresh=False):
         if self.loaded and not refresh:
@@ -176,13 +168,11 @@ class CalDAVPrincipal(object):
 
         self.loaded = True
 
-
     def getSmartDisplayName(self):
         if self.proxyFor:
             return "%s#%s" % (self.proxyFor.displayname, self.displayname,)
         else:
             return self.displayname
-
 
     def listCalendars(self, root=None):
         calendars = []
@@ -198,10 +188,8 @@ class CalDAVPrincipal(object):
                     calendars.append(Calendar(path=path, session=self.session))
         return calendars
 
-
     def listFreeBusySet(self):
         return self._getFreeBusySet()
-
 
     def addToFreeBusySet(self, calendars):
         current = self._getFreeBusySet()
@@ -209,13 +197,11 @@ class CalDAVPrincipal(object):
             current.append(calendar)
         self._setFreeBusySet(current)
 
-
     def removeFromFreeBusySet(self, calendars):
         calendar_paths = [calendar.path for calendar in calendars]
         current = self._getFreeBusySet()
         current = [cal for cal in current if cal.path not in calendar_paths]
         self._setFreeBusySet(current)
-
 
     def cleanFreeBusySet(self):
         fbset = self.listFreeBusySet()
@@ -227,16 +213,13 @@ class CalDAVPrincipal(object):
         if badfbset:
             self.removeFromFreeBusySet(badfbset)
 
-
     def _getFreeBusySet(self):
         hrefs = self.session.getHrefListProperty(self.inboxURL, caldavxml.calendar_free_busy_set)
         return [Calendar(href.relativeURL(), session=self.session) for href in hrefs]
 
-
     def _setFreeBusySet(self, calendars):
         hrefs = [URL(url=calendar.path) for calendar in calendars]
         self.session.setProperties(self.inboxURL, ((caldavxml.calendar_free_busy_set, hrefs),))
-
 
     def getReadProxies(self, refresh=True):
         if not self.proxyreadURL:
@@ -245,14 +228,12 @@ class CalDAVPrincipal(object):
         principal = principalCache.getPrincipal(self.session, self.proxyreadURL, refresh=refresh)
         return [principalCache.getPrincipal(self.session, member) for member in principal.memberset]
 
-
     def setReadProxies(self, principals):
         if not self.proxyreadURL:
             return ()
 
         self.session.setProperties(self.proxyreadURL, ((davxml.group_member_set, principals),))
         principalCache.invalidate(self.proxyreadURL)
-
 
     def getWriteProxies(self, refresh=True):
         if not self.proxywriteURL:
@@ -261,14 +242,12 @@ class CalDAVPrincipal(object):
         principal = principalCache.getPrincipal(self.session, self.proxywriteURL, refresh=refresh)
         return [principalCache.getPrincipal(self.session, member) for member in principal.memberset]
 
-
     def setWriteProxies(self, principals):
         if not self.proxywriteURL:
             return ()
 
         self.session.setProperties(self.proxywriteURL, ((davxml.group_member_set, principals),))
         principalCache.invalidate(self.proxywriteURL)
-
 
     def listAddressBooks(self, root=None):
         adbks = []

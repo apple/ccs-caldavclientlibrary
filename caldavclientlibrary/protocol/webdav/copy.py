@@ -16,6 +16,7 @@
 
 from caldavclientlibrary.protocol.webdav.copymovebase import CopyMoveBase
 
+
 class Copy(CopyMoveBase):
 
     def __init__(self, session, url_old, absurl_new, overwrite=False):

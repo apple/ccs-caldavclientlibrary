@@ -17,6 +17,7 @@
 from caldavclientlibrary.protocol.webdav.xmlresponseparser import XMLResponseParser
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 
+
 class MultiResponseParser(XMLResponseParser):
 
     def parse(self, multistatus_node):
@@ -31,7 +32,6 @@ class MultiResponseParser(XMLResponseParser):
         # Node is the right type, so iterator over all child response nodes and process each one
         for response in multistatus_node.getchildren():
             self.parseResponse(response)
-
 
     def parseResponse(self, response):
         raise NotImplementedError

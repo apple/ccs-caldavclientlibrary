@@ -22,13 +22,13 @@ import os
 import shlex
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("quota",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -61,7 +61,6 @@ class Cmd(Command):
             quota_available = int(results[davxml.quota_available_bytes])
             quota_used = int(results[davxml.quota_used_bytes])
 
-
         def _printSmartSize(size):
 
             if size < 1024:
@@ -81,13 +80,11 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s [PATH]
 PATH is a relative or absolute path.
 
 """ % (name,)
-
 
     def helpDescription(self):
         return "Checks quota on the specified PATH."

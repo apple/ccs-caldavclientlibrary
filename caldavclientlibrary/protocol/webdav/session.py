@@ -21,6 +21,7 @@ from caldavclientlibrary.protocol.http.requestresponse import RequestResponse
 from caldavclientlibrary.protocol.http.session import Session as HTTPSession
 from caldavclientlibrary.protocol.webdav.definitions import headers
 
+
 class Session(HTTPSession):
 
     def __init__(self, server, port=None, ssl=False, afunix=None, log=None):
@@ -30,7 +31,6 @@ class Session(HTTPSession):
 
         # Features for entire session
         self.useBriefHeader = True
-
 
     def initialise(self, host, base_uri):
         # Set host change
@@ -118,38 +118,29 @@ class Session(HTTPSession):
 
         return True
 
-
     def addVersion(self, token):
         self.version += (token,)
-
 
     def hasDAVVersion(self, version):
         return version in self.version
 
-
     def hasDAV(self):
         return self.hasDAVVersion(headers.DAV1)
-
 
     def hasDAVLocking(self):
         return self.hasDAVVersion(headers.DAV2) or self.hasDAVVersion(headers.DAVbis)
 
-
     def hasDAVACL(self):
         return self.hasDAVVersion(headers.DAVACL)
-
 
     def getAuthorizor(self, first_time, www_authenticate):
         raise NotImplementedError
 
-
     def setServerType(self, type):
         raise NotImplementedError
 
-
     def setServerDescriptor(self, txt):
         raise NotImplementedError
-
 
     def setServerCapability(self, txt):
         raise NotImplementedError

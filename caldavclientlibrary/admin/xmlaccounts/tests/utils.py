@@ -21,6 +21,7 @@ from xml.etree.ElementTree import XML
 
 import unittest
 
+
 class TestCommon(unittest.TestCase):
 
     def checkXML(self, x):

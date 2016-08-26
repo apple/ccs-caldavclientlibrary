@@ -23,13 +23,13 @@ import getopt
 import readline
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("notifications",)
         self.subshell = None
-
 
     def execute(self, cmdname, options):
 
@@ -67,7 +67,6 @@ class Cmd(Command):
 
         return True
 
-
     def doInteractiveMode(self, resource, invites):
 
         print "Entering notifications edit mode on resource: %s" % (resource.relativeURL(),)
@@ -85,7 +84,6 @@ class Cmd(Command):
         self.subshell.account = self.shell.account
         self.subshell.run()
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
 PATH is a relative or absolute path.
@@ -95,10 +93,8 @@ Options:
     if not present, existing notifications will be printed.
 """ % (name,)
 
-
     def helpDescription(self):
         return "Manage sharing notifications of an address book, calendar or address book group."
-
 
 
 class CommonNotificationsCommand(Command):
@@ -113,13 +109,11 @@ class CommonNotificationsCommand(Command):
         return notifications
 
 
-
 class Process(CommonNotificationsCommand):
 
     def __init__(self, accept):
         super(Command, self).__init__()
         self.accept = accept
-
 
     def execute(self, name, options):
 
@@ -147,22 +141,18 @@ class Process(CommonNotificationsCommand):
                 break
 
 
-
 class Accept(Process):
 
     def __init__(self):
         super(Accept, self).__init__(True)
         self.cmds = ("accept",)
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Accept an invite."
-
 
 
 class Decline(Process):
@@ -171,15 +161,12 @@ class Decline(Process):
         super(Decline, self).__init__(False)
         self.cmds = ("decline",)
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Decline an invite."
-
 
 
 class Delete(CommonNotificationsCommand):
@@ -187,7 +174,6 @@ class Delete(CommonNotificationsCommand):
     def __init__(self):
         super(Delete, self).__init__()
         self.cmds = ("delete",)
-
 
     def execute(self, name, options):
 
@@ -213,15 +199,12 @@ class Delete(CommonNotificationsCommand):
                 self.shell.shell.account.session.deleteResource(notifications[number].url)
                 break
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Delete notification resource."
-
 
 
 class List(CommonNotificationsCommand):
@@ -230,17 +213,14 @@ class List(CommonNotificationsCommand):
         super(List, self).__init__()
         self.cmds = ("list",)
 
-
     def execute(self, name, options):
 
         self.displayNotificationsList()
         return True
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
-
 
     def helpDescription(self):
         return "List current invites for user."

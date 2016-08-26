@@ -22,6 +22,7 @@ from xml.etree.ElementTree import QName
 from caldavclientlibrary.protocol.webdav.definitions import headers
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -29,7 +30,6 @@ class TestRequest(unittest.TestCase):
         server = Session("www.example.com")
         request = PropFind(server, "/", headers.Depth0, (davxml.getetag, QName("http://example.com/ns/", "taggy")))
         self.assertEqual(request.getMethod(), "PROPFIND")
-
 
 
 class TestRequestHeaders(unittest.TestCase):
@@ -43,7 +43,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
-
     def test_Depth1Headers(self):
 
         server = Session("www.example.com")
@@ -53,7 +52,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
-
     def test_DepthInfinityHeaders(self):
 
         server = Session("www.example.com")
@@ -62,7 +60,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 0" in hdrs)
         self.assertFalse("Depth: 1" in hdrs)
         self.assertTrue("Depth: infinity" in hdrs)
-
 
 
 class TestRequestBody(unittest.TestCase):
@@ -84,15 +81,12 @@ class TestRequestBody(unittest.TestCase):
         )
 
 
-
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

@@ -23,6 +23,7 @@ from caldavclientlibrary.protocol.webdav.report import Report
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
 
+
 class Multiget(Report):
 
     def __init__(self, session, url, hrefs, props=()):
@@ -32,13 +33,11 @@ class Multiget(Report):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def generateXML(self, os):
         # Structure of document is:

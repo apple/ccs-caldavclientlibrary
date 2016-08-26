@@ -17,6 +17,7 @@
 from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 from caldavclientlibrary.protocol.webdav.definitions import methods
 
+
 class MakeCollection(RequestResponse):
 
     def __init__(self, session, url):

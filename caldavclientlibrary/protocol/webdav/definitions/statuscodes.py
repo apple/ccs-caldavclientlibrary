@@ -14,7 +14,7 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.protocol.http.definitions.statuscodes import * #@UnusedWildImport
+from caldavclientlibrary.protocol.http.definitions.statuscodes import *  # @UnusedWildImport
 
 Processing = 102
 MultiStatus = 207

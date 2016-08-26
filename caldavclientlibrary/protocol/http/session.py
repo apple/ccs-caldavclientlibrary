@@ -17,6 +17,7 @@
 from httplib import InvalidURL
 import httplib
 
+
 class Session(object):
 
     STATE_OPEN = 0
@@ -34,19 +35,15 @@ class Session(object):
         self.connection_state = Session.STATE_CLOSED
         self.log = log
 
-
     def hasAuthorization(self):
         return self.authorization != None
-
 
     def getAuthorization(self):
         return self.authorization
 
-
     def addHeaders(self, hdrs, request):
         if self.hasAuthorization():
             self.getAuthorization().addHeaders(hdrs, request)
-
 
     def setServer(self, server, port=None):
 
@@ -71,7 +68,6 @@ class Session(object):
             # Always clear out authorization when host changes
             self.authorization = None
 
-
     def sendRequest(self, request):
         try:
 
@@ -91,47 +87,37 @@ class Session(object):
             self.connection_state = Session.STATE_CLOSED
             raise
 
-
     def handleHTTPError(self, request):
         raise NotImplementedError
-
 
     def displayHTTPError(self, request):
         raise NotImplementedError
 
-
     def isConnectionOpen(self):
         return self.connection_state == Session.STATE_OPEN
-
 
     def needConnection(self):
         if not self.isConnectionOpen():
             self.openConnection()
-
 
     def openConnection(self):
         if not self.isConnectionOpen():
             self.openSession()
             self.connection_state = Session.STATE_OPEN
 
-
     def closeConnection(self):
         if self.isConnectionOpen():
             self.closeSession()
             self.connection_state = Session.STATE_CLOSED
 
-
     def openSession(self):
         raise NotImplementedError
-
 
     def closeSession(self):
         raise NotImplementedError
 
-
     def runSession(self, request):
         raise NotImplementedError
-
 
     def doRequest(self, request):
         raise NotImplementedError

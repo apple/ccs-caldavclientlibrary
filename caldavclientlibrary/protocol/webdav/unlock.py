@@ -18,6 +18,7 @@ from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 from caldavclientlibrary.protocol.webdav.definitions import methods
 from caldavclientlibrary.protocol.webdav.definitions import headers
 
+
 class Unlock(RequestResponse):
 
     def __init__(self, session, url, lock_token):
@@ -25,7 +26,6 @@ class Unlock(RequestResponse):
         super(Unlock, self).__init__(session, methods.UNLOCK, url)
 
         self.lock_token = lock_token
-
 
     def addHeaders(self, hdrs):
         # Do default

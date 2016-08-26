@@ -16,29 +16,25 @@
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
     pass
-
 
 
 class TestRequestHeaders(unittest.TestCase):
     pass
 
 
-
 class TestRequestBody(unittest.TestCase):
     pass
-
 
 
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

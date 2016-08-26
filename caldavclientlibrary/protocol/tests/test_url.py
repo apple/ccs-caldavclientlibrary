@@ -18,6 +18,7 @@ from caldavclientlibrary.protocol.url import URL
 
 import unittest
 
+
 class TestURLParse(unittest.TestCase):
 
     def verifyParts(self, u, s, scheme, server, path, extended):
@@ -27,13 +28,11 @@ class TestURLParse(unittest.TestCase):
         self.assertEqual(u.path, path)
         self.assertEqual(u.extended, extended)
 
-
     def test_ParsePlain(self):
 
         s = "http://www.example.com"
         u = URL(url=s)
         self.verifyParts(u, s, "http", "www.example.com", "", "")
-
 
     def test_ParsePlainPath(self):
 
@@ -41,13 +40,11 @@ class TestURLParse(unittest.TestCase):
         u = URL(url=s)
         self.verifyParts(u, s, "http", "www.example.com", "/principals/users", "")
 
-
     def test_ParsePlainPathExtended(self):
 
         s = "http://www.example.com/principals/users?test=true"
         u = URL(url=s)
         self.verifyParts(u, s, "http", "www.example.com", "/principals/users", "?test=true")
-
 
     def test_ParseMailto(self):
 

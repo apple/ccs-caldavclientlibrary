@@ -23,13 +23,13 @@ import shlex
 
 synctokens = [{}, {}]
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("sync",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -82,7 +82,6 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
 PATH is a relative or absolute path.
@@ -92,7 +91,6 @@ Options:
 -i       depth:infinite [DEFAULT depth:1]
 -t TEXT  the token to use
 """ % (name,)
-
 
     def helpDescription(self):
         return "Sync the contents of a directory."

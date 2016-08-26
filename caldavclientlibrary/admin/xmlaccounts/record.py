@@ -21,6 +21,7 @@ from caldavclientlibrary.protocol.utils.xmlhelpers import SubElementWithData
 
 from xml.etree.ElementTree import Element
 
+
 class XMLRecord(object):
     """
     Represents a single principal record. This class can parse and generate the appropriate XML.
@@ -39,7 +40,6 @@ class XMLRecord(object):
         self.enabledForCalendaring = True
         self.proxies = set()
         self.proxyFor = set()
-
 
     def parseXML(self, node):
         """
@@ -81,7 +81,6 @@ class XMLRecord(object):
             else:
                 raise RuntimeError("Unknown account attribute: %s" % (child.tag,))
 
-
     def _parseMembers(self, node, addto):
         """
         Parse an XML <members> or <proxies> element list.
@@ -96,7 +95,6 @@ class XMLRecord(object):
             if child.tag == tags.ELEMENT_MEMBER:
                 recordType = child.get(tags.ATTRIBUTE_RECORDTYPE, recordtypes.recordType_users)
                 addto.add((recordType, child.text))
-
 
     def writeXML(self):
         """

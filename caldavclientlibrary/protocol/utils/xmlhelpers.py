@@ -26,12 +26,12 @@ from StringIO import StringIO
 from xml.etree.ElementTree import SubElement
 import string
 
+
 def SubElementWithData(parent, tag, data=None, attrs={}):
     element = SubElement(parent, tag, attrs)
     if data:
         element.text = data
     return element
-
 
 
 def myfixtag(tag, namespaces):
@@ -55,7 +55,6 @@ def myfixtag(tag, namespaces):
     return "%s:%s" % (prefix, tag), xmlns
 
 
-
 class BetterElementTree(ElementTree):
 
     def writeUTF8(self, file):
@@ -66,7 +65,6 @@ class BetterElementTree(ElementTree):
         file.write("<?xml version='1.0' encoding='%s'?>" % encoding)
         self._prettywrite(file, self._root, encoding, {})
         file.write("\r\n")
-
 
     def _prettywrite(self, file, node, encoding, namespaces, depth=0):
         # write XML to file
@@ -79,7 +77,7 @@ class BetterElementTree(ElementTree):
             file.write("<?%s?>" % _escape_cdata(node.text, encoding))
         else:
             items = node.items()
-            xmlns_items = [] # new namespaces in this scope
+            xmlns_items = []  # new namespaces in this scope
             try:
                 if isinstance(tag, QName) or tag[:1] == "{":
                     tag, xmlns = myfixtag(tag, namespaces)
@@ -90,7 +88,7 @@ class BetterElementTree(ElementTree):
             file.write("\r\n" + "  " * depth)
             file.write("<" + _encode(tag, encoding))
             if items or xmlns_items:
-                items.sort() # lexical order
+                items.sort()  # lexical order
                 for k, v in items:
                     try:
                         if isinstance(k, QName) or k[:1] == "{":
@@ -126,7 +124,6 @@ class BetterElementTree(ElementTree):
                 del namespaces[v]
         if node.tail:
             file.write(_escape_cdata(node.tail, encoding))
-
 
 
 def elementToString(element):

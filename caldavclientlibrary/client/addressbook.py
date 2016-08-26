@@ -18,6 +18,7 @@ from caldavclientlibrary.protocol.carddav.definitions import carddavxml
 from caldavclientlibrary.protocol.url import URL
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 
+
 class AddressBook(object):
 
     def __init__(self, path=None, session=None):
@@ -28,46 +29,36 @@ class AddressBook(object):
         self.displayname = None
         self.description = None
 
-
     def __str__(self):
         return "AddressBook: %s" % (self.path,)
-
 
     def __repr__(self):
         return "AddressBook: %s" % (self.path,)
 
-
     def exists(self):
         return self.session.testResource(URL(url=self.path))
-
 
     def readAddressBook(self):
         pass
 
-
     def writeAddressBook(self, adbk):
         pass
-
 
     def readComponent(self, name=None, uid=None):
         pass
 
-
     def writeComponent(self, component, name=None):
         pass
-
 
     def getDisplayName(self):
         if self.displayname is None and self.session:
             self._getProperties()
         return self.displayname
 
-
     def getDescription(self):
         if self.description is None and self.session:
             self._getProperties()
         return self.description
-
 
     def _getProperties(self):
         assert(self.session is not None)

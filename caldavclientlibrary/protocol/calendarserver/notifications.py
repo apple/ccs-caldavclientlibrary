@@ -31,7 +31,6 @@ def userNameFromNode(node):
     return cn.text if cn is not None else ("%s %s" % (first.text, last.text) if first is not None or last is not None else "")
 
 
-
 class InviteNotification(object):
     """
     An invite notification sent to sharees.
@@ -48,7 +47,6 @@ class InviteNotification(object):
         self.organizer_uid = None
         self.organizer_cn = None
         self.summary = "-"
-
 
     def parseFromNotification(self, url, notification):
 
@@ -80,7 +78,6 @@ class InviteNotification(object):
         return self
 
 
-
 class InviteReply(object):
     """
     An invite reply sent to the sharer.
@@ -94,7 +91,6 @@ class InviteReply(object):
         self.hosturl = ""
         self.in_reply_to = ""
         self.summary = "-"
-
 
     def parseFromNotification(self, url, notification):
 
@@ -122,7 +118,6 @@ class InviteReply(object):
         return self
 
 
-
 class ProcessNotification(Post):
     """
     HTTP POST request to accept or decline a sharee's invite notification.
@@ -135,13 +130,11 @@ class ProcessNotification(Post):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def generateXML(self, os):
         # Structure of document is:

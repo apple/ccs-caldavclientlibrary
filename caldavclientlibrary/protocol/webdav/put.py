@@ -18,11 +18,11 @@ from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 from caldavclientlibrary.protocol.webdav.definitions import methods
 from caldavclientlibrary.protocol.webdav.definitions import headers
 
+
 class Put(RequestResponse):
 
     def __init__(self, session, url, lock=None):
         super(Put, self).__init__(session, methods.PUT, url, lock=lock)
-
 
     def setData(self, request_data, response_data, etag=None, new_item=False):
         assert(not (etag and new_item))
@@ -38,7 +38,6 @@ class Put(RequestResponse):
         if new_item:
             self.etag = "*"
             self.etag_match = False
-
 
     def getNewETag(self):
         # Get the ETag header from response headers

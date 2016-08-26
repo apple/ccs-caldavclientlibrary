@@ -35,17 +35,17 @@ RECORD_TYPES = (
 """Allowed record type identifiers."""
 
 RECORD_TYPES_TO_TAGS = {
-    recordType_users     : tags.ELEMENT_USER,
-    recordType_groups    : tags.ELEMENT_GROUP,
-    recordType_locations : tags.ELEMENT_LOCATION,
-    recordType_resources : tags.ELEMENT_RESOURCE,
+    recordType_users: tags.ELEMENT_USER,
+    recordType_groups: tags.ELEMENT_GROUP,
+    recordType_locations: tags.ELEMENT_LOCATION,
+    recordType_resources: tags.ELEMENT_RESOURCE,
 }
 """Maps between record type identifiers and their corresponding XML element names."""
 
 TAGS_TO_RECORD_TYPES = {
-    tags.ELEMENT_USER     : recordType_users,
-    tags.ELEMENT_GROUP    : recordType_groups,
-    tags.ELEMENT_LOCATION : recordType_locations,
-    tags.ELEMENT_RESOURCE : recordType_resources,
+    tags.ELEMENT_USER: recordType_users,
+    tags.ELEMENT_GROUP: recordType_groups,
+    tags.ELEMENT_LOCATION: recordType_locations,
+    tags.ELEMENT_RESOURCE: recordType_resources,
 }
 """Maps between XML element names and their corresponding record type identifiers."""

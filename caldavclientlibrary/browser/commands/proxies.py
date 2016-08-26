@@ -23,13 +23,13 @@ from caldavclientlibrary.browser import commands
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("proxies",)
         self.subshell = None
-
 
     def execute(self, cmdname, options):
 
@@ -72,7 +72,6 @@ class Cmd(Command):
 
         return True
 
-
     def doInteractiveMode(self, principal):
 
         print "Entering Proxy edit mode on principal: %s (%s)" % (principal.getSmartDisplayName(), principal.principalURL)
@@ -89,7 +88,6 @@ class Cmd(Command):
         self.subshell.account = self.shell.account
         self.subshell.run()
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS]
 PRINCIPAL - principal path to request proxies for.
@@ -104,10 +102,8 @@ Options:
         if not present, the current user's principal is used.
 """ % (name,)
 
-
     def helpDescription(self):
         return "Displays the delegates for the chosen user."
-
 
 
 class CommonProxiesCommand(Command):
@@ -154,7 +150,6 @@ class CommonProxiesCommand(Command):
 
         return read
 
-
     def printProxyList(self, read):
 
         if read:
@@ -168,13 +163,11 @@ class CommonProxiesCommand(Command):
         return principals
 
 
-
 class Add(CommonProxiesCommand):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("add",)
-
 
     def execute(self, name, options):
 
@@ -196,7 +189,6 @@ class Add(CommonProxiesCommand):
             else:
                 self.shell.principal.setWriteProxies(principals)
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS]
 
@@ -206,10 +198,8 @@ Options:
         one of -r or -w must be present.
 """ % (name,)
 
-
     def helpDescription(self):
         return "Add proxies on principal."
-
 
 
 class Remove(CommonProxiesCommand):
@@ -217,7 +207,6 @@ class Remove(CommonProxiesCommand):
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("remove",)
-
 
     def execute(self, name, options):
 
@@ -235,7 +224,6 @@ class Remove(CommonProxiesCommand):
         else:
             self.shell.principal.setWriteProxies(principals)
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS]
 
@@ -245,10 +233,8 @@ Options:
         one of -r or -w must be present.
 """ % (name,)
 
-
     def helpDescription(self):
         return "Remove proxies on principal."
-
 
 
 class List(CommonProxiesCommand):
@@ -257,17 +243,14 @@ class List(CommonProxiesCommand):
         super(Command, self).__init__()
         self.cmds = ("list",)
 
-
     def execute(self, name, options):
 
         utils.printProxyPrincipals(self.shell.account, self.shell.principal, True, True, True, True)
         return True
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
-
 
     def helpDescription(self):
         return "List current ACLs on existing resource."

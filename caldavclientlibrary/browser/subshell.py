@@ -17,6 +17,7 @@
 from caldavclientlibrary.browser.command import Command
 from caldavclientlibrary.browser.baseshell import BaseShell
 
+
 class SubShell(BaseShell):
 
     def __init__(self, shell, prefix, cmds):
@@ -26,7 +27,6 @@ class SubShell(BaseShell):
         self.prefix = prefix
         self.preserve_history = True
         self.registerCommands(cmds)
-
 
     def registerCommands(self, cmds):
         for cmd in cmds:

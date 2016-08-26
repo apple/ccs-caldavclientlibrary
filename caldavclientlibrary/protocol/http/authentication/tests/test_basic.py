@@ -19,6 +19,7 @@ from caldavclientlibrary.protocol.http.definitions import headers
 
 import unittest
 
+
 class TestBasic(unittest.TestCase):
 
     def testBasic(self):

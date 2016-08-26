@@ -19,12 +19,12 @@ from xml.etree.ElementTree import Element
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
 
+
 class PropNames(PropFindBase):
 
     def __init__(self, session, url, depth):
         super(PropNames, self).__init__(session, url, depth)
         self.initRequestData()
-
 
     def generateXML(self, os):
         # Structure of document is:

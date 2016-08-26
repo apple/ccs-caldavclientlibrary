@@ -24,6 +24,7 @@ import readline
 import traceback
 import urllib
 
+
 class BaseShell(object):
 
     def __init__(self, history_name):
@@ -37,27 +38,22 @@ class BaseShell(object):
 
         self.readHistory()
 
-
     def readHistory(self):
         try:
             readline.read_history_file(os.path.expanduser("~/.%s" % (self.history_name,)))
         except IOError:
             pass
 
-
     def saveHistory(self):
         readline.write_history_file(os.path.expanduser("~/.%s" % (self.history_name,)))
 
-
     def registerCommands(self, cmds):
         raise NotImplementedError
-
 
     def registerCommand(self, command):
         for cmd in command.getCmds():
             self.commands[cmd] = command
         command.setShell(self)
-
 
     def run(self):
 
@@ -97,7 +93,6 @@ class BaseShell(object):
             readline.clear_history()
             map(readline.add_history, old_history)
 
-
     def execute(self, cmdline):
 
         # Check for history recall
@@ -136,7 +131,6 @@ class BaseShell(object):
             # Store in history
             self.history.append(cmdline)
 
-
     def help(self, cmd=None):
 
         if cmd:
@@ -161,7 +155,6 @@ class BaseShell(object):
                     results.append(cmd.helpListing(name))
             utils.printTwoColumnList(results)
 
-
     def complete(self, text, state):
 
         # If there is no space in the text we complete a command
@@ -179,7 +172,6 @@ class BaseShell(object):
                 results = self.commands[cmd].complete(rest)
 
         return results[state]
-
 
     def wdcomplete(self, text):
 

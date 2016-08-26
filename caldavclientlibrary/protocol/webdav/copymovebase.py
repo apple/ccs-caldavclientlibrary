@@ -18,13 +18,13 @@ from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 from caldavclientlibrary.protocol.webdav.definitions import methods
 from caldavclientlibrary.protocol.webdav.definitions import headers
 
+
 class CopyMoveBase(RequestResponse):
 
     def __init__(self, session, url_old, absurl_new, overwrite=False, delete_original=True):
         super(CopyMoveBase, self).__init__(session, methods.MOVE if delete_original else methods.COPY, url_old)
         self.absurl_new = absurl_new
         self.overwrite = overwrite
-
 
     def setData(self, etag):
         self.request_data = None
@@ -34,7 +34,6 @@ class CopyMoveBase(RequestResponse):
         if etag:
             self.etag = etag
             self.etag_match = True
-
 
     def addHeaders(self, hdrs):
         # Do default

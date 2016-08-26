@@ -25,6 +25,7 @@ import getopt
 import sys
 import urlparse
 
+
 class Shell(BaseShell):
 
     def __init__(self, server, path, user, pswd, logging, afunix=None):
@@ -44,7 +45,6 @@ class Shell(BaseShell):
 
         atexit.register(self.saveHistory)
 
-
     def registerCommands(self):
         module = caldavclientlibrary.browser.commands
         for item in module.__all__:
@@ -52,7 +52,6 @@ class Shell(BaseShell):
             cmd_class = mod.Cmd
             if type(cmd_class) is type and issubclass(cmd_class, Command):
                 self.registerCommand(cmd_class())
-
 
     def setWD(self, newwd):
 
@@ -63,13 +62,11 @@ class Shell(BaseShell):
         self.prefix = self.wd = newwd
         return True
 
-
     def setUserPswd(self, user, pswd):
 
         self.user = user
         self.pswd = pswd
         self.account.setUserPswd(user, pswd)
-
 
 
 def usage():
@@ -82,7 +79,6 @@ Options:
 --user=USER     user name to login as - will be prompted if not prsent [OPTIONAL].
 --pswd=PSWD     password for user - will be prompted if not prsent [OPTIONAL].
 """
-
 
 
 def runit():

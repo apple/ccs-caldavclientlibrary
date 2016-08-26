@@ -23,6 +23,7 @@ from caldavclientlibrary.protocol.webdav.definitions import davxml
 from xml.etree.ElementTree import Element
 from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
 
+
 class Lock(RequestResponse):
 
     eExclusive = 0
@@ -57,13 +58,11 @@ class Lock(RequestResponse):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def addHeaders(self, hdrs):
         # Do default
@@ -77,7 +76,6 @@ class Lock(RequestResponse):
             hdrs.append((headers.Timeout, headers.TimeoutInfinite))
         elif self.timeout > 0:
             hdrs.append((headers.Timeout, "%s%d" % (headers.TimeoutSeconds, self.timeout)))
-
 
     def generateXML(self, os):
         # Structure of document is:
@@ -120,7 +118,6 @@ class Lock(RequestResponse):
 
         # Now we have the complete document, so write it out (no indentation)
         BetterElementTree(lockinfo).writeUTF8(os)
-
 
     def getLockToken(self):
 

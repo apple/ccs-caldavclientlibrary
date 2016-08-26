@@ -21,13 +21,13 @@ import os
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("post",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -84,7 +84,6 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s OPTIONS PATH
 PATH is a relative or absolute path.
@@ -97,7 +96,6 @@ Options:
 Notes:
 Only one of -f or -d is allowed.
 """ % (name,)
-
 
     def helpDescription(self):
         return "Post data to a resource on the server."

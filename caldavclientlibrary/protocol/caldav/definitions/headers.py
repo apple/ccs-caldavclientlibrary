@@ -14,7 +14,7 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.protocol.webdav.definitions.headers import * #@UnusedWildImport
+from caldavclientlibrary.protocol.webdav.definitions.headers import *  # @UnusedWildImport
 
 # RFC4791
 CalendarAccess = "calendar-access"

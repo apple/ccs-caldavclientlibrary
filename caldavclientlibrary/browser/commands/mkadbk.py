@@ -21,13 +21,13 @@ import getopt
 import os
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("mkadbk",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -54,13 +54,11 @@ class Cmd(Command):
         self.shell.account.session.makeAddressBook(resource)
         return True
 
-
     def usage(self, name):
         return """Usage: %s PATH
 PATH is a relative or absolute path.
 
 """ % (name,)
-
 
     def helpDescription(self):
         return "Creates an address book collection."

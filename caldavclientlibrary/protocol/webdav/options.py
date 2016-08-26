@@ -19,11 +19,11 @@ from caldavclientlibrary.protocol.webdav.definitions import methods
 from caldavclientlibrary.protocol.http.util import parsetoken
 from caldavclientlibrary.protocol.webdav.definitions import headers
 
+
 class Options(RequestResponse):
 
     def __init__(self, session, url):
         super(Options, self).__init__(session, methods.OPTIONS, url)
-
 
     def getAllowed(self):
 
@@ -37,7 +37,6 @@ class Options(RequestResponse):
                     methods += (token,)
 
         return methods
-
 
     def isAllowed(self, method):
         methods = ()

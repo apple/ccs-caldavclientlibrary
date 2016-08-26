@@ -18,6 +18,7 @@ from caldavclientlibrary.protocol.url import URL
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 import os
 
+
 class Resource(object):
     """
     Maintains data for a WebDAV resource, including list of properties,
@@ -36,30 +37,23 @@ class Resource(object):
         self.details = None
         self.data = None
 
-
     def getPath(self):
         return self.path
-
 
     def getName(self):
         return os.path.basename(self.path)
 
-
     def getLastMod(self):
         return self.lastmod
-
 
     def getSize(self):
         return self.size
 
-
     def getType(self):
         return self.type
 
-
     def isCollection(self):
         return self.iscollection
-
 
     def findPath(self, path=None, elements=None):
         if path:
@@ -74,14 +68,12 @@ class Resource(object):
                         return child
         return None
 
-
     def findChild(self, name):
         if self.children:
             for child in self.children:
                 if child.getName() == name:
                     return child
         return None
-
 
     def listChildren(self):
         if self.children is None:
@@ -104,7 +96,6 @@ class Resource(object):
             ) for rurl in items if rurl != self.path + "/"]
         return self.children
 
-
     def getDetails(self):
         resource = URL(url=self.path + "/")
         props = (davxml.resourcetype,)
@@ -116,7 +107,6 @@ class Resource(object):
         modtime = props.get(davxml.getlastmodified, "-")
         return ["Size: %s" % (size,), "Modtime: %s" % (modtime,)]
 
-
     def getAllDetails(self):
         if self.details is None:
             resource = URL(url=self.path + "/")
@@ -127,20 +117,17 @@ class Resource(object):
             self.details = [(key, results[key],) for key in sorted]
         return self.details
 
-
     def getData(self):
         if self.data is None:
             resource = URL(url=self.path + "/")
             self.data, _ignore_etag = self.session.account.session.readData(resource)
         return self.data
 
-
     def getDataAsHTML(self):
         data = self.getData()
         if not self.type.startswith("text/html"):
             data = "<HTML><BODY>%s</BODY></HTML>" % (data.replace("\r\n", "\n").replace("\r", "\n").replace("\n", "<br>\n"),)
         return data
-
 
     def clear(self):
         self.children = None

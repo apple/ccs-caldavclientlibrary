@@ -22,6 +22,7 @@ from caldavclientlibrary.protocol.webdav.definitions import davxml
 from xml.etree.ElementTree import Element
 from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
 
+
 class ACL(RequestResponse):
 
     def __init__(self, session, url, acls):
@@ -30,13 +31,11 @@ class ACL(RequestResponse):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def generateXML(self, os):
         # Structure of document is:

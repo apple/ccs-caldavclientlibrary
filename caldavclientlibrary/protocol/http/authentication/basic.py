@@ -17,17 +17,16 @@
 from caldavclientlibrary.protocol.http.authentication.authenticator import Authenticator
 from caldavclientlibrary.protocol.http.definitions import headers
 
+
 class Basic(Authenticator):
 
     def __init__(self, user, pswd):
         self.user = user
         self.pswd = pswd
 
-
     def setDetails(self, user, pswd):
         self.user = user
         self.pswd = pswd
-
 
     def addHeaders(self, hdrs, request):
         # Generate the base64 encoded string

@@ -19,6 +19,7 @@ from caldavclientlibrary.protocol.webdav.options import Options
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -28,20 +29,16 @@ class TestRequest(unittest.TestCase):
         self.assertEqual(request.getMethod(), "OPTIONS")
 
 
-
 class TestRequestHeaders(unittest.TestCase):
     pass
-
 
 
 class TestRequestBody(unittest.TestCase):
     pass
 
 
-
 class TestResponse(unittest.TestCase):
     pass
-
 
 
 class TestResponseHeaders(unittest.TestCase):
@@ -59,7 +56,6 @@ class TestResponseHeaders(unittest.TestCase):
         self.assertTrue(request.isAllowed("OPTIONS"))
         self.assertTrue(request.isAllowed("HEAD"))
 
-
     def test_MultipleHeader(self):
 
         server = Session("www.example.com")
@@ -72,7 +68,6 @@ class TestResponseHeaders(unittest.TestCase):
         self.assertTrue(request.isAllowed("PUT"))
         self.assertTrue(request.isAllowed("OPTIONS"))
         self.assertTrue(request.isAllowed("HEAD"))
-
 
 
 class TestResponseBody(unittest.TestCase):

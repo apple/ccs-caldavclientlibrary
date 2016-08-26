@@ -16,6 +16,7 @@
 
 from caldavclientlibrary.protocol.webdav.getbase import GetBase
 
+
 class Head(GetBase):
 
     def __init__(self, session, url, lock=None):

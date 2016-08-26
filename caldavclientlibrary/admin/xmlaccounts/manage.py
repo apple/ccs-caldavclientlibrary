@@ -19,6 +19,7 @@ from caldavclientlibrary.admin.xmlaccounts.commands import registered
 
 import sys
 
+
 def usage():
     """
     Print out the command line usage.
@@ -33,7 +34,6 @@ CMD: one of:
 OPTIONS: specific to each command, use --help with the
 command to see what options are supported.
 """ % ("\n".join(["\t%s" % (cmd,) for cmd in cmds]),)
-
 
 
 def runit():

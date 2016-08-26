@@ -23,6 +23,7 @@ from StringIO import StringIO
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def verifyXML(self, x, y=None):
@@ -45,7 +46,6 @@ class TestRequest(unittest.TestCase):
         # Verify data
         self.assertEqual(os.getvalue(), y if y else x)
 
-
     def test_XML1(self):
 
         self.verifyXML("""<?xml version='1.0' encoding='utf-8'?>
@@ -60,7 +60,6 @@ class TestRequest(unittest.TestCase):
   </ns0:grant>
 </ns0:ace>
 """)
-
 
     def test_XML2(self):
 
@@ -80,7 +79,6 @@ class TestRequest(unittest.TestCase):
 </ns0:ace>
 """)
 
-
     def test_XML3(self):
 
         self.verifyXML("""<?xml version='1.0' encoding='utf-8'?>
@@ -97,7 +95,6 @@ class TestRequest(unittest.TestCase):
   <ns0:inherited />
 </ns0:ace>
 """)
-
 
     def test_XML4(self):
 
@@ -117,7 +114,6 @@ class TestRequest(unittest.TestCase):
   <ns0:inherited />
 </ns0:ace>
 """)
-
 
     def test_XML5(self):
 

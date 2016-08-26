@@ -23,6 +23,7 @@ from caldavclientlibrary.protocol.webdav.report import Report
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
 
+
 class Query(Report):
 
     def __init__(self, session, url, props=()):
@@ -31,13 +32,11 @@ class Query(Report):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def generateXML(self, os):
         # Structure of document is:
@@ -61,7 +60,6 @@ class Query(Report):
         xmldoc = BetterElementTree(query)
         xmldoc.writeUTF8(os)
 
-
     def addProps(self, query):
         """
         Add properties to the query XML.
@@ -76,14 +74,12 @@ class Query(Report):
                 # Add property element taking namespace into account
                 SubElement(prop, propname)
 
-
     def addFilterElement(self, query):
         """
         Add a CALDAV:filter element to the specified CALDAV:calendar-query element.
         Sub-classes must override to add specific types of query
         """
         raise NotImplementedError
-
 
 
 class QueryVEVENTTimeRange(Query):
@@ -95,7 +91,6 @@ class QueryVEVENTTimeRange(Query):
         self.expand = expand
 
         super(QueryVEVENTTimeRange, self).__init__(session, url, props)
-
 
     def addProps(self, query):
         """
@@ -115,7 +110,6 @@ class QueryVEVENTTimeRange(Query):
             if self.expand:
                 cdata = SubElement(prop, caldavxml.calendar_data)
                 SubElement(cdata, caldavxml.expand, {"start": self.trstart, "end": self.trend})
-
 
     def addFilterElement(self, query):
         """

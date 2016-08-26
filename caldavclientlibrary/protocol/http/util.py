@@ -33,7 +33,6 @@ def parsetoken(text, delimiters=" \t"):
         return token, lstripdelimiters(text[pos:], delimiters)
 
 
-
 def parsequoted(text, delimiters=" \t"):
 
     assert(text)
@@ -53,14 +52,12 @@ def parsequoted(text, delimiters=" \t"):
             )
 
 
-
 def lstripdelimiters(text, delimiters):
     for pos, c in enumerate(text):
         if c not in delimiters:
             return text[pos:]
     else:
         return ""
-
 
 
 def parseStatusLine(status):

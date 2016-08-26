@@ -14,6 +14,7 @@
 # limitations under the License.
 ##
 
+
 class Command(object):
 
     def __init__(self):
@@ -22,18 +23,14 @@ class Command(object):
         self.cmds = ()
         self.do_wd_complete = False
 
-
     def execute(self, name, options):
         raise NotImplementedError
-
 
     def usage(self, name):
         raise NotImplementedError
 
-
     def hasHelp(self, name):
         return name in self.cmds
-
 
     def help(self, name):
         result = "Command: %s\n" % (name,)
@@ -41,36 +38,28 @@ class Command(object):
         result += self.usage(name)
         return result
 
-
     def helpListing(self, name):
         return (name, self.helpDescription())
-
 
     def helpDescription(self):
         return ""
 
-
     def setShell(self, shell):
         self.shell = shell
-
 
     def getCmds(self):
         return self.cmds
 
-
     def complete(self, text):
         return () if not self.do_wd_complete else self.shell.wdcomplete(text)
-
 
 
 class WrongOptions(Exception):
     pass
 
 
-
 class UnknownCommand(Exception):
     pass
-
 
 
 class CommandError(Exception):

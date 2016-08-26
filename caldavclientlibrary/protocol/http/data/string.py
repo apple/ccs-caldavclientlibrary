@@ -18,6 +18,7 @@ from caldavclientlibrary.protocol.http.data.data import ResponseData
 from caldavclientlibrary.protocol.http.data.data import RequestData
 from StringIO import StringIO
 
+
 class RequestDataString(RequestData):
 
     def __init__(self, text, content_type):
@@ -30,10 +31,8 @@ class RequestDataString(RequestData):
 
         self.content_type = content_type
 
-
     def read(self):
         return self.text, False
-
 
 
 class ResponseDataString(ResponseData):
@@ -41,14 +40,11 @@ class ResponseDataString(ResponseData):
     def __init__(self):
         self.stream = StringIO()
 
-
     def getData(self):
         return self.stream.getvalue()
 
-
     def write(self, data):
         self.stream.write(data)
-
 
     def clear(self):
         # Throw out existing data and start from scratch

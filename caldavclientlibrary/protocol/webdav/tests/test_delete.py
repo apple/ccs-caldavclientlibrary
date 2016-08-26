@@ -19,6 +19,7 @@ from caldavclientlibrary.protocol.webdav.delete import Delete
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -26,7 +27,6 @@ class TestRequest(unittest.TestCase):
         server = Session("www.example.com")
         request = Delete(server, "/")
         self.assertEqual(request.getMethod(), "DELETE")
-
 
 
 class TestRequestHeaders(unittest.TestCase):
@@ -39,7 +39,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
 
-
     def test_IfMatchHeader(self):
 
         server = Session("www.example.com")
@@ -50,20 +49,16 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("If-Match: \"12345\"" in hdrs)
 
 
-
 class TestRequestBody(unittest.TestCase):
     pass
-
 
 
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

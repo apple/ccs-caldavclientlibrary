@@ -26,13 +26,13 @@ import getopt
 import shlex
 import urllib
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("ls",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -175,7 +175,6 @@ class Cmd(Command):
                 print
         return True
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
 PATH is a relative or absolute path.
@@ -190,7 +189,6 @@ Options:
 -s   long listing + DAV:sync-token
 -D   details including SUMMARY
 """ % (name,)
-
 
     def helpDescription(self):
         return "List the contents of a directory."

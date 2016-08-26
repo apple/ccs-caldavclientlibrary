@@ -22,13 +22,13 @@ import os
 import readline
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("mv", "move",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -73,13 +73,11 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s PATH PATH
 PATH is a relative or absolute path.
 
 """ % (name,)
-
 
     def helpDescription(self):
         return "Moves a resource."

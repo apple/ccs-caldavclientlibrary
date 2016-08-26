@@ -18,29 +18,29 @@
 Code based on PyObjC examples included with Apple Developer tools.
 """
 
-import Foundation #@UnusedImport
-import AppKit #@UnusedImport
-import WebKit #@UnusedImport
+import Foundation  # @UnusedImport
+import AppKit  # @UnusedImport
+import WebKit  # @UnusedImport
 
-from AppKit import * #@UnusedWildImport
-from AppKit import NSApplication #@UnresolvedImport
-from AppKit import NSImage #@UnresolvedImport
-from AppKit import NSMenuItem #@UnresolvedImport
-from AppKit import NSObject #@UnresolvedImport
-from AppKit import NSPlainFileType #@UnresolvedImport
-from AppKit import NSSize #@UnresolvedImport
-from AppKit import NSToolbar #@UnresolvedImport
-from AppKit import NSToolbarCustomizeToolbarItemIdentifier #@UnresolvedImport
-from AppKit import NSToolbarFlexibleSpaceItemIdentifier #@UnresolvedImport
-from AppKit import NSToolbarItem #@UnresolvedImport
-from AppKit import NSToolbarPrintItemIdentifier #@UnresolvedImport
-from AppKit import NSToolbarSeparatorItemIdentifier #@UnresolvedImport
-from AppKit import NSToolbarSpaceItemIdentifier #@UnresolvedImport
-from AppKit import NSURL #@UnresolvedImport
-from AppKit import NSUserDefaults #@UnresolvedImport
-from AppKit import NSWorkspace #@UnresolvedImport
+from AppKit import *  # @UnusedWildImport
+from AppKit import NSApplication  # @UnresolvedImport
+from AppKit import NSImage  # @UnresolvedImport
+from AppKit import NSMenuItem  # @UnresolvedImport
+from AppKit import NSObject  # @UnresolvedImport
+from AppKit import NSPlainFileType  # @UnresolvedImport
+from AppKit import NSSize  # @UnresolvedImport
+from AppKit import NSToolbar  # @UnresolvedImport
+from AppKit import NSToolbarCustomizeToolbarItemIdentifier  # @UnresolvedImport
+from AppKit import NSToolbarFlexibleSpaceItemIdentifier  # @UnresolvedImport
+from AppKit import NSToolbarItem  # @UnresolvedImport
+from AppKit import NSToolbarPrintItemIdentifier  # @UnresolvedImport
+from AppKit import NSToolbarSeparatorItemIdentifier  # @UnresolvedImport
+from AppKit import NSToolbarSpaceItemIdentifier  # @UnresolvedImport
+from AppKit import NSURL  # @UnresolvedImport
+from AppKit import NSUserDefaults  # @UnresolvedImport
+from AppKit import NSWorkspace  # @UnresolvedImport
 
-from Foundation import * #@UnusedWildImport
+from Foundation import *  # @UnusedWildImport
 
 from PyObjCTools import NibClassBuilder, AppHelper
 
@@ -57,6 +57,7 @@ kServerToolbarItemIdentifier = "WDB: Server Toolbar Identifier"
 kRefreshToolbarItemIdentifier = "WDB: Refresh Toolbar Identifier"
 kBrowserViewToolbarItemIdentifier = "WDB: Browser View Toolbar Identifier"
 kDataViewToolbarItemIdentifier = "WDB: Data View Toolbar Identifier"
+
 
 def addToolbarItem(aController, anIdentifier, aLabel, aPaletteLabel,
                    aToolTip, aTarget, anAction, anItemContent, aMenu):
@@ -91,23 +92,23 @@ def addToolbarItem(aController, anIdentifier, aLabel, aPaletteLabel,
     aController._toolbarItems[anIdentifier] = toolbarItem
 
 WRAPPED = {}
+
+
 class Wrapper(NSObject):
     """
     NSOutlineView doesn't retain values, which means we cannot use normal
     python values as values in an outline view.
     """
+
     def init_(self, value):
         self.value = value
         return self
 
-
     def __str__(self):
         return '<Wrapper for %s>' % self.value
 
-
     def description(self):
         return str(self)
-
 
 
 def wrap_object(obj):
@@ -118,12 +119,10 @@ def wrap_object(obj):
         return WRAPPED[obj]
 
 
-
 def unwrap_object(obj):
     if obj is None:
         return obj
     return obj.value
-
 
 
 class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
@@ -234,20 +233,18 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         if lastUser and len(lastUser):
             self.userText.setStringValue_(lastUser)
 
-
     def createToolbar(self):
         """
         Create the toolbar for our app.
         """
         toolbar = NSToolbar.alloc().initWithIdentifier_("Toolbar")
         toolbar.setDelegate_(self)
-        toolbar.setAllowsUserCustomization_(YES) #@UndefinedVariable
-        toolbar.setAutosavesConfiguration_(YES) #@UndefinedVariable
+        toolbar.setAllowsUserCustomization_(YES)  # @UndefinedVariable
+        toolbar.setAutosavesConfiguration_(YES)  # @UndefinedVariable
 
         self.createToolbarItems()
 
         self.window.setToolbar_(toolbar)
-
 
     def createToolbarItems(self):
         """
@@ -289,20 +286,17 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             NSToolbarCustomizeToolbarItemIdentifier,
         ]
 
-
     def toolbarDefaultItemIdentifiers_(self, anIdentifier):
         """
         Return the default set of toolbar items.
         """
         return self._toolbarDefaultItemIdentifiers
 
-
     def toolbarAllowedItemIdentifiers_(self, anIdentifier):
         """
         Return the allowed set of toolbar items.
         """
         return self._toolbarAllowedItemIdentifiers
-
 
     def toolbar_itemForItemIdentifier_willBeInsertedIntoToolbar_(self,
                                                                  toolbar,
@@ -335,24 +329,22 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
 
         return newItem
 
-
     def setBrowserView(self, view):
         """
         Change the browser view pane to the specified list type.
         """
         newView = {
             self.BROWSERVIEW_COLUMNS: self.columnView,
-            self.BROWSERVIEW_LIST   : self.listView,
+            self.BROWSERVIEW_LIST: self.listView,
         }.get(view, None)
         if self.currentBrowserView != newView:
             if self.currentBrowserView:
-                self.currentBrowserView.setHidden_(YES) #@UndefinedVariable
+                self.currentBrowserView.setHidden_(YES)  # @UndefinedVariable
             self.currentBrowserView = newView
             if self.currentBrowserView:
-                self.currentBrowserView.setHidden_(NO) #@UndefinedVariable
+                self.currentBrowserView.setHidden_(NO)  # @UndefinedVariable
             self.browserview = view
             self.refreshView()
-
 
     @objc.IBAction
     def changeBrowserView_(self, sender):
@@ -361,24 +353,22 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         """
         self.setBrowserView(sender.selectedSegment())
 
-
     def setDataView(self, view):
         """
         Change the data view pane to the specified type.
         """
         newView = {
             self.DATAVIEW_PROPERTIES: self.propertiesView,
-            self.DATAVIEW_DATA      : self.dataView,
+            self.DATAVIEW_DATA: self.dataView,
         }.get(view, None)
         if self.currentDataView != newView:
             if self.currentDataView:
-                self.currentDataView.setHidden_(YES) #@UndefinedVariable
+                self.currentDataView.setHidden_(YES)  # @UndefinedVariable
             self.currentDataView = newView
             if self.currentDataView:
-                self.currentDataView.setHidden_(NO) #@UndefinedVariable
+                self.currentDataView.setHidden_(NO)  # @UndefinedVariable
             self.dataview = view
             self.refreshView()
-
 
     @objc.IBAction
     def changeDataView_(self, sender):
@@ -386,7 +376,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         User clicked a view toolbar button.
         """
         self.setDataView(sender.selectedSegment())
-
 
     @objc.IBAction
     def resetServer_(self, sender):
@@ -398,7 +387,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             self.window,
             None, None, 0
         )
-
 
     def refreshData_(self, sender):
         """
@@ -413,7 +401,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             self.progress.stopAnimation_(self)
 
             self.refreshView()
-
 
     def refreshView(self):
         """
@@ -431,7 +418,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
                 url = NSURL.alloc().initWithString_(self.serverText.stringValue())
                 self.webView.mainFrame().loadHTMLString_baseURL_(self.selectedData, url)
             self.progress.stopAnimation_(self)
-
 
     @objc.IBAction
     def startupOKAction_(self, btn):
@@ -465,7 +451,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         self.browser.loadColumnZero()
         self.list.reloadItem_(None)
 
-
     @objc.IBAction
     def startupCancelAction_(self, btn):
         """
@@ -473,7 +458,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         """
         self.startupSheet.close()
         NSApplication.sharedApplication().endSheet_(self.startupSheet)
-
 
     @objc.IBAction
     def browserAction_(self, browser):
@@ -499,7 +483,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
 
         self.refreshView()
 
-
     def browser_willDisplayCell_atRow_column_(self, browser, cell, row, col):
         """
         Delegate method to set the actual stuff displayed in a column view row.
@@ -508,7 +491,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         cell.setLeaf_(isLeaf)
         cell.setStringValue_(self.columns[col][row].getName())
         cell.setImage_(self.fileImage if isLeaf else self.directoryImage)
-
 
     def browser_numberOfRowsInColumn_(self, browser, col):
         """
@@ -523,7 +505,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         self.progress.stopAnimation_(self)
         self.columns.append(resources)
         return len(resources)
-
 
     def outlineViewSelectionDidChange_(self, notification):
         """
@@ -541,7 +522,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
 
         self.refreshView()
 
-
     def outlineView_numberOfChildrenOfItem_(self, outlineView, item):
         """
         Delegate method to return the number of children of an item in the outline view.
@@ -557,17 +537,15 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         self.progress.stopAnimation_(self)
         return len(resources)
 
-
     def outlineView_isItemExpandable_(self, outlineView, item):
         """
         Delegate method to return the whether an item in the outline view is expandable.
         """
         if item is None:
-            return YES #@UndefinedVariable
+            return YES  # @UndefinedVariable
         else:
             resource = unwrap_object(item)
-            return YES if resource.isCollection() else NO #@UndefinedVariable
-
+            return YES if resource.isCollection() else NO  # @UndefinedVariable
 
     def outlineView_child_ofItem_(self, outlineView, index, item):
         """
@@ -582,7 +560,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         self.progress.stopAnimation_(self)
         return wrap_object(resources[index])
 
-
     def outlineView_objectValueForTableColumn_byItem_(self, outlineView, tableColumn, item):
         """
         Delegate method to return the data displayed in the outline view.
@@ -592,11 +569,10 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
         else:
             resource = unwrap_object(item)
         return {
-            "Name"    : resource.getName(),
-            "Size"    : resource.getSize(),
+            "Name": resource.getName(),
+            "Size": resource.getSize(),
             "Modified": resource.getLastMod(),
         }[tableColumn.identifier()]
-
 
     @objc.IBAction
     def tableAction_(self, table):
@@ -621,7 +597,6 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             text = ""
         self.text.setString_(text)
 
-
     def numberOfRowsInTableView_(self, tableView):
         """
         Delegate method to return the number of rows in the list.
@@ -632,20 +607,17 @@ class WebDAVBrowserDelegate(NibClassBuilder.AutoBaseClass):
             return 0
         return len(self.selectedDetails)
 
-
     def tableView_objectValueForTableColumn_row_(self, tableView, col, row):
         """
         Delegate method to return the text for a list cell.
         """
         return str(self.selectedDetails[row][0])
 
-
     def tableView_shouldEditTableColumn_row_(self, tableView, col, row):
         """
         Delegate method to indicate whether a cell can be edited.
         """
         return 0
-
 
     def propValueToText(self, value):
         """

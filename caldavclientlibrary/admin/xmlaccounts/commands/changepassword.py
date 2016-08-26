@@ -17,6 +17,7 @@
 from caldavclientlibrary.admin.xmlaccounts.commands.command import Command
 import getopt
 
+
 class ChangePassword(Command):
     """
     Command to change the password of an existing directory record.
@@ -28,7 +29,6 @@ class ChangePassword(Command):
         super(ChangePassword, self).__init__(self.CMDNAME, "Change the password for a record.")
         self.uid = None
 
-
     def usage(self):
         print """USAGE: %s TYPE [OPTIONS]
 
@@ -39,7 +39,6 @@ Options:
     -f    file path to accounts.xml
     --uid UID of record to change
 """ % (self.cmdname,)
-
 
     def execute(self, argv):
         """
@@ -89,7 +88,6 @@ Options:
             return 0
         return self.doCommand()
 
-
     def doCommand(self):
         """
         Run the command.
@@ -97,7 +95,6 @@ Options:
         if self.doChangePassword():
             return self.writeAccounts()
         return 0
-
 
     def doChangePassword(self):
         """

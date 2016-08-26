@@ -18,6 +18,7 @@ from caldavclientlibrary.client.httpshandler import SmartHTTPConnection
 from caldavclientlibrary.protocol.webdav.session import Session
 from caldavclientlibrary.protocol.webdav.options import Options
 
+
 def run(session, request):
 
     # Create connection

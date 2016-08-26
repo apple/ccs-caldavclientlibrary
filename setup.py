@@ -27,7 +27,7 @@ from distutils.core import setup
 data_files = []
 package_data = {}
 try:
-    import py2app #@UnusedImport
+    import py2app  # @UnusedImport
 except ImportError:
     pass
 else:
@@ -94,7 +94,6 @@ extras_requirements = {}
 # from distutils.core import Extension
 
 extensions = []
-
 
 
 #

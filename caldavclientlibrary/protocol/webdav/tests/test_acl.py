@@ -19,6 +19,7 @@ from caldavclientlibrary.protocol.webdav.acl import ACL
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -28,25 +29,20 @@ class TestRequest(unittest.TestCase):
         self.assertEqual(request.getMethod(), "ACL")
 
 
-
 class TestRequestHeaders(unittest.TestCase):
     pass
-
 
 
 class TestRequestBody(unittest.TestCase):
     pass
 
 
-
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

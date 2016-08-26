@@ -17,6 +17,7 @@
 from caldavclientlibrary.client.account import CalDAVAccount
 from caldavclientlibrary.ui.resource import Resource
 
+
 class Session(object):
     """
     Maintains the basic information for a session and the root resource.
@@ -34,7 +35,6 @@ class Session(object):
         server = server[8:] if ssl else server[7:]
         paths = "/principals/users/%s/" % (self.user,)
         self.account = CalDAVAccount(server, ssl=ssl, user=self.user, pswd=self.pswd, root=paths, principal=paths, logging=logging)
-
 
     def getRoot(self):
         return Resource(self, self.path)

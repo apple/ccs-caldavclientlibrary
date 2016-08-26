@@ -20,8 +20,8 @@ from caldavclientlibrary.protocol.webdav.definitions import davxml
 from caldavclientlibrary.protocol.webdav.session import Session
 import unittest
 
-class TestRequest(unittest.TestCase):
 
+class TestRequest(unittest.TestCase):
 
     def test_Method(self):
 
@@ -30,10 +30,8 @@ class TestRequest(unittest.TestCase):
         self.assertEqual(request.getMethod(), "REPORT")
 
 
-
 class TestRequestHeaders(unittest.TestCase):
     pass
-
 
 
 class TestRequestBody(unittest.TestCase):
@@ -52,7 +50,6 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
         )
 
-
     def test_GenerateXMLMultipleHrefsOnly(self):
 
         server = Session("www.example.com")
@@ -67,7 +64,6 @@ class TestRequestBody(unittest.TestCase):
 </ns0:addressbook-multiget>
 """.replace("\n", "\r\n")
         )
-
 
     def test_GenerateXMLMultipleHrefsOneProperty(self):
 
@@ -86,7 +82,6 @@ class TestRequestBody(unittest.TestCase):
 </ns0:addressbook-multiget>
 """.replace("\n", "\r\n")
         )
-
 
     def test_GenerateXMLMultipleHrefsMultipleProperties(self):
 
@@ -108,15 +103,12 @@ class TestRequestBody(unittest.TestCase):
         )
 
 
-
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

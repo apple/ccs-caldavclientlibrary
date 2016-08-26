@@ -19,8 +19,8 @@ from caldavclientlibrary.protocol.carddav.makeaddressbook import MakeAddressBook
 from StringIO import StringIO
 import unittest
 
-class TestRequest(unittest.TestCase):
 
+class TestRequest(unittest.TestCase):
 
     def test_Method(self):
 
@@ -29,10 +29,8 @@ class TestRequest(unittest.TestCase):
         self.assertEqual(request.getMethod(), "MKCOL")
 
 
-
 class TestRequestHeaders(unittest.TestCase):
     pass
-
 
 
 class TestRequestBody(unittest.TestCase):
@@ -59,7 +57,6 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
         )
 
-
     def test_GenerateXMLMultipleProperties(self):
 
         server = Session("www.example.com")
@@ -84,15 +81,12 @@ class TestRequestBody(unittest.TestCase):
         )
 
 
-
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

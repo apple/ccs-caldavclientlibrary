@@ -20,6 +20,7 @@ from StringIO import StringIO
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -27,7 +28,6 @@ class TestRequest(unittest.TestCase):
         server = Session("www.example.com")
         request = PrincipalMatch(server, "/", ())
         self.assertEqual(request.getMethod(), "REPORT")
-
 
 
 class TestRequestHeaders(unittest.TestCase):
@@ -40,7 +40,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Depth: 0" in hdrs)
         self.assertFalse("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
-
 
 
 class TestRequestBody(unittest.TestCase):
@@ -61,7 +60,6 @@ class TestRequestBody(unittest.TestCase):
 """.replace("\n", "\r\n")
         )
 
-
     def test_GenerateXMLMultipleProperties(self):
 
         server = Session("www.example.com")
@@ -80,15 +78,12 @@ class TestRequestBody(unittest.TestCase):
         )
 
 
-
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

@@ -21,13 +21,13 @@ import os
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("attach",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -119,7 +119,6 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s OPTIONS PATH
 PATH is a relative or absolute path.
@@ -131,7 +130,6 @@ Options:
 -u   updating managed-id
 -r   removing managed-id
 """ % (name,)
-
 
     def helpDescription(self):
         return "Add, update or remove an attachment for a calendar object resource on the server."

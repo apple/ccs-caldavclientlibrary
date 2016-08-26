@@ -25,6 +25,7 @@ import os
 import readline
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
@@ -32,7 +33,6 @@ class Cmd(Command):
         self.cmds = ("share",)
         self.subshell = None
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -80,7 +80,6 @@ class Cmd(Command):
 
         return True
 
-
     def doInteractiveMode(self, resource, invites):
 
         print "Entering sharing edit mode on resource: %s" % (resource.relativeURL(),)
@@ -98,7 +97,6 @@ class Cmd(Command):
         self.subshell.account = self.shell.account
         self.subshell.run()
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
 PATH is a relative or absolute path.
@@ -108,10 +106,8 @@ Options:
     if not present, existing invitees will be printed.
 """ % (name,)
 
-
     def helpDescription(self):
         return "Manage sharing of an address book, calendar or address book group."
-
 
 
 class CommonSharingCommand(Command):
@@ -124,7 +120,6 @@ class CommonSharingCommand(Command):
         else:
             print utils.printInviteList(invites, self.shell.account)
         return invites
-
 
     def createInvite(self, oldinvite=None):
 
@@ -146,13 +141,11 @@ class CommonSharingCommand(Command):
         return user_uid, read_write, summary
 
 
-
 class Add(CommonSharingCommand):
 
     def __init__(self):
         super(Add, self).__init__()
         self.cmds = ("add",)
-
 
     def execute(self, name, options):
 
@@ -162,15 +155,12 @@ class Add(CommonSharingCommand):
         # Now execute
         self.shell.shell.account.session.addInvitees(self.shell.resource, [user_uid, ], read_write, summary)
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Add invite to existing resource."
-
 
 
 class Change(CommonSharingCommand):
@@ -178,7 +168,6 @@ class Change(CommonSharingCommand):
     def __init__(self):
         super(Change, self).__init__()
         self.cmds = ("change",)
-
 
     def execute(self, name, options):
 
@@ -207,15 +196,12 @@ class Change(CommonSharingCommand):
                 self.shell.shell.account.session.addInvitees(self.shell.resource, [user_uid, ], read_write, summary)
                 break
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Change invite on existing resource."
-
 
 
 class Remove(CommonSharingCommand):
@@ -223,7 +209,6 @@ class Remove(CommonSharingCommand):
     def __init__(self):
         super(Remove, self).__init__()
         self.cmds = ("remove",)
-
 
     def execute(self, name, options):
 
@@ -249,15 +234,12 @@ class Remove(CommonSharingCommand):
                 self.shell.shell.account.session.removeInvitee(self.shell.resource, invites.invitees[number])
                 break
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Remove invite on existing resource."
-
 
 
 class List(CommonSharingCommand):
@@ -266,17 +248,14 @@ class List(CommonSharingCommand):
         super(List, self).__init__()
         self.cmds = ("list",)
 
-
     def execute(self, name, options):
 
         self.displayInviteList()
         return True
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
-
 
     def helpDescription(self):
         return "List current invitees on existing resource."

@@ -19,6 +19,7 @@ from caldavclientlibrary.protocol.webdav.unlock import Unlock
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -26,7 +27,6 @@ class TestRequest(unittest.TestCase):
         server = Session("www.example.com")
         request = Unlock(server, "/", "locked-up-in-chains")
         self.assertEqual(request.getMethod(), "UNLOCK")
-
 
 
 class TestRequestHeaders(unittest.TestCase):
@@ -39,20 +39,16 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Lock-Token: <locked-up-in-chains>" in hdrs)
 
 
-
 class TestRequestBody(unittest.TestCase):
     pass
-
 
 
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

@@ -16,7 +16,7 @@
 
 # RFC2518 9 - Request Header fields (only the ones we need)
 
-from caldavclientlibrary.protocol.http.definitions.headers import * #@UnusedWildImport
+from caldavclientlibrary.protocol.http.definitions.headers import *  # @UnusedWildImport
 
 DAV = "DAV"
 DAV1 = "1"

@@ -22,13 +22,13 @@ import os
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("props",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -88,7 +88,6 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
 PATH is a relative or absolute path.
@@ -101,7 +100,6 @@ Options:
     if neither -n nor -a are set then property names are first listed, and then values of those looked up.
     only one of -n and -a can be set.
 """ % (name,)
-
 
     def helpDescription(self):
         return "List the properties of a directory or file."

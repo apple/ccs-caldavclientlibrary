@@ -21,6 +21,7 @@ from xml.etree.ElementTree import XML
 
 import unittest
 
+
 class TestDirectory(unittest.TestCase):
 
     def checkXML(self, x):
@@ -39,7 +40,6 @@ class TestDirectory(unittest.TestCase):
 
         # Verify data
         self.assertEqual(os.getvalue(), x)
-
 
     def test_accounts(self):
 

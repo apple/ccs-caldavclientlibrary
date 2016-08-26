@@ -17,6 +17,7 @@
 from caldavclientlibrary.admin.xmlaccounts.commands.command import Command
 import getopt
 
+
 class RemoveRecord(Command):
 
     CMDNAME = "remove"
@@ -24,7 +25,6 @@ class RemoveRecord(Command):
     def __init__(self):
         super(RemoveRecord, self).__init__(self.CMDNAME, "Remove a record of the specified type.")
         self.uid = None
-
 
     def usage(self):
         print """USAGE: %s TYPE [OPTIONS]
@@ -36,7 +36,6 @@ Options:
     -f    file path to accounts.xml
     --uid UID to remove
 """ % (self.cmdname,)
-
 
     def execute(self, argv):
         """
@@ -86,7 +85,6 @@ Options:
             return 0
         return self.doCommand()
 
-
     def doCommand(self):
         """
         Run the command.
@@ -94,7 +92,6 @@ Options:
         if self.doRemove():
             return self.writeAccounts()
         return 0
-
 
     def doRemove(self):
         """

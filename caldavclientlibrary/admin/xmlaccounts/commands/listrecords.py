@@ -18,13 +18,13 @@ from caldavclientlibrary.admin.xmlaccounts.commands.command import Command
 from caldavclientlibrary.admin.xmlaccounts import recordtypes
 import itertools
 
+
 class ListRecords(Command):
 
     CMDNAME = "list"
 
     def __init__(self):
         super(ListRecords, self).__init__(self.CMDNAME, "List all records of the specified type.")
-
 
     def allRecordsAllowed(self):
         """
@@ -33,13 +33,11 @@ class ListRecords(Command):
         """
         return True
 
-
     def doCommand(self):
         """
         Run the command.
         """
         self.listRecords(self.recordType)
-
 
     def listRecords(self, recordType):
         """
@@ -106,7 +104,6 @@ class ListRecords(Command):
         self.printTable(table)
         return 1
 
-
     def printTable(self, table):
 
         maxWidths = [0 for _ignore in table[0]]
@@ -128,7 +125,6 @@ class ListRecords(Command):
             if not rowctr:
                 self.printDivider(maxWidths)
         self.printDivider(maxWidths, False)
-
 
     def printDivider(self, maxWidths, intermediate=True):
         t = "|" if intermediate else "+"

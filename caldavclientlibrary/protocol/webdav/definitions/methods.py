@@ -14,7 +14,7 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.protocol.http.definitions.methods import * #@UnusedWildImport
+from caldavclientlibrary.protocol.http.definitions.methods import *  # @UnusedWildImport
 
 # RFC2518 - WebDAV Request Methods
 

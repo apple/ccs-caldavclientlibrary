@@ -19,9 +19,9 @@ from caldavclientlibrary.protocol.http.definitions import headers
 from caldavclientlibrary.protocol.http.definitions import methods
 from caldavclientlibrary.protocol.http.definitions import statuscodes
 
+
 class ResponseError(Exception):
     pass
-
 
 
 class RequestResponse(object):
@@ -33,7 +33,6 @@ class RequestResponse(object):
         self.url = url
         self.etag = etag
         self.etag_match = etag_match
-
 
     def _initResponse(self):
         self.session = None
@@ -52,52 +51,40 @@ class RequestResponse(object):
         self.chunked = False
         self.completed = False
 
-
     def setSession(self, session):
         self.session = session
-
 
     def getSession(self):
         return self.session
 
-
     def getMethod(self):
         return self.method
-
 
     def setURL(self, ruri):
         self.url = ruri
 
-
     def getURL(self):
         return self.url
-
 
     def setETag(self, etag, etag_match):
         self.etag = etag
         self.etag_match = etag_match
 
-
     def queuedForSending(self, session):
         self.session = session
 
-
     def setRequestHeader(self, name, value):
         self.request_headers[name] = value
-
 
     def setData(self, request_data, response_data):
         self.request_data = request_data
         self.response_data = response_data
 
-
     def hasRequestData(self):
         return self.request_data != None
 
-
     def hasResponseData(self):
         return self.response_data != None
-
 
     def getRequestData(self):
         if self.request_data:
@@ -105,17 +92,14 @@ class RequestResponse(object):
         else:
             return None
 
-
     def getResponseData(self):
         if self.response_data:
             return self.response_data
         else:
             return None
 
-
     def getRequestStartLine(self):
         return "%s %s HTTP/1.1" % (self.method, self.url,)
-
 
     def getRequestHeaders(self):
         # This will be overridden by sub-classes that add headers - those classes should
@@ -124,7 +108,6 @@ class RequestResponse(object):
         self.addHeaders(result)
         return tuple(result)
 
-
     def generateRequestHeader(self):
         os = StringIO()
         os.write("%s\r\n" % (self.getRequestStartLine(),))
@@ -132,7 +115,6 @@ class RequestResponse(object):
             os.write("%s: %s\r\n" % (header, value,))
         os.write("\r\n")
         return os.getvalue()
-
 
     def addHeaders(self, hdrs):
 
@@ -162,18 +144,15 @@ class RequestResponse(object):
         for name, value in self.request_headers.items():
             hdrs.append((name, value))
 
-
     def addContentHeaders(self, hdrs):
         # Check for content
         if self.hasRequestData():
             hdrs.append((headers.ContentLength, str(self.request_data.getContentLength())))
             hdrs.append((headers.ContentType, self.request_data.getContentType()))
 
-
     def setResponseStatus(self, version, status, reason):
         self.status_code = status
         self.status_reason = reason
-
 
     def setResponseHeaders(self, hdrs):
         for header in hdrs:
@@ -182,7 +161,6 @@ class RequestResponse(object):
 
         # Now cache some useful header values
         self.cacheHeaders()
-
 
     def clearResponse(self):
         self.etag_match = False
@@ -197,45 +175,35 @@ class RequestResponse(object):
         if self.response_data:
             self.response_data.clear()
 
-
     def getStatusCode(self):
         return self.status_code
-
 
     def getStatusReason(self):
         return self.status_reason
 
-
     def getConnectionClose(self):
         return self.connection_close
-
 
     def getContentLength(self):
         return self.content_length
 
-
     def getChunked(self):
         return self.chunked
-
 
     def setComplete(self):
         self.completed = True
 
-
     def getCompleted(self):
         return self.completed
 
-
     def hasResponseHeader(self, hdr):
         return hdr.lower() in self.headers
-
 
     def getResponseHeader(self, hdr):
         if hdr.lower() in self.headers:
             return self.headers[hdr.lower()][0]
         else:
             return ""
-
 
     def getResponseHeaders(self, hdr=None):
         if hdr:
@@ -246,11 +214,9 @@ class RequestResponse(object):
         else:
             return self.headers
 
-
     def isRedirect(self):
         # Only these are allowed
         return self.status_code in (statuscodes.MovedPermanently, statuscodes.Found, statuscodes.TemporaryRedirect)
-
 
     def parseStatusLine(self, line):
 
@@ -272,7 +238,6 @@ class RequestResponse(object):
         # Remainder is reason
         if len(line) > 13:
             self.status_reason = line[13:]
-
 
     def readFoldedLine(self, instream, line1, line2, log):
         # If line2 already has data, transfer that into line1
@@ -312,7 +277,6 @@ class RequestResponse(object):
                 break
 
         return True, line1, line2
-
 
     def cacheHeaders(self):
         # Connection

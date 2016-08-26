@@ -22,6 +22,7 @@ from caldavclientlibrary.protocol.http.definitions import methods
 
 import unittest
 
+
 class TestRequestHeaders(unittest.TestCase):
 
     def test_NoEtag(self):
@@ -35,7 +36,6 @@ User-Agent: Secret-Agent
 """.replace("\n", "\r\n")
         )
 
-
     def test_EtagMatch(self):
 
         server = Session("www.example.com")
@@ -48,7 +48,6 @@ If-Match: "etag"
 """.replace("\n", "\r\n")
         )
 
-
     def test_EtagNoneMatch(self):
 
         server = Session("www.example.com")
@@ -60,7 +59,6 @@ If-None-Match: "etag"
 
 """.replace("\n", "\r\n")
         )
-
 
     def test_Content(self):
 
@@ -77,7 +75,6 @@ Content-Type: text/plain
 
 """.replace("\n", "\r\n") % (len(rawdata),)
         )
-
 
     def test_ContentAndAuthorization(self):
 

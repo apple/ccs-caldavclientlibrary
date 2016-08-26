@@ -20,13 +20,13 @@ from caldavclientlibrary.protocol.url import URL
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("calendars",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
         opts, args = getopt.getopt(shlex.split(options), '')
@@ -60,12 +60,10 @@ class Cmd(Command):
 
         return result
 
-
     def usage(self, name):
         return """Usage: %s [PRINCIPAL]
 PRINCIPAL is a principal-URL or principal UID.
 """ % (name,)
-
 
     def helpDescription(self):
         return "Change working directory to calendar home for current or specified principal."

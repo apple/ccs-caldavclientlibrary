@@ -21,6 +21,7 @@ from xml.etree.ElementTree import XML
 
 import unittest
 
+
 class TestRecord(unittest.TestCase):
 
     def checkXML(self, x):
@@ -40,7 +41,6 @@ class TestRecord(unittest.TestCase):
         # Verify data
         self.assertEqual(os.getvalue(), x)
 
-
     def test_user(self):
 
         self.checkXML("""<?xml version='1.0' encoding='utf-8'?>
@@ -52,7 +52,6 @@ class TestRecord(unittest.TestCase):
   <cuaddr>mailto:testuser@example.com</cuaddr>
 </user>
 """)
-
 
     def test_group(self):
 
@@ -67,7 +66,6 @@ class TestRecord(unittest.TestCase):
   </members>
 </group>
 """)
-
 
     def test_location(self):
 

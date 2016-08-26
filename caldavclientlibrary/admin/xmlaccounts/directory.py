@@ -20,6 +20,7 @@ from caldavclientlibrary.admin.xmlaccounts.record import XMLRecord
 
 from xml.etree.ElementTree import Element
 
+
 class XMLDirectory(object):
     """
     Model object for the XML-based directory. This can parse and generate the full XML file.
@@ -31,7 +32,6 @@ class XMLDirectory(object):
         for type in recordtypes.RECORD_TYPES:
             self.records[type] = []
 
-
     def addRecord(self, record):
         """
         Add a new principal record to the directory.
@@ -40,7 +40,6 @@ class XMLDirectory(object):
         @type record: L{admin.xmlaccounts.record.XMLRecord}
         """
         self.records[record.recordType].append(record)
-
 
     def containsRecord(self, recordType, uid):
         """
@@ -60,7 +59,6 @@ class XMLDirectory(object):
         else:
             return False
 
-
     def containsGUID(self, guid):
         """
         Test whether the directory contains a record with the specified GUID.
@@ -76,7 +74,6 @@ class XMLDirectory(object):
                 if record.guid == guid:
                     return True
         return False
-
 
     def getRecord(self, recordType, uid):
         """
@@ -95,7 +92,6 @@ class XMLDirectory(object):
                 return record
         else:
             return None
-
 
     def removeRecord(self, recordType, uid):
         """
@@ -116,7 +112,6 @@ class XMLDirectory(object):
         else:
             return False
 
-
     def parseXML(self, node):
         """
         Parse an entire XML directory.
@@ -134,7 +129,6 @@ class XMLDirectory(object):
 
             # TODO: Now resolve group and proxy references
 
-
     def writeXML(self):
         """
         Generate an entire XML directory.
@@ -149,7 +143,6 @@ class XMLDirectory(object):
         for type in recordtypes.RECORD_TYPES:
             self.writeXMLRecords(root, self.records[type])
         return root
-
 
     def writeXMLRecords(self, root, records):
         """

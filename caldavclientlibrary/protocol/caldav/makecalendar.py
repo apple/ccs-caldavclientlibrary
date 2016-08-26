@@ -24,6 +24,7 @@ from xml.etree.ElementTree import SubElement
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
 
+
 class MakeCalendar(RequestResponse):
 
     def __init__(self, session, url, displayname=None, description=None, timezone=None):
@@ -34,14 +35,12 @@ class MakeCalendar(RequestResponse):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         if self.displayname or self.description or self.timezone:
             # Write XML info to a string
             os = StringIO()
             self.generateXML(os)
             self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def generateXML(self, os):
         # Structure of document is:

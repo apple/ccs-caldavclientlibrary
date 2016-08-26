@@ -19,6 +19,7 @@ from xml.etree.ElementTree import XML
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def parseXML(self, x):
@@ -30,13 +31,11 @@ class TestRequest(unittest.TestCase):
         p.parse(XML(x))
         return p
 
-
     def checkResource(self, parser, resource, properties):
         result = parser.getResults().get(resource, None)
         self.assertTrue(result is not None)
         for prop, value in properties:
             self.assertEqual(result.getTextProperties().get(prop, None), value)
-
 
     def test_SinglePropSingleResource(self):
 
@@ -57,7 +56,6 @@ class TestRequest(unittest.TestCase):
         self.checkResource(parser, "/principals/users/a", (
             (davxml.getetag, "12345",),
         ))
-
 
     def test_MultiplePropsSingleResource(self):
 
@@ -85,7 +83,6 @@ class TestRequest(unittest.TestCase):
             (davxml.getetag, "12345",),
             (davxml.displayname, "Name",),
         ))
-
 
     def test_MultiplePropsSingleMultipleResources(self):
 
@@ -123,7 +120,6 @@ class TestRequest(unittest.TestCase):
             (davxml.getetag, "2",),
             (davxml.displayname, "Name2",),
         ))
-
 
     def test_ResourceNotFound(self):
         parser = self.parseXML("""<?xml version='1.0' encoding='UTF-8'?>

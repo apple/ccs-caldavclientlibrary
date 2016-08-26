@@ -23,6 +23,7 @@ from getpass import getpass
 
 import getopt
 
+
 class Command(object):
 
     def __init__(self, cmdname, description):
@@ -30,7 +31,6 @@ class Command(object):
         self.cmdname = cmdname
         self.description = description
         self.recordType = None
-
 
     def usage(self):
         if self.allRecordsAllowed():
@@ -53,7 +53,6 @@ Options:
     -f  file path to accounts.xml
 """ % (self.cmdname,)
 
-
     def allRecordsAllowed(self):
         """
         Indicates whether a command is able to operate on all record types in addition to
@@ -61,7 +60,6 @@ Options:
         record in one go.
         """
         return False
-
 
     def execute(self, argv):
         """
@@ -105,7 +103,6 @@ Options:
             return 0
         return self.doCommand()
 
-
     def getTypeArgument(self, argv):
         """
         Extract the user specified record type argument from the command line arguments.
@@ -134,7 +131,6 @@ Options:
         else:
             return argv
 
-
     def mapType(self, type):
         """
         Map the specified user record type input to the actual record type identifier.
@@ -146,18 +142,17 @@ Options:
         @rtype: L{admin.xmlaccounts.recordtypes}
         """
         return {
-            "users"    : recordtypes.recordType_users,
-            "u"        : recordtypes.recordType_users,
-            "groups"   : recordtypes.recordType_groups,
-            "g"        : recordtypes.recordType_groups,
+            "users": recordtypes.recordType_users,
+            "u": recordtypes.recordType_users,
+            "groups": recordtypes.recordType_groups,
+            "g": recordtypes.recordType_groups,
             "locations": recordtypes.recordType_locations,
-            "l"        : recordtypes.recordType_locations,
+            "l": recordtypes.recordType_locations,
             "resources": recordtypes.recordType_resources,
-            "r"        : recordtypes.recordType_resources,
-            "all"      : recordtypes.recordType_all,
-            "a"        : recordtypes.recordType_all,
+            "r": recordtypes.recordType_resources,
+            "all": recordtypes.recordType_all,
+            "a": recordtypes.recordType_all,
         }.get(type, None)
-
 
     def loadAccounts(self):
         """
@@ -173,7 +168,6 @@ Options:
         self.directory = XMLDirectory()
         self.directory.parseXML(XML(xmldata))
         return 1
-
 
     def writeAccounts(self):
         """
@@ -192,13 +186,11 @@ Options:
         f.close()
         return 1
 
-
     def doCommand(self):
         """
         Run the command. Sub-classes must implement this.
         """
         raise NotImplementedError
-
 
     def promptPassword(self):
         """
@@ -211,7 +203,6 @@ Options:
                 print "Passwords do not match. Try again."
             else:
                 return password
-
 
     def getMemberList(self, prompt, title, type):
         """

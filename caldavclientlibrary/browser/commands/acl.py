@@ -29,6 +29,7 @@ import os
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
@@ -36,7 +37,6 @@ class Cmd(Command):
         self.cmds = ("acl",)
         self.subshell = None
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -85,7 +85,6 @@ class Cmd(Command):
 
         return True
 
-
     def doInteractiveMode(self, resource, acls):
 
         print "Entering ACL edit mode on resource: %s" % (resource.relativeURL(),)
@@ -103,7 +102,6 @@ class Cmd(Command):
         self.subshell.account = self.shell.account
         self.subshell.run()
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS] [PATH]
 PATH is a relative or absolute path.
@@ -113,10 +111,8 @@ Options:
     if not present, existing ACLs will be printed.
 """ % (name,)
 
-
     def helpDescription(self):
         return "Manage the access privileges of a directory or file."
-
 
 
 class CommonACLCommand(Command):
@@ -131,7 +127,6 @@ class CommonACLCommand(Command):
             aces = ACE.parseFromACL(results[davxml.acl])
             print utils.printACEList(aces, self.shell.shell.account)
             return aces
-
 
     def createACE(self, oldace=None):
 
@@ -220,13 +215,11 @@ class CommonACLCommand(Command):
         return ace
 
 
-
 class Add(CommonACLCommand):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("add",)
-
 
     def execute(self, name, options):
 
@@ -263,15 +256,12 @@ class Add(CommonACLCommand):
                 self.shell.shell.account.session.setACL(self.shell.resource, aces)
                 break
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Add ACL to existing resource."
-
 
 
 class Change(CommonACLCommand):
@@ -279,7 +269,6 @@ class Change(CommonACLCommand):
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("change",)
-
 
     def execute(self, name, options):
 
@@ -319,15 +308,12 @@ class Change(CommonACLCommand):
                 self.shell.shell.account.session.setACL(self.shell.resource, aces)
                 break
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Change ACL on existing resource."
-
 
 
 class Remove(CommonACLCommand):
@@ -335,7 +321,6 @@ class Remove(CommonACLCommand):
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("remove",)
-
 
     def execute(self, name, options):
 
@@ -372,15 +357,12 @@ class Remove(CommonACLCommand):
                 self.shell.shell.account.session.setACL(self.shell.resource, aces)
                 break
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
 
-
     def helpDescription(self):
         return "Remove ACL on existing resource."
-
 
 
 class List(CommonACLCommand):
@@ -389,17 +371,14 @@ class List(CommonACLCommand):
         super(Command, self).__init__()
         self.cmds = ("list",)
 
-
     def execute(self, name, options):
 
         self.displayACEList()
         return True
 
-
     def usage(self, name):
         return """Usage: %s
 """ % (name,)
-
 
     def helpDescription(self):
         return "List current ACLs on existing resource."

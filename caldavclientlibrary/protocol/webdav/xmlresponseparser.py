@@ -16,18 +16,17 @@
 
 from xml.etree.ElementTree import XML
 
+
 class XMLResponseParser(object):
 
     def parseData(self, data):
         # XML parse the data
         self.parse(XML(data))
 
-
     def parseFile(self, fpath):
         fp = open(fpath, "r")
         self.parse(XML(fp.read()))
         fp.close()
-
 
     def parse(self, root_node):
         raise NotImplementedError

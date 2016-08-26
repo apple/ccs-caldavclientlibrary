@@ -19,6 +19,7 @@ from xml.etree.ElementTree import Element
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 from caldavclientlibrary.protocol.utils.xmlhelpers import BetterElementTree
 
+
 class PropFind(PropFindBase):
 
     def __init__(self, session, url, depth, props):
@@ -26,7 +27,6 @@ class PropFind(PropFindBase):
         self.props = props
 
         self.initRequestData()
-
 
     def generateXML(self, os):
         # Structure of document is:

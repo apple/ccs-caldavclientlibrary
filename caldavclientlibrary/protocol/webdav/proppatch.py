@@ -23,6 +23,7 @@ from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
 
+
 class PropPatch(RequestResponse):
 
     def __init__(self, session, url, setprops=None, delprops=None):
@@ -32,17 +33,14 @@ class PropPatch(RequestResponse):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml; charset=utf-8")
 
-
     def setOutput(self, response_data):
         self.response_data = response_data
-
 
     def addHeaders(self, hdrs):
         # Do default
@@ -51,7 +49,6 @@ class PropPatch(RequestResponse):
         # Optional ones
         if self.session.useBriefHeader:
             hdrs.append((headers.Brief, "t"))
-
 
     def generateXML(self, os):
         # Structure of document is:

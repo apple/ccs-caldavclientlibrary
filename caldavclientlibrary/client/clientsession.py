@@ -55,13 +55,13 @@ from caldavclientlibrary.protocol.webdav.synccollection import SyncCollection
 from xml.etree.ElementTree import Element, tostring, XML
 import types
 
+
 class CalDAVSession(Session):
 
     class logger(object):
 
         def write(self, data):
             print data.replace("\r\n", "\n"),
-
 
     def __init__(self, server, port=None, ssl=False, afunix=None, user="", pswd="", principal=None, root=None, logging=False):
         super(CalDAVSession, self).__init__(server, port, ssl, afunix, log=CalDAVSession.logger())
@@ -80,13 +80,11 @@ class CalDAVSession(Session):
 
         self._initCalDAVState()
 
-
     def _initCalDAVState(self):
 
         # We need to cache the server capabilities and properties
         if not self.principalPath:
             self._discoverPrincipal()
-
 
     def _discoverPrincipal(self):
 
@@ -113,14 +111,12 @@ class CalDAVSession(Session):
                 self.principalPath = current
                 return
 
-
     def setUserPswd(self, user, pswd):
 
         self.user = user
         self.pswd = pswd
         self.authorization = None
         self._discoverPrincipal()
-
 
     def testResource(self, rurl):
 
@@ -132,7 +128,6 @@ class CalDAVSession(Session):
         self.runSession(request)
 
         return request.getStatusCode() == statuscodes.MultiStatus
-
 
     def getPropertyNames(self, rurl):
 
@@ -169,7 +164,6 @@ class CalDAVSession(Session):
             self.handleHTTPError(request)
 
         return results
-
 
     def getProperties(self, rurl, props, xmldata=False):
 
@@ -217,7 +211,6 @@ class CalDAVSession(Session):
 
         return results, bad
 
-
     def getPropertiesOnHierarchy(self, rurl, props):
 
         assert(isinstance(rurl, URL))
@@ -258,7 +251,6 @@ class CalDAVSession(Session):
 
         return results
 
-
     def getHrefListProperty(self, rurl, propname):
 
         assert(isinstance(rurl, URL))
@@ -296,7 +288,6 @@ class CalDAVSession(Session):
             self.handleHTTPError(request)
 
         return results
-
 
     # Do principal-match report with self on the passed in url
     def getSelfProperties(self, rurl, props):
@@ -340,7 +331,6 @@ class CalDAVSession(Session):
 
         return results
 
-
     # Do principal-match report with self on the passed in url
     def getSelfHrefs(self, rurl):
 
@@ -375,7 +365,6 @@ class CalDAVSession(Session):
 
         return results
 
-
     # Do principal-match report with self on the passed in url
     def getSelfPrincipalResource(self, rurl):
 
@@ -394,7 +383,6 @@ class CalDAVSession(Session):
 
         return None
 
-
     # Do current-user-principal property on the passed in url
     def getCurrentPrincipalResource(self, rurl):
 
@@ -402,7 +390,6 @@ class CalDAVSession(Session):
 
         hrefs = self.getHrefListProperty(rurl, davxml.current_user_principal)
         return hrefs[0] if hrefs else None
-
 
     def setProperties(self, rurl, props):
 
@@ -467,7 +454,6 @@ class CalDAVSession(Session):
 
         return results
 
-
     def setACL(self, rurl, aces):
 
         assert(isinstance(rurl, URL))
@@ -480,7 +466,6 @@ class CalDAVSession(Session):
 
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
-
 
     def makeCollection(self, rurl):
 
@@ -495,7 +480,6 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
 
-
     def makeCalendar(self, rurl, displayname=None, description=None):
 
         assert(isinstance(rurl, URL))
@@ -509,7 +493,6 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
 
-
     def makeAddressBook(self, rurl, displayname=None, description=None):
 
         assert(isinstance(rurl, URL))
@@ -522,7 +505,6 @@ class CalDAVSession(Session):
 
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
-
 
     def calendarMultiGet(self, rurl, hrefs, props):
         """
@@ -552,7 +534,6 @@ class CalDAVSession(Session):
             self.handleHTTPError(request)
             return None
 
-
     def addressbookMultiGet(self, rurl, hrefs, props):
         """
         Fetches the specified props for the specified hrefs using a single
@@ -580,7 +561,6 @@ class CalDAVSession(Session):
         else:
             self.handleHTTPError(request)
             return None
-
 
     def syncCollection(self, rurl, synctoken, props=(), infinite=False):
 
@@ -628,7 +608,6 @@ class CalDAVSession(Session):
 
         return (newsynctoken, changed, removed, other,)
 
-
     def queryCollection(self, rurl, timerange, start, end, expand, props=()):
 
         assert(isinstance(rurl, URL))
@@ -664,7 +643,6 @@ class CalDAVSession(Session):
 
         return hrefs
 
-
     def deleteResource(self, rurl):
 
         assert(isinstance(rurl, URL))
@@ -677,7 +655,6 @@ class CalDAVSession(Session):
 
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent):
             self.handleHTTPError(request)
-
 
     def moveResource(self, rurlFrom, rurlTo):
 
@@ -692,7 +669,6 @@ class CalDAVSession(Session):
 
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent):
             self.handleHTTPError(request)
-
 
     def readData(self, rurl):
 
@@ -724,7 +700,6 @@ class CalDAVSession(Session):
 
         # Return data as a string and etag
         return dout.getData(), etag
-
 
     def writeData(self, rurl, data, contentType, etag=None, method="PUT"):
 
@@ -759,7 +734,6 @@ class CalDAVSession(Session):
         # Return data as a string
         return dout.getData()
 
-
     def importData(self, rurl, data, contentType):
 
         assert(isinstance(rurl, URL))
@@ -776,7 +750,6 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.MultiStatus, statuscodes.NoContent,):
             self.handleHTTPError(request)
 
-
     def getInvites(self, rurl):
         """
         Get the invitation details for the specified resource by reading and parsing the CS:invite WebDAV property.
@@ -792,7 +765,6 @@ class CalDAVSession(Session):
             return Invites()
         else:
             return Invites().parseFromInvite(results.get(csxml.invite))
-
 
     def addInvitees(self, rurl, user_uids, read_write, summary=None):
         """
@@ -819,7 +791,6 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent,):
             self.handleHTTPError(request)
 
-
     def removeInvitee(self, rurl, invitee):
         """
         Remove an invite from a shared resource.
@@ -840,7 +811,6 @@ class CalDAVSession(Session):
 
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent,):
             self.handleHTTPError(request)
-
 
     def getNotifications(self, rurl):
         """
@@ -875,7 +845,6 @@ class CalDAVSession(Session):
 
         return notifications
 
-
     def processNotification(self, principal, notification, accept):
         """
         Accept or decline a sharing invite in the specified notification.
@@ -905,7 +874,6 @@ class CalDAVSession(Session):
         else:
             return True
 
-
     def addAttachment(self, rurl, filename, data, contentType, return_representation):
 
         assert(isinstance(rurl, URL))
@@ -925,7 +893,6 @@ class CalDAVSession(Session):
         # Check response status
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
             self.handleHTTPError(request)
-
 
     def updateAttachment(self, rurl, managed_id, filename, data, contentType, return_representation):
 
@@ -947,7 +914,6 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.Created, statuscodes.NoContent,):
             self.handleHTTPError(request)
 
-
     def removeAttachment(self, rurl, managed_id):
 
         assert(isinstance(rurl, URL))
@@ -963,10 +929,8 @@ class CalDAVSession(Session):
         if request.getStatusCode() not in (statuscodes.OK, statuscodes.NoContent,):
             self.handleHTTPError(request)
 
-
     def displayHTTPError(self, request):
         print request.status_code
-
 
     def openSession(self):
         # Create connection
@@ -977,7 +941,6 @@ class CalDAVSession(Session):
             self.log.write("\n        <-------- BEGIN HTTP CONNECTION -------->\n")
             self.log.write("Server: %s\n" % (self.server,))
 
-
     def closeSession(self):
         if self.connect:
             self.connect.close()
@@ -986,7 +949,6 @@ class CalDAVSession(Session):
             # Write to log file
             if self.loghttp and self.log:
                 self.log.write("\n        <-------- END HTTP CONNECTION -------->\n")
-
 
     def runSession(self, request):
 
@@ -1022,7 +984,6 @@ class CalDAVSession(Session):
 
             # Exit when redirect does not occur
             break
-
 
     def doSession(self, request):
         # Do initialisation if not already done
@@ -1080,7 +1041,6 @@ class CalDAVSession(Session):
         # Break connection with server
         self.closeConnection()
 
-
     def doRequest(self, request):
 
         # Write request headers
@@ -1128,10 +1088,8 @@ class CalDAVSession(Session):
         if self.loghttp and self.log:
             self.log.write("\n        <-------- END HTTP RESPONSE -------->\n")
 
-
     def handleHTTPError(self, request):
         print "Ignoring error: %d" % (request.getStatusCode(),)
-
 
     def getAuthorizor(self, first_time, wwwhdrs):
 
@@ -1146,7 +1104,6 @@ class CalDAVSession(Session):
                     return Kerberos(self.user), False
         else:
             return None, True
-
 
     def writeRequestData(self, request):
 
@@ -1171,7 +1128,6 @@ class CalDAVSession(Session):
                 # Tell data we are done using it
                 stream.stop()
 
-
     def readResponseData(self, request, response):
 
         # Check for data and write it
@@ -1188,14 +1144,11 @@ class CalDAVSession(Session):
         if self.loghttp and self.log:
             self.log.write(data)
 
-
     def setServerType(self, type):
         self.type = type
 
-
     def setServerDescriptor(self, txt):
         self.descriptor = txt
-
 
     def setServerCapability(self, txt):
         self.capability = txt

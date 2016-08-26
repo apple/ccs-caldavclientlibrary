@@ -18,6 +18,7 @@ from xml.etree.ElementTree import QName
 from caldavclientlibrary.protocol.webdav.definitions import davxml
 from xml.etree.ElementTree import SubElement
 
+
 class ACE(object):
 
     def __init__(self):
@@ -30,19 +31,15 @@ class ACE(object):
         self.protected = False
         self.inherited = False
 
-
     def getPrincipal(self):
         return self.principal
-
 
     def setPrincipal(self, principal, data=None):
         self.principal = principal
         self.data = data
 
-
     def canChange(self):
         return not self.protected and not self.inherited
-
 
     @staticmethod
     def parseFromACL(aclnode):
@@ -54,7 +51,6 @@ class ACE(object):
             newace.parseACE(node)
             aces.append(newace)
         return aces
-
 
     def parseACE(self, acenode):
 
@@ -103,7 +99,6 @@ class ACE(object):
 
         return True
 
-
     def parsePrivileges(self, parent):
 
         assert(parent.tag in (davxml.grant, davxml.deny,))
@@ -117,7 +112,6 @@ class ACE(object):
 
             # Now get rights within the privilege
             self.privs += (privilege.getchildren()[0].tag,)
-
 
     def generateACE(self, aclnode):
         # Structure of ace is:

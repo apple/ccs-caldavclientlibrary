@@ -31,7 +31,6 @@ def userNameFromNode(node):
     return cn.text if cn is not None else ("%s %s" % (first.text, last.text) if first is not None or last is not None else "")
 
 
-
 class Invites(object):
     """
     Represents a list of invites to sharees for a shared resource.
@@ -42,7 +41,6 @@ class Invites(object):
         self.organizer_uid = None
         self.organizer_cn = ""
         self.invitees = []
-
 
     def parseFromInvite(self, invite):
 
@@ -58,7 +56,6 @@ class Invites(object):
         return self
 
 
-
 class InviteUser(object):
     """
     An invite for a specific sharee.
@@ -71,7 +68,6 @@ class InviteUser(object):
         self.mode = "unknown"
         self.access = "unknown"
         self.summary = "-"
-
 
     def parseFromUser(self, user):
 
@@ -99,7 +95,6 @@ class InviteUser(object):
         return self
 
 
-
 class AddInvitees(Post):
     """
     HTTP POST request to add an invite for a sharee.
@@ -113,13 +108,11 @@ class AddInvitees(Post):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def generateXML(self, os):
         # Structure of document is:
@@ -161,7 +154,6 @@ class AddInvitees(Post):
         xmldoc.writeUTF8(os)
 
 
-
 class RemoveInvitee(Post):
     """
     HTTP POST request to remove an invite for a sharee.
@@ -173,13 +165,11 @@ class RemoveInvitee(Post):
 
         self.initRequestData()
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml;charset=utf-8")
-
 
     def generateXML(self, os):
         # Structure of document is:

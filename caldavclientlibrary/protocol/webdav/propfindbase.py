@@ -20,6 +20,7 @@ from caldavclientlibrary.protocol.webdav.definitions import headers
 from caldavclientlibrary.protocol.webdav.definitions import methods
 from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 
+
 class PropFindBase(RequestResponse):
 
     def __init__(self, session, url, depth):
@@ -28,17 +29,14 @@ class PropFindBase(RequestResponse):
         super(PropFindBase, self).__init__(session, methods.PROPFIND, url)
         self.depth = depth
 
-
     def initRequestData(self):
         # Write XML info to a string
         os = StringIO()
         self.generateXML(os)
         self.request_data = RequestDataString(os.getvalue(), "text/xml; charset=utf-8")
 
-
     def setOutput(self, response_data):
         self.response_data = response_data
-
 
     def addHeaders(self, hdrs):
         # Do default
@@ -50,7 +48,6 @@ class PropFindBase(RequestResponse):
         # Optional ones
         if self.session.useBriefHeader:
             hdrs.append((headers.Brief, "t"))
-
 
     def generateXML(self, os):
         raise NotImplementedError

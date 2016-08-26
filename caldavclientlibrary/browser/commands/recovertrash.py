@@ -20,12 +20,12 @@ from caldavclientlibrary.protocol.url import URL
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("recovertrash",)
-
 
     def execute(self, cmdname, options):
 
@@ -36,7 +36,6 @@ class Cmd(Command):
             raise CommandError
 
         homepath = homeset[0].path
-
 
         recoveryID = None
         mode = "event"
@@ -62,7 +61,6 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s [OPTIONS] RID1, ...
 RIDx are recovery IDs.
@@ -71,7 +69,6 @@ Options:
 -c    recover a collection
 
 """ % (name,)
-
 
     def helpDescription(self):
         return "Get the contents of the trash of the current user."

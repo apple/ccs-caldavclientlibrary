@@ -14,6 +14,7 @@
 # limitations under the License.
 ##
 
+
 class Authenticator(object):
 
     def addHeaders(self, hdrs, request):

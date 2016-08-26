@@ -21,6 +21,7 @@ from StringIO import StringIO
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -28,7 +29,6 @@ class TestRequest(unittest.TestCase):
         server = Session("www.example.com")
         request = Lock(server, "/", headers.Depth0, Lock.eExclusive, "user@example.com", -1)
         self.assertEqual(request.getMethod(), "LOCK")
-
 
 
 class TestRequestHeaders(unittest.TestCase):
@@ -41,7 +41,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
 
-
     def test_IfMatchHeader(self):
 
         server = Session("www.example.com")
@@ -50,7 +49,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("If-None-Match:" in hdrs)
         self.assertTrue("If-Match: *" in hdrs)
 
-
     def test_IfNoneMatchHeader(self):
 
         server = Session("www.example.com")
@@ -58,7 +56,6 @@ class TestRequestHeaders(unittest.TestCase):
         hdrs = request.generateRequestHeader()
         self.assertTrue("If-None-Match: *" in hdrs)
         self.assertFalse("If-Match:" in hdrs)
-
 
     def test_Depth0Headers(self):
 
@@ -69,7 +66,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
-
     def test_Depth1Headers(self):
 
         server = Session("www.example.com")
@@ -79,7 +75,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Depth: 1" in hdrs)
         self.assertFalse("Depth: infinity" in hdrs)
 
-
     def test_DepthInfinityHeaders(self):
 
         server = Session("www.example.com")
@@ -88,7 +83,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertFalse("Depth: 0" in hdrs)
         self.assertFalse("Depth: 1" in hdrs)
         self.assertTrue("Depth: infinity" in hdrs)
-
 
 
 class TestRequestBody(unittest.TestCase):
@@ -114,10 +108,8 @@ class TestRequestBody(unittest.TestCase):
         )
 
 
-
 class TestResponse(unittest.TestCase):
     pass
-
 
 
 class TestResponseHeaders(unittest.TestCase):

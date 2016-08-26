@@ -21,13 +21,13 @@ import os
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("put", "write",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
 
@@ -85,7 +85,6 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s OPTIONS PATH
 PATH is a relative or absolute path.
@@ -94,7 +93,6 @@ Options:
 -f   file name of data to put [REQUIRED]
 -t   content-type of data being put [DEFAULT: text/plain]
 """ % (name,)
-
 
     def helpDescription(self):
         return "Write data to a file on the server."

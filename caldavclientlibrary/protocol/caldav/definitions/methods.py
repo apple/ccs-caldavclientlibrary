@@ -14,7 +14,7 @@
 # limitations under the License.
 ##
 
-from caldavclientlibrary.protocol.webdav.definitions.methods import * #@UnusedWildImport
+from caldavclientlibrary.protocol.webdav.definitions.methods import *  # @UnusedWildImport
 
 # RFC4791 - CalDAV Request Methods
 

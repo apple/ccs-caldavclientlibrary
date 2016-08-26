@@ -17,15 +17,14 @@
 from caldavclientlibrary.protocol.webdav.definitions import methods, headers
 from caldavclientlibrary.protocol.webdav.requestresponse import RequestResponse
 
+
 class Report(RequestResponse):
 
     def __init__(self, session, url):
         super(Report, self).__init__(session, methods.REPORT, url)
 
-
     def setOutput(self, response_data):
         self.response_data = response_data
-
 
     def addHeaders(self, hdrs):
         # Do default

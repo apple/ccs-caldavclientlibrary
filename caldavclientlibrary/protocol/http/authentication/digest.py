@@ -21,6 +21,7 @@ from StringIO import StringIO
 import hashlib
 import uuid
 
+
 class Digest(Authenticator):
 
     def __init__(self, user, pswd, www_authenticate):
@@ -31,12 +32,10 @@ class Digest(Authenticator):
         self.stale = False
         self.clientCount = 0
 
-
     def setDetails(self, user, pswd, www_authenticate):
         self.fields['username'] = user
         self.fields['password'] = pswd
         self.parseAuthenticateHeader(www_authenticate)
-
 
     def addHeaders(self, hdrs, request):
         # Generate response
@@ -60,7 +59,6 @@ class Digest(Authenticator):
             os.write(", opaque=\"%s\"" % (self.fields['opaque'],))
 
         hdrs.append((headers.Authorization, os.getvalue()))
-
 
     def parseAuthenticateHeader(self, hdrs):
         for hdr in hdrs:
@@ -161,7 +159,6 @@ class Digest(Authenticator):
 
         return HA1.encode('hex')
 
-
     # DigestCalcHA2
     @staticmethod
     def calcHA2(algo, pszMethod, pszDigestUri, pszQop, pszHEntity):
@@ -189,7 +186,6 @@ class Digest(Authenticator):
 
         return HA2.encode('hex')
 
-
     # DigestCalcResponse
     @staticmethod
     def calcResponse(
@@ -206,7 +202,7 @@ class Digest(Authenticator):
         m.update(":")
         m.update(pszNonce)
         m.update(":")
-        if pszNonceCount and pszCNonce: # pszQop:
+        if pszNonceCount and pszCNonce:  # pszQop:
             m.update(pszNonceCount)
             m.update(":")
             m.update(pszCNonce)
@@ -216,7 +212,6 @@ class Digest(Authenticator):
         m.update(HA2)
         respHash = m.digest().encode('hex')
         return respHash
-
 
     def generateResponse(self, request):
 

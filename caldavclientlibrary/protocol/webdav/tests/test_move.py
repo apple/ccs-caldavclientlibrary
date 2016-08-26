@@ -19,6 +19,7 @@ from caldavclientlibrary.protocol.webdav.move import Move
 
 import unittest
 
+
 class TestRequest(unittest.TestCase):
 
     def test_Method(self):
@@ -26,7 +27,6 @@ class TestRequest(unittest.TestCase):
         server = Session("www.example.com")
         request = Move(server, "/a", "http://www.example.com/b")
         self.assertEqual(request.getMethod(), "MOVE")
-
 
 
 class TestRequestHeaders(unittest.TestCase):
@@ -41,7 +41,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Overwrite: F" in hdrs)
         self.assertTrue("Destination: http://www.example.com/b" in hdrs)
 
-
     def test_IfMatchHeader(self):
 
         server = Session("www.example.com")
@@ -52,7 +51,6 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("If-Match: \"12345\"" in hdrs)
         self.assertTrue("Overwrite: F" in hdrs)
         self.assertTrue("Destination: http://www.example.com/b" in hdrs)
-
 
     def test_OverwriteHeader(self):
 
@@ -65,20 +63,16 @@ class TestRequestHeaders(unittest.TestCase):
         self.assertTrue("Destination: http://www.example.com/b" in hdrs)
 
 
-
 class TestRequestBody(unittest.TestCase):
     pass
-
 
 
 class TestResponse(unittest.TestCase):
     pass
 
 
-
 class TestResponseHeaders(unittest.TestCase):
     pass
-
 
 
 class TestResponseBody(unittest.TestCase):

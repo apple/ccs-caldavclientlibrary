@@ -19,6 +19,7 @@ from caldavclientlibrary.admin.xmlaccounts.record import XMLRecord
 from uuid import uuid4
 from caldavclientlibrary.admin.xmlaccounts import recordtypes
 
+
 class AddRecord(Command):
     """
     Command that adds a record to the directory.
@@ -29,7 +30,6 @@ class AddRecord(Command):
     def __init__(self):
         super(AddRecord, self).__init__(self.CMDNAME, "Add a record of the specified type.")
 
-
     def doCommand(self):
         """
         Run the command.
@@ -37,7 +37,6 @@ class AddRecord(Command):
         if self.doAdd():
             return self.writeAccounts()
         return 0
-
 
     def doAdd(self):
         """

@@ -23,30 +23,23 @@ class CalendarUserAddress(object):
         if attendee:
             self.setAttendee(attendee)
 
-
     def getCUAddr(self):
         return self.cuaddr
-
 
     def setCUAddr(self, value):
         self.cuaddr = value
 
-
     def getName(self):
         return self.name
-
 
     def setCn(self, value):
         self.name = value
 
-
     def getFullText(self):
         return ("%s <%s>" % (self.name, self.cuaddr,)) if self.name else ("<%s>" % (self.cuaddr,))
 
-
     def getAttendeeProperty(self):
         pass
-
 
     def setAttendee(self, attendee):
         pass

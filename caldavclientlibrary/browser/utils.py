@@ -43,7 +43,6 @@ def printPrincipalPaths(account, principals, resolve, refresh):
     return result
 
 
-
 def printPrincipals(account, principals, resolve, refresh):
 
     result = ""
@@ -68,14 +67,12 @@ def printPrincipals(account, principals, resolve, refresh):
     return result
 
 
-
 def printProxyPrincipals(account, principal, read=True, write=True, resolve=True, refresh_main=False, refresh=False):
     if read:
         print "    Read-Only Proxies: %s" % printPrincipals(account, principal.getReadProxies(refresh_main), resolve, refresh)
         refresh_main = False
     if write:
         print "    Read-Write Proxies: %s" % printPrincipals(account, principal.getWriteProxies(refresh_main), resolve, refresh)
-
 
 
 def printProperties(items):
@@ -91,7 +88,6 @@ def printProperties(items):
             print "    %s: %s" % (key, value,)
 
 
-
 def printList(items):
     result = ""
     if len(items) == 1:
@@ -104,7 +100,6 @@ def printList(items):
         return result
 
 
-
 def printTwoColumnList(items, indent=0):
 
     strlen = reduce(lambda x, y: max(x, len(y[0]) + 1), items, 0)
@@ -112,7 +107,6 @@ def printTwoColumnList(items, indent=0):
     sorted.sort(key=lambda x: x[0])
     for col1, col2 in sorted:
         print "%s%- *s - %s" % (" " * indent, strlen, col1, col2,)
-
 
 
 def printPrincipalList(principals):
@@ -123,14 +117,12 @@ def printPrincipalList(principals):
     return result
 
 
-
 def printACEList(aces, account):
 
     result = ""
     for ctr, ace in enumerate(aces):
         result += "\n% 2d. %s" % (ctr + 1, printACE(ace, account))
     return result
-
 
 
 def printACE(ace, account):
@@ -163,14 +155,12 @@ def printACE(ace, account):
     return result
 
 
-
 def printInviteList(invites, account):
 
     result = "Organizer: %s (%s)" % (invites.organizer_cn, invites.organizer_uid,)
     for ctr, user in enumerate(invites.invitees):
         result += "\n% 2d. %s" % (ctr + 1, printInviteUser(user, account))
     return result
-
 
 
 def printInviteUser(user, account):
@@ -184,7 +174,6 @@ def printInviteUser(user, account):
     )
 
 
-
 def printNotificationsList(notifications, account):
 
     result = ""
@@ -194,7 +183,6 @@ def printNotificationsList(notifications, account):
     else:
         "No notifications."
     return result
-
 
 
 def printNotification(notification, account):
@@ -216,7 +204,6 @@ def printNotification(notification, account):
         )
 
 
-
 def textInput(title, insert=None):
     if insert:
         title = "%s [%s]:" % (title, insert,)
@@ -226,7 +213,6 @@ def textInput(title, insert=None):
     if not result:
         result = insert
     return result
-
 
 
 def numericInput(title, low, high, allow_q=False, insert=None):
@@ -239,10 +225,8 @@ def numericInput(title, low, high, allow_q=False, insert=None):
         return int(choiceInput(title, [str(num) for num in range(low, high + 1)], insert))
 
 
-
 def yesNoInput(title, insert=None):
     return choiceInput(title, ("y", "n"), insert)
-
 
 
 def choiceInput(title, choices, insert=None):
@@ -253,7 +237,6 @@ def choiceInput(title, choices, insert=None):
         if result in choices:
             return result
         print "Invalid input. Try again."
-
 
 
 def multiChoiceInput(title, choices, insert=None):

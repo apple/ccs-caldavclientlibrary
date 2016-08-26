@@ -21,13 +21,13 @@ import os
 import getopt
 import shlex
 
+
 class Cmd(Command):
 
     def __init__(self):
         super(Command, self).__init__()
         self.cmds = ("cat", "more",)
         self.do_wd_complete = True
-
 
     def execute(self, cmdname, options):
         opts, args = getopt.getopt(shlex.split(options), '')
@@ -48,12 +48,10 @@ class Cmd(Command):
 
         return True
 
-
     def usage(self, name):
         return """Usage: %s PATH
 PATH is a relative or absolute path.
 """ % (name,)
-
 
     def helpDescription(self):
         return "Display contents of a file or directory."

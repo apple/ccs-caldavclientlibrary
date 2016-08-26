@@ -20,6 +20,7 @@ from caldavclientlibrary.protocol.http.util import parseStatusLine
 from xml.etree.ElementTree import QName
 from caldavclientlibrary.protocol.url import URL
 
+
 class PropFindParser(MultiResponseParser):
 
     textProperties = set()
@@ -37,47 +38,49 @@ class PropFindParser(MultiResponseParser):
 
         def setResource(self, resource):
             self.resource = resource
+
         def getResource(self):
             return self.resource
 
         def setStatus(self, status):
             self.status = status
+
         def getStatus(self):
             return self.status
 
         def addTextProperty(self, name, value):
             self.textProperties[name] = value
+
         def getTextProperties(self):
             return self.textProperties
 
         def addHrefProperty(self, name, value):
             self.hrefProperties[name] = value
+
         def getHrefProperties(self):
             return self.hrefProperties
 
         def addNodeProperty(self, name, node):
             self.nodeProperties[name] = node
+
         def getNodeProperties(self):
             return self.nodeProperties
 
         def addBadProperty(self, name, status):
             self.badProperties[name] = status
+
         def getBadProperties(self):
             return self.badProperties
-
 
     def __init__(self):
         self.results = {}
         self.others = set()
 
-
     def getResults(self):
         return self.results
 
-
     def getOthers(self):
         return self.others
-
 
     # Parse the response element down to the properties
     def parseResponse(self, response):
@@ -105,7 +108,6 @@ class PropFindParser(MultiResponseParser):
         if result.getResource():
             self.results[result.getResource()] = result
 
-
     def parsePropStat(self, propstat, result):
         # Scan the propstat node the status - we only process OK status
 
@@ -122,12 +124,10 @@ class PropFindParser(MultiResponseParser):
             for item in propstat.findall(str(davxml.prop)):
                 self.parseProp(item, result, badstatus)
 
-
     def parseProp(self, property, result, badstatus):
         # Scan the prop node - each child is processed
         for item in property.getchildren():
             self.parsePropElement(item, result, badstatus)
-
 
     # Parsing of property elements
     def parsePropElement(self, prop, result, badstatus):
@@ -159,12 +159,10 @@ class PropFindParser(MultiResponseParser):
             else:
                 self.parsePropElementUnknown(prop, result)
 
-
     def parsePropElementText(self, prop, result):
         # Grab the element data
         result.addTextProperty(QName(prop.tag), prop.text if prop.text else "")
         result.addNodeProperty(QName(prop.tag), prop)
-
 
     def parsePropElementHref(self, prop, result, is_list):
         # Grab the element data
@@ -176,7 +174,6 @@ class PropFindParser(MultiResponseParser):
                 hrefs = ""
         result.addHrefProperty(QName(prop.tag), hrefs)
         result.addNodeProperty(QName(prop.tag), prop)
-
 
     def parsePropElementUnknown(self, prop, result):
         # Just add the node

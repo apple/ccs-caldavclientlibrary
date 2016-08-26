@@ -27,12 +27,12 @@ from caldavclientlibrary.protocol.http.definitions import headers
 import re
 import kerberos
 
+
 class Kerberos(Authenticator):
 
     def __init__(self, user):
         self.user = user
         self.context = None
-
 
     def addHeaders(self, hdrs, request):
         neg_value = self.negotiate_value(hdrs)
@@ -41,7 +41,6 @@ class Kerberos(Authenticator):
         # Generate header
         hdrs.append((headers.Authorization, header))
         self.clean_context()
-
 
     def negotiate_value(self, headers):
         """checks for "Negotiate" in proper auth header
@@ -66,7 +65,6 @@ class Kerberos(Authenticator):
             # header not found
 
         return None
-
 
     def generate_request_header(self, req, headers, neg_value):
         """
@@ -105,7 +103,6 @@ class Kerberos(Authenticator):
         # authGSSClientResponse() succeeded
 
         return "Negotiate %s" % response
-
 
     def clean_context(self):
         """
