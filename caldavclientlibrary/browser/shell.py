@@ -28,7 +28,7 @@ import urlparse
 
 class Shell(BaseShell):
 
-    def __init__(self, server, path, user, pswd, logging, afunix=None):
+    def __init__(self, server, path, user, pswd, logging, noHostRedirect=False, afunix=None):
 
         super(Shell, self).__init__("caldav_client")
         self.prefix = self.wd = "/"
@@ -41,7 +41,7 @@ class Shell(BaseShell):
         # Create the account
         ssl = server.startswith("https://")
         server = server[8:] if ssl else server[7:]
-        self.account = CalDAVAccount(server, ssl=ssl, afunix=afunix, user=self.user, pswd=self.pswd, root=path, principal=None, logging=logging)
+        self.account = CalDAVAccount(server, ssl=ssl, afunix=afunix, user=self.user, pswd=self.pswd, root=path, principal=None, logging=logging, noHostRedirect=noHostRedirect)
 
         atexit.register(self.saveHistory)
 
@@ -73,11 +73,12 @@ def usage():
     return """Usage: shell [OPTIONS]
 
 Options:
--l              start with HTTP logging on.
---server=HOST   url of the server include http/https scheme and port [REQUIRED].
---unix=PATH     path to unix socket to connect to server [OPTIONAL]
---user=USER     user name to login as - will be prompted if not prsent [OPTIONAL].
---pswd=PSWD     password for user - will be prompted if not prsent [OPTIONAL].
+-l                  start with HTTP logging on.
+--server=HOST       url of the server include http/https scheme and port [REQUIRED].
+--unix=PATH         path to unix socket to connect to server [OPTIONAL]
+--user=USER         user name to login as - will be prompted if not present [OPTIONAL].
+--pswd=PSWD         password for user - will be prompted if not present [OPTIONAL].
+--no-host-redirect  Don't allow the hostname to change when an HTTP redirect occurs [OPTIONAL]
 """
 
 
@@ -87,8 +88,9 @@ def runit():
     afunix = None
     user = None
     pswd = None
+    noHostRedirect = False
 
-    opts, _ignore_args = getopt.getopt(sys.argv[1:], 'lh', ["help", "server=", "unix=", "user=", "pswd="])
+    opts, _ignore_args = getopt.getopt(sys.argv[1:], 'lh', ["help", "server=", "unix=", "user=", "pswd=", "no-host-redirect"])
 
     for name, value in opts:
 
@@ -102,6 +104,8 @@ def runit():
             user = value
         elif name == "--pswd":
             pswd = value
+        elif name == "--no-host-redirect":
+            noHostRedirect = True
         else:
             print usage()
             raise SystemExit()
@@ -120,7 +124,7 @@ def runit():
     if not pswd:
         pswd = getpass("Password: ")
 
-    shell = Shell(server, path, user, pswd, logging, afunix=afunix)
+    shell = Shell(server, path, user, pswd, logging, noHostRedirect=noHostRedirect, afunix=afunix)
     shell.run()
 
 

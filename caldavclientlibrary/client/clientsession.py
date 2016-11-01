@@ -63,13 +63,15 @@ class CalDAVSession(Session):
         def write(self, data):
             print data.replace("\r\n", "\n"),
 
-    def __init__(self, server, port=None, ssl=False, afunix=None, user="", pswd="", principal=None, root=None, logging=False):
+    def __init__(self, server, port=None, ssl=False, afunix=None, user="", pswd="", principal=None, root=None, logging=False, noHostRedirect=False):
         super(CalDAVSession, self).__init__(server, port, ssl, afunix, log=CalDAVSession.logger())
 
         self.loghttp = logging
 
         self.user = user
         self.pswd = pswd
+
+        self.noHostRedirect = noHostRedirect
 
         # Initialize state
         self.connect = None
@@ -967,7 +969,7 @@ class CalDAVSession(Session):
                         different_server = (self.server != u.server) if u.server else False
 
                         # Use new host in this session
-                        if different_server:
+                        if different_server and not self.noHostRedirect:
                             self.setServer(u.server)
 
                         # Reset the request with new info
