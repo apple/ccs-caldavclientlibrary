@@ -25,7 +25,7 @@ cached_types = ()
 
 # ssl module may be missing some of these attributes depending on how
 # the backend ssl library is configured.
-for attrname in ("PROTOCOL_TLSv1", "PROTOCOL_SSLv3", "PROTOCOL_SSLv23"):
+for attrname in ("PROTOCOL_TLS", "PROTOCOL_TLSv1_2", "PROTOCOL_TLSv1_1", "PROTOCOL_TLSv1", "PROTOCOL_SSLv3", "PROTOCOL_SSLv23"):
     if hasattr(sslmodule, attrname):
         cached_types += ((set(), getattr(sslmodule, attrname)),)
 if len(cached_types) == 0:
@@ -90,7 +90,7 @@ def SmartHTTPConnection(host, port, ssl, afunix):
     if afunix:
         connect = UnixSocketHTTPConnection(afunix, host, port)
     elif ssl:
-        # Iterate over the TL:S versions and find one that works and cache it for future use.
+        # Iterate over the TLS versions and find one that works and cache it for future use.
         for cached, connection_type in cached_types:
             if (host, port) in cached:
                 try:
@@ -105,7 +105,7 @@ def SmartHTTPConnection(host, port, ssl, afunix):
             except:
                 cached.remove((host, port))
 
-        raise RuntimeError("Cannot connect via with TLSv1, SSLv3 or SSLv23")
+        raise RuntimeError("Cannot connect with any available TLS version")
     else:
         connect = httplib.HTTPConnection(host, port)
     connect.connect()
